@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Voki">
+  <title>Tecnologías de Front-end</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/serif.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Tecnologías de Front-end</h1>
+  <p class="subtitle">usadas en Som Energia, para Pythoner@s</p>
+  <p class="author">Voki</p>
+</section>
+
+<section><section id="intro" class="titleslide slide level1"><h1>Intro</h1></section><section id="frontend-vs-backend" class="slide level2">
+<h2>Frontend vs Backend</h2>
+<ul>
+<li><strong>Frontend:</strong> se ejecuta en el <strong>cliente</strong>
+<ul>
+<li>Mithril, ReactJS, Angular...</li>
+</ul></li>
+<li><strong>Backend:</strong> se ejecuta en el <strong>servidor</strong>
+<ul>
+<li>Flask, Django, NodeJS, PHP...</li>
+</ul></li>
+</ul>
+</section><section id="elementos-del-frontend" class="slide level2">
+<h2>Elementos del Frontend</h2>
+<ul>
+<li><strong>Javascript:</strong> lenguage</li>
+<li><strong>nodejs/npm:</strong> entorno, paquetes (virtualenv, pip)</li>
+<li><strong>Webpack:</strong> constructor (makefile)</li>
+<li><strong>Mithril:</strong> controlador (MVC)</li>
+<li><strong>Material Design Components:</strong> widgets (qt)</li>
+<li><strong>ospec:</strong> Framework de testing (unittest)</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Javascript
+<ul>
+<li>ES6 nuevo y bonito pero no portable</li>
+<li>Se usa Babel para convertir a ES5, no cal</li>
+</ul></li>
+<li>nodejs/npm
+<ul>
+<li>nodejs es tecnologia de backend</li>
+<li>usamos su empaquetado (pip+setup.py)</li>
+<li>npm es un pip con esteroides</li>
+</ul></li>
+<li>Webpack
+<ul>
+<li>Procesa el codigo y los recursos</li>
+<li>Analiza las dependencias</li>
+<li>Genera los ficheros que se baja el navegador</li>
+<li>Alternativas: grunt, gulp...</li>
+</ul></li>
+<li>Mithril
+<ul>
+<li>Framework de control (Angular, React, Vue...)</li>
+<li>HTML es de naturaleza estatica -&gt; Javascript</li>
+<li>La API estandard tiene muchas limitaciones</li>
+<li>Separacion del modelo y construccion por composicion</li>
+</ul></li>
+<li>Material Design Components
+<ul>
+<li>Diseño concreto de interactividad</li>
+<li>Define como son los elementos combinables (widgets)</li>
+</ul></li>
+<li>Framework de testing</li>
+</ul>
+</aside>
+</section></section>
+<section><section id="javascript" class="titleslide slide level1"><h1>Javascript</h1></section><section id="falsos-amigos" class="slide level2">
+<h2>Falsos amigos</h2>
+<p>Javascript: tan familiar que nos pensamos que no hay que aprenderlo.</p>
+<p>Se parece a C++ y Java, esperamos que se comporte como C++ y Java.</p>
+<p>Cuando no lo hace, 😠 😠 😠 😠 ＼(｀0´)／</p>
+</section><section id="falsos-amigos-y" class="slide level2">
+<h2>Falsos amigos: <code>==</code> y <code>!=</code></h2>
+<ul>
+<li><code>==</code> y <code>!=</code> intentan convertir tipos antes de comparar</li>
+<li><code>===</code> y <code>!==</code> comparan sin conversion</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="dv">1</span><span class="op">==</span><span class="st">&#39;1&#39;</span> <span class="co">// true</span>
+<span class="dv">1</span><span class="op">===</span><span class="st">&#39;1&#39;</span> <span class="co">// false </span>
+<span class="dv">0</span><span class="op">==</span><span class="st">&#39;&#39;</span> <span class="co">// true</span>
+<span class="dv">0</span><span class="op">===</span><span class="st">&#39;&#39;</span> <span class="co">// false</span>
+<span class="kw">false</span><span class="op">==</span><span class="st">&#39;&#39;</span> <span class="co">// true</span>
+<span class="kw">undefined</span><span class="op">==</span><span class="kw">false</span> <span class="co">// false</span></code></pre></div>
+<p>La regla: Usar el de tres signos al menos que realmente quieras la conversión (y no, no la quieres)</p>
+</section><section id="falsos-amigos-1" class="slide level2">
+<h2>Falsos amigos: <code>+</code></h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span> <span class="co">// 5</span>
+<span class="st">&#39;a&#39;</span> <span class="op">+</span> <span class="st">&#39;b&#39;</span> <span class="co">// &#39;ab&#39;</span>
+<span class="st">&#39;a&#39;</span> <span class="op">+</span> <span class="dv">3</span> <span class="co">// &#39;a3&#39;</span>
+<span class="st">&#39;2&#39;</span> <span class="op">+</span> <span class="dv">3</span> <span class="co">// 23 !!</span>
+<span class="dv">3</span> <span class="op">+</span> <span class="kw">true</span> <span class="co">// 4 !!</span>
+<span class="dv">3</span> <span class="op">+</span> <span class="kw">false</span> <span class="co">// 3 !!</span>
+<span class="dv">3</span> <span class="op">+</span> <span class="kw">undefined</span> <span class="co">// NaN</span>
+<span class="st">&#39;a&#39;</span> <span class="op">+</span> <span class="kw">undefined</span>  <span class="co">// &#39;aundefined&#39;</span>
+<span class="dv">3</span> <span class="op">+</span> <span class="op">{}</span> <span class="co">// &#39;3[object Object]&#39;</span></code></pre></div>
+</section><section id="falsos-amigos-bool-cast" class="slide level2">
+<h2>Falsos amigos: bool cast</h2>
+<p>En Python estamos muy acostumbrados a usarlas en condiciones y funcionan muy distinto.</p>
+<ul>
+<li>Las estructuras vacias <code>{}</code> y <code>[]</code> son <code>true</code>!!</li>
+<li>Un string vacio es <code>false</code>, pero tambien uno con solo espacios: <code>'    '</code></li>
+<li>El entero <code>0</code> es falso pero, tambien el string <code>'0'</code>!!</li>
+<li>De hecho un string con varios ceros pero con espacios delante y detras tambien es <code>false</code>: <code>'   000 \t\n  '</code></li>
+</ul>
+</section><section id="variables-no-declaradas" class="slide level2">
+<h2>Variables no declaradas</h2>
+<p>Error típico: me equivoco en el nombre de la variable</p>
+<p>Javascript no se queja, te de vuelve un valor <code>undefined</code>, convertible a <code>false</code> o al numero <code>NaN</code> o a la cadena <code>'undefined'</code>.</p>
+<p>Añadir <code>'use strict';</code> al principio de los ficheros hace que se queje si usas una variable no declarada.</p>
+<p>Pero ojo: Aún tenemos el mismo problema cuando accedemos a una propiedad de un objeto.</p>
+</section><section id="objetos" class="slide level2">
+<h2>Objetos</h2>
+<p>Los objetos de Javascript son diccionarios de Python con esteroides.</p>
+<p>Acceso dual con <code>.</code> y <code>[]</code> como nuestro <code>yamlns</code>.</p>
+<p>Si un atributo es una funcion se puede llamar como método.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">o1 <span class="op">=</span> <span class="op">{</span>
+    <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span>
+    <span class="st">&#39;b-at&#39;</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span>  <span class="co">// si el nombre no es identificador, comillas</span>
+<span class="op">};</span>
+<span class="va">Object</span>.<span class="at">assign</span>(o1<span class="op">,</span> <span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">c</span><span class="op">:</span> <span class="dv">4</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// py update</span>
+o2 <span class="op">=</span> <span class="va">Object</span>.<span class="at">assign</span>(<span class="op">{},</span> o1)<span class="op">;</span> <span class="co">// py clone</span></code></pre></div>
+<aside class="notes">
+<ul>
+<li>Usamos la sintaxis de <code>[]</code> en vez de <code>.</code> cuando la clave:
+<ul>
+<li>Es calculada, o</li>
+<li>No es un identificador</li>
+</ul></li>
+<li>Usamos <code>''</code> en las claves de los literales cuando no es identificador</li>
+<li>Truco: si la clave es calculada y esta en la variable <code>key</code>, definir el literal: <code>{ ''+key: value }</code>, si no considera la clave literal <code>'key'</code>.</li>
+</ul>
+</aside>
+</section><section id="las-clases-son-funciones" class="slide level2">
+<h2>Las clases son funciones</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">MyClass</span>(param1) <span class="op">{</span>  <span class="co">// funcion &#39;Factoria&#39;</span>
+    <span class="kw">this</span>.<span class="at">_param1</span> <span class="op">=</span> param1<span class="op">;</span> <span class="co">// Attributo</span>
+    <span class="kw">function</span> <span class="at">premethod1</span>() <span class="op">{</span>
+        <span class="co">// body</span>
+    <span class="op">}</span> <span class="co">// &lt;- Sin punto y coma, es una declaracion</span>
+    <span class="kw">this</span>.<span class="at">method1</span> <span class="op">=</span> premethod1<span class="op">;</span>
+    <span class="kw">this</span>.<span class="at">method2</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+        <span class="co">// body</span>
+    <span class="op">};</span> <span class="co">// &lt;- Ojo el punto y coma! es una asignacion</span>
+<span class="op">}</span>
+<span class="co">// Esto es útil para ampliar una clase que no es nuestra</span>
+<span class="kw">function</span> <span class="at">premethod3</span>() <span class="op">{}</span>
+<span class="va">MyClass</span>.<span class="va">prototype</span>.<span class="at">method3</span> <span class="op">=</span> premethod3<span class="op">;</span>
+
+<span class="kw">var</span> myinstance <span class="op">=</span> <span class="kw">new</span> <span class="at">MyClass</span>(<span class="st">&#39;param1value&#39;</span>)<span class="op">;</span> <span class="co">// No olvides el new</span></code></pre></div>
+</section><section id="o-diccionarios" class="slide level2">
+<h2>O diccionarios</h2>
+<p>En Mithril los usamos para definir componentes.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> MySingleton <span class="op">=</span> <span class="op">{</span>
+    <span class="dt">_param1</span><span class="op">:</span> <span class="st">&#39;param1value&#39;</span><span class="op">,</span>
+    <span class="dt">method1</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span>
+        <span class="co">// body</span>
+    <span class="op">},</span>
+    <span class="dt">method2</span><span class="op">:</span> outerfunction<span class="op">,</span>
+<span class="op">};</span>
+<span class="va">MySingleton</span>.<span class="at">method3</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{};</span></code></pre></div>
+<p>O son singletons o sirven de prototypos para otros objetos.</p>
+</section><section id="falsos-amigos-this" class="slide level2">
+<h2>Falsos amigos: <code>this</code></h2>
+<p>Su valor en una funcion <code>f</code> depende de como se llame, no de donde se defina</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">f</span> (a<span class="op">,</span>b) <span class="op">{</span> <span class="va">console</span>.<span class="at">debug</span>(<span class="kw">this</span>)<span class="op">;</span> <span class="op">}</span>
+
+<span class="at">f</span>(a<span class="op">,</span>b)<span class="op">;</span> <span class="co">// Seria `undefined`</span>
+<span class="kw">new</span> <span class="at">f</span>(a<span class="op">,</span>b)<span class="op">;</span> <span class="co">// un nuevo objeto `{}` vacio</span>
+<span class="va">o</span>.<span class="at">f</span><span class="op">=</span>f<span class="op">;</span> <span class="va">o</span>.<span class="at">f</span>(a<span class="op">,</span>b)<span class="op">;</span> <span class="co">// Seria `o`</span>
+<span class="va">f</span>.<span class="at">call</span>(o<span class="op">,</span> a<span class="op">,</span> b)<span class="op">;</span> <span class="co">// Seria `o`</span>
+<span class="va">f</span>.<span class="at">apply</span>(o<span class="op">,</span> [a<span class="op">,</span>b])<span class="op">;</span> <span class="co">// Seria `o`</span>
+<span class="va">f</span>.<span class="at">bind</span>(o)<span class="op">;</span> <span class="at">f</span>(a<span class="op">,</span>b)<span class="op">;</span> <span class="co">// Seria `o`</span>
+
+<span class="kw">var</span> f2 <span class="op">=</span> <span class="va">o</span>.<span class="at">f</span><span class="op">;</span> <span class="at">f2</span>()<span class="op">;</span> <span class="co">// f2 loses the this binding</span></code></pre></div>
+</section><section id="falsos-amigos-this-1" class="slide level2">
+<h2>Falsos amigos: <code>this</code></h2>
+<p>Ojo con las lambdas y las inner:</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">mymethod</span>(b) <span class="op">{</span>
+    <span class="kw">var</span> a <span class="op">=</span> <span class="dv">3</span><span class="op">;</span>
+    <span class="kw">var</span> self <span class="op">=</span> <span class="kw">this</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="at">onEvent</span>(<span class="kw">function</span>() <span class="op">{</span>
+        <span class="co">// a y b se pueden usar aqui dentro</span>
+        <span class="co">// pero this esta redefinida como undefined</span>
+        <span class="co">// por eso usamos self como variable intermedia</span>
+        <span class="va">self</span>.<span class="at">otrafuncion</span>(a<span class="op">,</span>b)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+</section></section>
+<section><section id="nodejs-i-npm" class="titleslide slide level1"><h1>NodeJS i npm</h1></section><section id="node-no-es-de-backend" class="slide level2">
+<h2>Node no es de backend?</h2>
+<p>Si, pero hace cosas que son utiles para front-end (similares a otras que tenemos en python).</p>
+<ul>
+<li>Definicion de proyecto (setup.py -&gt; package.json)</li>
+<li>Gestion de paquetes y dependencias (pip -&gt; npm)</li>
+<li>Entorno local aislado (venv -&gt; node_modules)</li>
+<li>Interprete interactivo (python -&gt; node)</li>
+<li>Web server para desarrollo (flask serve -&gt; npm run server)</li>
+</ul>
+</section><section id="definición-del-proyecto" class="slide level2">
+<h2>Definición del proyecto</h2>
+<p><code>package.json</code> contiene los metadatos del proyecto.</p>
+<p>Se crea con el comando <code>npm init</code> a partir de preguntas interactivas.</p>
+<p>La clave <code>scripts</code>, contiene comandos personalizados que podemos ejecutar con <code>npm</code>, por ejemplo: <code>npm run server</code>.</p>
+</section><section id="entorno-virtual-y-repositorios" class="slide level2">
+<h2>Entorno virtual y repositorios</h2>
+<p>El proyecto tiene su entorno virtual en la carpeta <code>node_modules</code> donde se iran instalando los paquetes de <em>vendor</em>.</p>
+<p>Muy parecido a <code>pip</code>: <code>npm search</code>, <code>npm install</code>...</p>
+</section><section id="dependencias-del-proyecto" class="slide level2">
+<h2>Dependencias del proyecto</h2>
+<p><strong>Dependencias (de run-time):</strong> necesarias para alguien que use el paquete distribuido</p>
+<p><strong>Dependencias de desarrollo:</strong> necesarias para construir el paquete distribuido</p>
+<p>Nosotros no hacemos paquete (aun), las de run-time son las que se usan en el navegador</p>
+<p>Se instalan con <code>npm install</code> sin especificar paquete.</p>
+</section><section id="añadiendo-dependencias" class="slide level2">
+<h2>Añadiendo dependencias</h2>
+<p>Los paquetes insalados a pelo se marcan como <em>straneous</em>. Quiere decir que si otra persona instala el paquete, no los tomara.</p>
+<p>Se añaden con <code>npm install --save paquete</code> o <code>--save-dev</code> si es de desarrollo.</p>
+<p>El <code>package.json</code> se guarda la versión.</p>
+<p>Para actualizar: <code>npm install --upgrade paquete</code></p>
+</section><section id="chuleta" class="slide level2">
+<h2>Chuleta</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">npm</span> init <span class="co"># Crea el package.json a base de preguntas</span>
+
+<span class="ex">npm</span> install <span class="co"># Instal·la les dependencies del package.js</span>
+
+<span class="ex">npm</span> search <span class="op">&lt;</span>words<span class="op">&gt;</span> <span class="co"># busca paquetes con words en la descripción</span>
+
+<span class="ex">npm</span> install --save <span class="op">&lt;</span>package<span class="op">&gt;</span> <span class="co"># añade la dependencia al proyecto</span>
+
+<span class="ex">npm</span> install --save-dev package <span class="co"># añade dependencia de desarrollo</span>
+
+<span class="ex">npm</span> run test <span class="co"># Ejecuta el script `test` definido en `package.json`</span></code></pre></div>
+</section></section>
+<section><section id="webpack" class="titleslide slide level1"><h1>Webpack</h1></section><section id="que-hace-webpack" class="slide level2">
+<h2>Que hace webpack?</h2>
+<p>A partir del codigo fuente, genera los ficheros que se bajará el navegador.</p>
+<p>Vamos que compila, ¿pero Javascript no era interpretado?</p>
+<p>A medida que los proyectos se hacen grandes, es necesario modularizar, descartar modulos no usados, agregar el resto, optimizar, preprocesar...</p>
+</section><section id="modulos-en-javascript" class="slide level2">
+<h2>Modulos en Javascript</h2>
+<p>A pelo, Javascript ES5 no sabe de modulos.</p>
+<ul>
+<li>Incluimos cada .js en el html con <code>&lt;script&gt;</code>.</li>
+<li>Tambien las dependencias!</li>
+<li>Todo va al scope global. No hay <code>namespaces</code>.</li>
+</ul>
+</section><section id="como-funciona" class="slide level2">
+<h2>Como funciona?</h2>
+<ul>
+<li>explora las dependencias entre los módulos y genera código para:
+<ul>
+<li>aislar cada modulo en su espacio de nombres</li>
+<li>organizarlos en una estructura buscable por el path</li>
+<li>implementar la funcion <code>require</code> para acceder a las dependencias</li>
+</ul></li>
+<li>modifica el html para incluir los js finales</li>
+</ul>
+</section><section id="definición-de-módulos" class="slide level2">
+<h2>Definición de módulos</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// mymodule.js</span>
+<span class="st">&#39;use strict&#39;</span><span class="op">;</span> <span class="co">// Activa errors per variables no declarades</span>
+
+<span class="kw">function</span> <span class="at">myfunction</span>() <span class="op">{</span>
+    <span class="cf">return</span> <span class="st">&#39;hello world&#39;</span><span class="op">;</span>
+<span class="op">}</span>
+
+<span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> myfunction<span class="op">;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// main.js</span>
+<span class="st">&#39;use strict&#39;</span><span class="op">;</span> <span class="co">// Activa errors per variables no declarades</span>
+
+<span class="kw">var</span> imported <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;./mymodule&#39;</span>)<span class="op">;</span>
+
+<span class="va">console</span>.<span class="at">debug</span>(<span class="at">imported</span>())<span class="op">;</span> <span class="co">// should show &#39;hello world&#39;</span></code></pre></div>
+</section><section id="el-bundle-envoltorio" class="slide level2">
+<h2>El bundle (envoltorio)</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>(modules) <span class="op">{</span> <span class="co">// funcion auto-llamada</span>
+    <span class="kw">var</span> installedModules <span class="op">=</span> <span class="op">{};</span> <span class="co">// The module cache</span>
+    <span class="kw">function</span> <span class="at">require</span>(moduleId) <span class="op">{</span>
+        <span class="co">// Check if module is in cache</span>
+        <span class="cf">if</span>(installedModules[moduleId]) <span class="op">{</span>
+            <span class="cf">return</span> installedModules[moduleId].<span class="at">exports</span><span class="op">;</span>
+        <span class="op">}</span>
+        <span class="co">// Create a new module (and put it into the cache)</span>
+        <span class="kw">var</span> module <span class="op">=</span> installedModules[moduleId] <span class="op">=</span> <span class="op">{</span>
+            <span class="dt">i</span><span class="op">:</span> moduleId<span class="op">,</span>
+            <span class="dt">exports</span><span class="op">:</span> <span class="op">{}</span>
+        <span class="op">};</span>
+        <span class="co">// Execute the module function</span>
+        modules[moduleId].<span class="at">call</span>(module<span class="op">,</span> <span class="va">module</span>.<span class="at">exports</span><span class="op">,</span> require)<span class="op">;</span>
+        <span class="co">// Return the exports of the module</span>
+        <span class="cf">return</span> <span class="va">module</span>.<span class="at">exports</span><span class="op">;</span>
+    <span class="op">}</span>
+    <span class="at">require</span>(<span class="st">&#39;./main&#39;</span>)<span class="op">;</span> <span class="co">// el entry point del bundle</span>
+<span class="op">}</span>) (<span class="op">{</span>
+    <span class="st">&#39;./mymodule&#39;</span><span class="op">:</span> <span class="kw">function</span>(module<span class="op">,</span> exports<span class="op">,</span> require) <span class="op">{</span>
+        <span class="at">eval</span>(<span class="st">&#39;string con el contenido del fichero&#39;</span>)<span class="op">;</span>
+    <span class="op">},</span>
+    <span class="st">&#39;./main&#39;</span><span class="op">:</span> <span class="kw">function</span>(module<span class="op">,</span> exports<span class="op">,</span> require) <span class="op">{</span>
+        <span class="at">eval</span>(<span class="st">&#39;string con el contenido del fichero&#39;</span>)<span class="op">;</span>
+    <span class="op">},</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</section><section id="otros-recursos-assets" class="slide level2">
+<h2>Otros recursos (assets)</h2>
+<p>Datos (json, xml, yaml), estilos (css, sass, less, stylus), imagenes (png, jpg, svg) ...</p>
+<p>Se <em>requieren</em> como si fueran javascripts.</p>
+<p>Los <em>loaders</em> se encargan de que esten disponibles.</p>
+Strings en el bundle javascript o en su propio bundle.
+<aside class="notes">
+<ul>
+<li>Como string en el js, añaden codigo js para que este disponible</li>
+<li>En su propio bundle, modifican el html para incluirlo</li>
+</ul>
+</aside>
+</section></section>
+<section><section id="mithril" class="titleslide slide level1"><h1>Mithril</h1></section><section id="frameworks" class="slide level2">
+<h2>Frameworks</h2>
+<p>HTML pensado para ser estático, o poco dinámico. Con CSS se pueden hacer algunas florituras.</p>
+<p>Necesitamos que el HTML cambie en el navegador: Javascript.</p>
+<p>Librerias: Complementan API DOM. JQuery, Underscore, Sugar...</p>
+<p>Frameworks: Componentización, Comunicación Modelo-Vista... Vue, React, Angular, Mithril...</p>
+</section><section id="componentización" class="slide level2">
+<h2>Componentización</h2>
+<p>Componentes gráficos (widgets), en html:</p>
+<ul>
+<li>un tag propio, lo controlamos con los atributos y el contenido.</li>
+<li>abstrae un html mas complejo</li>
+<li>los podemos juntar para hacer componentes mas complejos</li>
+</ul>
+</section><section id="comunicacion-modelo-vista" class="slide level2">
+<h2>Comunicacion Modelo-Vista</h2>
+<p>El patron MVC, tal como se definió, no es practico y no se usa. Cada framework llama vista, modelo y controlador a cosas distintas. Pero queda la idea: <strong>Separar la presentación de los datos</strong>.</p>
+<p>El framework define:</p>
+<ul>
+<li>Como los datos modifican la vista (html)</li>
+<li>Como lo que pasa en la vista modifica los datos</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>En el Modelo-Vista-Controlador original habia tres clases.</li>
+<li>El controlador era el unico que conoce a los otros dos y recibe notificaciones de ambos.</li>
+<li>Como patron es bastante limitante pero se quedaron los conceptos.</li>
+<li>Las vistas tienen su propio modelo (estado) interno.</li>
+<li>Como se resuelve la agregacion de vistas?</li>
+<li>Todo el mundo llama MVC a lo suyo y hablan de cosas muy distintas.</li>
+</ul>
+</aside>
+</section><section id="ventajas-de-mithril" class="slide level2">
+<h2>Ventajas de Mithril</h2>
+<ul>
+<li>Ligero: muy pocos k's</li>
+<li>Rápido: Usa DOM virtual</li>
+<li>Simple: API minimalista</li>
+<li>Potente: A pesar de la simplicidad</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>DOM es la API que ofrece el navegador para manipular el html</li>
+<li>Manipular el DOM es bastante lento</li>
+<li>Un DOM virtual permite detectar las diferencias y modificar quirurgicamente</li>
+</ul>
+</aside>
+</section><section id="la-api-mithril" class="slide level2">
+<h2>La API Mithril</h2>
+<p>Toda la api sirve</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">m <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;mithril&#39;</span>)<span class="op">;</span></code></pre></div>
+</section><section id="componentes-en-mithril" class="slide level2">
+<h2>Componentes en Mithril</h2>
+<p>En Mithril, un componente se define con:</p>
+<ul>
+<li>Una funcion, <code>view</code>, que genera dinamicamente el html</li>
+<li>Una serie de atributos que podemos fijar desde donde los usamos, dependiendo del modelo</li>
+<li>De esos attributos, algunos son callbacks que hacen la comunicación contraria hacia arriba</li>
+<li>Un estado interno del componente</li>
+<li>Unos callbacks que se llaman en momentos especificos del ciclo de vida</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
