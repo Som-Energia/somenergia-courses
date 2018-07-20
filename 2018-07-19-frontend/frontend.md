@@ -52,6 +52,16 @@ include-before: |
 
 # Frontend {data-background-image="../images/logo-somenergia-nobg.svg" }
 
+## Objetivo
+
+Poner al día de las tecnologías de Frontend
+que usamos en Som Energía
+al personal que ya programa en Python temas de Backend.
+
+Se supone una base en programación.
+
+Haré paralelismos con tecnologías Python.
+
 ## Frontend vs Backend
 
 - **Frontend:** se ejecutan en el **navegador**
@@ -69,20 +79,6 @@ include-before: |
 - **Material Design Components:** widgets (qt)
 - **ospec:** Framework de testing (unittest)
 
-<div class="notes">
-
-- Mithril
-	- Framework de control (Angular, React, Vue...)
-	- HTML es de naturaleza estatica -> Javascript
-	- La API estandard tiene muchas limitaciones
-	- Separacion del modelo y construccion por composicion
-- Material Design Components
-	- Diseño concreto de interactividad
-	- Define como son los elementos combinables (widgets)
-- Framework de testing
-
-</div>
-
 ## Javascript { data-background-image='../images/logo-js.svg' data-background-size='40%' }
 
 **Inevitable:** El único lenguage incluido en todos los navegadores (a su manera)
@@ -92,7 +88,7 @@ Repasaremos algunas trampas.
 
 Es necesario entender algunas construciones que usamos en **Mithril**.
 
-## NodeJS, npm { data-background-image='../images/logo-nodejs.svg' data-background-size='60%' }
+## NodeJS { data-background-image='../images/logo-nodejs.svg' data-background-size='60%' }
 
 Tecnologia de backend, sí, pero nos da un entorno de desarrollo
 (como el que tenemos en python).
@@ -103,7 +99,10 @@ Tecnologia de backend, sí, pero nos da un entorno de desarrollo
 - Interprete interactivo (python -> node)
 - Web server para desarrollo
 
-## Webpack { data-background-image='../images/logo-webpack.svg' data-background-size='40%' }
+## Webpack {
+	data-background-image='../images/logo-webpack.svg'
+	data-background-size='40%'
+	}
 
 Constructor: Prepara el paquete de ficheros que se bajará el navegador.
 Deja obsoletos a Grunt, Gulp, Requirejs, Bower, Browserify...
@@ -116,7 +115,10 @@ Deja obsoletos a Grunt, Gulp, Requirejs, Bower, Browserify...
 - Separa lo que puede ir separado
 - Modifica el HTML para bajarselo todo
 
-## Mithril { data-background-image='../images/logo-mithril.svg' data-background-size='40%' }
+## Mithril   {
+	data-background-image='../images/logo-mithril.svg'
+	data-background-size='40%'
+	}
 
 Framework para desarrollar
 aplicaciones de página única
@@ -127,7 +129,10 @@ que se ejecutan en el navegador.
 - Acceder **asincronamente** a las **APIs**
 - Pequeño, sencillo, rápido y potente
 
-## Material Design { data-background-image='../images/logo-materialdesign.svg' data-background-size='40%' }
+## Material Design   {
+	data-background-image='../images/logo-materialdesign.svg'
+	data-background-size='40%'
+	}
 
 Especificación de componentes gráficos.
 Originalmente para Android.
@@ -140,7 +145,7 @@ Usamos la de Google para Web:
 
 **Material Design Components for the Web**
 
-Agnóstica al framework, habrá que adaptarla a Mithril
+Agnóstica al framework, la adaptamos a Mithril
 
 
 # Javascript {data-background-image="../images/logo-somenergia-nobg.svg" }
@@ -353,7 +358,7 @@ aislado como un `virtualenv` en Python.
 
 **Dependencias de desarrollo:** de construcción del paquete
 
-Para nosotros, las de run-time son las que se usan en el navegador.
+Para nosotros, que no hacemos paquete (aun), las de run-time son las que se usan en el navegador.
 
 Se definen en el `package.json` y se instalan con `npm install` sin especificar paquete.
 
@@ -429,17 +434,23 @@ modularizar, descartar modulos no usados, agregar el resto, optimizar, preproces
 
 A pelo, Javascript ES5 no sabe de modulos.
 
-- Incluimos cada .js en el html con `<script>`.
-- Tambien las dependencias!
-- Todo va al scope global. No hay `namespaces`.
+Se incluye cada .js en el html con `<script>`.
+
+Tambien las dependencias!
+
+Todo va al scope global. No hay `namespaces`.
+
+Se usan funciones auto-llamadas para aislar.
 
 ## Como funciona?
 
-- explora las dependencias entre los módulos y genera código para:
-	- aislar cada modulo en su espacio de nombres
-	- organizarlos en una estructura buscable por el path
-	- implementar la funcion `require` para acceder a las dependencias
-- modifica el html para incluir los js finales
+Explora las dependencias entre los módulos y genera código para:
+
+- aislar el espacio de nombres de cada módulo
+- indexarlos por el path
+- la función `require` que los carga
+
+Tambien modifica el html para incluir los assets finales
 
 ## Definición de módulos
 
@@ -514,39 +525,69 @@ Strings en el bundle javascript o en su propio bundle.
 
 </div>
 
+## Entry points y bundles
+
+**Entry point:** Punto de partida (js) de donde estirar las dependencias.
+Puede haber varios (diferentes páginas)
+
+Los navegadores cargan más rápido un fichero mediano que muchos pequenos.
+
+**Bundle:** Un fichero que junta las dependencias de un punto de partida.
+
+## Chunks
+
+Fragmentos, todo en un bundle no siempre es bueno
+
+Los assets se generan con un **hash** en el nombre para forzar recarga de cache si hay cambios.
+
+Las dependencias `vendor` son menos proclives a cambiar, si las separamos tendran mas hits de cache.
+
+Con varios entry points, habrá cosas comunes entre los bundles.
+Separando lo común y lo exclusivo, se optimiza la carga
+de diferentes páginas.
+
+
+
+
 # Mithril {data-background-image="../images/logo-somenergia-nobg.svg" }
 
 ## Frameworks
 
-HTML pensado para ser estático, o poco dinámico.
-Con CSS se pueden hacer algunas florituras.
+HTML y CSS permiten algunas animaciones y respuesta interactiva,
+pero son en esencia estàticos. 
+**JavaScript** permite modificar el HTML en el navegador.
 
-Necesitamos que el HTML cambie en el navegador: Javascript.
-
-Librerias: Complementan API DOM.
+La **librería estándar** no es muy potente.
+Hay **librerías** que la complementan:
 JQuery, Underscore, Sugar...
 
-Frameworks: Componentización, Comunicación Modelo-Vista...
+No es suficiente abstracción para construir aplicaciones complejas.
+Ahí entran los **frameworks**:
 Vue, React, Angular, Mithril...
 
 ## Componentización
 
-Componentes gráficos (widgets), en html:
+Los frameworks suelen dar una forma de definir
+**componentes gráficos** o **widgets**.
 
-- un tag propio, lo controlamos con los atributos y el contenido.
-- abstrae un html mas complejo
-- los podemos juntar para hacer componentes mas complejos
+En HTML sería un **tag propio**,
+que controlamos **vía atributos**,
+y que **abstrae** un HTML más complejo.
 
-## Comunicacion Modelo-Vista
+Se pueden replicar y juntar con otros para armar
+nuevos componentes.
 
-El patron MVC, tal como se definió, no es practico y  no se usa.
-Cada framework llama vista, modelo y controlador a cosas distintas.
+## Interacción Modelo-Vista
+
+El patron MVC original no es practico y realmente no se usa.
+Cada framework llama vista, modelo o controlador a cosas distintas.
 Pero queda la idea: **Separar la presentación de los datos**.
 
 El framework define:
 
-- Como los datos modifican la vista (html)
-- Como lo que pasa en la vista modifica los datos
+Como el modelo (js) altera la vista (html)
+
+Como lo que pasa en la vista modifica el modelo
 
 <div class="notes">
 
@@ -574,13 +615,84 @@ El framework define:
 
 </div>
 
-## La API Mithril
+## Hola mundo
 
-Toda la api sirve 
+```html
+...
+<div id='mithril-target' class='main'>
+	<div class='loading'><b>Loading...</b></div>
+</div>
+...
+```
 
 ```javascript
-m = require('mithril');
+var m = require('mithril');
+
+window.onload = function() {
+	var element = document.getElementById('mithril-target');
+	m.render(element, m('h1', 'Hola mundo'));
+};
 ```
+
+## Hola mundo, comentado
+
+Usamos `m` para acceder a las funciones de la API de Mithril como `m.render`.
+
+Usamos `m` como función para generar nodos virtuales.
+
+Los **nodos virtuales** (vnodes) representan HTML sin usar el DOM directamente, que es lento.
+
+`m.render` convierte nodos virtuales en HTML.
+
+Lo hace una vez, para cosas dinámicas, no basta.
+Necesitaremos actualizarlo.
+
+## Generando vnodes
+
+```javascript
+// Sintaxis general
+m(tag, attrs, children1, children2, ...);
+
+// tag: sintaxis css
+'h1'                // <h1>
+'.sidebar.black'    // <div class="sidebar black">
+'#mytag'            // <div id="mytag">
+'[title="tooltip"]' // <div title="tooltip">
+// Combinable:
+'input.mdc-input#name[type="text"]'
+
+// attrs: (opcional) diccionario con más attributos
+// children: (opcional, multiple) string, vnodes o lista childrens
+```
+
+
+## Montando componentes
+
+```javascript
+var m = require('mithril');
+
+// Nuestro primer componente!
+var Hello = {
+	view: function(vn) {
+		return m('h1', 'Hola mundo');
+	},
+};
+
+window.onload = function() {
+	var element = document.getElementById('mithril-target');
+	m.mount(element, Hello); // Usamos mount, no render!
+};
+// `mount` llamará al `render` con m(Hello)
+// cada vez que haya un cambio en el modelo.
+```
+
+## `mount` comentado
+
+
+Crea el nodo virtual para `m(Hello)`, el tag es el componente.
+
+
+
 
 
 

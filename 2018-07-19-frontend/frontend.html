@@ -102,7 +102,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <p class="author">Voki</p>
 </section>
 
-<section><section id="frontend" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>Frontend</h1></section><section id="frontend-vs-backend" class="slide level2">
+<section><section id="frontend" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>Frontend</h1></section><section id="objetivo" class="slide level2">
+<h2>Objetivo</h2>
+<p>Poner al día de las tecnologías de Frontend que usamos en Som Energía al personal que ya programa en Python temas de Backend.</p>
+<p>Se supone una base en programación.</p>
+<p>Haré paralelismos con tecnologías Python.</p>
+</section><section id="frontend-vs-backend" class="slide level2">
 <h2>Frontend vs Backend</h2>
 <ul>
 <li><strong>Frontend:</strong> se ejecutan en el <strong>navegador</strong>
@@ -124,30 +129,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><strong>Material Design Components:</strong> widgets (qt)</li>
 <li><strong>ospec:</strong> Framework de testing (unittest)</li>
 </ul>
-<aside class="notes">
-<ul>
-<li>Mithril
-<ul>
-<li>Framework de control (Angular, React, Vue...)</li>
-<li>HTML es de naturaleza estatica -&gt; Javascript</li>
-<li>La API estandard tiene muchas limitaciones</li>
-<li>Separacion del modelo y construccion por composicion</li>
-</ul></li>
-<li>Material Design Components
-<ul>
-<li>Diseño concreto de interactividad</li>
-<li>Define como son los elementos combinables (widgets)</li>
-</ul></li>
-<li>Framework de testing</li>
-</ul>
-</aside>
 </section><section id="javascript" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Javascript</h2>
 <p><strong>Inevitable:</strong> El único lenguage incluido en todos los navegadores (a su manera)</p>
 <p>Sintaxis familiar y engañosa, no se comporta igual que C++ o Java. Repasaremos algunas trampas.</p>
 <p>Es necesario entender algunas construciones que usamos en <strong>Mithril</strong>.</p>
-</section><section id="nodejs-npm" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
-<h2>NodeJS, npm</h2>
+</section><section id="nodejs" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
+<h2>NodeJS</h2>
 <p>Tecnologia de backend, sí, pero nos da un entorno de desarrollo (como el que tenemos en python).</p>
 <ul>
 <li>Definicion de proyecto (setup.py -&gt; package.json)</li>
@@ -183,7 +171,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Define: aspecto, comportamiento, variaciones... de botones, menus, radio buttons...</p>
 <p>Hay muchas implementaciones (incompletas todas) Usamos la de Google para Web:</p>
 <p><strong>Material Design Components for the Web</strong></p>
-<p>Agnóstica al framework, habrá que adaptarla a Mithril</p>
+<p>Agnóstica al framework, la adaptamos a Mithril</p>
 </section></section>
 <section><section id="javascript-1" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>Javascript</h1></section><section id="falsos-amigos" class="slide level2">
 <h2>Falsos amigos</h2>
@@ -322,7 +310,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
 </section></section>
-<section><section id="nodejs" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>NodeJS</h1></section><section id="definición-del-proyecto" class="slide level2">
+<section><section id="nodejs-1" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>NodeJS</h1></section><section id="definición-del-proyecto" class="slide level2">
 <h2>Definición del proyecto</h2>
 <p>La definición del proyecto se guarda en <code>package.json</code>.</p>
 <p>Se crea con el comando <code>npm init</code> a partir de preguntas interactivas.</p>
@@ -336,7 +324,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Dependencias del proyecto</h2>
 <p><strong>Dependencias (de run-time):</strong> de uso del paquete</p>
 <p><strong>Dependencias de desarrollo:</strong> de construcción del paquete</p>
-<p>Para nosotros, las de run-time son las que se usan en el navegador.</p>
+<p>Para nosotros, que no hacemos paquete (aun), las de run-time son las que se usan en el navegador.</p>
 <p>Se definen en el <code>package.json</code> y se instalan con <code>npm install</code> sin especificar paquete.</p>
 </section><section id="añadiendo-dependencias" class="slide level2">
 <h2>Añadiendo dependencias</h2>
@@ -379,22 +367,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </section><section id="modulos-en-javascript" class="slide level2">
 <h2>Modulos en Javascript</h2>
 <p>A pelo, Javascript ES5 no sabe de modulos.</p>
-<ul>
-<li>Incluimos cada .js en el html con <code>&lt;script&gt;</code>.</li>
-<li>Tambien las dependencias!</li>
-<li>Todo va al scope global. No hay <code>namespaces</code>.</li>
-</ul>
+<p>Se incluye cada .js en el html con <code>&lt;script&gt;</code>.</p>
+<p>Tambien las dependencias!</p>
+<p>Todo va al scope global. No hay <code>namespaces</code>.</p>
+<p>Se usan funciones auto-llamadas para aislar.</p>
 </section><section id="como-funciona" class="slide level2">
 <h2>Como funciona?</h2>
+<p>Explora las dependencias entre los módulos y genera código para:</p>
 <ul>
-<li>explora las dependencias entre los módulos y genera código para:
-<ul>
-<li>aislar cada modulo en su espacio de nombres</li>
-<li>organizarlos en una estructura buscable por el path</li>
-<li>implementar la funcion <code>require</code> para acceder a las dependencias</li>
-</ul></li>
-<li>modifica el html para incluir los js finales</li>
+<li>aislar el espacio de nombres de cada módulo</li>
+<li>indexarlos por el path</li>
+<li>la función <code>require</code> que los carga</li>
 </ul>
+<p>Tambien modifica el html para incluir los assets finales</p>
 </section><section id="definición-de-módulos" class="slide level2">
 <h2>Definición de módulos</h2>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// mymodule.js</span>
@@ -451,29 +436,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>En su propio bundle, modifican el html para incluirlo</li>
 </ul>
 </aside>
+</section><section id="entry-points-y-bundles" class="slide level2">
+<h2>Entry points y bundles</h2>
+<p><strong>Entry point:</strong> Punto de partida (js) de donde estirar las dependencias. Puede haber varios (diferentes páginas)</p>
+<p>Los navegadores cargan más rápido un fichero mediano que muchos pequenos.</p>
+<p><strong>Bundle:</strong> Un fichero que junta las dependencias de un punto de partida.</p>
+</section><section id="chunks" class="slide level2">
+<h2>Chunks</h2>
+<p>Fragmentos, todo en un bundle no siempre es bueno</p>
+<p>Los assets se generan con un <strong>hash</strong> en el nombre para forzar recarga de cache si hay cambios.</p>
+<p>Las dependencias <code>vendor</code> son menos proclives a cambiar, si las separamos tendran mas hits de cache.</p>
+<p>Con varios entry points, habrá cosas comunes entre los bundles. Separando lo común y lo exclusivo, se optimiza la carga de diferentes páginas.</p>
 </section></section>
 <section><section id="mithril-1" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>Mithril</h1></section><section id="frameworks" class="slide level2">
 <h2>Frameworks</h2>
-<p>HTML pensado para ser estático, o poco dinámico. Con CSS se pueden hacer algunas florituras.</p>
-<p>Necesitamos que el HTML cambie en el navegador: Javascript.</p>
-<p>Librerias: Complementan API DOM. JQuery, Underscore, Sugar...</p>
-<p>Frameworks: Componentización, Comunicación Modelo-Vista... Vue, React, Angular, Mithril...</p>
+<p>HTML y CSS permiten algunas animaciones y respuesta interactiva, pero son en esencia estàticos. <strong>JavaScript</strong> permite modificar el HTML en el navegador.</p>
+<p>La <strong>librería estándar</strong> no es muy potente. Hay <strong>librerías</strong> que la complementan: JQuery, Underscore, Sugar...</p>
+<p>No es suficiente abstracción para construir aplicaciones complejas. Ahí entran los <strong>frameworks</strong>: Vue, React, Angular, Mithril...</p>
 </section><section id="componentización" class="slide level2">
 <h2>Componentización</h2>
-<p>Componentes gráficos (widgets), en html:</p>
-<ul>
-<li>un tag propio, lo controlamos con los atributos y el contenido.</li>
-<li>abstrae un html mas complejo</li>
-<li>los podemos juntar para hacer componentes mas complejos</li>
-</ul>
-</section><section id="comunicacion-modelo-vista" class="slide level2">
-<h2>Comunicacion Modelo-Vista</h2>
-<p>El patron MVC, tal como se definió, no es practico y no se usa. Cada framework llama vista, modelo y controlador a cosas distintas. Pero queda la idea: <strong>Separar la presentación de los datos</strong>.</p>
+<p>Los frameworks suelen dar una forma de definir <strong>componentes gráficos</strong> o <strong>widgets</strong>.</p>
+<p>En HTML sería un <strong>tag propio</strong>, que controlamos <strong>vía atributos</strong>, y que <strong>abstrae</strong> un HTML más complejo.</p>
+<p>Se pueden replicar y juntar con otros para armar nuevos componentes.</p>
+</section><section id="interacción-modelo-vista" class="slide level2">
+<h2>Interacción Modelo-Vista</h2>
+<p>El patron MVC original no es practico y realmente no se usa. Cada framework llama vista, modelo o controlador a cosas distintas. Pero queda la idea: <strong>Separar la presentación de los datos</strong>.</p>
 <p>El framework define:</p>
-<ul>
-<li>Como los datos modifican la vista (html)</li>
-<li>Como lo que pasa en la vista modifica los datos</li>
-</ul>
+<p>Como el modelo (js) altera la vista (html)</p>
+<p>Como lo que pasa en la vista modifica el modelo</p>
 <aside class="notes">
 <ul>
 <li>En el Modelo-Vista-Controlador original habia tres clases.</li>
@@ -499,10 +489,61 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Un DOM virtual permite detectar las diferencias y modificar quirurgicamente</li>
 </ul>
 </aside>
-</section><section id="la-api-mithril" class="slide level2">
-<h2>La API Mithril</h2>
-<p>Toda la api sirve</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">m <span class="op">=</span> <span class="at">require</span>(<span class="st">'mithril'</span>)<span class="op">;</span></code></pre></div>
+</section><section id="hola-mundo" class="slide level2">
+<h2>Hola mundo</h2>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html">...
+<span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">'mithril-target'</span><span class="ot"> class=</span><span class="st">'main'</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">'loading'</span><span class="kw">&gt;&lt;b&gt;</span>Loading...<span class="kw">&lt;/b&gt;&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+...</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> m <span class="op">=</span> <span class="at">require</span>(<span class="st">'mithril'</span>)<span class="op">;</span>
+
+<span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="kw">var</span> element <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">'mithril-target'</span>)<span class="op">;</span>
+    <span class="va">m</span>.<span class="at">render</span>(element<span class="op">,</span> <span class="at">m</span>(<span class="st">'h1'</span><span class="op">,</span> <span class="st">'Hola mundo'</span>))<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+</section><section id="hola-mundo-comentado" class="slide level2">
+<h2>Hola mundo, comentado</h2>
+<p>Usamos <code>m</code> para acceder a las funciones de la API de Mithril como <code>m.render</code>.</p>
+<p>Usamos <code>m</code> como función para generar nodos virtuales.</p>
+<p>Los <strong>nodos virtuales</strong> (vnodes) representan HTML sin usar el DOM directamente, que es lento.</p>
+<p><code>m.render</code> convierte nodos virtuales en HTML.</p>
+<p>Lo hace una vez, para cosas dinámicas, no basta. Necesitaremos actualizarlo.</p>
+</section><section id="generando-vnodes" class="slide level2">
+<h2>Generando vnodes</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Sintaxis general</span>
+<span class="at">m</span>(tag<span class="op">,</span> attrs<span class="op">,</span> children1<span class="op">,</span> children2<span class="op">,</span> ...)<span class="op">;</span>
+
+<span class="co">// tag: sintaxis css</span>
+<span class="st">'h1'</span>                <span class="co">// &lt;h1&gt;</span>
+<span class="st">'.sidebar.black'</span>    <span class="co">// &lt;div class=&quot;sidebar black&quot;&gt;</span>
+<span class="st">'#mytag'</span>            <span class="co">// &lt;div id=&quot;mytag&quot;&gt;</span>
+<span class="st">'[title=&quot;tooltip&quot;]'</span> <span class="co">// &lt;div title=&quot;tooltip&quot;&gt;</span>
+<span class="co">// Combinable:</span>
+<span class="st">'input.mdc-input#name[type=&quot;text&quot;]'</span>
+
+<span class="co">// attrs: (opcional) diccionario con más attributos</span>
+<span class="co">// children: (opcional, multiple) string, vnodes o lista childrens</span></code></pre></div>
+</section><section id="montando-componentes" class="slide level2">
+<h2>Montando componentes</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> m <span class="op">=</span> <span class="at">require</span>(<span class="st">'mithril'</span>)<span class="op">;</span>
+
+<span class="co">// Nuestro primer componente!</span>
+<span class="kw">var</span> Hello <span class="op">=</span> <span class="op">{</span>
+    <span class="dt">view</span><span class="op">:</span> <span class="kw">function</span>(vn) <span class="op">{</span>
+        <span class="cf">return</span> <span class="at">m</span>(<span class="st">'h1'</span><span class="op">,</span> <span class="st">'Hola mundo'</span>)<span class="op">;</span>
+    <span class="op">},</span>
+<span class="op">};</span>
+
+<span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="kw">var</span> element <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">'mithril-target'</span>)<span class="op">;</span>
+    <span class="va">m</span>.<span class="at">mount</span>(element<span class="op">,</span> Hello)<span class="op">;</span> <span class="co">// Usamos mount, no render!</span>
+<span class="op">};</span>
+<span class="co">// `mount` llamará al `render` con m(Hello)</span>
+<span class="co">// cada vez que haya un cambio en el modelo.</span></code></pre></div>
+</section><section id="mount-comentado" class="slide level2">
+<h2><code>mount</code> comentado</h2>
+<p>Crea el nodo virtual para <code>m(Hello)</code>, el tag es el componente.</p>
 </section><section id="componentes-en-mithril" class="slide level2">
 <h2>Componentes en Mithril</h2>
 <p>En Mithril, un componente se define con:</p>
