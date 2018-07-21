@@ -19,7 +19,7 @@ include-before: |
 	<style>
 		.reveal {
 			background: #d5e20f88;
-			background-image: url('../images/logo-somenergia-nobg.svg');
+			background-image: url('../images/logo-somit.svg');
 			background-repeat: no-repeat;
 			background-size: 20%;
 			background-position: bottom left;
