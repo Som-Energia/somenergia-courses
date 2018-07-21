@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="Voki">
+  <meta name="author" content="David García Garzón">
   <title>Tecnologías de Front-end</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -71,7 +71,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         opacity: 50%;
     }
     .reveal .slides {
-        background: #ffffffdd;
+        background: #ffffffee;
     }
     .reveal .slides .titleslide {
         background-color: #86bc25ff;
@@ -99,15 +99,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <section>
   <h1 class="title">Tecnologías de Front-end</h1>
   <p class="subtitle">usadas en Som Energia, para Pythoner@s</p>
-  <p class="author">Voki</p>
+  <p class="author">David García Garzón</p>
 </section>
 
-<section><section id="frontend" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>Frontend</h1></section><section id="objetivo" class="slide level2">
-<h2>Objetivo</h2>
-<p>Poner al día de las tecnologías de Frontend que usamos en Som Energía al personal que ya programa en Python temas de Backend.</p>
-<p>Se supone una base en programación.</p>
-<p>Haré paralelismos con tecnologías Python.</p>
-</section><section id="frontend-vs-backend" class="slide level2">
+<section><section id="frontend" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg" data-background-size="80%"><h1>Frontend</h1></section><section id="frontend-vs-backend" class="slide level2" data-background-image="../images/logo-somenergia-nobg.svg" data-background-size="80%">
 <h2>Frontend vs Backend</h2>
 <ul>
 <li><strong>Frontend:</strong> se ejecutan en el <strong>navegador</strong>
@@ -119,8 +114,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Flask, Django, NodeJS, PHP...</li>
 </ul></li>
 </ul>
-</section><section id="elementos-del-frontend" class="slide level2">
-<h2>Elementos del Frontend</h2>
+</section><section id="objetivo" class="slide level2" data-background-image="../images/logo-somenergia-nobg.svg" data-background-size="80%">
+<h2>Objetivo</h2>
+<p>Poner al día de las tecnologías de Frontend que usamos en Som Energía al personal que ya programa en Python temas de Backend.</p>
+<p>Se supone una base en programación.</p>
+<p>Haré paralelismos con tecnologías Python.</p>
+</section><section id="ecosistema-de-frontend" class="slide level2" data-background-image="../images/logo-somenergia-nobg.svg" data-background-size="80%">
+<h2>Ecosistema de Frontend</h2>
 <ul>
 <li><strong>Javascript:</strong> lenguage</li>
 <li><strong>NodeJS:</strong> entorno, paquetes (virtualenv, pip)</li>
@@ -131,8 +131,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </section><section id="javascript" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Javascript</h2>
-<p><strong>Inevitable:</strong> El único lenguage incluido en todos los navegadores (a su manera)</p>
-<p>Sintaxis familiar y engañosa, no se comporta igual que C++ o Java. Repasaremos algunas trampas.</p>
+<p><strong>Inevitable:</strong> El único lenguage incluido en todos los navegadores (en cada uno a su manera)</p>
+<p>Sintaxis familiar pero engañosa, no se comporta igual que C++ o Java. Repasaremos algunas trampas.</p>
 <p>Es necesario entender algunas construciones que usamos en <strong>Mithril</strong>.</p>
 </section><section id="nodejs" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
 <h2>NodeJS</h2>
@@ -168,12 +168,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </section><section id="material-design" class="slide level2" data-background-image="../images/logo-materialdesign.svg" data-background-size="40%">
 <h2>Material Design</h2>
 <p>Especificación de componentes gráficos. Originalmente para Android.</p>
-<p>Define: aspecto, comportamiento, variaciones... de botones, menus, radio buttons...</p>
+<p>Define aspecto, comportamiento, variaciones... de botones, menus, radio buttons...</p>
 <p>Hay muchas implementaciones (incompletas todas) Usamos la de Google para Web:</p>
 <p><strong>Material Design Components for the Web</strong></p>
 <p>Agnóstica al framework, la adaptamos a Mithril</p>
 </section></section>
-<section><section id="javascript-1" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>Javascript</h1></section><section id="falsos-amigos" class="slide level2">
+<section><section id="javascript-1" class="titleslide slide level1" data-background-image="../images/logo-js.svg" data-background-size="40%"><h1>Javascript</h1></section><section id="falsos-amigos" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Falsos amigos</h2>
 <blockquote>
 <p>Javascript, tan familiar que pensamos que no hay que aprenderlo.</p>
@@ -181,7 +181,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Se parece a C++ y Java</p>
 <p>Esperamos que se comporte como ellos.</p>
 <p>Cuando no lo hace, 😠 😠 😠 😠 <code>＼(｀O´)／</code></p>
-</section><section id="falsos-amigos-y" class="slide level2">
+</section><section id="falsos-amigos-y" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Falsos amigos: <code>==</code> y <code>!=</code></h2>
 <ul>
 <li><code>==</code> y <code>!=</code> intentan convertir tipos antes de comparar</li>
@@ -194,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">false</span><span class="op">==</span><span class="st">''</span> <span class="co">// true</span>
 <span class="kw">undefined</span><span class="op">==</span><span class="kw">false</span> <span class="co">// false</span></code></pre></div>
 <p>La regla: Usar el de tres signos al menos que realmente quieras la conversión (y no, no la quieres)</p>
-</section><section id="falsos-amigos-1" class="slide level2">
+</section><section id="falsos-amigos-1" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Falsos amigos: <code>+</code></h2>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span> <span class="co">// 5</span>
 <span class="st">'a'</span> <span class="op">+</span> <span class="st">'b'</span> <span class="co">// 'ab'</span>
@@ -206,7 +206,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="dv">3</span> <span class="op">+</span> <span class="kw">undefined</span> <span class="co">// NaN</span>
 <span class="st">'a'</span> <span class="op">+</span> <span class="kw">undefined</span>  <span class="co">// 'aundefined'</span>
 <span class="dv">3</span> <span class="op">+</span> <span class="op">{}</span> <span class="co">// '3[object Object]'</span></code></pre></div>
-</section><section id="falsos-amigos-bool-cast" class="slide level2">
+</section><section id="falsos-amigos-bool-cast" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Falsos amigos: bool cast</h2>
 <p>En Python estamos muy acostumbrados a usarlas en condiciones y funcionan muy distinto.</p>
 <ul>
@@ -215,14 +215,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>El entero <code>0</code> es falso pero, tambien el string <code>'0'</code>!!</li>
 <li>De hecho un string con varios ceros pero con espacios delante y detras tambien es <code>false</code>: <code>'   000 \t\n  '</code></li>
 </ul>
-</section><section id="variables-no-declaradas" class="slide level2">
+</section><section id="variables-no-declaradas" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Variables no declaradas</h2>
 <p><strong>Típico:</strong> me equivoco en el nombre de la variable</p>
 <p>Javascript no se queja, devuelve <code>undefined</code>.</p>
 <p>Se propaga en silencio como <code>false</code> o el numero <code>NaN</code> o la cadena <code>'undefined'</code>... hasta que peta!!!</p>
 <p>Añadir <code>'use strict';</code> al principio de los ficheros hace que se queje si usas una variable no declarada.</p>
 <p><strong>¡Ojo!</strong> Avisará con las variables, pero no con las propiedades de los objetos que no existen.</p>
-</section><section id="objetos" class="slide level2">
+</section><section id="objetos" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Objetos</h2>
 <p>Los objetos de Javascript son &quot;diccionarios&quot;</p>
 <p>Acceso dual con <code>.</code> y <code>[]</code> como nuestro <code>yamlns</code>.</p>
@@ -251,7 +251,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Truco: si la clave es calculada y esta en la variable <code>key</code>, definir el literal: <code>{ ''+key: value }</code>, si no considera la clave literal <code>'key'</code>.</li>
 </ul>
 </aside>
-</section><section id="singletons" class="slide level2">
+</section><section id="singletons" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Singletons</h2>
 <p>Métodos: atributos que apuntan a funciones</p>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> MySingleton <span class="op">=</span> <span class="op">{</span>
@@ -264,7 +264,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="va">MySingleton</span>.<span class="at">method3</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{};</span></code></pre></div>
 <p>No son clases, son <strong>Singletons</strong>, objetos únicos. Pero sirven de prototipo para otros.</p>
 <p>En Mithril los usamos para definir componentes.</p>
-</section><section id="las-clases-son-funciones" class="slide level2">
+</section><section id="las-clases-son-funciones" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Las clases son funciones</h2>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">MyClass</span>(param1) <span class="op">{</span>  <span class="co">// funcion 'Factoria'</span>
     <span class="kw">this</span>.<span class="at">_param1</span> <span class="op">=</span> param1<span class="op">;</span> <span class="co">// Attributo</span>
@@ -281,7 +281,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="va">MyClass</span>.<span class="va">prototype</span>.<span class="at">method3</span> <span class="op">=</span> premethod3<span class="op">;</span>  <span class="co">// Recuerda el prototype</span>
 
 <span class="kw">var</span> myinstance <span class="op">=</span> <span class="kw">new</span> <span class="at">MyClass</span>(<span class="st">'param1value'</span>)<span class="op">;</span> <span class="co">// No olvides el new</span></code></pre></div>
-</section><section id="falsos-amigos-this" class="slide level2">
+</section><section id="falsos-amigos-this" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Falsos amigos: <code>this</code></h2>
 <p>Su valor en una funcion <code>f</code> depende de como se llame, no de donde se defina</p>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// La misma funcion todo el rato</span>
@@ -295,7 +295,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="va">f</span>.<span class="at">bind</span>(o)<span class="op">;</span> <span class="at">f</span>(a<span class="op">,</span>b)<span class="op">;</span> <span class="co">// Seria `o`</span>
 
 <span class="kw">var</span> f2 <span class="op">=</span> <span class="va">o</span>.<span class="at">f</span><span class="op">;</span> <span class="at">f2</span>()<span class="op">;</span> <span class="co">// 'undefined', f2 pierde el binding</span></code></pre></div>
-</section><section id="falsos-amigos-this-1" class="slide level2">
+</section><section id="falsos-amigos-this-1" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Falsos amigos: <code>this</code></h2>
 <p>Ojo con las lambdas y las inner:</p>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">mymethod</span>(b) <span class="op">{</span>
@@ -310,29 +310,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
 </section></section>
-<section><section id="nodejs-1" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>NodeJS</h1></section><section id="definición-del-proyecto" class="slide level2">
+<section><section id="nodejs-1" class="titleslide slide level1" data-background-image="../images/logo-nodejs.svg" data-background-size="60%"><h1>NodeJS</h1></section><section id="definición-del-proyecto" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
 <h2>Definición del proyecto</h2>
 <p>La definición del proyecto se guarda en <code>package.json</code>.</p>
 <p>Se crea con el comando <code>npm init</code> a partir de preguntas interactivas.</p>
-</section><section id="repositorio-de-paquetes" class="slide level2">
+</section><section id="repositorio-de-paquetes" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
 <h2>Repositorio de paquetes</h2>
 <p><code>npm</code> es un gestor de paquetes parecido a <code>pip</code></p>
 <p><code>npm search</code>, <code>npm install</code>...</p>
 <p>Se baja los paquetes de un repositorio online y los instala en local, en la carpeta <code>node_modules</code>.</p>
 <p>Cada proyecto tiene su <code>node_modules</code> propio y aislado como un <code>virtualenv</code> en Python.</p>
-</section><section id="dependencias-del-proyecto" class="slide level2">
+</section><section id="dependencias-del-proyecto" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
 <h2>Dependencias del proyecto</h2>
 <p><strong>Dependencias (de run-time):</strong> de uso del paquete</p>
 <p><strong>Dependencias de desarrollo:</strong> de construcción del paquete</p>
 <p>Para nosotros, que no hacemos paquete (aun), las de run-time son las que se usan en el navegador.</p>
 <p>Se definen en el <code>package.json</code> y se instalan con <code>npm install</code> sin especificar paquete.</p>
-</section><section id="añadiendo-dependencias" class="slide level2">
+</section><section id="añadiendo-dependencias" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
 <h2>Añadiendo dependencias</h2>
 <p>Se añaden con <code>npm install --save paquete</code> o con <code>--save-dev</code> si es de desarrollo.</p>
 <p>Con las opciones <em>save</em> quedan guardadas en las claves <code>dependencies</code> y <code>devDependencies</code></p>
 <p>Si no, no se actualiza (los marca <em>straneous</em>)</p>
 <p>Queda guardada la versión. Para actualizarlas: <code>npm update --save paquete</code></p>
-</section><section id="comandos-extra" class="slide level2">
+</section><section id="comandos-extra" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
 <h2>Comandos extra</h2>
 <p>Podemos añadir comandos personalizados para el desarrolo de nuestro proyecto.</p>
 <p>El <code>package.json</code> contiene la clave <code>scripts</code> con comandos personalizados de <code>npm</code>.</p>
@@ -340,7 +340,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         <span class="dt">&quot;server&quot;</span><span class="fu">:</span> <span class="st">&quot;webpack-dev-server --open --watch -d&quot;</span><span class="fu">,</span>
     <span class="fu">}</span><span class="er">,</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">npm</span> run server</code></pre></div>
-</section><section id="chuleta" class="slide level2">
+</section><section id="chuleta" class="slide level2" data-background-image="../images/logo-nodejs.svg" data-background-size="60%">
 <h2>Chuleta</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">npm</span> init <span class="co"># Crea el package.json a base de preguntas</span>
 
@@ -359,19 +359,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>El update no actualiza las versiones mayores. Hay que editarlas a mano en el fichero</p>
 </aside>
 </section></section>
-<section><section id="webpack-1" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>Webpack</h1></section><section id="que-hace-webpack" class="slide level2">
+<section><section id="webpack-1" class="titleslide slide level1" data-background-image="../images/logo-webpack.svg" data-background-size="40%"><h1>Webpack</h1></section><section id="que-hace-webpack" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
 <h2>Que hace webpack?</h2>
 <p>A partir del codigo fuente, genera los ficheros que se bajará el navegador.</p>
 <p>Vamos que compila, ¿pero Javascript no era interpretado?</p>
 <p>A medida que los proyectos se hacen grandes, es necesario modularizar, descartar modulos no usados, agregar el resto, optimizar, preprocesar...</p>
-</section><section id="modulos-en-javascript" class="slide level2">
+</section><section id="modulos-en-javascript" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
 <h2>Modulos en Javascript</h2>
 <p>A pelo, Javascript ES5 no sabe de modulos.</p>
 <p>Se incluye cada .js en el html con <code>&lt;script&gt;</code>.</p>
 <p>Tambien las dependencias!</p>
 <p>Todo va al scope global. No hay <code>namespaces</code>.</p>
 <p>Se usan funciones auto-llamadas para aislar.</p>
-</section><section id="como-funciona" class="slide level2">
+</section><section id="como-funciona" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
 <h2>Como funciona?</h2>
 <p>Explora las dependencias entre los módulos y genera código para:</p>
 <ul>
@@ -380,7 +380,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>la función <code>require</code> que los carga</li>
 </ul>
 <p>Tambien modifica el html para incluir los assets finales</p>
-</section><section id="definición-de-módulos" class="slide level2">
+</section><section id="definición-de-módulos" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
 <h2>Definición de módulos</h2>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// mymodule.js</span>
 <span class="st">'use strict'</span><span class="op">;</span> <span class="co">// Activa errors per variables no declarades</span>
@@ -396,7 +396,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">var</span> imported <span class="op">=</span> <span class="at">require</span>(<span class="st">'./mymodule'</span>)<span class="op">;</span>
 
 <span class="va">console</span>.<span class="at">debug</span>(<span class="at">imported</span>())<span class="op">;</span> <span class="co">// should show 'hello world'</span></code></pre></div>
-</section><section id="el-bundle-envoltorio" class="slide level2">
+</section><section id="el-bundle-envoltorio" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
 <h2>El bundle (envoltorio)</h2>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>(modules) <span class="op">{</span> <span class="co">// funcion auto-llamada</span>
     <span class="kw">var</span> installedModules <span class="op">=</span> <span class="op">{};</span> <span class="co">// The module cache</span>
@@ -424,45 +424,103 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         <span class="at">eval</span>(<span class="st">'string con el contenido del fichero'</span>)<span class="op">;</span>
     <span class="op">},</span>
 <span class="op">}</span>)<span class="op">;</span></code></pre></div>
-</section><section id="otros-recursos-assets" class="slide level2">
+</section><section id="entry-points-y-bundles" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Entry points y bundles</h2>
+<p><strong>Entry point:</strong> Punto de partida (js) de donde estirar las dependencias. Puede haber varios (diferentes páginas)</p>
+<p>Los navegadores cargan más rápido un fichero mediano que muchos pequenos.</p>
+<p><strong>Bundle:</strong> Un fichero que junta las dependencias de un punto de partida.</p>
+</section><section id="chunks" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Chunks</h2>
+<p>Fragmentos, todo en un bundle no siempre es bueno</p>
+<p>Los assets se generan con un <strong>hash</strong> en el nombre para forzar recarga de cache si hay cambios.</p>
+<p>Las dependencias <em>vendor</em> son menos proclives a cambiar, si las separamos tendran mas hits de cache.</p>
+<p>Con varios <em>entry points</em>, habrá cosas comunes entre los bundles. Separando lo común y lo particular, se optimiza la carga de múltiples páginas.</p>
+</section><section id="otros-recursos-assets" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
 <h2>Otros recursos (assets)</h2>
 <p>Datos (json, xml, yaml), estilos (css, sass, less, stylus), imagenes (png, jpg, svg) ...</p>
 <p>Se <em>requieren</em> como si fueran javascripts.</p>
-<p>Los <em>loaders</em> se encargan de que esten disponibles.</p>
-<p>Strings en el bundle javascript o en su propio bundle.</p>
+<p>Una cadena de <em>loaders</em> se encarga de que esten disponibles en el navegador.</p>
 <aside class="notes">
 <ul>
 <li>Como string en el js, añaden codigo js para que este disponible</li>
 <li>En su propio bundle, modifican el html para incluirlo</li>
 </ul>
 </aside>
-</section><section id="entry-points-y-bundles" class="slide level2">
-<h2>Entry points y bundles</h2>
-<p><strong>Entry point:</strong> Punto de partida (js) de donde estirar las dependencias. Puede haber varios (diferentes páginas)</p>
-<p>Los navegadores cargan más rápido un fichero mediano que muchos pequenos.</p>
-<p><strong>Bundle:</strong> Un fichero que junta las dependencias de un punto de partida.</p>
-</section><section id="chunks" class="slide level2">
-<h2>Chunks</h2>
-<p>Fragmentos, todo en un bundle no siempre es bueno</p>
-<p>Los assets se generan con un <strong>hash</strong> en el nombre para forzar recarga de cache si hay cambios.</p>
-<p>Las dependencias <code>vendor</code> son menos proclives a cambiar, si las separamos tendran mas hits de cache.</p>
-<p>Con varios entry points, habrá cosas comunes entre los bundles. Separando lo común y lo exclusivo, se optimiza la carga de diferentes páginas.</p>
+</section><section id="transcripción" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Transcripción</h2>
+<p>Los loaders nos permiten <strong>traducir recursos</strong> en formatos no soportados por los navegadores.</p>
+<ul>
+<li>CSS: Sass, Less, Stylus</li>
+<li>Javascript: ES6, CoffeScript, TypeScript</li>
+<li>HTML: Markdown, RST, Jade</li>
+<li>Datos: XML, JSON, YAML</li>
+<li>Imagenes, videos, fuentes...</li>
+</ul>
+<p>También se usan para la <strong>optimización</strong>. Minifiers, uglifiers, imagenes multiresolución...</p>
+</section><section id="disposición" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Disposición</h2>
+<p>Los loaders determinan en que forma estará disponible el recurso y lo hacen accesible de forma transparente</p>
+<p>Como ficheros independientes</p>
+<p>Como <strong>strings en el bundle javascript</strong></p>
+<p>Extraidos en <strong>su propio bundle</strong></p>
+<p><strong>Insertados</strong> en otro recurso</p>
+</section><section id="ejemplo-real" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Ejemplo real</h2>
+<p>Repositorio <code>webforms-mithril</code>:</p>
+<p>Comandos de <code>webpack</code> en los <code>scripts</code> del <code>package.json</code></p>
+<p>La configuración de webpack en <code>webpack-config.js</code></p>
+</section><section id="loaders" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Loaders</h2>
+<p><code>config.module.rules</code> como cargar cada recurso.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">rules<span class="op">:</span> [
+    <span class="co">// yaml-loader: yaml data -&gt; json data</span>
+    <span class="co">// json-loader: json data -&gt; js object</span>
+    <span class="co">// you get it with 'require'</span>
+    <span class="op">{</span> <span class="dt">test</span><span class="op">:</span> <span class="ss">/</span><span class="sc">\.</span><span class="ss">yaml</span><span class="sc">$</span><span class="ss">/</span><span class="op">,</span> <span class="dt">use</span><span class="op">:</span> [<span class="st">&quot;json-loader&quot;</span><span class="op">,</span> <span class="st">&quot;yaml-loader&quot;</span> ] <span class="op">},</span>
+
+    <span class="co">// stylus-loader:  stylus -&gt; css</span>
+    <span class="co">// css-loader: css -&gt; js code that adds the style</span>
+    <span class="co">// MiniCssExtractPlugin: extracts the css into a css bundle</span>
+    <span class="co">// The css bundle is configured in the plugin section</span>
+    <span class="co">// 'require' ensures that the css is loaded</span>
+    <span class="op">{</span> <span class="dt">test</span><span class="op">:</span> <span class="ss">/</span><span class="sc">\.</span><span class="ss">styl</span><span class="sc">$</span><span class="ss">/</span><span class="op">,</span> <span class="dt">use</span><span class="op">:</span> [
+        <span class="va">MiniCssExtractPlugin</span>.<span class="at">loader</span><span class="op">,</span> <span class="st">&quot;css-loader&quot;</span><span class="op">,</span> <span class="st">&quot;stylus-loader&quot;</span>]<span class="op">},</span>
+    ...</code></pre></div>
+</section><section id="servidor-de-desarrollo" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Servidor de desarrollo</h2>
+<p><code>webpack-dev-server --open -d</code></p>
+<p>o <code>npm run server</code></p>
+<p>Lanza un webserver NodeJS local con los assets</p>
+<p>Apunta el navegador a la página principal.</p>
+<p>Detecta cambios en los ficheros, regenera los assets del servidor y recarga el navegador.</p>
+<p>Agiliza mucho el ciclo de desarrollo.</p>
+</section><section id="integración-back-end" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Integración Back-end</h2>
+<p><strong>Problema:</strong> el HTML lo genera la aplicacion de backend, no webpack.</p>
+<p>Hay <strong>plugins de webpack</strong> que generan <strong>manifiestos</strong> con la <strong>lista de assets</strong>.</p>
+<p>Hay <strong>extensiones para Flask y Django</strong> que integran esa lista en las páginas.</p>
+<p><strong>Estrategia:</strong> en backend pocas páginas y mucha API.</p>
+</section><section id="source-maps" class="slide level2" data-background-image="../images/logo-webpack.svg" data-background-size="40%">
+<h2>Source Maps</h2>
+<p>Con tanta transformación, ¿cómo relacionamos un error en el navegador con el código fuente?</p>
+<p>En modo desarrollo webpack genera <em>source maps</em>. Comentarios especiales que referencian al código original, fichero y linia.</p>
+<p>Los navegadores modernos los entienden y generan <em>stack traces</em> usables.</p>
 </section></section>
-<section><section id="mithril-1" class="titleslide slide level1" data-background-image="../images/logo-somenergia-nobg.svg"><h1>Mithril</h1></section><section id="frameworks" class="slide level2">
+<section><section id="mithril-1" class="titleslide slide level1" data-background-image="../images/logo-mithril.svg" data-background-size="40%"><h1>Mithril</h1></section><section id="frameworks" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
 <h2>Frameworks</h2>
 <p>HTML y CSS permiten algunas animaciones y respuesta interactiva, pero son en esencia estàticos. <strong>JavaScript</strong> permite modificar el HTML en el navegador.</p>
 <p>La <strong>librería estándar</strong> no es muy potente. Hay <strong>librerías</strong> que la complementan: JQuery, Underscore, Sugar...</p>
 <p>No es suficiente abstracción para construir aplicaciones complejas. Ahí entran los <strong>frameworks</strong>: Vue, React, Angular, Mithril...</p>
-</section><section id="componentización" class="slide level2">
+</section><section id="componentización" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
 <h2>Componentización</h2>
 <p>Los frameworks suelen dar una forma de definir <strong>componentes gráficos</strong> o <strong>widgets</strong>.</p>
 <p>En HTML sería un <strong>tag propio</strong>, que controlamos <strong>vía atributos</strong>, y que <strong>abstrae</strong> un HTML más complejo.</p>
 <p>Se pueden replicar y juntar con otros para armar nuevos componentes.</p>
-</section><section id="interacción-modelo-vista" class="slide level2">
+</section><section id="interacción-modelo-vista" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
 <h2>Interacción Modelo-Vista</h2>
-<p>El patron MVC original no es practico y realmente no se usa. Cada framework llama vista, modelo o controlador a cosas distintas. Pero queda la idea: <strong>Separar la presentación de los datos</strong>.</p>
+<p>Cada framework llama <em>vista</em>, <em>modelo</em> o <em>controlador</em> a cosas distintas. El patron MVC <strong>original</strong> no era práctico y nadie lo usa tal cual. Pero quedó la idea: <strong>Separar la presentación de los datos</strong>.</p>
 <p>El framework define:</p>
-<p>Como el modelo (js) altera la vista (html)</p>
+<p>Como el modelo (datos js) altera la vista (html)</p>
 <p>Como lo que pasa en la vista modifica el modelo</p>
 <aside class="notes">
 <ul>
@@ -474,7 +532,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Todo el mundo llama MVC a lo suyo y hablan de cosas muy distintas.</li>
 </ul>
 </aside>
-</section><section id="ventajas-de-mithril" class="slide level2">
+</section><section id="ventajas-de-mithril" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
 <h2>Ventajas de Mithril</h2>
 <ul>
 <li>Ligero: muy pocos k's</li>
@@ -489,7 +547,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Un DOM virtual permite detectar las diferencias y modificar quirurgicamente</li>
 </ul>
 </aside>
-</section><section id="hola-mundo" class="slide level2">
+</section><section id="hola-mundo" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
 <h2>Hola mundo</h2>
 <div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html">...
 <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">'mithril-target'</span><span class="ot"> class=</span><span class="st">'main'</span><span class="kw">&gt;</span>
@@ -502,17 +560,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="kw">var</span> element <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">'mithril-target'</span>)<span class="op">;</span>
     <span class="va">m</span>.<span class="at">render</span>(element<span class="op">,</span> <span class="at">m</span>(<span class="st">'h1'</span><span class="op">,</span> <span class="st">'Hola mundo'</span>))<span class="op">;</span>
 <span class="op">};</span></code></pre></div>
-</section><section id="hola-mundo-comentado" class="slide level2">
+</section><section id="hola-mundo-comentado" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
 <h2>Hola mundo, comentado</h2>
-<p>Usamos <code>m</code> para acceder a las funciones de la API de Mithril como <code>m.render</code>.</p>
-<p>Usamos <code>m</code> como función para generar nodos virtuales.</p>
+<p><code>m.xxxx</code> - acceso a funciones de la api Mithril.</p>
+<p><code>m(...)</code> - como función genera nodos virtuales.</p>
 <p>Los <strong>nodos virtuales</strong> (vnodes) representan HTML sin usar el DOM directamente, que es lento.</p>
 <p><code>m.render</code> convierte nodos virtuales en HTML.</p>
-<p>Lo hace una vez, para cosas dinámicas, no basta. Necesitaremos actualizarlo.</p>
-</section><section id="generando-vnodes" class="slide level2">
+<p>Renderiza solo una vez, nos vale para ejemplos. Veremos adelante como actualizar.</p>
+</section><section id="generando-vnodes" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
 <h2>Generando vnodes</h2>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Sintaxis general</span>
-<span class="at">m</span>(tag<span class="op">,</span> attrs<span class="op">,</span> children1<span class="op">,</span> children2<span class="op">,</span> ...)<span class="op">;</span>
+<span class="at">m</span>(tag<span class="op">,</span> attrs<span class="op">,</span> children<span class="op">,</span> children2<span class="op">,</span> ...)<span class="op">;</span>
 
 <span class="co">// tag: sintaxis css</span>
 <span class="st">'h1'</span>                <span class="co">// &lt;h1&gt;</span>
@@ -524,36 +582,96 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <span class="co">// attrs: (opcional) diccionario con más attributos</span>
 <span class="co">// children: (opcional, multiple) string, vnodes o lista childrens</span></code></pre></div>
-</section><section id="montando-componentes" class="slide level2">
-<h2>Montando componentes</h2>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> m <span class="op">=</span> <span class="at">require</span>(<span class="st">'mithril'</span>)<span class="op">;</span>
-
-<span class="co">// Nuestro primer componente!</span>
+</section><section id="ejemplo" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>Ejemplo</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> backuri <span class="op">=</span> <span class="st">'http://example.com'</span><span class="op">;</span>
+<span class="kw">var</span> vnode <span class="op">=</span>
+    <span class="at">m</span>(<span class="st">'section#section1'</span><span class="op">,</span> [
+        <span class="at">m</span>(<span class="st">'h2'</span><span class="op">,</span> <span class="st">'Titulo'</span>)<span class="op">,</span>
+        <span class="at">m</span>(<span class="st">'p.first'</span><span class="op">,</span><span class="st">'contenido'</span>)<span class="op">,</span>
+        <span class="at">m</span>(<span class="st">'p'</span><span class="op">,</span><span class="st">'contenido'</span>)<span class="op">,</span>
+        <span class="at">m</span>(<span class="st">'nav.backlink'</span><span class="op">,</span> [
+            <span class="at">m</span>(<span class="st">'a[target=&quot;_blank&quot;]'</span><span class="op">,</span> <span class="op">{</span>
+                <span class="st">'href'</span><span class="op">:</span> backuri<span class="op">,</span>
+            <span class="op">},</span>
+                <span class="st">'Volver atras'</span>
+            )<span class="op">,</span>
+        ])<span class="op">,</span>
+    ])<span class="op">;</span></code></pre></div>
+</section><section id="vnodes-por-dentro" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>vnodes por dentro</h2>
+<p>Es un objeto/diccionario con:</p>
+<ul>
+<li><code>tag</code>, <code>attrs</code> y <code>children</code>: los parámetros del <code>m</code></li>
+<li><code>text</code>: si solo hay un children y es texto</li>
+<li><code>dom</code>: elemento DOM renderizado (si lo está)</li>
+<li><code>state</code>, <code>instance</code>, <code>key</code>...: los veremos</li>
+</ul>
+<p>Manipular el DOM dispara el redibujado. Los vnodes son baratos de crear y comparar. Vale la pena generarlos a menudo a cambio de juntar cambios en un solo redibujado.</p>
+</section><section id="primer-componente" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>Primer componente</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Nuestro primer componente!</span>
 <span class="kw">var</span> Hello <span class="op">=</span> <span class="op">{</span>
+    <span class="co">// render llama al método view pasandole el vnode original</span>
+    <span class="co">// Retornamos el vnode que se renderizará en su lugar</span>
     <span class="dt">view</span><span class="op">:</span> <span class="kw">function</span>(vn) <span class="op">{</span>
-        <span class="cf">return</span> <span class="at">m</span>(<span class="st">'h1'</span><span class="op">,</span> <span class="st">'Hola mundo'</span>)<span class="op">;</span>
+        <span class="co">// podemos acceder a los attributos del vnode original</span>
+        <span class="cf">return</span> <span class="at">m</span>(<span class="st">'h1'</span><span class="op">,</span> <span class="st">'Hola '</span><span class="op">+</span><span class="va">vn</span>.<span class="va">attrs</span>.<span class="at">name</span><span class="op">||</span><span class="st">'mundo'</span>)<span class="op">;</span>
     <span class="op">},</span>
 <span class="op">};</span>
 
 <span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
     <span class="kw">var</span> element <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">'mithril-target'</span>)<span class="op">;</span>
-    <span class="va">m</span>.<span class="at">mount</span>(element<span class="op">,</span> Hello)<span class="op">;</span> <span class="co">// Usamos mount, no render!</span>
+    <span class="co">// Usamos el componente como tag</span>
+    <span class="va">m</span>.<span class="at">render</span>(element<span class="op">,</span> <span class="at">m</span>(Hello<span class="op">,</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">'Voki'</span><span class="op">}</span>))<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+</section><section id="montando-la-app" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>Montando la app</h2>
+<p>La funcion <code>m.mount</code> activa el sistema de actualización. Después de cada evento se dispara un renderizado, si hay cambios se redibuja el DOM.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> App <span class="op">=</span> <span class="op">{};</span>
+<span class="va">App</span>.<span class="at">view</span> <span class="op">=</span> <span class="kw">function</span>(vn) <span class="op">{</span> <span class="cf">return</span> <span class="at">m</span>(<span class="st">'h1'</span><span class="op">,</span> <span class="st">'Hola mundo'</span>)<span class="op">;</span> <span class="op">},</span>
+
+<span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="kw">var</span> element <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">'mithril-target'</span>)<span class="op">;</span>
+    <span class="va">m</span>.<span class="at">mount</span>(element<span class="op">,</span> App)<span class="op">;</span> <span class="co">// mount, no render!</span>
+<span class="op">};</span></code></pre></div>
+<p>Al <code>mount</code> le pasamos un componente, <code>App</code> y no un vnode, <code>m(App)</code>, como al <code>render</code>.</p>
+</section><section id="componente-contenedor" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>Componente <em>contenedor</em></h2>
+<p>Metemos los children del vnode original en el vnode resultante.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> RedBox <span class="op">=</span> <span class="op">{};</span>
+<span class="va">RedBox</span>.<span class="at">view</span> <span class="op">=</span> <span class="kw">function</span>(vn) <span class="op">{</span>
+    <span class="cf">return</span> <span class="at">m</span>(<span class="st">''</span><span class="op">,</span> <span class="op">{</span><span class="dt">style</span><span class="op">:</span> <span class="st">'border:3pt solid red'</span><span class="op">},</span> <span class="va">vn</span>.<span class="at">children</span>)<span class="op">;</span>
 <span class="op">};</span>
-<span class="co">// `mount` llamará al `render` con m(Hello)</span>
-<span class="co">// cada vez que haya un cambio en el modelo.</span></code></pre></div>
-</section><section id="mount-comentado" class="slide level2">
-<h2><code>mount</code> comentado</h2>
-<p>Crea el nodo virtual para <code>m(Hello)</code>, el tag es el componente.</p>
-</section><section id="componentes-en-mithril" class="slide level2">
-<h2>Componentes en Mithril</h2>
-<p>En Mithril, un componente se define con:</p>
-<ul>
-<li>Una funcion, <code>view</code>, que genera dinamicamente el html</li>
-<li>Una serie de atributos que podemos fijar desde donde los usamos, dependiendo del modelo</li>
-<li>De esos attributos, algunos son callbacks que hacen la comunicación contraria hacia arriba</li>
-<li>Un estado interno del componente</li>
-<li>Unos callbacks que se llaman en momentos especificos del ciclo de vida</li>
-</ul>
+
+<span class="kw">var</span> App <span class="op">=</span> <span class="op">{};</span>
+<span class="va">App</span>.<span class="at">view</span> <span class="op">=</span> <span class="kw">function</span>(vn) <span class="op">{</span>
+    <span class="cf">return</span> <span class="at">m</span>(RedBox<span class="op">,</span>
+        <span class="at">m</span>(<span class="st">'h1'</span><span class="op">,</span> <span class="st">'Dress in red'</span>)<span class="op">,</span>
+        <span class="at">m</span>(<span class="st">'.content'</span><span class="op">,</span> <span class="st">'bla bla'</span>)<span class="op">,</span>
+    )<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+</section><section id="controlando-un-modelo" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>Controlando un modelo</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> Person <span class="op">=</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">'anonymous'</span> <span class="op">};</span>  <span class="co">// the model</span>
+
+<span class="kw">var</span> PersonEditor <span class="op">=</span> <span class="op">{};</span>
+<span class="va">PersonEditor</span>.<span class="at">view</span> <span class="op">=</span> <span class="kw">function</span>(vn) <span class="op">{</span>
+    <span class="cf">return</span> <span class="at">m</span>(<span class="st">''</span><span class="op">,</span>[
+        <span class="at">m</span>(<span class="st">'input'</span><span class="op">,</span> <span class="op">{</span>
+            <span class="dt">value</span><span class="op">:</span> <span class="va">Person</span>.<span class="at">name</span><span class="op">,</span> <span class="co">// Model -&gt; View</span>
+            <span class="dt">oninput</span><span class="op">:</span> <span class="kw">function</span>(ev) <span class="op">{</span>
+                <span class="va">Person</span>.<span class="at">name</span> <span class="op">=</span> <span class="va">ev</span>.<span class="va">target</span>.<span class="at">value</span><span class="op">;</span> <span class="co">// View -&gt; Model</span>
+            <span class="op">},</span>
+        <span class="op">}</span>)<span class="op">,</span>
+        <span class="at">m</span>(<span class="st">''</span><span class="op">,</span> <span class="st">'hello '</span> <span class="op">+</span> <span class="va">Person</span>.<span class="at">name</span>)<span class="op">,</span> <span class="co">// Model -&gt; View (again)</span>
+    ])<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+</section><section id="estado-interno" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>Estado interno</h2>
+<p><code>vn.state</code> es un objeto que mantiene el estado de la instancia.</p>
+</section><section id="clave" class="slide level2">
+<h2>Clave</h2>
 </section></section>
     </div>
   </div>
@@ -574,6 +692,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         history: true,
         // Enable keyboard shortcuts for navigation
         keyboard: true,
+        // Vertical centering of slides
+        center: true,
         // Transition style
         transition: 'slide', // none/fade/slide/convex/concave/zoom
         // Parallax background size

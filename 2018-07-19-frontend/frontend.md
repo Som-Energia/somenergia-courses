@@ -1,16 +1,16 @@
 ---
 title: Tecnologías de Front-end
 subtitle: usadas en Som Energia, para Pythoner@s
-author: Voki
+author: David García Garzón
 
 theme: serif # beige/black/blood/league/moon/night/serif/simple/sky/solarized/white
 history: true # no vuelvas al principo con F5
 transition: slide # none/fade/slide/convex/concave/zoom
-center: false
-slideNumber: true
+center: true
+slideNumber: true # Muestra el numero de slide
 progress: true
-parallaxBackgroundSize: 150%
 #parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+parallaxBackgroundSize: 150%
 parallaxBackgroundHorizontal: 20
 parallaxBackgroundVertical: 5
 keyboard:
@@ -26,7 +26,7 @@ include-before: |
 			opacity: 50%;
 		}
 		.reveal .slides {
-			background: #ffffffdd;
+			background: #ffffffee;
 		}
 		.reveal .slides .titleslide {
 			background-color: #86bc25ff;
@@ -50,9 +50,27 @@ include-before: |
 	</style>
 ---
 
-# Frontend {data-background-image="../images/logo-somenergia-nobg.svg" }
+# Frontend {
+	data-background-image="../images/logo-somenergia-nobg.svg"
+	data-background-size="80%"
+	}
 
-## Objetivo
+## Frontend vs Backend {
+	data-background-image="../images/logo-somenergia-nobg.svg"
+	data-background-size="80%"
+	}
+
+- **Frontend:** se ejecutan en el **navegador**
+	- Mithril, ReactJS, Angular...
+
+- **Backend:** se ejecutan en el **servidor**
+	- Flask, Django, NodeJS, PHP... 
+
+## Objetivo {
+	data-background-image="../images/logo-somenergia-nobg.svg"
+	data-background-size="80%"
+	}
+
 
 Poner al día de las tecnologías de Frontend
 que usamos en Som Energía
@@ -62,15 +80,12 @@ Se supone una base en programación.
 
 Haré paralelismos con tecnologías Python.
 
-## Frontend vs Backend
 
-- **Frontend:** se ejecutan en el **navegador**
-	- Mithril, ReactJS, Angular...
+## Ecosistema de Frontend {
+	data-background-image="../images/logo-somenergia-nobg.svg"
+	data-background-size="80%"
+	}
 
-- **Backend:** se ejecutan en el **servidor**
-	- Flask, Django, NodeJS, PHP... 
-
-## Elementos del Frontend
 
 - **Javascript:** lenguage
 - **NodeJS:** entorno, paquetes (virtualenv, pip)
@@ -79,16 +94,23 @@ Haré paralelismos con tecnologías Python.
 - **Material Design Components:** widgets (qt)
 - **ospec:** Framework de testing (unittest)
 
-## Javascript { data-background-image='../images/logo-js.svg' data-background-size='40%' }
 
-**Inevitable:** El único lenguage incluido en todos los navegadores (a su manera)
+## Javascript {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
-Sintaxis familiar y engañosa, no se comporta igual que C++ o Java.
+**Inevitable:** El único lenguage incluido en todos los navegadores (en cada uno a su manera)
+
+Sintaxis familiar pero engañosa, no se comporta igual que C++ o Java.
 Repasaremos algunas trampas.
 
 Es necesario entender algunas construciones que usamos en **Mithril**.
 
-## NodeJS { data-background-image='../images/logo-nodejs.svg' data-background-size='60%' }
+## NodeJS {
+	data-background-image='../images/logo-nodejs.svg'
+	data-background-size='60%'
+	}
 
 Tecnologia de backend, sí, pero nos da un entorno de desarrollo
 (como el que tenemos en python).
@@ -137,7 +159,7 @@ que se ejecutan en el navegador.
 Especificación de componentes gráficos.
 Originalmente para Android.
 
-Define: aspecto, comportamiento, variaciones...
+Define aspecto, comportamiento, variaciones...
 de botones, menus, radio buttons...
 
 Hay muchas implementaciones (incompletas todas)
@@ -148,9 +170,15 @@ Usamos la de Google para Web:
 Agnóstica al framework, la adaptamos a Mithril
 
 
-# Javascript {data-background-image="../images/logo-somenergia-nobg.svg" }
+# Javascript {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
-## Falsos amigos
+## Falsos amigos {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 > Javascript, tan familiar que pensamos que no hay que aprenderlo.
 
@@ -160,7 +188,10 @@ Esperamos que se comporte como ellos.
 
 Cuando no lo hace, 😠 😠 😠 😠 `＼(｀O´)／`
 
-## Falsos amigos: `==` y `!=`
+## Falsos amigos: `==` y `!=` {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 - `==` y `!=` intentan convertir tipos antes de comparar
 - `===` y `!==` comparan sin conversion
@@ -177,7 +208,10 @@ undefined==false // false
 La regla: Usar el de tres signos al menos que realmente quieras la conversión
 (y no, no la quieres)
 
-## Falsos amigos: `+`
+## Falsos amigos: `+` {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 ```javascript
 3 + 2 // 5
@@ -192,7 +226,10 @@ La regla: Usar el de tres signos al menos que realmente quieras la conversión
 3 + {} // '3[object Object]'
 ```
 
-## Falsos amigos: bool cast
+## Falsos amigos: bool cast {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 En Python estamos muy acostumbrados a usarlas en condiciones y funcionan muy distinto.
 
@@ -202,7 +239,10 @@ En Python estamos muy acostumbrados a usarlas en condiciones y funcionan muy dis
 - De hecho un string con varios ceros pero con espacios delante y detras tambien es `false`: `'   000 \t\n  '`
 
 
-## Variables no declaradas
+## Variables no declaradas {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 **Típico:** me equivoco en el nombre de la variable
 
@@ -218,7 +258,10 @@ si usas una variable no declarada.
 **¡Ojo!** Avisará con las variables,
 pero no con las propiedades de los objetos que no existen.
 
-## Objetos
+## Objetos {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 Los objetos de Javascript son "diccionarios"
 
@@ -252,7 +295,10 @@ var o2 = Object.assign({}, o1);
 
 </div>
 
-## Singletons
+## Singletons {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 Métodos: atributos que apuntan a funciones
 
@@ -274,7 +320,10 @@ En Mithril los usamos para definir componentes.
 
 
 
-## Las clases son funciones
+## Las clases son funciones {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 ```javascript
 function MyClass(param1) {  // funcion 'Factoria'
@@ -294,7 +343,10 @@ MyClass.prototype.method3 = premethod3;  // Recuerda el prototype
 var myinstance = new MyClass('param1value'); // No olvides el new
 ```
 
-## Falsos amigos: `this`
+## Falsos amigos: `this` {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 Su valor en una funcion `f` depende de como se llame, no de donde se defina
 
@@ -313,7 +365,10 @@ var f2 = o.f; f2(); // 'undefined', f2 pierde el binding
 ```
 
 
-## Falsos amigos: `this`
+## Falsos amigos: `this` {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
 
 Ojo con las lambdas y las inner:
 
@@ -331,16 +386,27 @@ function mymethod(b) {
 }
 ```
 
-# NodeJS {data-background-image="../images/logo-somenergia-nobg.svg" }
+# NodeJS {
+	data-background-image='../images/logo-nodejs.svg'
+	data-background-size='60%'
+	}
 
-## Definición del proyecto
+## Definición del proyecto {
+	data-background-image='../images/logo-nodejs.svg'
+	data-background-size='60%'
+	}
+
 
 La definición del proyecto se guarda en `package.json`.
 
 Se crea con el comando `npm init` a partir de preguntas interactivas.
 
 
-## Repositorio de paquetes
+## Repositorio de paquetes {
+	data-background-image='../images/logo-nodejs.svg'
+	data-background-size='60%'
+	}
+
 
 `npm` es un gestor de paquetes parecido a `pip`
 
@@ -352,7 +418,11 @@ y los instala en local, en la carpeta `node_modules`.
 Cada proyecto tiene su `node_modules` propio y
 aislado como un `virtualenv` en Python.
 
-## Dependencias del proyecto
+## Dependencias del proyecto {
+	data-background-image='../images/logo-nodejs.svg'
+	data-background-size='60%'
+	}
+
 
 **Dependencias (de run-time):** de uso del paquete
 
@@ -363,7 +433,11 @@ Para nosotros, que no hacemos paquete (aun), las de run-time son las que se usan
 Se definen en el `package.json` y se instalan con `npm install` sin especificar paquete.
 
 
-## Añadiendo dependencias
+## Añadiendo dependencias {
+	data-background-image='../images/logo-nodejs.svg'
+	data-background-size='60%'
+	}
+
 
 Se añaden con `npm install --save paquete` o con `--save-dev` si es de desarrollo.
 
@@ -375,7 +449,11 @@ Si no, no se actualiza (los marca _straneous_)
 Queda guardada la versión.
 Para actualizarlas: `npm update --save paquete`
 
-## Comandos extra
+## Comandos extra {
+	data-background-image='../images/logo-nodejs.svg'
+	data-background-size='60%'
+	}
+
 
 Podemos añadir comandos personalizados para el desarrolo de nuestro proyecto.
 
@@ -393,7 +471,11 @@ $ npm run server
 ```
 
 
-## Chuleta
+## Chuleta {
+	data-background-image='../images/logo-nodejs.svg'
+	data-background-size='60%'
+	}
+
 
 ```bash
 npm init # Crea el package.json a base de preguntas
@@ -418,9 +500,16 @@ Hay que editarlas a mano en el fichero
 </div>
 
 
-# Webpack {data-background-image="../images/logo-somenergia-nobg.svg" }
+# Webpack {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
 
-## Que hace webpack?
+## Que hace webpack? {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
 
 A partir del codigo fuente, genera los ficheros que se bajará el navegador.
 
@@ -430,7 +519,11 @@ A medida que los proyectos se hacen grandes, es necesario
 modularizar, descartar modulos no usados, agregar el resto, optimizar, preprocesar...
 
 
-## Modulos en Javascript
+## Modulos en Javascript {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
 
 A pelo, Javascript ES5 no sabe de modulos.
 
@@ -442,7 +535,11 @@ Todo va al scope global. No hay `namespaces`.
 
 Se usan funciones auto-llamadas para aislar.
 
-## Como funciona?
+## Como funciona? {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
 
 Explora las dependencias entre los módulos y genera código para:
 
@@ -452,7 +549,11 @@ Explora las dependencias entre los módulos y genera código para:
 
 Tambien modifica el html para incluir los assets finales
 
-## Definición de módulos
+## Definición de módulos {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
 
 ```javascript
 // mymodule.js
@@ -474,7 +575,11 @@ var imported = require('./mymodule');
 console.debug(imported()); // should show 'hello world'
 ```
 
-## El bundle (envoltorio)
+## El bundle (envoltorio) {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
 
 ```javascript
 (function(modules) { // funcion auto-llamada
@@ -505,27 +610,11 @@ console.debug(imported()); // should show 'hello world'
 });
 ```
 
-## Otros recursos (assets)
+## Entry points y bundles {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
 
-Datos (json, xml, yaml),
-estilos (css, sass, less, stylus),
-imagenes (png, jpg, svg)
-...
-
-Se _requieren_ como si fueran javascripts.
-
-Los _loaders_ se encargan de que esten disponibles.
-
-Strings en el bundle javascript o en su propio bundle.
-
-<div class='notes'>
-
-- Como string en el js, añaden codigo js para que este disponible
-- En su propio bundle, modifican el html para incluirlo
-
-</div>
-
-## Entry points y bundles
 
 **Entry point:** Punto de partida (js) de donde estirar las dependencias.
 Puede haber varios (diferentes páginas)
@@ -534,24 +623,175 @@ Los navegadores cargan más rápido un fichero mediano que muchos pequenos.
 
 **Bundle:** Un fichero que junta las dependencias de un punto de partida.
 
-## Chunks
+## Chunks {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
 
 Fragmentos, todo en un bundle no siempre es bueno
 
 Los assets se generan con un **hash** en el nombre para forzar recarga de cache si hay cambios.
 
-Las dependencias `vendor` son menos proclives a cambiar, si las separamos tendran mas hits de cache.
+Las dependencias _vendor_ son menos proclives a cambiar, si las separamos tendran mas hits de cache.
 
-Con varios entry points, habrá cosas comunes entre los bundles.
-Separando lo común y lo exclusivo, se optimiza la carga
-de diferentes páginas.
+Con varios _entry points_, habrá cosas comunes entre los bundles.
+Separando lo común y lo particular, se optimiza la carga
+de múltiples páginas.
+
+## Otros recursos (assets) {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+
+Datos (json, xml, yaml),
+estilos (css, sass, less, stylus),
+imagenes (png, jpg, svg)
+...
+
+Se _requieren_ como si fueran javascripts.
+
+Una cadena de _loaders_ se encarga
+de que esten disponibles en el navegador.
+
+<div class='notes'>
+
+- Como string en el js, añaden codigo js para que este disponible
+- En su propio bundle, modifican el html para incluirlo
+
+</div>
+
+## Transcripción {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+Los loaders nos permiten **traducir recursos** en formatos
+no soportados por los navegadores.
+
+- CSS: Sass, Less, Stylus
+- Javascript: ES6, CoffeScript, TypeScript
+- HTML: Markdown, RST, Jade
+- Datos: XML, JSON, YAML
+- Imagenes, videos, fuentes...
+
+También se usan para la **optimización**.
+Minifiers, uglifiers, imagenes multiresolución...
+
+## Disposición {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+Los loaders determinan en que forma estará disponible
+el recurso y lo hacen accesible de forma transparente
+
+Como ficheros independientes
+
+Como **strings en el bundle javascript**
+
+Extraidos en **su propio bundle**
+
+**Insertados** en otro recurso
+
+## Ejemplo real {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+Repositorio `webforms-mithril`:
+
+Comandos de `webpack` en los `scripts` del `package.json`
+
+La configuración de webpack en `webpack-config.js`
 
 
 
+## Loaders {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
 
-# Mithril {data-background-image="../images/logo-somenergia-nobg.svg" }
+`config.module.rules` como cargar cada recurso.
 
-## Frameworks
+```javascript
+rules: [
+	// yaml-loader: yaml data -> json data
+	// json-loader: json data -> js object
+	// you get it with 'require'
+	{ test: /\.yaml$/, use: ["json-loader", "yaml-loader" ] },
+
+	// stylus-loader:  stylus -> css
+	// css-loader: css -> js code that adds the style
+	// MiniCssExtractPlugin: extracts the css into a css bundle
+	// The css bundle is configured in the plugin section
+	// 'require' ensures that the css is loaded
+	{ test: /\.styl$/, use: [
+		MiniCssExtractPlugin.loader, "css-loader", "stylus-loader"]},
+	...
+```
+
+## Servidor de desarrollo {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+
+`webpack-dev-server --open -d `
+
+o `npm run server`
+
+Lanza un webserver NodeJS local con los assets
+
+Apunta el navegador a la página principal.
+
+Detecta cambios en los ficheros,
+regenera los assets del servidor y
+recarga el navegador.
+
+Agiliza mucho el ciclo de desarrollo.
+
+
+## Integración Back-end {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+
+**Problema:** el HTML lo genera la aplicacion de backend, no webpack.
+
+Hay **plugins de webpack** que generan **manifiestos**
+con la **lista de assets**.
+
+Hay **extensiones para Flask y Django** que integran esa lista en las páginas.
+
+**Estrategia:** en backend pocas páginas y mucha API.
+
+## Source Maps {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+Con tanta transformación, 
+¿cómo relacionamos un error en el navegador con el código fuente?
+
+En modo desarrollo webpack genera _source maps_.
+Comentarios especiales que referencian al código original,
+fichero y linia.
+
+Los navegadores modernos los entienden y generan _stack traces_ usables.
+
+
+# Mithril {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+## Frameworks {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
 
 HTML y CSS permiten algunas animaciones y respuesta interactiva,
 pero son en esencia estàticos. 
@@ -565,7 +805,10 @@ No es suficiente abstracción para construir aplicaciones complejas.
 Ahí entran los **frameworks**:
 Vue, React, Angular, Mithril...
 
-## Componentización
+## Componentización {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
 
 Los frameworks suelen dar una forma de definir
 **componentes gráficos** o **widgets**.
@@ -577,15 +820,18 @@ y que **abstrae** un HTML más complejo.
 Se pueden replicar y juntar con otros para armar
 nuevos componentes.
 
-## Interacción Modelo-Vista
+## Interacción Modelo-Vista {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
 
-El patron MVC original no es practico y realmente no se usa.
-Cada framework llama vista, modelo o controlador a cosas distintas.
-Pero queda la idea: **Separar la presentación de los datos**.
+Cada framework llama _vista_, _modelo_ o _controlador_ a cosas distintas.
+El patron MVC **original** no era práctico y nadie lo usa tal cual.
+Pero quedó la idea: **Separar la presentación de los datos**.
 
 El framework define:
 
-Como el modelo (js) altera la vista (html)
+Como el modelo (datos js) altera la vista (html)
 
 Como lo que pasa en la vista modifica el modelo
 
@@ -600,7 +846,10 @@ Como lo que pasa en la vista modifica el modelo
 
 </div>
 
-## Ventajas de Mithril
+## Ventajas de Mithril {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
 
 - Ligero: muy pocos k's
 - Rápido: Usa DOM virtual
@@ -615,7 +864,10 @@ Como lo que pasa en la vista modifica el modelo
 
 </div>
 
-## Hola mundo
+## Hola mundo {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
 
 ```html
 ...
@@ -634,24 +886,30 @@ window.onload = function() {
 };
 ```
 
-## Hola mundo, comentado
+## Hola mundo, comentado {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
 
-Usamos `m` para acceder a las funciones de la API de Mithril como `m.render`.
+`m.xxxx` - acceso a funciones de la api Mithril.
 
-Usamos `m` como función para generar nodos virtuales.
+`m(...)` - como función genera nodos virtuales.
 
 Los **nodos virtuales** (vnodes) representan HTML sin usar el DOM directamente, que es lento.
 
 `m.render` convierte nodos virtuales en HTML.
 
-Lo hace una vez, para cosas dinámicas, no basta.
-Necesitaremos actualizarlo.
+Renderiza solo una vez, nos vale para ejemplos.
+Veremos adelante como actualizar.
 
-## Generando vnodes
+## Generando vnodes {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
 
 ```javascript
 // Sintaxis general
-m(tag, attrs, children1, children2, ...);
+m(tag, attrs, children, children2, ...);
 
 // tag: sintaxis css
 'h1'                // <h1>
@@ -665,48 +923,143 @@ m(tag, attrs, children1, children2, ...);
 // children: (opcional, multiple) string, vnodes o lista childrens
 ```
 
-
-## Montando componentes
+## Ejemplo {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
 
 ```javascript
-var m = require('mithril');
+var backuri = 'http://example.com';
+var vnode =
+	m('section#section1', [
+		m('h2', 'Titulo'),
+		m('p.first','contenido'),
+		m('p','contenido'),
+		m('nav.backlink', [
+			m('a[target="_blank"]', {
+				'href': backuri,
+			},
+				'Volver atras'
+			),
+		]),
+	]);
+```
 
+## vnodes por dentro {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+Es un objeto/diccionario con:
+
+- `tag`, `attrs` y `children`: los parámetros del `m`
+- `text`: si solo hay un children y es texto
+- `dom`: elemento DOM renderizado (si lo está)
+- `state`, `instance`, `key`...: los veremos
+
+Manipular el DOM dispara el redibujado.
+Los vnodes son baratos de crear y comparar.
+Vale la pena generarlos a menudo
+a cambio de juntar cambios en un solo redibujado.
+
+
+
+## Primer componente {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+```javascript
 // Nuestro primer componente!
 var Hello = {
+	// render llama al método view pasandole el vnode original
+	// Retornamos el vnode que se renderizará en su lugar
 	view: function(vn) {
-		return m('h1', 'Hola mundo');
+		// podemos acceder a los attributos del vnode original
+		return m('h1', 'Hola '+vn.attrs.name||'mundo');
 	},
 };
 
 window.onload = function() {
 	var element = document.getElementById('mithril-target');
-	m.mount(element, Hello); // Usamos mount, no render!
+	// Usamos el componente como tag
+	m.render(element, m(Hello, {name: 'Voki'}));
 };
-// `mount` llamará al `render` con m(Hello)
-// cada vez que haya un cambio en el modelo.
 ```
 
-## `mount` comentado
+## Montando la app {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+La funcion `m.mount` activa el sistema de actualización.
+Después de cada evento se dispara un renderizado, si hay cambios se redibuja el DOM.
+
+```javascript
+var App = {};
+App.view = function(vn) { return m('h1', 'Hola mundo'); },
+
+window.onload = function() {
+	var element = document.getElementById('mithril-target');
+	m.mount(element, App); // mount, no render!
+};
+```
+Al `mount` le pasamos un componente, `App` y
+no un vnode, `m(App)`, como al `render`.
+
+## Componente _contenedor_ {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+Metemos los children del vnode original en el vnode resultante.
+
+```javascript
+var RedBox = {};
+RedBox.view = function(vn) {
+	return m('', {style: 'border:3pt solid red'}, vn.children);
+};
+
+var App = {};
+App.view = function(vn) {
+	return m(RedBox,
+		m('h1', 'Dress in red'),
+		m('.content', 'bla bla'),
+	);
+};
+```
+
+## Controlando un modelo {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+```javascript
+var Person = { name: 'anonymous' };  // the model
+
+var PersonEditor = {};
+PersonEditor.view = function(vn) {
+	return m('',[
+		m('input', {
+			value: Person.name, // Model -> View
+			oninput: function(ev) {
+				Person.name = ev.target.value; // View -> Model
+			},
+		}),
+		m('', 'hello ' + Person.name), // Model -> View (again)
+	]);
+};
+```
 
 
-Crea el nodo virtual para `m(Hello)`, el tag es el componente.
+## Estado interno {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+`vn.state` es un objeto que mantiene el estado de la instancia.
 
 
 
-
-
-
-## Componentes en Mithril
-
-En Mithril, un componente se define con:
-
-- Una funcion, `view`, que genera dinamicamente el html
-- Una serie de atributos que podemos fijar desde donde los usamos, dependiendo del modelo
-- De esos attributos, algunos son callbacks que hacen la comunicación contraria hacia arriba
-- Un estado interno del componente
-- Unos callbacks que se llaman en momentos especificos del ciclo de vida
-
-
-
-
+## Conciliar con claves
 
