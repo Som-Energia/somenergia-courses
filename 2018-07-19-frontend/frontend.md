@@ -5,7 +5,7 @@ author: David García Garzón
 
 theme: serif # beige/black/blood/league/moon/night/serif/simple/sky/solarized/white
 history: true # no vuelvas al principo con F5
-transition: slide # none/fade/slide/convex/concave/zoom
+transition: convex # none/fade/slide/convex/concave/zoom
 center: true
 slideNumber: true # Muestra el numero de slide
 progress: true
@@ -85,14 +85,18 @@ Haré paralelismos con tecnologías Python.
 	data-background-image="../images/logo-somenergia-nobg.svg"
 	data-background-size="80%"
 	}
-
-
+<div>
+![Javascript](../images/logo-js.svg){width=15%}
+![NodeJS](../images/logo-nodejs.svg){width=15%}
+![Webpack](../images/logo-webpack.svg){width=15%}
+![Mithril](../images/logo-mithril.svg){width=15%}
+![MDC](../images/logo-materialdesign.svg){width=15%}
+</div>
 - **Javascript:** lenguage
 - **NodeJS:** entorno, paquetes (virtualenv, pip)
 - **Webpack:** constructor (makefile)
 - **Mithril:** controlador (MVC)
 - **Material Design Components:** widgets (qt)
-- **ospec:** Framework de testing (unittest)
 
 
 ## Javascript {
@@ -386,6 +390,30 @@ function mymethod(b) {
 }
 ```
 
+## Promesas {
+	data-background-image='../images/logo-js.svg'
+	data-background-size='40%'
+	}
+
+Facilitan la programación asíncrona.
+
+```javascript
+function funcionAsincrona() {
+	return new Promise(function (resolve, reject) {
+		// do you async stuff here
+		if (ok) { resolve(result); }  // makes the promise succed
+		else { reject(error); }  // makes the promise fail
+	});
+}
+var promesa = funcionAsincrona();
+promesa.then(function(result) {
+	// Codigo a ejecutar cuando acabe
+}).catch(function(error) {
+	// Codigo a ejecutar si falla
+});
+```
+
+
 # NodeJS {
 	data-background-image='../images/logo-nodejs.svg'
 	data-background-size='60%'
@@ -505,7 +533,7 @@ Hay que editarlas a mano en el fichero
 	data-background-size='40%'
 	}
 
-## Que hace webpack? {
+## ¿Qué aporta? {
 	data-background-image="../images/logo-webpack.svg"
 	data-background-size='40%'
 	}
@@ -535,7 +563,7 @@ Todo va al scope global. No hay `namespaces`.
 
 Se usan funciones auto-llamadas para aislar.
 
-## Como funciona? {
+## ¿Cómo funciona? {
 	data-background-image="../images/logo-webpack.svg"
 	data-background-size='40%'
 	}
@@ -544,8 +572,8 @@ Se usan funciones auto-llamadas para aislar.
 Explora las dependencias entre los módulos y genera código para:
 
 - aislar el espacio de nombres de cada módulo
-- indexarlos por el path
-- la función `require` que los carga
+- indexar los módulos por el path
+- implementar `require` para cargarlos
 
 Tambien modifica el html para incluir los assets finales
 
@@ -619,7 +647,7 @@ console.debug(imported()); // should show 'hello world'
 **Entry point:** Punto de partida (js) de donde estirar las dependencias.
 Puede haber varios (diferentes páginas)
 
-Los navegadores cargan más rápido un fichero mediano que muchos pequenos.
+Los navegadores cargan más rápido un fichero mediano que muchos pequeños.
 
 **Bundle:** Un fichero que junta las dependencias de un punto de partida.
 
@@ -628,8 +656,7 @@ Los navegadores cargan más rápido un fichero mediano que muchos pequenos.
 	data-background-size='40%'
 	}
 
-
-Fragmentos, todo en un bundle no siempre es bueno
+Un fichero grande también es peor que varios medianos. Fragmentemos.
 
 Los assets se generan con un **hash** en el nombre para forzar recarga de cache si hay cambios.
 
@@ -702,10 +729,9 @@ Extraidos en **su propio bundle**
 
 Repositorio `webforms-mithril`:
 
-Comandos de `webpack` en los `scripts` del `package.json`
-
 La configuración de webpack en `webpack-config.js`
 
+Comandos de `webpack` en los `scripts` del `package.json`
 
 
 ## Loaders {
@@ -724,12 +750,12 @@ rules: [
 
 	// stylus-loader:  stylus -> css
 	// css-loader: css -> js code that adds the style
-	// MiniCssExtractPlugin: extracts the css into a css bundle
-	// The css bundle is configured in the plugin section
+	// MiniCssExtractPlugin: extracts into a css bundle
 	// 'require' ensures that the css is loaded
-	{ test: /\.styl$/, use: [
-		MiniCssExtractPlugin.loader, "css-loader", "stylus-loader"]},
-	...
+	// as any dependant assets (images, includes...)
+	{ test: /\.styl$/, use: [ MiniCssExtractPlugin.loader,
+			"css-loader", "stylus-loader"]},
+	// The css bundle is configured in the plugin section
 ```
 
 ## Servidor de desarrollo {
@@ -923,27 +949,49 @@ m(tag, attrs, children, children2, ...);
 // children: (opcional, multiple) string, vnodes o lista childrens
 ```
 
-## Ejemplo {
+## Hyperscript {
 	data-background-image="../images/logo-mithril.svg"
 	data-background-size='40%'
 	}
 
 ```javascript
 var backuri = 'http://example.com';
-var vnode =
-	m('section#section1', [
-		m('h2', 'Titulo'),
-		m('p.first','contenido'),
-		m('p','contenido'),
-		m('nav.backlink', [
-			m('a[target="_blank"]', {
-				'href': backuri,
-			},
-				'Volver atras'
-			),
-		]),
-	]);
+return m('section#section1',[ // <section id="section1>
+	m('h2', 'Titulo'),             //   <h2>Titulo</h2>
+	m('p.first','yes'),            //   <p class="first">yes</p>
+	m('p','no'),                   //   <p>no</p>
+	m('nav.backlink', [            //   <nav class="backlink">
+		m('a[target="_blank"]', {  //     <a target="_blank"
+			'href': backuri,       //       href="http://examp..."
+		},                         //     >
+			'Volver atras'         //       Volver atras
+		),                         //     </a>
+	]),                            //   </nav> 
+]);                                // </section>
 ```
+## Control flujo {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+Las estructuras de control `if`  y `for` rompen la estructura visual del hyperscript.
+
+Mejor usar expresiones ternarias o cortocircuitos booleanos y, para los loops, `map`.
+
+```javascript
+var verduras = ['judias', 'acelgas', 'espinacas'];
+var selected = 'judias';
+return m('ul',
+	verduras.map(function(verdura, i) {
+		return m('li', i+1, ' - ', verdura,
+			verdura==selected?" selected":null),
+		);
+	})
+);
+
+```
+
+
 
 ## vnodes por dentro {
 	data-background-image="../images/logo-mithril.svg"
@@ -955,7 +1003,7 @@ Es un objeto/diccionario con:
 - `tag`, `attrs` y `children`: los parámetros del `m`
 - `text`: si solo hay un children y es texto
 - `dom`: elemento DOM renderizado (si lo está)
-- `state`, `instance`, `key`...: los veremos
+- `state`, `key`: los veremos
 
 Manipular el DOM dispara el redibujado.
 Los vnodes son baratos de crear y comparar.
@@ -1004,15 +1052,17 @@ window.onload = function() {
 	m.mount(element, App); // mount, no render!
 };
 ```
-Al `mount` le pasamos un componente, `App` y
+**Ojo!** Al `mount` le pasamos un componente, `App`,
 no un vnode, `m(App)`, como al `render`.
+
 
 ## Componente _contenedor_ {
 	data-background-image="../images/logo-mithril.svg"
 	data-background-size='40%'
 	}
 
-Metemos los children del vnode original en el vnode resultante.
+Igual que usábamos `vn.attrs`, podemos propagar `vn.children`
+al _virtual node_ resultante.
 
 ```javascript
 var RedBox = {};
@@ -1057,9 +1107,79 @@ PersonEditor.view = function(vn) {
 	data-background-size='40%'
 	}
 
-`vn.state` es un objeto que mantiene el estado de la instancia.
+`vn.state`: objeto que mantiene el estado del widget
+
+```javascript
+PersonEditor.var1 = 1; // inicializa vn.state.var1
+
+// Inicializa el estado en oninit
+// Se llama antes de inicializar el DOM
+PersonEditor.oninit = function(vn) {
+	vn.state.var2 = 'value2';
+	// vn.state se pasa como this a los metodos del componente
+	this.var3 = 'value3'; // igual que vn.state.var3
+};
+```
+
+**¡Ojo!** Distingue entre estado interno y modelo
 
 
 
-## Conciliar con claves
+## Acceso al dom {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+Hay que evitar manipular el DOM directamente.
+
+A veces es necesario  por el uso de otras librerías.
+(Como MDC4W).
+
+`vn.dom`: apunta al DOM renderizado
+
+El componente puede implementar hooks que se llaman en diferentes momentos del ciclo de vida.
+
+En `vn.oninit()` no está disponible porque no se ha ejecutado aún ningún render.
+
+## Ciclo de vida (I) {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+`oninit`: Antes de llamar al `view` la primera vez.
+Para inicializar `vn.state` a partir de `vn.attrs`.
+Cosas que no necesiten el DOM.
+
+`oncreate`/`onupdate`: Tras insertar/actualizar el DOM después de un render.
+Para llamar librerias que necesitan el DOM o consultar layout final.
+
+**¡Ojo!** Cambios en el modelo aquí, no disparan render.
+
+## Ciclo de vida (II) {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+`onremove`: Para tareas de limpieza.  Se llama justo antes de eliminar el nodo.
+
+`onbeforeremove`: Para transiciones de salida. Retorna un `Promise`.
+Se retrasa el `onremove` y la eliminación del nodo hasta que el `Promise` resuelva.
+
+
+
+## Conciliar con claves {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+Es difícil saber que nodo virtual corresponde si
+reordenamos los nodos o si cambian demasiado.
+
+Mithril permite asociar al virtual node una clave,
+`vn.key`, para asegurar que el mapeo es correcto.
+
+## Consultas a APIs {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
 
