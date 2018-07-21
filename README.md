@@ -1,7 +1,8 @@
 # somenergia-courses
 
 Public materials used in internal Som Energia training courses.
-Available [here](https://som-energia.github.io/somenergia-courses).
+[View version](https://som-energia.github.io/somenergia-courses).
+[Edit version](https://github.com/Som-Energia/somenergia-courses).
 
 
 - [Tecnologías de Front-end en Som Energia para Pythoner@s](2018-07-19-frontend/)
