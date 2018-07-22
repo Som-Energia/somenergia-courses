@@ -47,6 +47,13 @@ include-before: |
 		.slide strong {
 			color: #060;
 		}
+		.columns {
+			display: flex;
+		}
+		.columns .column {
+			margin-left: auto;
+			margin-right: auto;
+		}
 	</style>
 ---
 
@@ -85,18 +92,26 @@ Haré paralelismos con tecnologías Python.
 	data-background-image="../images/logo-somenergia-nobg.svg"
 	data-background-size="80%"
 	}
-<div>
-![Javascript](../images/logo-js.svg){width=15%}
-![NodeJS](../images/logo-nodejs.svg){width=15%}
-![Webpack](../images/logo-webpack.svg){width=15%}
-![Mithril](../images/logo-mithril.svg){width=15%}
-![MDC](../images/logo-materialdesign.svg){width=15%}
+
+<div class='columns'>
+<div class='column'>
+![Javascript (Lenguage)](../images/logo-js.svg){width=40%} 
 </div>
-- **Javascript:** lenguage
-- **NodeJS:** entorno, paquetes (virtualenv, pip)
-- **Webpack:** constructor (makefile)
-- **Mithril:** controlador (MVC)
-- **Material Design Components:** widgets (qt)
+<div class='columns'>
+![NodeJS<br>(Paqueteria, Entorno)](../images/logo-nodejs.svg){width=45%}
+</div>
+<div class='columns'>
+![Webpack (Builder)](../images/logo-webpack.svg){width=50%} 
+</div>
+</div>
+<div class='columns'>
+<div class='column'>
+![Mithril (Control)](../images/logo-mithril.svg){width=40%} 
+</div>
+<div class='column'>
+![Material (Widgets)](../images/logo-materialdesign.svg){width=35%} 
+</div>
+</div>
 
 
 ## Javascript {
@@ -1226,5 +1241,42 @@ Diferentes niveles de personalizacion partiendo de:
 `config`: permite modificar las cabeceras de la request
 
 `serialize`: aplicado a data, por defecto `JSON.serialize`
+
+
+# Material Design {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+## MD Components {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+<div class="columns">
+<div class="column">
+Dialog
+
+Button
+</div>
+<div class="column">
+Dialog
+
+Button
+
+sdfa
+</div>
+<div class="column">
+Dialog
+
+Button
+</div>
+<div class="column">
+Dialog
+
+Button
+</div>
+</div>
+
 
 
