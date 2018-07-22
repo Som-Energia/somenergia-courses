@@ -732,6 +732,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Mithril permite asociar al virtual node una clave, <code>vn.key</code>, para asegurar que el mapeo es correcto.</p>
 </section><section id="consultas-a-apis" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
 <h2>Consultas a APIs</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">m</span>.<span class="at">request</span>(<span class="op">{</span>
+    <span class="dt">url</span><span class="op">:</span> <span class="st">'https://example.com/api/persona'</span><span class="op">,</span>
+    <span class="dt">method</span><span class="op">:</span> <span class="st">'POST'</span><span class="op">,</span>
+    <span class="dt">data</span><span class="op">:</span> <span class="op">{</span>
+        <span class="dt">name</span><span class="op">:</span> <span class="va">Persona</span>.<span class="at">name</span><span class="op">,</span>
+    <span class="op">},</span>
+<span class="op">}</span>).<span class="at">then</span>(<span class="kw">function</span>(response) <span class="op">{</span>
+    
+<span class="op">},</span> <span class="kw">function</span>(error) <span class="op">{</span>
+
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>Se refresca la interfaz despues de recibir la respuesta.</p>
+<p>Por defecto JSON, personalizable.</p>
+</section><section id="personalizar-la-response" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>Personalizar la response</h2>
+<p>Diferentes niveles de personalizacion partiendo de:</p>
+<p><code>extract(xhr, options)</code>: acceso a toda la respuesta, por defecto pasa <code>xhr.responseText</code></p>
+<p><code>deserialize(responseText)</code>: a partir del responseText, por defecto parser JSON</p>
+<p><code>type(object)</code>: objeto JSON parseado, por defecto identidad</p>
+</section><section id="personalizar-la-request" class="slide level2" data-background-image="../images/logo-mithril.svg" data-background-size="40%">
+<h2>Personalizar la request</h2>
+<p><code>data</code>: datos que serializan en el body o en la request</p>
+<p><code>headers</code>: añade cabeceras</p>
+<p><code>config</code>: permite modificar las cabeceras de la request</p>
+<p><code>serialize</code>: aplicado a data, por defecto <code>JSON.serialize</code></p>
 </section></section>
     </div>
   </div>

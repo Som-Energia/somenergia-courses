@@ -1182,4 +1182,49 @@ Mithril permite asociar al virtual node una clave,
 	data-background-size='40%'
 	}
 
+```javascript
+m.request({
+	url: 'https://example.com/api/persona',
+	method: 'POST',
+	data: {
+		name: Persona.name,
+	},
+}).then(function(response) {
+	
+}, function(error) {
+
+});
+```
+
+Se refresca la interfaz despues de recibir la respuesta.
+
+Por defecto JSON, personalizable.
+
+## Personalizar la response {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+Diferentes niveles de personalizacion partiendo de:
+
+`extract(xhr, options)`: acceso a toda la respuesta, por defecto pasa `xhr.responseText`
+
+`deserialize(responseText)`: a partir del responseText, por defecto parser JSON
+
+`type(object)`: objeto JSON parseado, por defecto identidad
+
+
+## Personalizar la request {
+	data-background-image="../images/logo-mithril.svg"
+	data-background-size='40%'
+	}
+
+`data`: datos que serializan en el body o en la request
+
+`headers`: añade cabeceras
+
+`config`: permite modificar las cabeceras de la request
+
+`serialize`: aplicado a data, por defecto `JSON.serialize`
+
 
