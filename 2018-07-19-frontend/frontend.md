@@ -735,7 +735,7 @@ de múltiples páginas.
     plugins:[ // webpack deals with js, html by plugins
         // Generaes html to insert generated css and js
         new HtmlWebpackPlugin({filename: 'index.html'}),
-		// Each page should have is html plugin
+		// Each page should have its html plugin
         new HtmlWebpackPlugin({filename: 'contact.html'}),
 ```
 
