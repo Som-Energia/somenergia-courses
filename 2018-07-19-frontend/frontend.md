@@ -561,6 +561,18 @@ Vamos que compila, ¿pero Javascript no era interpretado?
 A medida que los proyectos se hacen grandes, es necesario
 modularizar, descartar modulos no usados, agregar el resto, optimizar, preprocesar...
 
+## Ejemplo real {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+Repositorio `webforms-mithril` ([link](https://github.com/Som-Energia/webforms-mithril/blob/master/webpack.config.js){ target=_blank })
+
+La configuración de webpack en `webpack-config.js`
+
+Comandos de `webpack` en los `scripts` del `package.json`
+
+
 
 ## Modulos en Javascript {
 	data-background-image="../images/logo-webpack.svg"
@@ -736,18 +748,6 @@ Como **strings en el bundle javascript**
 Extraidos en **su propio bundle**
 
 **Insertados** en otro recurso
-
-## Ejemplo real {
-	data-background-image="../images/logo-webpack.svg"
-	data-background-size='40%'
-	}
-
-Repositorio `webforms-mithril`:
-
-La configuración de webpack en `webpack-config.js`
-
-Comandos de `webpack` en los `scripts` del `package.json`
-
 
 ## Loaders {
 	data-background-image="../images/logo-webpack.svg"
