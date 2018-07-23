@@ -3691,10 +3691,8 @@
 			var element;
 
 			// Ensure the named link is a valid HTML ID attribute
-			if( /^[a-zA-Z][\w:.-]*$/.test( name ) ) {
-				// Find the slide with the specified ID
-				element = document.getElementById( name );
-			}
+			name = decodeURIComponent(name);
+			element = document.getElementById( name );
 
 			if( element ) {
 				// Find the position of the named slide and navigate to it
