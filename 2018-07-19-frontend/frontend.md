@@ -275,7 +275,7 @@ Añadir `'use strict';` al principio de los ficheros hace que se queje
 si usas una variable no declarada.
 
 **¡Ojo!** Avisará con las variables,
-pero no con las propiedades de los objetos que no existen.
+pero no con las **propiedades de los objetos** que no existen.
 
 ## Objetos {
 	data-background-image='../images/logo-js.svg'
