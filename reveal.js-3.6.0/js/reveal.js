@@ -3742,7 +3742,7 @@
 				// Attempt to create a named link based on the slide's ID
 				var id = currentSlide.getAttribute( 'id' );
 				if( id ) {
-					id = id.replace( /[^a-zA-Z0-9\-\_\:\.]/g, '' );
+					//id = id.replace( /[^a-zA-Z0-9\-\_\:\.]/g, '' );
 				}
 
 				// If the current slide has an ID, use that as a named link
