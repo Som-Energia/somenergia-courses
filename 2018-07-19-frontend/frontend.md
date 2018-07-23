@@ -378,9 +378,9 @@ new f(a,b); // Seria un nuevo objeto `{}` vacio
 o.f=f; o.f(a,b); // Seria `o`
 f.call(o, a, b); // Seria `o`
 f.apply(o, [a,b]); // Seria `o`
-f.bind(o); f(a,b); // Seria `o`
+var f2 = o.f; f2(a,b); // 'undefined', f2 pierde el binding
+var f3 = f.bind(o); f3(a,b); // Seria `o`
 
-var f2 = o.f; f2(); // 'undefined', f2 pierde el binding
 ```
 
 
