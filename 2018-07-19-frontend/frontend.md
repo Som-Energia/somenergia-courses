@@ -678,6 +678,29 @@ Los navegadores cargan más rápido un fichero mediano que muchos pequeños.
 
 **Bundle:** Un fichero que junta las dependencias de un punto de partida.
 
+## Configuración {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+
+```javascript
+var config = {
+    context: path.resolve(__dirname, 'src'), // our code's root
+    entry: {
+        main: './main.js',   // bundle name -> src/main.js
+    },
+    output:
+		// Apends a chunkhash to force reloading
+        filename: 'bundle-[name]-[chunkhash].js',
+    },
+    plugins:[ // webpack deals with js, html by plugins
+        // Generaes html to insert generated css and js
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            }),
+```
+
 ## Chunks {
 	data-background-image="../images/logo-webpack.svg"
 	data-background-size='40%'
@@ -692,6 +715,29 @@ Las dependencias _vendor_ son menos proclives a cambiar, si las separamos tendra
 Con varios _entry points_, habrá cosas comunes entre los bundles.
 Separando lo común y lo particular, se optimiza la carga
 de múltiples páginas.
+
+## Múltiples entradas {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+```javascript
+	...
+    entry: {
+        main: './main.js',
+		contact: './contact.js', // added: second entry point
+    },
+    output:
+        filename: 'bundle-[name]-[chunkhash].js',
+		// added: id would be 'main~contract` for the shared one
+        chunkFilename: 'chunk-[id]-[chunkhash].js', // added
+    },
+    plugins:[ // webpack deals with js, html by plugins
+        // Generaes html to insert generated css and js
+        new HtmlWebpackPlugin({filename: 'index.html'}),
+		// Each page should have is html plugin
+        new HtmlWebpackPlugin({filename: 'contact.html'}),
+```
 
 ## Otros recursos (assets) {
 	data-background-image="../images/logo-webpack.svg"
@@ -772,6 +818,43 @@ rules: [
 			"css-loader", "stylus-loader"]},
 	// The css bundle is configured in the plugin section
 ```
+## Plugins {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+Los _loaders_ son solo tuberias.
+
+Los _plugins_ aportan loaders nuevos pero tambien otra funcionalidad.
+
+`HtmlWebPackPlugin`: Genera un html a partir de un template incluyendo uno o varios chunks (js, css...)
+
+```javascript
+plugins: [
+	new HtmlWebPackPlugin({
+		filename: 'index.html',
+		template: 'mithriltemplate.html',
+		chunks: ['example', 'common'],
+	}),
+]
+```
+
+
+## Integración Back-end {
+	data-background-image="../images/logo-webpack.svg"
+	data-background-size='40%'
+	}
+
+
+**Problema:** el HTML lo genera la aplicacion de backend, no webpack.
+
+Hay **plugins de webpack** que generan **manifiestos**
+con la **lista de assets**.
+
+Hay **extensiones para Flask y Django** que integran esa lista en las páginas.
+
+**Estrategia:** en backend pocas páginas y mucha API.
+
 
 ## Servidor de desarrollo {
 	data-background-image="../images/logo-webpack.svg"
@@ -793,21 +876,6 @@ recarga el navegador.
 
 Agiliza mucho el ciclo de desarrollo.
 
-
-## Integración Back-end {
-	data-background-image="../images/logo-webpack.svg"
-	data-background-size='40%'
-	}
-
-
-**Problema:** el HTML lo genera la aplicacion de backend, no webpack.
-
-Hay **plugins de webpack** que generan **manifiestos**
-con la **lista de assets**.
-
-Hay **extensiones para Flask y Django** que integran esa lista en las páginas.
-
-**Estrategia:** en backend pocas páginas y mucha API.
 
 ## Source Maps {
 	data-background-image="../images/logo-webpack.svg"
