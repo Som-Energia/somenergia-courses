@@ -1321,6 +1321,8 @@ Diferentes niveles de personalizacion partiendo de:
 	data-background-size='40%'
 	}
 
+Coming soon...
+
 <div class="columns">
 <div class="column">
 Dialog
