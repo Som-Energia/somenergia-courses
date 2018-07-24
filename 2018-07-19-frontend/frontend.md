@@ -14,7 +14,7 @@ parallaxBackgroundSize: 150%
 parallaxBackgroundHorizontal: 20
 parallaxBackgroundVertical: 5
 keyboard:
-  8: navigatePrev
+  46: prev
 include-before: |
 	<style>
 		.reveal {
@@ -169,6 +169,8 @@ que se ejecutan en el navegador.
 - Sincronizar **vista** y **modelo**
 - Acceder **asincronamente** a las **APIs**
 - Pequeño, sencillo, rápido y potente
+
+**Alternativas:** React, Vue, Angular...
 
 ## Material Design   {
 	data-background-image='../images/logo-materialdesign.svg'
@@ -355,11 +357,11 @@ function MyClass(param1) {  // funcion 'Factoria'
 		// body
 	}; // <- Ojo el punto y coma! es una asignacion
 }
-// Esto es útil para ampliar una clase que no es nuestra
-function premethod3() {}
-MyClass.prototype.method3 = premethod3;  // Recuerda el prototype
-
 var myinstance = new MyClass('param1value'); // No olvides el new
+
+// Ampliar una clase a posteriori. No olvides el 'prototype'!
+MyClass.prototype.method3 = function() { ... };
+
 ```
 
 ## Falsos amigos: `this` {
@@ -376,11 +378,11 @@ function f (a,b) { console.debug(this); }
 f(a,b); // Seria `undefined`
 new f(a,b); // Seria un nuevo objeto `{}` vacio
 o.f=f; o.f(a,b); // Seria `o`
-f.call(o, a, b); // Seria `o`
-f.apply(o, [a,b]); // Seria `o`
 var f2 = o.f; f2(a,b); // 'undefined', f2 pierde el binding
 var f3 = f.bind(o); f3(a,b); // Seria `o`
-
+// A bajo nivel
+f.call(o, a, b); // Seria `o`
+f.apply(o, [a,b]); // Seria `o`
 ```
 
 
@@ -688,13 +690,14 @@ Los navegadores cargan más rápido un fichero mediano que muchos pequeños.
 var config = {
     context: path.resolve(__dirname, 'src'), // our code's root
     entry: {
-        main: './main.js',   // bundle name -> src/main.js
+        main: './main',   // bundle name -> src/main.js
     },
     output:
 		// Apends a chunkhash to force reloading
         filename: 'bundle-[name]-[chunkhash].js',
     },
-    plugins:[ // webpack deals with js, html by plugins
+    plugins:[
+		// webpack deals with js. html by plugins
         // Generaes html to insert generated css and js
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -724,16 +727,15 @@ de múltiples páginas.
 ```javascript
 	...
     entry: {
-        main: './main.js',
-		contact: './contact.js', // added: second entry point
+        main: './main',
+		contact: './contact', // added: second entry point
     },
     output:
         filename: 'bundle-[name]-[chunkhash].js',
 		// added: id would be 'main~contract` for the shared one
         chunkFilename: 'chunk-[id]-[chunkhash].js', // added
     },
-    plugins:[ // webpack deals with js, html by plugins
-        // Generaes html to insert generated css and js
+    plugins:[
         new HtmlWebpackPlugin({filename: 'index.html'}),
 		// Each page should have its html plugin
         new HtmlWebpackPlugin({filename: 'contact.html'}),
@@ -846,7 +848,7 @@ plugins: [
 	}
 
 
-**Problema:** el HTML lo genera la aplicacion de backend, no webpack.
+**Problema:** el HTML lo genera la aplicacion de backend (flask, django, php), no webpack.
 
 Hay **plugins de webpack** que generan **manifiestos**
 con la **lista de assets**.
@@ -1311,42 +1313,312 @@ Diferentes niveles de personalizacion partiendo de:
 `serialize`: aplicado a data, por defecto `JSON.serialize`
 
 
+
+
+
 # Material Design {
 	data-background="../images/logo-materialdesign.svg"
 	data-background-size='40%'
 	}
 
-## MD Components {
+## Librerias componentes {
 	data-background="../images/logo-materialdesign.svg"
 	data-background-size='40%'
 	}
 
-Coming soon...
+Bootstrap (Twitter)
+
+Material (Google)
+
+JQuery-UI
+
+...
+
+## Origen {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+<div class="columns">
+
+<div class="column" style="width:60%">
+
+**Material Design** http://material.io
+
+**Especificación** de cómo han de ser las interfaces en **Android**
+a partir de Lollypop
+
+Generalizado a otros soportes como el web.
+
+Multiples implementaciones.
+
+</div>
+<div class="column" style="width:30%">
+![](Material_Design.svg){width=100%}
+</div>
+</div>
+
+
+## Component List {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
 
 <div class="columns">
 <div class="column">
-Dialog
-
 Button
+
+Slider
+
+Switch
+
+TextField
+
+Selects
+
+Checkbox
+
+RadioButton
 </div>
 <div class="column">
-Dialog
+LayoutGrid
 
-Button
+List
 
-sdfa
+GridList
+
+ImageList
+
+Tabs
+
+Chip
+
+Progress
 </div>
 <div class="column">
+AppBar
+
+Drawer
+
+Card
+
+SnackBar
+
+Banner
+
 Dialog
 
-Button
+Sheet
 </div>
-<div class="column">
-Dialog
+</div>
 
-Button
+
+## Navegación {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+
+**Lateral:** pantallas al mismo nivel accesibles en todo momento.
+(Tabs, Drawer, Bottom Navigation Bar)
+
+**Progreso:** profundizar en el nivel jerárquico
+(Button, List, Grid List, Image list...)
+
+**Atrás:** Cronológico o jeràrquico
+(Back button)
+
+## Comunicación {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+
+
+<div class=columns>
+<div class=column style="width:30%">
+![Dialog](mdc-dialog.png){width=80%}
+
+Persistente
+
+Bloqueante
 </div>
+<div class=column style="width:30%">
+![Banner](mdc-alert.png)
+
+Persistente
+
+No bloqueante
 </div>
+<div class=column style="width:30%">
+![SnackBar](mdc-snackbar.png)
+
+Temporal
+</div>
+
+## Sistema de Color {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+![](mdc-colorsystem.png){width="60%"}
+
+## Tema de Color {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+**Primary**, **Secondary** y sus variantes **light** y **dark**.
+
+Las **variantes** para destacar de forma harmoniosa.
+
+**Secondary** para dar acento especial.
+
+**Background** para el fondo estatico.
+
+**Surface** para las cosas que se elevan sobre el fondo.
+
+**OnX:** El color de texto cuando se usa _X_ como fondo
+
+
+
+## ¿Material para Mithril? {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+**[Polythene](https://github.com/ArthurClemens/Polythene):**
+Lo usamos en el [Tomàtic](https://github.com/Som-Energia/somenergia-tomatic).
+Calcula los estilos en el navegador,
+y pierde lo que ganas con Mithril.
+
+**Mithril MDL:** wrapper para Mithril de Material Design Lite de Google.
+Menos completo, mucho más rápido. Estilos precompilados.
+
+MDL fue discontinuado en favor de
+**Material Components 4 Web**
+que aún no tiene wrapper Mithril.
+
+
+
+
+## MD Components 4 Web {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+Implementación Web de Google
+
+Incompleta como todas, en progreso rápido.
+
+En vez de concentrarse en un framework da herramientas
+para usarlo en cualquiera.
+
+Nosotros haremos el wrapping para Mithril:
+`src/mdc/` ([link](https://github.com/Som-Energia/webforms-mithril/tree/master/src/mdc))
+
+
+## Estructura {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+**Estilos:**
+
+Implementados con Sass.
+
+Customizables (¡precalculados!)
+
+**Javascript:**
+
+Cuando necesitan inicializacion
+
+Cuando Ofrecen API.
+
+## MDC Button en Mithril {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+Sin Javascript, basado solo en estilos
+
+```javascript
+require('@material/button/dist/mdc.button.css');
+var Button = {
+	view: function(vn) {
+		return  m('button.mdc-button'
+			+(vn.attrs.raised ? '.mdc-button--raised':'')
+			+(vn.attrs.unelevated ? '.mdc-button--unelevated':'')
+			+(vn.attrs.outlined ? '.mdc-button--outlined':'')
+			+(+vn.attrs.dense ? '.mdc-button--dense':'')
+			, attrs, [
+			(vn.attrs.faicon ? m(
+				'i.mdc-button__icon.fa.fa-'+vn.attrs.faicon):''),
+			vn.children
+		]);
+	},
+};
+```
+
+## Uso del MDC Button {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+```javascript
+var Button = require('./mdc/button');
+
+var App = {
+	clicked: false,
+	view: function(vn) {
+		return  m(Button, {
+			raised: true,
+			faicon: this.clicked?'spinner.fa-spin':'paper-plane',
+			onclick: function(ev) {
+				vn.state.clicked = true;
+			},
+		}, 'Send');
+	},
+};
+```
+
+## Como pinta {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+![](mdc-button.png)
+
+
+## MDC Dialog en Mithril {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+Inicializando y con API.
+
+```javascript
+const mdcDialog = require('@material/dialog');
+const MDCDialog = mdcDialog.MDCDialog;
+var Dialog = {};
+Dialog.oninit = function(vn) {
+	// Para poder acceder desde fuera a la API
+	vn.state.model = vn.attrs.model || {};
+	// Api publica del componente Mithril
+	vn.state.model.open = function() {
+		vn.state.widget.show();
+	};
+};
+Dialog.oncreate = function(vn) {
+	vn.state.widget = MDCDialog.attachTo(vn.dom);
+	vn.state.widget.listen('MDCDialog:accept', function() {
+		vn.attrs.onaccept && vn.attrs.onaccept();
+	});
+	vn.state.widget.listen('MDCDialog:cancel', function() {
+		vn.attrs.oncancel && vn.attrs.oncancel();
+	});
+};
+```
 
 
 
