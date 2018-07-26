@@ -1437,21 +1437,21 @@ Sheet
 
 <div class=columns>
 <div class=column style="width:30%">
-![Dialog](mdc-dialog.png){width=80%}
+![**Dialog**](mdc-dialog.png){width=80%}
 
 Persistente
 
 Bloqueante
 </div>
 <div class=column style="width:30%">
-![Banner](mdc-alert.png)
+![**Banner**](mdc-alert.png)
 
 Persistente
 
 No bloqueante
 </div>
 <div class=column style="width:30%">
-![SnackBar](mdc-snackbar.png)
+![**SnackBar**](mdc-snackbar.png)
 
 Temporal
 </div>
