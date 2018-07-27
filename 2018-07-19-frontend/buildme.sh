@@ -1,2 +1,2 @@
 #!/bin/bash
-pandoc --self-contained frontend.md -t revealjs -o index.html 
+pandoc --self-contained metadata.yaml *.md -t revealjs -o index.html 
