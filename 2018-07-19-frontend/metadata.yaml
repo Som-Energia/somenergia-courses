@@ -13,6 +13,7 @@ progress: true
 parallaxBackgroundSize: 150%
 parallaxBackgroundHorizontal: 20
 parallaxBackgroundVertical: 5
+showNotes: true
 keyboard:
   46: prev
 include-before: |

@@ -1,5 +1,5 @@
 
-# Material Design {
+# Material {
 	data-background="../images/logo-materialdesign.svg"
 	data-background-size='40%'
 	}
@@ -9,15 +9,14 @@
 	data-background-size='40%'
 	}
 
-Bootstrap (Twitter)
+Bibliotecas que definen elementos de la interfaz reusables (widgets)
 
-Material (Google)
+- Bootstrap (Twitter)
+- Material (Google)
+- JQuery-UI
+- ...
 
-JQuery-UI
-
-...
-
-## Origen {
+## Material Design {
 	data-background="../images/logo-materialdesign.svg"
 	data-background-size='40%'
 	}
@@ -26,7 +25,7 @@ JQuery-UI
 
 <div class="column" style="width:60%">
 
-**Material Design** http://material.io
+[http://material.io](http://material.io){target="blank"}
 
 **Especificación** de cómo han de ser las interfaces en **Android**
 a partir de Lollypop
@@ -137,6 +136,8 @@ No bloqueante
 ![**SnackBar**](mdc-snackbar.png)
 
 Temporal
+
+No bloqueante
 </div>
 
 ## Sistema de Color {
@@ -164,6 +165,18 @@ Las **variantes** para destacar de forma harmoniosa.
 **OnX:** El color de texto cuando se usa _X_ como fondo
 
 
+## Tipografía
+
+Valores por defecto, customizables y criterios.
+
+Fuente, tamaño, espaciado, mayúsculas...
+
+- **Headlines 1-6:** Textos cortos prominentes
+- **Subtitles 1-2:** Textos cortos enfatizados
+- **Body 1-2:** Textos largos
+- **Caption:** Pies de imagen
+- **Overline:** Contextualizar un titulo
+- **Button:** Texto para botones
 
 ## ¿Material para Mithril? {
 	data-background="../images/logo-materialdesign.svg"
@@ -200,6 +213,8 @@ para usarlo en cualquiera.
 Nosotros haremos el wrapping para Mithril:
 `src/mdc/` ([link](https://github.com/Som-Energia/webforms-mithril/tree/master/src/mdc))
 
+[Demo en vivo](http://material-components-web.appspot.com/)
+
 
 ## Estructura {
 	data-background="../images/logo-materialdesign.svg"
@@ -217,6 +232,52 @@ Customizables (¡precalculados!)
 Cuando necesitan inicializacion
 
 Cuando Ofrecen API.
+
+## Aplicar tipografía {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+
+```javascript
+require('@material/typography/dist/mdc.typography.css');
+```
+
+En la raiz aplicar la clase `mdc-typography`.
+
+- `mdc-typography--headline1` a `6`
+- `mdc-typography--subtitles1` a `2`
+- `mdc-typography--body1` a `2`
+- `mdc-typography--caption`
+- `mdc-typography--overline`
+- `mdc-typography--button`
+
+Redefinibles en el CSS.
+
+## Usando el tema {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
+
+
+En nuestro css, antes de cargar el de MDC4W
+
+```css
+* {
+	--mdc-theme-primary: red;
+	--mdc-theme-secondary: yellow;
+	--mdc-theme-background: white;
+	--mdc-theme-surface: #ffe;
+	/* cuando ponemos un color de tema de fondo,
+		estos colores para el texto */
+	--mdc-theme-on-primary: white;
+	--mdc-theme-on-secondary: black;
+	--mdc-theme-on-surface: black;
+}
+```
+
+Usables como color `var(--mdc-theme-primary, #faf)`
+
 
 ## MDC Button en Mithril {
 	data-background="../images/logo-materialdesign.svg"
@@ -301,7 +362,34 @@ Dialog.oncreate = function(vn) {
 		vn.attrs.oncancel && vn.attrs.oncancel();
 	});
 };
+Dialog.onremove = function(vn) {
+	vn.state.widget.destroy();
+};
 ```
 
+## Uso de Dialog {
+	data-background="../images/logo-materialdesign.svg"
+	data-background-size='40%'
+	}
 
+Acceso al API via objeto injectado
+
+```javascript
+const Dialog = require('./mdc/dialog');
+var mydialog = {};
+m(Dialog, {
+	oncancel: function() { }, // Whatever to do on cancel
+	onaccept: function() { }, // Whatever to do on accept
+	model: mydialog, // inject object
+	buttons: [
+		{ text: "Help", onclick: showhelp }, // Custom action
+		{ text: "No", cancel: true }, // Default cancel action
+		{ text: "Si", accept: true }, // Default accept action
+	},
+}, m('¿Quieres proceder?)),
+m(Buttton, {
+	// open is accessible via mydialog
+	onclick: function() { mydialog.open(); },
+}, "Open Dialog");
+```
 
