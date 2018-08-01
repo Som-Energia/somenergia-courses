@@ -13,9 +13,11 @@ progress: true
 parallaxBackgroundSize: 150%
 parallaxBackgroundHorizontal: 20
 parallaxBackgroundVertical: 5
+#showNotes: separate-page
 showNotes: true
 keyboard:
   46: prev
+  13: alert('hello')
 include-before: |
 	<style>
 		.reveal {

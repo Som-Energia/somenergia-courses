@@ -26,16 +26,22 @@ Cuando no lo hace, 😠 😠 😠 😠 `＼(｀O´)／`
 - `===` y `!==` comparan sin conversion
 
 ```javascript
-1=='1' // true
-1==='1' // false 
-0=='' // true
-0==='' // false
-false=='' // true
-undefined==false // false
+1=='1' // true    ''=='    ' // false  null == undefined // true
+1==='1' // false  false=='' // true    null === undefined // false
+0=='' // true     false==0 // true     undefined==false // false
+0==='' // false                        [1,2]=='1,2' // true
 ```
 
 La regla: Usar el de tres signos al menos que realmente quieras la conversión
 (y no, no la quieres)
+
+<div class='notes'>
+No la quieres porque aunque te puedas esperar cierta conversión,
+siempre hay una conversión que no esperabas.
+
+Si es el caso, explicita la conversión y usa el de tres signos,
+o usa dos comparaciones con el de tres signos.
+</div>
 
 ## Falsos amigos: `+` {
 	data-background-image='../images/logo-js.svg'
@@ -45,15 +51,23 @@ La regla: Usar el de tres signos al menos que realmente quieras la conversión
 ```javascript
 3 + 2 // 5
 'a' + 'b' // 'ab'
-'a' + 3 // 'a3'
-'2' + 3 // 23 !!
 '2' - 3 // -1 !!
+'2' + 3 // 23 !!
+'a' + 3 // 'a3'
 3 + true // 4 !!
 3 + false // 3 !!
+'3' + true // '3true' !!
 3 + undefined // NaN
 'a' + undefined  // 'aundefined'
 3 + {} // '3[object Object]'
 ```
+
+<div class='notes'>Y
+- Con `-` se convierten los operadores a número.
+- Con `+` si un operador es string, se convierte el otro a string
+- Todo se convierte a string menos los booleanos si al otro lado hay un numero
+</div>
+
 
 ## Falsos amigos: bool cast {
 	data-background-image='../images/logo-js.svg'
@@ -171,6 +185,16 @@ var myinstance = new MyClass('param1value'); // No olvides el new
 MyClass.prototype.method3 = function() { ... };
 
 ```
+<div class='notes'>
+- Al llamarla con `new` pasamos un objeto nuevo vacio como `this`.
+- La expresion `new` retorna ese objeto, despues de rellenarlo en la función factoría.
+- Dos formas de definir una función: declaración y assignación.
+- El punto y coma solo la lleva la asignación.
+- La funcion factoría tiene un attributo, `prototype`,
+  sobre el que podemos añadir métodos y atributos a posteriori
+- En el singleton lo podíamos hacer directamente
+</div>
+
 
 ## Falsos amigos: `this` {
 	data-background-image='../images/logo-js.svg'
@@ -193,6 +217,14 @@ f.call(o, a, b); // Seria `o`
 f.apply(o, [a,b]); // Seria `o`
 ```
 
+<div class='notes'>
+- La función es la misma todo el rato
+- Que reciba un this no depende de como la definamos, sino de como la llamamos
+- lo que intentamos hacer con `f2`, és obtener una función _bindeada_ a un objeto, y se puede en muchos lenguajes
+- pero si lo hacemos en javascript, acabamos llamando a la función a pelo sin objeto
+- en javascript lo hacemos como lo hace `f3`
+</div>
+
 
 ## Falsos amigos: `this` {
 	data-background-image='../images/logo-js.svg'
@@ -214,6 +246,12 @@ function mymethod(b) {
 	}
 }
 ```
+<div class='notes'>
+Pregunta:
+podemos usar `this` en los métodos que se definen dentro de la función factoría
+de unas diapositivas atras?
+</div>
+
 
 ## Promesas {
 	data-background-image='../images/logo-js.svg'
@@ -237,6 +275,13 @@ promesa.then(function(result) {
 	// Codigo a ejecutar si falla
 });
 ```
+
+<div class='notes'>
+- Si se resuelve antes de añadir el `then` tambien se ejecuta
+- Un segundo parámetro en un `then`, se considera un `catch`.
+- Podemos encadenar varios `then` y `catch`
+- Si alguno retorna algo, es el `result` o el `error` para el siguiente `then` o `catch`.
+</div>
 
 
 
