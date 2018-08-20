@@ -239,7 +239,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">'a'</span> <span class="op">+</span> <span class="kw">undefined</span>  <span class="co">// 'aundefined'</span>
 <span class="dv">3</span> <span class="op">+</span> <span class="op">{}</span> <span class="co">// '3[object Object]'</span></code></pre></div>
 <aside class="notes">
-<p>Y - Con <code>-</code> se convierten los operadores a número. - Con <code>+</code> si un operador es string, se convierte el otro a string - Todo se convierte a string menos los booleanos si al otro lado hay un numero</p>
+<ul>
+<li>Con <code>-</code> se convierten los operadores a número.</li>
+<li>Con <code>+</code> si un operador es string, se convierte el otro a string</li>
+<li>Todo se convierte a string menos los booleanos si al otro lado hay un numero</li>
+</ul>
 </aside>
 </section><section id="falsos-amigos-bool-cast" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Falsos amigos: bool cast</h2>
@@ -250,6 +254,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>El entero <code>0</code> es falso pero, tambien el string <code>'0'</code>!!</li>
 <li>De hecho un string con varios ceros pero con espacios delante y detras tambien es <code>false</code>: <code>'   000 \t\n  '</code></li>
 </ul>
+<aside class="notes">
+<ul>
+<li>Lo que buscas es: <code>[].length</code>, <code>Object({}).keys().length</code> o <code>''.length</code></li>
+<li>Comparar un objeto o array con otro vacío, siempre sera falso, pues comparar dos objetos distintos es falso aunque tenga el mismo contenido</li>
+</ul>
+</aside>
 </section><section id="variables-no-declaradas" class="slide level2" data-background-image="../images/logo-js.svg" data-background-size="40%">
 <h2>Variables no declaradas</h2>
 <p><strong>Típico:</strong> me equivoco en el nombre de la variable</p>
@@ -276,11 +286,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">var</span> o2 <span class="op">=</span> <span class="va">Object</span>.<span class="at">assign</span>(<span class="op">{},</span> o1)<span class="op">;</span></code></pre></div>
 <aside class="notes">
 <ul>
+<li><code>yamlns</code> es una libreria que usamos en Python para tener diccionarios con esteroides</li>
 <li>&quot;diccionarios&quot; en Python, <em>associative array</em> en general</li>
 <li>Usamos la sintaxis de <code>[]</code> en vez de <code>.</code> cuando la clave:
 <ul>
 <li>Es calculada, o</li>
-<li>No es un identificador</li>
+<li>No es un identificador válido</li>
 </ul></li>
 <li>Usamos <code>''</code> en las claves de los literales cuando no es identificador</li>
 <li>Truco: si la clave es calculada y esta en la variable <code>key</code>, definir el literal: <code>{ ''+key: value }</code>, si no considera la clave literal <code>'key'</code>.</li>

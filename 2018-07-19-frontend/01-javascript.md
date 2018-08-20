@@ -62,7 +62,7 @@ o usa dos comparaciones con el de tres signos.
 3 + {} // '3[object Object]'
 ```
 
-<div class='notes'>Y
+<div class='notes'>
 - Con `-` se convierten los operadores a número.
 - Con `+` si un operador es string, se convierte el otro a string
 - Todo se convierte a string menos los booleanos si al otro lado hay un numero
@@ -80,6 +80,11 @@ En Python estamos muy acostumbrados a usarlas en condiciones y funcionan muy dis
 - Un string vacio `''` es `false`, pero tambien uno con solo espacios: `'    '`
 - El entero `0` es falso pero, tambien el string `'0'`!!
 - De hecho un string con varios ceros pero con espacios delante y detras tambien es `false`: `'   000 \t\n  '`
+
+<div class='notes'>
+- Lo que buscas es: `[].length`, `Object({}).keys().length` o `''.length`
+- Comparar un objeto o array con otro vacío, siempre sera falso, pues comparar dos objetos distintos es falso aunque tenga el mismo contenido
+</div>
 
 
 ## Variables no declaradas {
@@ -128,10 +133,11 @@ var o2 = Object.assign({}, o1);
 
 <div class="notes">
 
+- `yamlns` es una libreria que usamos en Python para tener diccionarios con esteroides
 - "diccionarios" en Python, _associative array_ en general
 - Usamos la sintaxis de `[]` en vez de `.` cuando la clave:
 	- Es calculada, o
-	- No es un identificador
+	- No es un identificador válido
 - Usamos `''` en las claves de los literales cuando no es identificador
 - Truco: si la clave es calculada y esta en la variable `key`,
   definir el literal: `{ ''+key: value }`, si no considera la clave literal `'key'`.
