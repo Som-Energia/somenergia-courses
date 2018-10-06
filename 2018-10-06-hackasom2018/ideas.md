@@ -30,6 +30,18 @@ Referencias relativas. Eventos
 
 Mejorar el front-end
 
+## Herramientas de Análisis
+
+Cuadros de control
+
+Mineria temporal y geográfica
+
+Correlacionar con eventos
+
+Animaciones, interactivos...
+
+Widgets insertables en el blog
+
 
 ## Visualización
 
@@ -56,18 +68,6 @@ Mejorar el front-end
 </div>
 </div>
 
-
-## Herramienas de Análisis
-
-Cuadros de control
-
-Mineria temporal y geográfica
-
-Correlacionar con eventos
-
-Animaciones, interactivos...
-
-Widgets insertables en el blog
 
 ## Nuevas métricas
 
