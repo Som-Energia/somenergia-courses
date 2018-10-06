@@ -1,13 +1,58 @@
+---
+title: Construyendo comunidad
+---
+
 # Planteamiento
 
+## Menú del día
+
+- Restrospectiva
+- Recursos
+- Discutir la organización
+- Proyectos posibles
+- Hackeo (en los cafés)
+
+<div class=notes>
+- ¿Estuvisteis el año pasado?
+- ¿Personas técnicas?
+- ¿Cuántas pensábais que hackearíais hoy?
+- ¿Cuantas habéis pensado en qué os gustaría hacer?
+- Para alinearnos, haremos retrospectiva y veremos los recursos de que disponemos
+- Lo central será una propuesta mártir de como organizarnos que despues discutiremos
+- Si hay tiempo podemos presentar algunas propuestas de proyectos
+- El hackeo propiamente dicho seguro que será después
+
+</div>
+
+
 ## ¿Cómo fué el anterior?
+
+Track paralelo a la escuela
 
 Buena asistencia. Gente potente
 
 Se montó el Github SomLabs
 
-Se concentraron esfuerzos en 4 proyectos software
+Esfuerzos concentrados en 4 proyectos software
 
+La parte de cacharrería no prosperó
+
+
+<div class=notes>
+- **Track paralelo:**
+La gente del hackaton se perdió las otras actividades
+
+- **Cacharreo:**
+Básicamente, para hacer un hackaton de cacharreo
+hay que traer los cacharros.
+Necesita planificación previa.
+
+- **Hackeo:**
+Para que no os perdais las otras actividades
+hemos relegado el hackeo a los cafes.
+
+- **Objetivo:** organizarnos para hackear juntos cuando nos separemos.
+</div>
 
 ## Projectos presentados
 
@@ -15,7 +60,6 @@ Se concentraron esfuerzos en 4 proyectos software
 - Wrapper API
 - App mobil  
 - Gamificacion
-- Hardware
 
 ## ¿Puntos a mejorar?
 
@@ -79,7 +123,9 @@ Gisce sigue sin publicar el codigo del ERP
 
 Grupo de Telegram
 
-Mecanismos propios de Github (issues)
+Mecanismos propios de Github (issues, wikis)
+
+Grupos Plataforma: a extinguir
 
 ¿Lista de correo?
 
@@ -93,6 +139,107 @@ Los materiales de las formaciones internas son públicos
 Podreis conocer las tecnologías y metodologías que usamos y como está montado todo.
 
 También estaría bien formación desde la comunidad hacia Girona o a otros voluntarios.
+
+## Nuevas herramientas
+
+**Open Data:** API de datos públicos
+`opendata.somenergia.coop`
+
+[Más info](opendata.html)
+
+**CAS:** Autenticación centralizada
+`cas.somenergia.coop`
+
+[Más info](cas.html)
+
+**Intercoop:** Descubrir y activar servicios de otras entidades
+
+[Más info](intercoop.html)
+
+<div class=notes>
+- No entraremos a explicarlas a fondo
+- Enlaces a presentaciónes de cada una
+- Sabiendo que son y que existen, es más importante hoy la organización
+</div>
+
+## Herramientas que faltan
+
+**API autenticada**
+
+Ver y gestionar los contratos, por ejemplo
+
+Consideraciones de seguridad y privacidad
+
+**Carnet**
+
+Para identificar personas socias
+
+Hay alguna propuesta 'funcionando' pero necesita definirse más
+
+## Herramientas que faltan
+
+**Código ERP publicado con datos de testing**
+
+Os permitiría hackear el core sin API's
+
+Sin datos personales reales
+
+El código és libre pero el histórico contiene datos personales que hay que limpiar
+
+Seguimos insistiendo a Gisce
+
+## Peticiones a Girona
+
+Consultas técnicas
+
+API's nuevas
+
+Formaciones
+
+Acceso a datos
+
+Infrastructura (servidores, DNS's...)
+
+Traspasar mantenimientos
+
+## Consultas Técnicas
+
+Estamos en el Telegram y normalmente pendientes
+
+Intentad resolverlo en la comunidad.
+
+Los proyectos para paracaidistas son más divertidos
+y nos desviaremos de otras cosas más aburridas pero más vitales para la cooperativa.
+
+
+## API's nuevas
+
+No son prioritarias, tardaremos.
+
+Mockup que simule lo que quereis de la API
+
+Substituible por el proxy remoto real
+
+Ojo, hay que simular asincronía (Promesas)
+
+En serio: no hace falta crear ningún framework de simulación de API's
+
+Caso nuestro: Los nuevos formularios simulan CAS y backend
+
+
+## Traspasos
+
+¡Ojo con las tecnologías!
+
+Estamos intentando reducirlas.
+Facilita la incorporación de IT's
+
+**Backend:** Python (OpenErp, Flask, Django)
+
+**Frontend:** Javascript (Mithril, Webpack)
+
+**Alojamiento:** Ubuntu Server
+
 
 
 # Construyendo comunidad
@@ -135,6 +282,8 @@ Ya hay diversas listas. Juntar, limpiar y clasificar:
 
 **Propuesta:** Issues en el SomLabs o iniciativas del Partricipa...
 
+**De momento:** Recopilación parcial en [esta presentación](ideas.html)
+
 <div class='notes'>
 - Paracaidistas: Estudiantes, voluntarios, training...
 - Son proyectos que puedes hacer sin meterte en el core
@@ -156,191 +305,6 @@ Cuando alguien se acerca a un proyecto sus aportaciones suelen tener fallos, hay
 <div class='notes'>
 - Tambien fallbacks para no quedar huerfanos
 </div>
-
-## Ayuda de Girona
-
-Estamos en el Telegram y normalmente pendientes
-
-Intentad resolverlo en la comunidad.
-
-Los proyectos para paracaidistas son más divertidos
-y nos desviaremos de otras cosas más aburridas pero más vitales para la cooperativa.
-
-
-## Recursos de Girona
-
-API's nuevas
-
-Formaciones
-
-Acceso a datos
-
-Infrastructura (servidores, DNS's...)
-
-Traspasar mantenimiento
-
-## API's nuevas
-
-Mockup que simule lo que queremos de la API
-
-Definimos la interficie de ese mockup de forma que lo podamos substituir por un proxy remoto que realmente ataque a la api.
-
-Ojo, hay que simular asincronia.
-
-No hace falta ningún framework de simulación. En serio.
-
-Desarrollando el front-end de los formularios simulamos CAS y la API de contratación.
-
-
-
-# API OpenData
-
-## Open Data
-
-Acceso a datos anonimizados por agregación
-
-[`http://opendata.somenergia.coop`](http://opendata.somenergia.coop){target=_blank}
-
-En la raiz está la documentación
-
-**Da pie a proyectos para voluntarios y estudiantes**
-
-- Explotar los datos
-- Ampliar funcionalidades
-
-## Métricas y detalle
-
-**Métricas:**
-
-`/v0.2/members` (socias)
-
-`/v0.2/contracts` (contratos)
-
-**Detalle geográfico:**
-Por defecto global.
-
-`/by/<level>`
-(`country`, `state`, `ccaa`, `city`)
-
-
-
-## Serie temporal
-
-**Por defecto:** la última fecha disponible
-
-**A fecha dada:** `/on/<date>`
-
-(solo primeros de mes, de momento)
-
-**Serie anual:** `/yearly[/from/<date>][/to/<date>]`
-
-**Serie mensual:** `/monthly[/from/<date>][/to/<date>]`
-
-
-## Filtros geográficos
-
-En la query string.
-
-`?ccaa=01&city=38017&city=38019`
-
-Incluiria Andalucía (01) y los municipios Tinerfeños de 
-_Granadilla de Abona_ (38017) y
-_Guía Isora_ (38019)
-
-Se usan los códigos del INE ([web](http://www.ine.es/daco/daco42/codmun/codmunmapa.htm){target=_blank})
-
-
-## Ideas: Nuevas métricas
-
-Consumo agregado,
-Producción,
-Plantas,
-Autoproducción
-...
-
-**Referéncias para métricas relativas:**
-Población,
-Superficie,
-Puntos de suministro
-...
-
-## Ideas: Formatos y visualizaciones
-
-**Formatos:** Soportar JSON, CSV... no solo YAML
-
-**Visualizaciones:** Usando los datos de la API o integradas en la API como formato de salida
-
-Gráficas -
-Mapas -
-Animaciones -
-Interactivos
-
-¿Concurso?
-
-## Ideas: Frontend
-
-Hacer accesible la herramienta a personas no técnicas para que la puedan usar los grupos locales
-
-Construcción interactiva de la query
-
-Integración de las visualizaciones
-
-Conversor Grupo Local -> lista de municipios
-
-Generación de snippets para integrar en el blog
-
-# CAS
-
-## Autentificación
-
-Muchas cosas que se quieren implementar requieren validar la aplicación y el usuario que la maneja.
-
-- Aplicaciones web hospedadas por Som, o no.
-- Aplicaciones cliente de móbil o escritorio.
-- API's autentificadas.
-
-Porque:
-
-- Acceden a datos personales.
-- Operaciones delicadas (contratar, dar de baja...)
-
-
-## CAS, ¿qué es?
-
-Funcionalidad equivalente al Google Accounts
-para aplicaciones de SomEnergia
-
-Protocolo standard y herramientas abiertas
-
-Permite que aplicaciones web desarrolladas independientemente
-pero en un mismo ámbito (SomEnergia) compartan la sesión
-
-Las aplicaciones se fian de una tercera para saber si el usuario tiene la sesión abierta.
-
-## CAS, ¿qué NO es?
-
-No es **LDAP**: No solo se comparte el directorio de usuarios, también la sesión abierta.
-
-No es **OpenID**: No es una identificacion descentralizada sino centralizada.
-
-No es **OAuth**: No sirve para que accedan terceras partes a los recursos del usuario.
-
-Sí que se puede usar en combinación con esas tecnologías
-
-## ¿Dónde lo usamos?
-
-De momento, Decidim/Participa y la Oficina Virtual.
-
-Lo usarán los formularios de contratación: se pedirá contraseña, evitará pedir datos que se tienen.
-
-## ¿Cómo se puede utilizar?
-
-TODO: Analizar para que si y para que no (privacidad, trust...)
-
-
-
-
-
 
 
 
