@@ -143,18 +143,16 @@ También estaría bien formación desde la comunidad hacia Girona o a otros volu
 ## Nuevas herramientas
 
 **Open Data:** API de datos públicos
-`opendata.somenergia.coop`
-
-[Más info](opendata.html)
+<br>`opendata.somenergia.coop`
+<br>[Presentación](opendata.html)
 
 **CAS:** Autenticación centralizada
-`cas.somenergia.coop`
+<br>`cas.somenergia.coop`
+<br>[Presentación](cas.html)
 
-[Más info](cas.html)
-
-**Intercoop:** Descubrir y activar servicios de otras entidades
-
-[Más info](intercoop.html)
+**Intercoop:** Descubrir y activar servicios externos
+<br>`intercoop.somenergia.coop`
+<br>[Presentación](intercoop.html)
 
 <div class=notes>
 - No entraremos a explicarlas a fondo

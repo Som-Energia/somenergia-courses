@@ -75,11 +75,11 @@ Grupos locales, Equipo técnico
 - Visualizar resultados
 
 
-## Front-end
+## Ideas para hackear
 
-Editor de filtros
+Editor de filtros geográficos
 
-Mejorar la tabla
+Mejorar la tabla de resultados
 
 Integrar nuevas visualizaciones
 
@@ -99,12 +99,23 @@ Tecnologías utilizadas:
 - Webpack: optimización y empacado
 - NodeJS: dependencias
 
-Explicadas en una formación 'interna'
+Explicadas en una formación 'interna':
 
-[enlace](../2018-07-19-frontend/index.html)
+[Presentación: Tecnologías de front-end](../2018-07-19-frontend/index.html)
 
 
-# Ideas de uso
+# Ideas: usando el API
+
+## Usando el API
+
+El API permite usar 
+
+No limita tecnologías
+
+**Herramientas de análisis**
+
+
+
 
 ## Herramientas de Análisis
 
