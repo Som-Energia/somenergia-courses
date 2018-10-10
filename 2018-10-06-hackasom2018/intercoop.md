@@ -171,14 +171,20 @@ y una **API intercoop** para recibir transferencias de usuarios
 de las otras entidades.
 
 <div class=notes>
-- P. Usuarios:
-	- Ofrecen **portales**
-	- Para gestionar sus datos
-	- Donde estan disponible un catálogo de servicios de otras entidaes.
+- Proveedoras de Usuarios:
+	- Ofrecen **portales** para que las usuarias gestionen sus datos
+	- Se les añade un **catálogo de servicios** de otras entidaes
+	- Nuestro portal seria la **Oficina Virtual**
+- Proveedoras de Servicios
+	- Ofrecen **formularios** de contratación de los servicios
+	- Añaden una **API intercoop** donde aceptar tranferencias de usuarios de otras entidades
 </div>
 
-## Escenario Principal
+## Activación de servicios
 
+![](images/intercoop-mainscenario.svg){style=border:none;width:70%}
+
+<div class=notes>
 1. La usuaria en el Portal de su entidad
 	- Se identifica
 	- Explora el catálogo de servicios intercoop
@@ -188,23 +194,42 @@ de las otras entidades.
 	- los datos que se transferirán
 	- la política de privacidad del destino
 
-## Escenario Principal
-
 3. Si la usuaria acepta, el portal
 	- Cifra los datos y certifica el origen
 	- Los envía a la API del destino
 	- La API responde con un token
 
 4. El portal redirige a la usuaria
-	- Al formulario de contratación
-	- Adjuntando el token
+	- Al formulario de contratación de destino
+	- Se adjunta el token
 
-5. La usuaria puede continuar con el proceso
+5. La usuaria rellena el formulario en destino
 	- No se preguntan los datos transferidos
 
+Otros usos, donde el proveedor de servicios y usuarios es el mismo.
+Pero el usuario o la aplicación no son el mismo.
+Se quiere certificar el origen y pasar algun dato.
+
+- Invitaciones, Promociones, Comunicación entre servicios internos...
+
+
+</div>
 
 
 # Arquitectura
+
+## Librerias
+
+Python (completa) y PHP (acabándose)
+
+Módulos comunes y módulos personalizables
+
+Test driven developed
+
+Ambas tienen estructura muy similar
+
+Incluyen ejemplos funcionales contra los que probar
+
 
 ##
 
@@ -247,7 +272,36 @@ de los proveedores de usuarios.
 </div>
 
 
-## Proyectos
+## Peer Descriptor
+
+Información de una entidad y sus servicios
+
+Indica los datos de usuario que se requieren
+
+Formato YAML, fáciles de crear y compartir
+
+Doble versionado: contenido y formato
+
+
+
+# Proyectos
+
+## 
+
+Integrar catálogo en la OV (Girona/APSL)
+
+Aceptar tokens en los formularios (Girona)
+
+Soportar otros lenguajes
+
+Promociones de Navidad
+
+Invitaciones de socios
+
+Gamificación Economía Social
+
+
+
 
 
 
