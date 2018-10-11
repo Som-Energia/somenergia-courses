@@ -233,7 +233,7 @@ Incluyen ejemplos funcionales contra los que probar
 
 ##
 
-![](images/architecture.svg){style=border:none;width:80%}
+![](images/intercoop-architecture.svg){style=border:none;width:80%}
 
 <div class=notes>
 - Libreria común (azul) vs módulos personalizados (rojo)
