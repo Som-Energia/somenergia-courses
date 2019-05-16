@@ -68,7 +68,7 @@
 
 
 <section><section id="cas" class="titleslide slide level1"><h1>CAS</h1></section><section id="autentificación" class="slide level2">
-<h2>Autentificación</h2>
+<h1>Autentificación</h1>
 <p>Muchas cosas que se quieren implementar requieren validar la aplicación y el usuario que la maneja.</p>
 <ul>
 <li>Aplicaciones web hospedadas por Som, o no.</li>
@@ -81,23 +81,23 @@
 <li>Operaciones delicadas (contratar, dar de baja...)</li>
 </ul>
 </section><section id="cas-qué-es" class="slide level2">
-<h2>CAS, ¿qué es?</h2>
+<h1>CAS, ¿qué es?</h1>
 <p>Funcionalidad equivalente al Google Accounts para aplicaciones de SomEnergia</p>
 <p>Protocolo standard y herramientas abiertas</p>
 <p>Permite que aplicaciones web desarrolladas independientemente pero en un mismo ámbito (SomEnergia) compartan la sesión</p>
 <p>Las aplicaciones se fian de una tercera para saber si el usuario tiene la sesión abierta.</p>
 </section><section id="cas-qué-no-es" class="slide level2">
-<h2>CAS, ¿qué NO es?</h2>
+<h1>CAS, ¿qué NO es?</h1>
 <p>No es <strong>LDAP</strong>: No solo se comparte el directorio de usuarios, también la sesión abierta.</p>
 <p>No es <strong>OpenID</strong>: No es una identificacion descentralizada sino centralizada.</p>
 <p>No es <strong>OAuth</strong>: No sirve para que accedan terceras partes a los recursos del usuario.</p>
 <p>Sí que se puede usar en combinación con esas tecnologías</p>
 </section><section id="dónde-lo-usamos" class="slide level2">
-<h2>¿Dónde lo usamos?</h2>
+<h1>¿Dónde lo usamos?</h1>
 <p>De momento, Decidim/Participa y la Oficina Virtual.</p>
 <p>Lo usarán los formularios de contratación: se pedirá contraseña, evitará pedir datos que se tienen.</p>
 </section><section id="cómo-se-puede-utilizar" class="slide level2">
-<h2>¿Cómo se puede utilizar?</h2>
+<h1>¿Cómo se puede utilizar?</h1>
 <p>TODO: Analizar para que si y para que no (privacidad, trust...)</p>
 </section></section>
     </div>
@@ -136,7 +136,7 @@
         dependencies: [
           { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
         ]
       });
     </script>

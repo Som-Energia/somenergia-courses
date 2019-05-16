@@ -322,11 +322,13 @@ Otras no y las podeis aportar vosotros mismos.
 
 [Front End Open Data](http://github.com/som-energia/webforms-mithril)
 
-[SomMaps (HackaSom 2017)](http://github.com/som-labs/sommaps)
+[Ejemplo: SomMaps (HackaSom 2017)](https://som-labs.github.io/somenergia-maps/) [Código](http://github.com/som-labs/somenergia-maps)
+
+[Ejemplo: GapMinder (HackaSom 2018](https://opendata.somenergia.coop/ui/gapminder.html)
 
 [Cuadro de control de socios, Baix Montseny](https://docs.google.com/a/somenergia.coop/spreadsheets/d/1Kb9USX6lmZ9Yq5AMVaVwpRQEvoJo-FNbHznoIMeF3gk})
 
-[Discusion sobre mapas en la Plataforma](https://plataforma.somenergia.coop/discussion/view/153870/som-maps)
+[Discusion sobre mapas en la Plataforma (2015)](https://plataforma.somenergia.coop/discussion/view/153870/som-maps)
 
 
 
