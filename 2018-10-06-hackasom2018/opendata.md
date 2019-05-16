@@ -320,11 +320,11 @@ Otras no y las podeis aportar vosotros mismos.
 
 [API Open Data](http://github.com/som-energia/somenergia-api)
 
-[Front End Open Data](http://github.com/som-energia/webforms-mithril)
+[Front End Open Data](https://opendata.somenergia.coop) [Código](http://github.com/som-energia/webforms-mithril)
 
 [Ejemplo: SomMaps (HackaSom 2017)](https://som-labs.github.io/somenergia-maps/) [Código](http://github.com/som-labs/somenergia-maps)
 
-[Ejemplo: GapMinder (HackaSom 2018](https://opendata.somenergia.coop/ui/gapminder.html)
+[Ejemplo: GapMinder (HackaSom 2018)](https://opendata.somenergia.coop/ui/gapminder.html) [Código](https://github.com/Som-Energia/webforms-mithril/blob/master/src/gapminder.js) 
 
 [Cuadro de control de socios, Baix Montseny](https://docs.google.com/a/somenergia.coop/spreadsheets/d/1Kb9USX6lmZ9Yq5AMVaVwpRQEvoJo-FNbHznoIMeF3gk})
 
