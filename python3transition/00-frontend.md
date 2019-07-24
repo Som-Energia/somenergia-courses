@@ -45,6 +45,35 @@ Six: Libreria de cross portabilidad.
 
 Lo usamos para detectar las incompatibilidades.
 
+## Estrategia: Testing
+
+Código aguantado con tests.
+
+¿No hay tests? Montamos B2B de campaña.
+
+Objetivo: que no dejen de pasar en Py2 mientras avanzamos hacia pasarlos en Py3.
+
+`.travis.yaml` multiversion para los test publicables
+
+(los que no usan datos presonales, ni erp)
+
+Travis de ejemplo: intercoop, generation...
+
+## Conversion automàtica
+
+Pasamos el `2to3` con los fixes portables
+
+	$ 2to3 -w -f raise -f except -f asserts -f paren \
+		-f raw_input -f reduce -f import
+
+Test, commit y, el resto, sin sobreescribir:
+
+	$ 2to3 -nw --add-suffix=3 src/ # Genera ficheros py3
+
+Analizamos los cambios propuestos caso a caso
+
+	$ find -name \*.py3 | while read a; do vimdiff $a ${a%3}; done
+
 ## Novedades Py3 {
 	data-background-image="../images/logo-somenergia-nobg.svg"
 	data-background-size="80%"
@@ -68,10 +97,11 @@ Lo usamos para detectar las incompatibilidades.
 	data-background-size="80%"
 	}
 
-`keys`/`iterkeys`
+`keys`/`iterkeys`,
 `values`/`itervalues`,
 `items`/`iteritems`,
 `range`/`xrange`,
+`readlines`/`xreadlines`,
 `map`/`imap`,
 `zip`/`izip`,
 `filter`/`ifilter`,
@@ -107,18 +137,334 @@ convertir a lista.
 
 ```python
 # original
-for k in d.keys()
+for k,v in d.items()
 # 2to3
-for k in list(d.keys())
+for k,v in list(d.items())
 # propuesta
-for k in d.keys()
-# mejora: de itera en keys
-for k in d
-# asegurar que no haya list intermedias
-from builtins import iterkeys
-for k in iterkeys(d)
+for k,v in d.items()
+# Si la lista es grande y en Py2 ralentiza
+from future.builtins import iteritems
+for k in iteritems(d)
+# No cacheamos el resultado, la llamamos cada vez
+for k in sorted(d.items())
+# En algunos casos necesitaremos convertir
+list(sorted(d.items()))[:2] # las dos primeras parejas
 ```
 
+# Gestion excepciones
 
+## Novedades
+
+Hay cierta sintaxis para gestionar las excepciones,
+que hace tiempo está deprecada en Py2, y ahora queda obsoleta.
+
+La nueva funciona en ambos, Py2 y Py3.
+
+Hace tiempo deberíamos de usar la nueva.
+Hay mucho código nuestro que, por copia y pega, la usa.
+
+Estrategia: Dejar a 2to3 que haga lo suyo
+
+## Ejemplo
+
+```python
+try:
+	...
+	raise MyException, 'Ha petado' # Obsoleto
+except MyException, e: # Obsoleto
+	...
+# Forma correcta en Py2 y P3
+try:
+	...
+	raise MyException('Ha petado') # Correcto
+except MyException as exception: # Correcto
+	...
+```
+
+## `raise from`
+
+Interesante para encadenar contexto
+
+```python
+# Python 3 only
+class FileDatabase:
+    def __init__(self, filename):
+        try:
+            self.file = open(filename)
+        except IOError as exception:
+            raise DatabaseError('failed to open') from exception
+
+# Python 2 and 3:
+from future.utils import raise_from
+
+class FileDatabase:
+    def __init__(self, filename):
+        try:
+            self.file = open(filename)
+        except IOError as exception:
+            raise_from(DatabaseError('failed to open'), exception)
+
+# Testing the above:
+try:
+    fd = FileDatabase('non_existent_file.txt')
+except Exception as e:
+    assert isinstance(e.__cause__, IOError)    # FileNotFoundError on Py3.3+ inherits from IOError
+```
+
+## Excepciones nuevas
+
+Algunas excepciones han cambiado:
+
+TODO
+
+
+# Funcion `print`
+
+## Comportamiento nuevo
+
+En Py2 el `print` era una cláusula como el `return`.
+
+Ahora es una función.
+
+## Estrategia
+
+```python
+# Solo una cosa: Entre parentesis.
+print('Hola mundo') # Portable
+
+# Varias cosas: Usamos format
+print('Hola', name) # imprime la tupla en Py2!!
+print('Hola {}'.format(name)) # Portable
+
+# Standard error: usamos consolemsg
+print sys.stderr << "La has cagado", name # Py2 only
+print("Fastidiate {}".format(name)", file=sys.stderr) # Py3 only
+
+from consolemsg import error # Errores en colorines
+error("Fastidiate {}", name) # No hace falta format
+```
+
+## Sin fin de linea
+
+TODO:
+
+Hemos evitado hacer `from __future__ import print_function`
+
+Pero ¿y los prints acabados en coma que no hacen salto de linia?
+
+# Otros
+
+## División entera
+
+Py2: `a/b` es división entera con operadores enteros
+
+En muchos sitios, `float(a)/b` para evitarlo.
+
+Py3: `a/b` siempre es división real
+
+```python3
+3 / 2 # Retorna 1 en Py2, 1.5 en Py3
+
+# Si queremos entero, usamos operador explicito
+3 // 2 # Retorna 1 en Py2 y Py3
+
+# No queremos comportamiento antiguo de / asi que:
+from __future__ import division
+3 / 2 # Retorna 1.5 en Py2 y Py3
+```
+
+Atención, efecto sutil. Bugs escondidos.
+
+## Bye `long`
+
+El sufijo `L` para los long es implicito en Py2, ilegal en Py3, lo quitamos
+
+El tipo `long` de Py2 es el `int` de Py3, si necesitas discriminarlos:
+
+## Constantes octales
+
+`0644` solo funciona en Py2, `0o644` en ambos.
+
+Usar la segunda forma siempre.
+
+Evitar usar 0-padding en las constantes, para no liar a Py2.
+
+Estrategia, pasar el fix `numliterals` de `2to3`,
+y revisar que realmente queriamos una constante octal
+donde proponga cambios.
+
+## Imports relativos
+
+En Py2 los imports eran implicitamente relativos.
+
+En Py3 solo se puede hacer de forma explícita.
+
+Como la forma explícita es común, usaremos esa en ambos.
+
+```python
+import sibbiling_module # Solo funciona en Py2
+
+from . import sibbiling_module # Funciona en ambos
+```
+
+Fix portable de `2to3`: `import`.
+
+# Unicode HELL
+
+## Cambios
+
+`str` -> `bytes`
+
+`unicode` -> `str`
+
+`'text'` o `b'text'` -> `b'text'`
+
+`u'text'` -> `'text'` o `u'text'`
+
+`basestring` -> ~~removed~~
+
+## Invariante
+
+Los prefijos explicitos funcionan en ambos
+a partir de 2.7 y 3.3
+
+`type(u'')` es `unicode` en Py2, `str` en Py3 
+
+`type(b'')` es `str` en Py2, `bytes` en Py3 
+
+`type('')` es `str` en ambos pero semanticamente diferentes
+
+## Sinceramente
+
+No lo sabemos manejar ni en Py2 ni en Py3.
+
+Establezcamos premisas y intentemoslas seguir en ambos.
+
+La semantica del unicode (`str` en Py3)
+es texto multilenguaje, sin ninguna codificación explícita.
+
+La semantica del `bytes` (`str` en Py2)
+son los bytes que lo representan usando una codificación concreta,
+ASCII, UTF-8...
+
+## Premisas
+
+Si todo es unicode, seremos mas felices.
+
+Si todo bytes está codificado en UTF8, lo seremos aún mas.
+
+Si nos llegan cosas como bytes: `decode('utf8')`
+
+Si nos piden cosas como bytes: `encode('utf8')`
+
+Solo podemos aplicar `decode` a bytes
+
+Solo podemos aplicar `encode` a unicodes
+
+## Why ASCII? WHY!?
+
+Py2 permite encode y decode a todo,
+cuando se aplica al que no se debe,
+supone el origen ASCII y, si no lo es, peta.
+Paranoia y complicamos el codigo.
+
+```python
+u'Castaña'.decode('utf8')
+# En Py3 no hay decode para unicodes
+# En Py2 es equivalente a:
+u'Castaña'.encode('ascii').decode('utf8')
+# Como no puede encodear a ascii peta
+
+# Analogamente:
+b'Castaña'.encode('utf8')
+# En Py3 no hay encode para bytes
+# En Py2 es equivalente a
+b'Castaña'.decode('ascii').encode('utf8')
+```
+
+## Código fuente
+
+El código fuente se guarda como bytes.
+
+En Py3 se supone UTF8
+
+En Py2 se supone ASCIII (again!)
+
+Siempre en la cabeceras (sobretodo si hay caracteres raros):
+
+```
+# -*- encoding: utf8 -*-
+```
+
+Y si usais un editor chungo, configurarlo para que use UTF8 como encoding por defecto.
+
+## Literales
+
+Es un coñazo pero mejor usar el prefijo `u`.
+
+Si haceis un format de unicode a un bytes, intenta 
+
+```python
+name = u'Víctor' # unicode porque esta leido de un yaml
+                 # No sabemos a priori si contiene acentos
+b'Hola {}'.format(name) # fuerza name a que sea bytes, en Py2 via ASCII y peta
+b'Hola {}'.format(name.encode('utf8')) # Verbose
+               # y petara en Py3 si es un bytes (no tiene encode)
+               # y en Py2 si es un bytes con no ASCII
+u'Hola {}'.format(name) # Funciona correctamente
+               # petara en Py2 si es un bytes con no ASCIII
+```
+
+## Aseguradores
+
+TODO: meterlo en somutils y testearlo
+
+```python
+def force_unicode(text):
+	if type(text) == type(b''):
+		return text.decode('utf8')
+	if type(text) == type(u''):
+		return text
+	return type(u'')(text)
+
+def force_bytes(text):
+	if type(text) == type(u''):
+		return text.encode('utf8')
+	if type(text) == type(b''):
+		return text
+	return type(u'')(text).encode('utf8')
+```
+
+## `open`
+
+En Py3 lee `unicode` cuando no es modo binario.
+Default encoding a `utf-8`.
+
+En Py2 lee `bytes` siempre.
+Se usaba la libreria `codecs` para
+tener unicodes con utf8.
+
+Es mucho mas simple si usamos `io.open`, existe en
+Py2 y Py3, y tiene la misma signatura que `open` en Py3.
+
+
+
+## Pipes y `print`
+
+Cuando metemos nuestro script en pipes de shell
+el locale de stdin/stdout pasa a ser C.ASCIII
+
+En Py2, funcionaba en consola pero petará.
+
+```bash
+PYTHONIOENCODING='utf8'
+```
+TODO: Hack
+
+```bash
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+```
 
 
