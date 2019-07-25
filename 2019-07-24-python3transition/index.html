@@ -1858,6 +1858,7 @@ from __future__ import division
 <p><code>'text'</code> o <code>b'text'</code> -&gt; <code>b'text'</code></p>
 <p><code>u'text'</code> -&gt; <code>'text'</code> o <code>u'text'</code></p>
 <p><code>basestring</code> -&gt; <del>removed</del></p>
+<p>¡Ojo! Aunque tienen la misma semántica, <code>bytes</code> en Py3 tiene una API muy diferente a <code>str</code> en Py2.</p>
 </section><section id="invariante" class="slide level2">
 <h2>Invariante</h2>
 <p>Los prefijos explícitos mantienen la misma semántica</p>
@@ -1913,7 +1914,8 @@ from __future__ import division
 <p>Podemos ahorrarnos las <code>u</code>’s con:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1"><span class="im">from</span> __future__ <span class="im">import</span> unicode_literals</a></code></pre></div>
 <p>Pero en la práctica se ve que da problemas y todo el mundo lo descaconseja.</p>
-<p>Algunas librerías se quejan de ello (<code>click</code>)</p>
+<p>Yo no entiendo porque.</p>
+<p>Algunas librerías se quejan si lo usas (<code>click</code>)</p>
 </section><section id="aseguradores" class="slide level2">
 <h2>Aseguradores</h2>
 <p>TODO: meterlo en somutils y testearlo</p>
@@ -1944,6 +1946,17 @@ from __future__ import division
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="ex">import</span> sys</a>
 <a class="sourceLine" id="cb16-2" title="2"><span class="ex">reload</span>(sys)</a>
 <a class="sourceLine" id="cb16-3" title="3"><span class="ex">sys.setdefaultencoding</span>(<span class="st">'utf-8'</span>)</a></code></pre></div>
+</section></section>
+<section><section id="sin-python-2" class="title-slide slide level1"><h1>Sin Python 2</h1></section><section id="más-allà-de-python-2" class="slide level2">
+<h2>Más allà de Python 2</h2>
+<p>Nos hemos centrado en código portable Py2/Py3.</p>
+<p>¿Qué podremos hacer cuando dejemos caer Py2?</p>
+<ul>
+<li>Dejar de usar los prefijos <code>u''</code></li>
+<li>Eliminar todos los futures i six</li>
+<li>Usar f-strings en vez de <code>format</code></li>
+<li>…</li>
+</ul>
 </section></section>
     </div>
   </div>
