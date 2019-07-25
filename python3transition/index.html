@@ -1843,7 +1843,13 @@ from __future__ import division
 <a class="sourceLine" id="cb9-3" title="3"><span class="im">from</span> . <span class="im">import</span> sibbiling_module <span class="co"># Funciona en ambos</span></a></code></pre></div>
 <p>Fix portable de <code>2to3</code>: <code>import</code>.</p>
 </section></section>
-<section><section id="unicode-hell" class="title-slide slide level1"><h1>Unicode HELL</h1></section><section id="cambios" class="slide level2">
+<section><section id="unicode-hell" class="title-slide slide level1"><h1>Unicode HELL</h1></section><section id="sinceramente" class="slide level2">
+<h2>Sinceramente</h2>
+<p>Ya cuesta manejar unicode en cada versión por separado. Que funcione el mismo codigo en las dos…</p>
+<p>Aclaremos conceptos y establezcamos premisas que podamos seguir en ambas.</p>
+<p><code>unicode</code> (<code>str</code> en Py3): texto multilenguaje, sin ninguna codificación explícita.</p>
+<p><code>bytes</code> (<code>str</code> en Py2): bytes que lo representan usando una codificación concreta, ASCII, UTF-8… o qualquier tira de bytes aleatoria.</p>
+</section><section id="cambios" class="slide level2">
 <h2>Cambios</h2>
 <p><code>str</code> -&gt; <code>bytes</code></p>
 <p><code>unicode</code> -&gt; <code>str</code></p>
@@ -1852,20 +1858,15 @@ from __future__ import division
 <p><code>basestring</code> -&gt; <del>removed</del></p>
 </section><section id="invariante" class="slide level2">
 <h2>Invariante</h2>
-<p>Los prefijos explicitos funcionan en ambos a partir de 2.7 y 3.3</p>
+<p>Los prefijos explícitos mantienen la misma semántica</p>
+<p>Disponibles a partir de 2.7.1 y 3.3</p>
 <p><code>type(u'')</code> es <code>unicode</code> en Py2, <code>str</code> en Py3</p>
 <p><code>type(b'')</code> es <code>str</code> en Py2, <code>bytes</code> en Py3</p>
 <p><code>type('')</code> es <code>str</code> en ambos pero semanticamente diferentes</p>
-</section><section id="sinceramente" class="slide level2">
-<h2>Sinceramente</h2>
-<p>No lo sabemos manejar ni en Py2 ni en Py3.</p>
-<p>Establezcamos premisas y intentemoslas seguir en ambos.</p>
-<p>La semantica del unicode (<code>str</code> en Py3) es texto multilenguaje, sin ninguna codificación explícita.</p>
-<p>La semantica del <code>bytes</code> (<code>str</code> en Py2) son los bytes que lo representan usando una codificación concreta, ASCII, UTF-8…</p>
 </section><section id="premisas" class="slide level2">
 <h2>Premisas</h2>
-<p>Si todo es unicode, seremos mas felices.</p>
-<p>Si todo bytes está codificado en UTF8, lo seremos aún mas.</p>
+<p>Todas las cadenas de texto que manejamos, unicode.</p>
+<p>Todos los bytes codificados en UTF-8, por defecto.</p>
 <p>Si nos llegan cosas como bytes: <code>decode('utf8')</code></p>
 <p>Si nos piden cosas como bytes: <code>encode('utf8')</code></p>
 <p>Solo podemos aplicar <code>decode</code> a bytes</p>
@@ -1886,16 +1887,17 @@ from __future__ import division
 <a class="sourceLine" id="cb10-11" title="11">b<span class="st">'Castaña'</span>.decode(<span class="st">'ascii'</span>).encode(<span class="st">'utf8'</span>)</a></code></pre></div>
 </section><section id="código-fuente" class="slide level2">
 <h2>Código fuente</h2>
-<p>El código fuente se guarda como bytes.</p>
+<p>El código fuente se guarda como bytes<br />
+¿Qué codificación?</p>
 <p>En Py3 se supone UTF8</p>
 <p>En Py2 se supone ASCIII (again!)</p>
-<p>Siempre en la cabeceras (sobretodo si hay caracteres raros):</p>
+<p>Por Py2, siempre en la cabecera:</p>
 <pre><code># -*- encoding: utf8 -*-</code></pre>
-<p>Y si usais un editor chungo, configurarlo para que use UTF8 como encoding por defecto.</p>
+<p>Y configurar editor con encoding UTF8 defecto.</p>
 </section><section id="literales" class="slide level2">
 <h2>Literales</h2>
 <p>Es un coñazo pero mejor usar el prefijo <code>u</code>.</p>
-<p>Si haceis un format de unicode a un bytes, intenta</p>
+<p>Si haceis un format de unicode a un bytes, intenta decodificar de ASCII (again!)</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" title="1">name <span class="op">=</span> <span class="st">u'Víctor'</span> <span class="co"># unicode porque esta leido de un yaml</span></a>
 <a class="sourceLine" id="cb12-2" title="2">                 <span class="co"># No sabemos a priori si contiene acentos</span></a>
 <a class="sourceLine" id="cb12-3" title="3">b<span class="st">'Hola </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(name) <span class="co"># fuerza name a que sea bytes, en Py2 via ASCII y peta</span></a>
@@ -1904,22 +1906,28 @@ from __future__ import division
 <a class="sourceLine" id="cb12-6" title="6">               <span class="co"># y en Py2 si es un bytes con no ASCII</span></a>
 <a class="sourceLine" id="cb12-7" title="7"><span class="co">u'Hola {}'</span>.<span class="bu">format</span>(name) <span class="co"># Funciona correctamente</span></a>
 <a class="sourceLine" id="cb12-8" title="8">               <span class="co"># petara en Py2 si es un bytes con no ASCIII</span></a></code></pre></div>
+</section><section id="future" class="slide level2">
+<h2>Future</h2>
+<p>Podemos ahorrarnos las <code>u</code>’s con:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1"><span class="im">from</span> __future__ <span class="im">import</span> unicode_literals</a></code></pre></div>
+<p>Pero en la práctica se ve que da problemas y todo el mundo lo descaconseja.</p>
+<p>Algunas librerías se quejan de ello (<code>click</code>)</p>
 </section><section id="aseguradores" class="slide level2">
 <h2>Aseguradores</h2>
 <p>TODO: meterlo en somutils y testearlo</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">def</span> force_unicode(text):</a>
-<a class="sourceLine" id="cb13-2" title="2">    <span class="cf">if</span> <span class="bu">type</span>(text) <span class="op">==</span> <span class="bu">type</span>(b<span class="st">''</span>):</a>
-<a class="sourceLine" id="cb13-3" title="3">        <span class="cf">return</span> text.decode(<span class="st">'utf8'</span>)</a>
-<a class="sourceLine" id="cb13-4" title="4">    <span class="cf">if</span> <span class="bu">type</span>(text) <span class="op">==</span> <span class="bu">type</span>(<span class="st">u''</span>):</a>
-<a class="sourceLine" id="cb13-5" title="5">        <span class="cf">return</span> text</a>
-<a class="sourceLine" id="cb13-6" title="6">    <span class="cf">return</span> <span class="bu">type</span>(<span class="st">u''</span>)(text)</a>
-<a class="sourceLine" id="cb13-7" title="7"></a>
-<a class="sourceLine" id="cb13-8" title="8"><span class="kw">def</span> force_bytes(text):</a>
-<a class="sourceLine" id="cb13-9" title="9">    <span class="cf">if</span> <span class="bu">type</span>(text) <span class="op">==</span> <span class="bu">type</span>(<span class="st">u''</span>):</a>
-<a class="sourceLine" id="cb13-10" title="10">        <span class="cf">return</span> text.encode(<span class="st">'utf8'</span>)</a>
-<a class="sourceLine" id="cb13-11" title="11">    <span class="cf">if</span> <span class="bu">type</span>(text) <span class="op">==</span> <span class="bu">type</span>(b<span class="st">''</span>):</a>
-<a class="sourceLine" id="cb13-12" title="12">        <span class="cf">return</span> text</a>
-<a class="sourceLine" id="cb13-13" title="13">    <span class="cf">return</span> <span class="bu">type</span>(<span class="st">u''</span>)(text).encode(<span class="st">'utf8'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">def</span> force_unicode(text):</a>
+<a class="sourceLine" id="cb14-2" title="2">    <span class="cf">if</span> <span class="bu">type</span>(text) <span class="op">==</span> <span class="bu">type</span>(b<span class="st">''</span>):</a>
+<a class="sourceLine" id="cb14-3" title="3">        <span class="cf">return</span> text.decode(<span class="st">'utf8'</span>)</a>
+<a class="sourceLine" id="cb14-4" title="4">    <span class="cf">if</span> <span class="bu">type</span>(text) <span class="op">==</span> <span class="bu">type</span>(<span class="st">u''</span>):</a>
+<a class="sourceLine" id="cb14-5" title="5">        <span class="cf">return</span> text</a>
+<a class="sourceLine" id="cb14-6" title="6">    <span class="cf">return</span> <span class="bu">type</span>(<span class="st">u''</span>)(text)</a>
+<a class="sourceLine" id="cb14-7" title="7"></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="kw">def</span> force_bytes(text):</a>
+<a class="sourceLine" id="cb14-9" title="9">    <span class="cf">if</span> <span class="bu">type</span>(text) <span class="op">==</span> <span class="bu">type</span>(<span class="st">u''</span>):</a>
+<a class="sourceLine" id="cb14-10" title="10">        <span class="cf">return</span> text.encode(<span class="st">'utf8'</span>)</a>
+<a class="sourceLine" id="cb14-11" title="11">    <span class="cf">if</span> <span class="bu">type</span>(text) <span class="op">==</span> <span class="bu">type</span>(b<span class="st">''</span>):</a>
+<a class="sourceLine" id="cb14-12" title="12">        <span class="cf">return</span> text</a>
+<a class="sourceLine" id="cb14-13" title="13">    <span class="cf">return</span> <span class="bu">type</span>(<span class="st">u''</span>)(text).encode(<span class="st">'utf8'</span>)</a></code></pre></div>
 </section><section id="open" class="slide level2">
 <h2><code>open</code></h2>
 <p>En Py3 lee <code>unicode</code> cuando no es modo binario. Default encoding a <code>utf-8</code>.</p>
@@ -1929,11 +1937,11 @@ from __future__ import division
 <h2>Pipes y <code>print</code></h2>
 <p>Cuando metemos nuestro script en pipes de shell el locale de stdin/stdout pasa a ser C.ASCIII</p>
 <p>En Py2, funcionaba en consola pero petará.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="va">PYTHONIOENCODING=</span><span class="st">'utf8'</span></a></code></pre></div>
-<p>TODO: Hack</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="ex">import</span> sys</a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="ex">reload</span>(sys)</a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="ex">sys.setdefaultencoding</span>(<span class="st">'utf-8'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="va">PYTHONIOENCODING=</span><span class="st">'utf8'</span></a></code></pre></div>
+<p>TODO: Hack?</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="ex">import</span> sys</a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="ex">reload</span>(sys)</a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="ex">sys.setdefaultencoding</span>(<span class="st">'utf-8'</span>)</a></code></pre></div>
 </section></section>
     </div>
   </div>
