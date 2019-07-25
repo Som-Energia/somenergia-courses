@@ -1,6 +1,6 @@
 #!/bin/bash
 build() {
-	pandoc metadata.yaml *.md -t revealjs -o index.html --self-contained
+	pandoc metadata.yaml *.md -f markdown+emoji -t revealjs -o index.html --self-contained
 }
 
 build
