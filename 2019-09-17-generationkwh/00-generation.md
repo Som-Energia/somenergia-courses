@@ -4,6 +4,26 @@
 	data-background-size="80%"
 	}
 
+## ¿Qué es?
+
+Una forma de **invertir en renovables** que,
+en vez de darte derecho a un interés,
+**da derecho a usar kWh producidos**
+a **precio de coste**.
+
+## Funcionamiento
+
+Las socias realizan **inversiones** para construir **plantas**
+
+A 25 años, sin intereses, carencia de un año
+
+Una vez construidas, los kWh que se produzcan se transforman en **derechos** de uso para las inversoras, proporcionalmente a su inversión.
+
+Los derechos se reparten entre diferentes contratos según las **asignaciones** definidas por cada inversora.
+
+En las facturas se separan los kWh a **precio Generation** de los que son a **precio de mercado**.
+
+
 ## Documentación
 
 [Píndoles Generation kWh](https://github.com/Som-Energia/somenergia-generationkwh/blob/master/docs/intro-ca.markdown){target=_blank}
@@ -41,11 +61,8 @@ Algunas de las ultimas decisiones no estan incluidas, deberian.
 - RightsPerShareCurver: ahora es `RightsGranter`
 - ProductionAggregator: ahora es un `Mix`
 - BuiltShareValue: ahora es ...
-
-
-
-
 </div>
+
 
 
 # Modelos de inversión {
