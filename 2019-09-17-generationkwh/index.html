@@ -109,6 +109,22 @@
 <li>BuiltShareValue: ahora es ...</li>
 </ul>
 </aside>
+</section><section id="road-map" class="slide level2">
+<h1>Road Map</h1>
+<p>Modelos de inversión</p>
+<p>Concesión de derechos</p>
+<p>Asignación de contratos</p>
+<p>Uso de derechos</p>
+<p>Corrección de derechos</p>
+<aside class="notes">
+<ul>
+<li><strong>Modelos de inversión:</strong> Ciclo de vida (operaciones/estados) de una inversion: compra, pago, activacion, amortización, cancelación, desinversión...</li>
+<li><strong>Concesión de derechos:</strong> A partir de la producción definir que derechos van a cada socia</li>
+<li><strong>Asignación de contratos:</strong> Cómo se define qué contratos se benefician de los derechos de una socia</li>
+<li><strong>Uso de derechos:</strong> Cómo se usan (o devuelven) los derechos en las facturas</li>
+<li><strong>Corrección de derechos:</strong> Cómo rectificar derechos generados erróneamente</li>
+</ul>
+</aside>
 </section></section>
 <section><section id="modelos-de-inversión-1" class="titleslide slide level1" data-background-image="images/logo-somenergia-nobg.svg" data-background-size="80%"><h1>Modelos de inversión</h1></section><section id="modelo-de-inversión" class="slide level2">
 <h1>Modelo de inversión</h1>
@@ -183,7 +199,7 @@ Solo se pueden gastar en el mismo periodo tarifario en que fueron producidos</p>
 <p>No almacenamos curvas de derechos para cada socio</p>
 <p>Precalculamos para cada número de acciones (Perfil)</p>
 <p><strong>Ojo:</strong> Un socio cambia de perfil cuando se activa o expira una inversión</p>
-<p>La curva de derechos de un socio concreto será un colage de varias curvas de perfil</p>
+<p>La curva de derechos de un socio concreto será un collage de curvas de varios perfiles</p>
 <aside class="notes">
 <p>En el ERP, las curvas según número de acciones se llaman <code>RightsPerShare</code>. Están almacenadas en Móngo como un <code>MongoTimeCurve</code>.</p>
 </aside>
@@ -223,7 +239,9 @@ Solo se pueden gastar en el mismo periodo tarifario en que fueron producidos</p>
 </figure>
 <aside class="notes">
 <ul>
-<li><code>MongoTimeCurve</code> en la coleccion del Mongo <code>tm_profile</code></li>
+<li>Antes lo leiamos nosotros de Monsol</li>
+<li>Ahora lo lee Gisce de la planta directamente</li>
+<li>Lo deja como <code>MongoTimeCurve</code> en la coleccion del Mongo <code>tm_profile</code></li>
 <li>Script permite otras agregaciones (mensuales, con o sin detalle por horas)</li>
 </ul>
 </aside>
@@ -244,8 +262,8 @@ Solo se pueden gastar en el mismo periodo tarifario en que fueron producidos</p>
 <p>Obtener, para cada perfil, derechos en kWh enteros sin perder fracciones entre hora y hora</p>
 <ul>
 <li>Convertir producción agregada a Wh (<code>*1000</code>)</li>
-<li>Suma acomulada hora a hora (integral)</li>
 <li>Aplicar proporción: acciones / construidas</li>
+<li>Suma acomulada hora a hora (integral)</li>
 <li>Discretizar a kWh (<code>//1000</code>)</li>
 <li>Diferencia hora a hora</li>
 </ul>

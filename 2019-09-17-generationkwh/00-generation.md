@@ -64,6 +64,26 @@ Algunas de las ultimas decisiones no estan incluidas, deberian.
 </div>
 
 
+## Road Map
+
+Modelos de inversión
+
+Concesión de derechos
+
+Asignación de contratos
+
+Uso de derechos
+
+Corrección de derechos
+
+<div class=notes>
+- **Modelos de inversión:** Ciclo de vida (operaciones/estados) de una inversion: compra, pago, activacion, amortización, cancelación, desinversión...
+- **Concesión de derechos:** A partir de la producción definir que derechos van a cada socia
+- **Asignación de contratos:** Cómo se define qué contratos se benefician de los derechos de una socia
+- **Uso de derechos:** Cómo se usan (o devuelven) los derechos en las facturas
+- **Corrección de derechos:** Cómo rectificar derechos generados erróneamente
+</div>
+
 
 # Modelos de inversión {
 	data-background-image="images/logo-somenergia-nobg.svg"
@@ -172,7 +192,7 @@ Precalculamos para cada número de acciones (Perfil)
 
 **Ojo:** Un socio cambia de perfil cuando se activa o expira una inversión
 
-La curva de derechos de un socio concreto será un colage de varias curvas de perfil
+La curva de derechos de un socio concreto será un collage de curvas de varios perfiles
 
 
 <div class=notes>
@@ -214,7 +234,9 @@ Están almacenadas en Móngo como un `MongoTimeCurve`.
 ![](images/genkwh-scripts-productionCurve.png){style="widht:70%"}
 
 <div class=notes>
-- `MongoTimeCurve` en la coleccion del Mongo `tm_profile`
+- Antes lo leiamos nosotros de Monsol
+- Ahora lo lee Gisce de la planta directamente
+- Lo deja como `MongoTimeCurve` en la coleccion del Mongo `tm_profile`
 - Script permite otras agregaciones (mensuales, con o sin detalle por horas)
 </div>
 
@@ -245,8 +267,8 @@ Obtener, para cada perfil, derechos en kWh enteros
 sin perder fracciones entre hora y hora
 
 - Convertir producción agregada a Wh (`*1000`)
-- Suma acomulada hora a hora (integral)
 - Aplicar proporción: acciones / construidas
+- Suma acomulada hora a hora (integral)
 - Discretizar a kWh (`//1000`)
 - Diferencia hora a hora
 
