@@ -295,6 +295,7 @@ calcular desde el principio
 
 <div class=notes>
 - Por ejemplo: cuando se activa una inversión y nunca habíamos calculado derechos para ese número de acciones
+- Se calcularon al principio de 0 a 99, y algun desalmado invirtio 120
 </div>
 
 ## Derechos por perfil
@@ -378,6 +379,45 @@ A misma prioridad o en zona no restringida, el primero que factura se lo lleva.
 
 # Uso de derechos
 
+## Anotando el uso
+
+El uso de los derechos sí que\
+se almacena por cada socia
+
+A medida que usamos kWh,\
+la curva de uso del socio va igualando sin superar,\
+a su curva de derechos
+
+
+<div class=notes>
+Si, la curva de derechos de la socia que no almacenamos
+y que calculamos como collage de los perfiles que ha tenido.
+
+Si reescribimos la curva de derechos a la baja,
+podemos acabar teniendo derechos usados que no se han otorgado
+
+Aunque en suma sean iguales o menos,
+podrian ser mayores hora a hora.
+
+Los 
+</div>
+
+
+## Uso y retorno
+
+Cuando se crea una factura en borrador se reservan derechos.
+
+Cuando se borra, abona, rectifica... se devuelven derechos.
+
+Ojo, facturas en borrador reservan derechos\
+hay que borrarlas si no son buenas.
+
+
+## Periodos P1, P2...
+
+La facturación pide 
+
+
 ## Derechos usados
 
 ![](images/genkwh-scripts-usedRights.png){style="width:90%"}
@@ -411,9 +451,6 @@ Dentro de la ventana de uso:
 **Se devuelven** los más modernos usados
 
 No guardamos los dias/horas de origen en las facturas
-
-Ojo, facturas en borrador reservan derechos\
-hay que borrarlas si no son buenas.
 
 
 
