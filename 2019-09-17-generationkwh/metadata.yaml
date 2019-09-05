@@ -1,7 +1,7 @@
 ---
-title: Transición a Python3
-subtitle: Como irse quitando de Python2
-author: David García Garzón
+subtitle: ":zap:"
+title: "Generation kWh"
+author: Som Energia
 
 theme: serif # beige/black/blood/league/moon/night/serif/simple/sky/solarized/white
 history: true # no vuelvas al principo con F5
@@ -17,7 +17,6 @@ parallaxBackgroundVertical: 5
 showNotes: true
 keyboard:
   46: prev
-  13: alert('hello')
 include-before: |
 	<style>
 		.reveal {
@@ -37,7 +36,9 @@ include-before: |
 		.reveal .slides .titleslide h1 {
 			color: white;
 		}
+		.reveal .slides .slide.level2 h1 ,
 		.reveal .slides .slide.level2 h2 {
+            font-size: 2.2em;
 			color: #86bc25ff;
 			//color: #480;
 		}
