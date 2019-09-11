@@ -2192,9 +2192,9 @@ codificando y decodificando a <code>utf-8</code></p>
 </section><section id="pipes-y-print" class="slide level2">
 <h2>Pipes y <code>print</code></h2>
 <p>Cuando metemos nuestro script en pipes de shell el locale de stdin/stdout pasa a ser C (ASCII)</p>
-<p>En Py2, funcionaba en consola pero petará.</p>
+<p>Py2: funciona en consola pero en pipe peta</p>
 <p>La solución en todo caso es definir un environment.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"><span class="va">PYTHONIOENCODING=</span><span class="st">'utf8'</span></a></code></pre></div>
+<p><code>PYTHONIOENCODING='utf8'</code></p>
 <p>O usar exclusivamente las funciones de la última versión de <code>consolemsg</code> que gestionan esto ellas solas sin requerir que el usuario defina el environ.</p>
 </section><section id="simplified-sandwitch" class="slide level2">
 <h2>Simplified Sandwitch</h2>
@@ -2204,13 +2204,223 @@ codificando y decodificando a <code>utf-8</code></p>
 <h2>Más allà de Python 2</h2>
 <p>Nos hemos centrado en código portable Py2/Py3.</p>
 <p>¿Qué podremos hacer cuando dejemos caer Py2?</p>
+</section><section id="bye-portabilidad" class="slide level2">
+<h2>Bye portabilidad</h2>
+<p>Dejar de usar los prefijos <code>u''</code></p>
+<p>Eliminar todos los futures y six</p>
+</section><section id="f-strings" class="slide level2">
+<h2>F-strings</h2>
+<p>Substituyen a <code>format</code>, similar microlenguage</p>
+<p>Prefijo <code>f''</code>, usa las variables locales</p>
+<p>Se pueden meter expresiones Python</p>
+<p>Mucho más rápido (increiblemente)</p>
+</section><section id="enums" class="slide level2">
+<h2>Enums</h2>
+<aside class="notes">
+<p>A partir de Py 3.4</p>
+<p>Libreria de compatibilidad</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"><span class="ex">pip</span> install enum34</a></code></pre></div>
+</aside>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" title="1"><span class="im">from</span> enums <span class="im">import</span> Enum</a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="kw">class</span> Colors(Enum):</a>
+<a class="sourceLine" id="cb26-3" title="3">    red <span class="op">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb26-4" title="4">    green <span class="op">=</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb26-5" title="5"></a>
+<a class="sourceLine" id="cb26-6" title="6"><span class="bu">print</span>(Colors.red) <span class="co"># Prints &quot;Colors.red&quot;, not 1</span></a>
+<a class="sourceLine" id="cb26-7" title="7">Colors.red.value <span class="co"># 1</span></a>
+<a class="sourceLine" id="cb26-8" title="8">Colors.red.name <span class="co"># &quot;red&quot;</span></a>
+<a class="sourceLine" id="cb26-9" title="9"></a>
+<a class="sourceLine" id="cb26-10" title="10">Colors(<span class="dv">1</span>) <span class="co"># returns Colors.red by value</span></a>
+<a class="sourceLine" id="cb26-11" title="11">Colors[<span class="st">'red'</span>] <span class="co"># returns Colors.red by name</span></a>
+<a class="sourceLine" id="cb26-12" title="12"></a>
+<a class="sourceLine" id="cb26-13" title="13">[c.name <span class="cf">for</span> c <span class="kw">in</span> Colors] <span class="co"># all color names</span></a></code></pre></div>
+</section><section id="enums-tools" class="slide level2">
+<h2>Enums (tools)</h2>
+<p>No puede haber claves duplicadas pero si valores<br />
+<code>@enum.unique</code> prohibe valores duplicados</p>
+<p><code>EnumInt</code> deriva de <code>int</code>, se puede usar como tal</p>
+<p><code>Enum.auto()</code> asigna los valores automágicamente</p>
+<p>Podemos definir métodos en la clase</p>
+</section><section id="flags" class="slide level2">
+<h2>Flags</h2>
+<aside class="notes">
+<p>A partir de Py 3.6</p>
+</aside>
+<p>Enums combinables con <code>&amp; | ~ ^</code></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">class</span> Colors(Flag): <span class="co"># O FlagInt</span></a>
+<a class="sourceLine" id="cb27-2" title="2">    BLACK <span class="op">=</span> <span class="dv">0</span> <span class="co"># Cero explicito, auto empieza en 1</span></a>
+<a class="sourceLine" id="cb27-3" title="3">    RED <span class="op">=</span> auto() <span class="co"># Potencias de 2</span></a>
+<a class="sourceLine" id="cb27-4" title="4">    GREEN <span class="op">=</span> auto()</a>
+<a class="sourceLine" id="cb27-5" title="5">    BLUE <span class="op">=</span> auto()</a>
+<a class="sourceLine" id="cb27-6" title="6">    YELLOW <span class="op">=</span> RED <span class="op">|</span> GREEN <span class="co"># Combinacion nombrada</span></a>
+<a class="sourceLine" id="cb27-7" title="7">    CYAN <span class="op">=</span> GREEN <span class="op">|</span> BLUE</a>
+<a class="sourceLine" id="cb27-8" title="8">    MAGENTA <span class="op">=</span> RED <span class="op">|</span> BLUE</a>
+<a class="sourceLine" id="cb27-9" title="9">    WHITE <span class="op">=</span> RED <span class="op">|</span> GREEN <span class="op">|</span> BLUE</a>
+<a class="sourceLine" id="cb27-10" title="10"></a>
+<a class="sourceLine" id="cb27-11" title="11">Colors.RED <span class="op">|</span> Colors.BLUE <span class="co">#  Colors.MAGENTA</span></a>
+<a class="sourceLine" id="cb27-12" title="12">Colors.WHITE <span class="op">&amp;</span> <span class="op">~</span>Colors.BLUE <span class="co">#  Colors.YELLOW</span></a>
+<a class="sourceLine" id="cb27-13" title="13"><span class="bu">bool</span>(Colors.CYAN <span class="op">&amp;</span> Colors.RED) <span class="co"># False</span></a>
+<a class="sourceLine" id="cb27-14" title="14"><span class="bu">bool</span>(Colors.CYAN <span class="op">&amp;</span> Colors.BLUE) <span class="co"># True</span></a></code></pre></div>
+</section><section id="pathlib" class="slide level2">
+<h2>Pathlib</h2>
+<p>Bye <code>os.path.join</code> and co</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" title="1"><span class="im">from</span> pathlib <span class="im">import</span> Path</a>
+<a class="sourceLine" id="cb28-2" title="2"></a>
+<a class="sourceLine" id="cb28-3" title="3">base <span class="op">=</span> Path(<span class="st">'/usr/local'</span>)</a>
+<a class="sourceLine" id="cb28-4" title="4">binpath <span class="op">=</span> base <span class="op">/</span> <span class="st">'bin'</span>  <span class="co"># overloaded operator /</span></a>
+<a class="sourceLine" id="cb28-5" title="5">binpath.parts           <span class="co"># ('/', 'usr', 'local', 'bin')</span></a></code></pre></div>
+<aside class="notes">
+<p>Simplifica mucho operaciones muy típicas.</p>
+<p>Aparecio en Py 3.4. Hay librería de portabilidad para versiones anteriores:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb29-1" title="1"><span class="ex">pip</span> install pathlib</a></code></pre></div>
+</aside>
+</section><section id="pathlib-pureness" class="slide level2">
+<h2>Pathlib: Pureness</h2>
+<p><code>PurePath</code>: ops que no acceden al sistema<br />
+<code>Path</code>: le añade ops que acceden al sistema</p>
+<p>En Linux:</p>
+<p><code>[Pure]Path</code> es un alias de <code>Posix[Pure]Path</code></p>
+<p>Se puede usar <code>WindowsPurePath</code><br />
+pero no <code>WindowsPath</code></p>
+</section><section id="pathlib-pure-ops" class="slide level2">
+<h2>Pathlib: pure ops</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb30-1" title="1">workingDir <span class="op">=</span> Path(<span class="st">'.'</span>) <span class="co"># Also Path.cwd()</span></a>
+<a class="sourceLine" id="cb30-2" title="2">home <span class="op">=</span> Path.home() <span class="co"># '/home/vokimon' in my linux</span></a>
+<a class="sourceLine" id="cb30-3" title="3">p <span class="op">=</span> Path(<span class="st">'/tmp/vokimon/myzip.tar.gz'</span>)</a>
+<a class="sourceLine" id="cb30-4" title="4">p.parent <span class="co"># '/tmp/vokimon'</span></a>
+<a class="sourceLine" id="cb30-5" title="5">p.name <span class="co"># 'myzip.tar.gz'</span></a>
+<a class="sourceLine" id="cb30-6" title="6">p.stem <span class="co"># 'myzip.tar'</span></a>
+<a class="sourceLine" id="cb30-7" title="7">p.suffix <span class="co"># '.gz'</span></a>
+<a class="sourceLine" id="cb30-8" title="8">p.suffixes <span class="co"># ['.tar', '.gz']</span></a>
+<a class="sourceLine" id="cb30-9" title="9">p.relative_to(<span class="st">'/tmp'</span>) <span class="co"># 'vokimon/myzip.tar.gz'</span></a>
+<a class="sourceLine" id="cb30-10" title="10">p.with_suffix(<span class="st">'.bz2'</span>) <span class="co"># '/tmp/vokimon/myzip.tar.bz2'</span></a>
+<a class="sourceLine" id="cb30-11" title="11">p.with_name(<span class="st">'foo.zip'</span>) <span class="co"># '/tmp/vokimon/foo.zip'</span></a>
+<a class="sourceLine" id="cb30-12" title="12">p.anchor <span class="co"># p.drive + p.root</span></a>
+<a class="sourceLine" id="cb30-13" title="13"><span class="bu">str</span>(p) <span class="co"># returns the path string</span></a>
+<a class="sourceLine" id="cb30-14" title="14"><span class="bu">bytes</span>(p) <span class="co"># uses os.fsencode()</span></a>
+<a class="sourceLine" id="cb30-15" title="15">p.as_uri() <span class="co"># file://....</span></a>
+<a class="sourceLine" id="cb30-16" title="16">p.as_posix() <span class="co"># forwards back slashes</span></a>
+<a class="sourceLine" id="cb30-17" title="17">p.is_absolute() <span class="co"># true</span></a>
+<a class="sourceLine" id="cb30-18" title="18">p.is_reserved() <span class="co"># pe. true for 'null' in windows</span></a>
+<a class="sourceLine" id="cb30-19" title="19">p.match(<span class="st">&quot;*.gz&quot;</span>) <span class="co"># true</span></a></code></pre></div>
+<aside class="notes">
+<p>Bye <code>os.path.join</code> and co</p>
+<p>Simplifica mucho operaciones muy típicas.</p>
+<p>Aparecio en Py 3.4, para versiones anteriores:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb31-1" title="1"><span class="ex">pip</span> install pathlib <span class="co"># para python &lt; 3.4</span></a></code></pre></div>
+<p>Pure ops: no necesitan acceder al sistema.</p>
+<p>En Posix, <code>PurePath</code> es un <code>PosixPurePath</code>.</p>
+<p>Podemos instanciar WindowsPurePath en Posix para operaciones abstractas con paths en Windows.</p>
+</aside>
+</section><section id="pathlib-system-ops" class="slide level2">
+<h2>Pathlib: system ops</h2>
+<aside class="notes">
+<p><code>Path</code> hereda las ops de <code>PurePath</code> y añade las ops que acceden al sistema.</p>
+<p>En Linux, <code>Path</code> es <code>PosixPath</code> y no se puede instanciar <code>WindowsPath</code></p>
+<p>Fallo: Paths debieran ser iterables directamente (sin <code>iterdir</code>)</p>
+</aside>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" title="1">Path(<span class="st">&quot;/home/vokimon/../sammy/&quot;</span>).resolve() <span class="co"># /home/sammy</span></a>
+<a class="sourceLine" id="cb32-2" title="2">Path(<span class="st">'~/.config'</span>).expanduser() <span class="co"># /home/vokimon/.config</span></a>
+<a class="sourceLine" id="cb32-3" title="3">subdirs <span class="op">=</span> [ x <span class="cf">for</span> x <span class="kw">in</span> workingDir.iterdir() <span class="cf">if</span> x.is_dir() ]</a>
+<a class="sourceLine" id="cb32-4" title="4">p.exists(),  p.is_file(), p.is_dir(), p.is_link(), p.is_socket()</a>
+<a class="sourceLine" id="cb32-5" title="5">p.is_fifo(), p.is_block_device(), p.is_char_device()</a>
+<a class="sourceLine" id="cb32-6" title="6">p.glob(<span class="st">&quot;**/*.py&quot;</span>) <span class="co"># globbing recursivo</span></a>
+<a class="sourceLine" id="cb32-7" title="7"><span class="cf">with</span> p.<span class="bu">open</span>(encoding<span class="op">=</span><span class="st">'utf8'</span>) <span class="im">as</span> f: lines <span class="op">=</span> f.readlines()</a>
+<a class="sourceLine" id="cb32-8" title="8">content <span class="op">=</span> p.read_text(encoding<span class="op">=</span><span class="st">'utf8'</span>) <span class="co"># Or read_bytes</span></a>
+<a class="sourceLine" id="cb32-9" title="9">p.write_text(content, encoding<span class="op">=</span><span class="st">'utf8'</span>) <span class="co"># Or write_bytes(bcontent)</span></a>
+<a class="sourceLine" id="cb32-10" title="10">p.owner</a>
+<a class="sourceLine" id="cb32-11" title="11">p.group</a>
+<a class="sourceLine" id="cb32-12" title="12">p.stat().st_size <span class="co"># st_mtime, st_size...</span></a>
+<a class="sourceLine" id="cb32-13" title="13">p.mkdir(parents<span class="op">=</span><span class="va">True</span>, exists_ok<span class="op">=</span><span class="va">True</span>) <span class="co"># mkdir -p</span></a>
+<a class="sourceLine" id="cb32-14" title="14">p.chmod(<span class="dv">0o777</span>)</a>
+<a class="sourceLine" id="cb32-15" title="15">p.rmdir() <span class="co"># must be empty</span></a>
+<a class="sourceLine" id="cb32-16" title="16">p.symlink_to(target) <span class="co"># ln -s</span></a>
+<a class="sourceLine" id="cb32-17" title="17">p.(target) <span class="co"># mv</span></a>
+<a class="sourceLine" id="cb32-18" title="18">p.rename(target) <span class="co"># mv? (behaves different Win/Posix)</span></a>
+<a class="sourceLine" id="cb32-19" title="19">p.replace(target) <span class="co"># mv? (portable)</span></a>
+<a class="sourceLine" id="cb32-20" title="20">p.touch() <span class="co"># touch</span></a>
+<a class="sourceLine" id="cb32-21" title="21">p.unlink() <span class="co"># rm</span></a>
+<a class="sourceLine" id="cb32-22" title="22">p.samefile(other) <span class="co"># Points to same inode</span></a></code></pre></div>
+</section><section id="anotaciones" class="slide level2">
+<h2>Anotaciones</h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" title="1">a: <span class="bu">int</span> <span class="op">=</span> <span class="dv">3</span> <span class="co"># hinting variables</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="co"># Hinting functions</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="kw">def</span> myfunction(arg1: ann1, arg2: ann2 <span class="op">=</span> <span class="st">'default'</span>) <span class="op">-&gt;</span> annr :</a>
+<a class="sourceLine" id="cb33-4" title="4">    ...</a></code></pre></div>
+<p>Python solo lo guarda en <code>myfunction.__annotations__</code> y prou.</p>
+<p>Static type checking ( <a href="http://www.mypy-lang.org/">mypy</a>, <a href="https://google.github.io/pytype/">pytype</a> )</p>
+<p>Editores para dar pistas inteligentes.</p>
+<p>Para documentar, <a href="https://pypi.org/project/overload/">implementar sobrecarga</a>…</p>
+</section><section id="typing" class="slide level2">
+<h2>Typing</h2>
+<p>Anotaciones con tipos genéricos</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" title="1"><span class="im">from</span> typing <span class="im">import</span> TypeVar, Sequence</a>
+<a class="sourceLine" id="cb34-2" title="2">X <span class="op">=</span> TypeVar(<span class="st">'X'</span>)</a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="kw">def</span> choose(elements: Sequence[X], n: <span class="bu">int</span>) <span class="op">-&gt;</span> X: </a>
+<a class="sourceLine" id="cb34-4" title="4">    ...</a></code></pre></div>
+<p>DuckTypes (como los Concepts de C++)</p>
+<p><code>Any</code>, <code>Union</code>, <code>List</code>, <code>Tuple</code>, <code>Callable</code>, <code>Type</code>, <code>TypeVar</code>, <code>Optional</code>…</p>
+</section><section id="star-unpacking" class="slide level2">
+<h2>Star unpacking</h2>
+<p>Facilita el uso de desempaquetado con tamaños variables.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb35-1" title="1"><span class="op">&gt;&gt;&gt;</span> a, <span class="op">*</span>b, c <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]`</a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="op">&gt;&gt;&gt;</span> b</a>
+<a class="sourceLine" id="cb35-3" title="3">[<span class="dv">2</span>,<span class="dv">3</span>]</a></code></pre></div>
+</section><section id="control-parámetros" class="slide level2">
+<h2>Control parámetros</h2>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">def</span> f(a, <span class="op">/</span>, b, <span class="op">*</span>, c, <span class="op">**</span>kwd):</a>
+<a class="sourceLine" id="cb36-2" title="2">    ...</a></code></pre></div>
 <ul>
-<li>Dejar de usar los prefijos <code>u''</code></li>
-<li>Eliminar todos los futures i six</li>
-<li>Usar f-strings en vez de <code>format</code></li>
-<li><code>nonlocal</code> en las closures para modificar variables de la funcion superior</li>
-<li>star unpacking: `a, *b, c = [1,2,3,4]</li>
-<li>…</li>
+<li><code>a</code> solo posicional</li>
+<li><code>/</code> indica anteriores solo posicionales</li>
+<li><code>b</code> posicional o clave</li>
+<li><code>*</code> indica siguientes solo clave</li>
+<li><code>c</code> solo clave</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><code>*</code> puede ser <code>*args</code> si aceptamos posicionales arbitrarios</li>
+<li>Util: en <code>kwd</code> puede haber una <code>a</code></li>
+</ul>
+</aside>
+</section><section id="nuevos-operadores" class="slide level2">
+<h2>Nuevos operadores</h2>
+<ul>
+<li>Walrus operator <code>:=</code> (asignación/expresión) (2.8)</li>
+<li>Starship operator <code>&lt;=&gt;</code> (comparacion 1,0,-1) (2.9)</li>
+<li>Matrix Mult operator: <code>@</code>, <code>__matmult__</code></li>
+</ul>
+</section><section id="añadidos-a-la-stdlib" class="slide level2">
+<h2>Añadidos a la stdlib</h2>
+<ul>
+<li><code>functools.lru_cache</code>
+<ul>
+<li>decorator cachea resultados</li>
+</ul></li>
+<li><code>ipaddress</code>
+<ul>
+<li>interpreta ip str, operaciones…</li>
+</ul></li>
+<li><code>faulthandler</code>:
+<ul>
+<li>stack trace en petes duros (segfault)</li>
+</ul></li>
+</ul>
+</section><section id="y-más" class="slide level2">
+<h2>…y más</h2>
+<ul>
+<li>asyncio and <code>@coroutine</code></li>
+<li>Excepciones encadenadas
+<ul>
+<li><code>raise excep from oldexcept</code></li>
+</ul></li>
+<li><code>yield from generator()</code>
+<ul>
+<li>shortcut <code>for x in generator(): yield x</code></li>
+</ul></li>
+<li><code>nonlocal</code> en las closures para modificar<br />
+variables de la funcion contenedora</li>
+<li>acentos en las variables (don’t!)</li>
 </ul>
 </section></section>
     </div>
