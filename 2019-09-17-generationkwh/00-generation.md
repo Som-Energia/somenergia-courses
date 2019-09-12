@@ -4,6 +4,20 @@
 	data-background-size="80%"
 	}
 
+## Objetivo
+
+Familiarizar al equipo de proyecto
+y al resto de IT de los detalles
+de implementacion del Generation kWh
+que se necesitan para entender su dinámica.
+
+**Proyectos:**
+entender las recientes incidencias
+y repensar el nuevo modelo de inversión
+
+**IT:** mapa mental para entrar al código
+
+
 ## ¿Qué es?
 
 Una forma de **invertir en renovables** que,
@@ -88,12 +102,15 @@ Uso de derechos
 
 Corrección de derechos
 
+Módulos (IT)
+
 <div class=notes>
 - **Modelos de inversión:** Ciclo de vida (operaciones/estados) de una inversion: compra, pago, activación, amortización, cancelación, desinversión...
 - **Concesión de derechos:** A partir de la producción definir que derechos van a cada socia
 - **Asignación de contratos:** Cómo se define qué contratos se benefician de los derechos de una socia
 - **Uso de derechos:** Cómo se usan (o devuelven) los derechos en las facturas
 - **Corrección de derechos:** Cómo rectificar derechos generados erróneamente
+- **Módulos:** Como està organizado el código. Solo para IT.
 </div>
 
 
@@ -296,6 +313,10 @@ para usarlo para el pròximo intérvalo.
 - Es posible que no sea precisión suficiente
     - Consta que los que menos acciones tienen, pierden
 </div>
+
+## Discretización
+
+![](images/genkwh-rightsgranter.svg)
 
 ## Remanentes
 
@@ -621,6 +642,77 @@ Pendiente: corregir el uso de derechos
 para que sea compatible con la curva bonica
 y poder mostrar dos curvas bonicas en la OV.
 </div>
+
+
+# Módulos {
+	data-background-image="images/logo-generationkwh.jpg"
+	data-background-size="80%"
+	}
+
+
+## ERP vs Pure Python
+
+La lógica de negocio se ha extraido fuera del ERP
+
+**Objetivo:**
+
+Poder ejecutar tests unitarios ágilmente \
+Facilitar una eventual migración a otro ERP o versión
+
+Es común, aunque no necesariamente bueno,
+ver que toda clase del ERP tiene su
+versión no ERP que implementa sus funcones.
+
+## Data providers
+
+Abstraen el acceso a datos del ERP
+
+Substituibles por mocks para testear la lógica de negocio
+
+API ha de ser independiente del ERP\
+(menos el constructor)
+
+`ErpWrapper` recibe los parametros de ERP
+`cursor`, `uid`... y los pone disponibles como miembros
+
+## Test Helpers
+
+Los tests funcionales usan `erppeek`
+para llegar al código erp
+
+Helpers son modelos ERP instrumentales para
+llamar y traducir parametros y retornos
+tal que se puedan enviar por XMLRPC
+
+## Investments
+
+<div class=columns>
+<div class=column>
+Modelo ERP: 
+`generationkwh.investment`\
+Delega manipulacion de estado a `investmentstate`.
+Añade creacion de facturas, remesas...
+
+`investmentstate` máquina de estados de inversión.
+Se inicializa y serializa en un diccionario como el del erp.
+</div>
+<div class=column>
+`investmentmodel` encapsula expecificidades de Generation
+de cara a parametrizarlas algun día.
+
+`genkwh_investments.py`\
+cli para gestionar las inversiones
+</div>
+</div>
+
+
+## Assignments
+
+
+
+
+
+
 
 
 
