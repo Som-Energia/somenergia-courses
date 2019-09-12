@@ -526,7 +526,7 @@ para cada periodo horario de la tarifa
 Solo se pueden gastar los derechos\
 generados a las horas que le corresponden
 
-[](images/genkwh-factura-detalle-dh.png)
+![](images/genkwh-invoice-lines.png)
 
 
 
