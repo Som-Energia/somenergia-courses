@@ -294,7 +294,7 @@ Baja cuando jubilamos la planta.
 
 Sirve para relativizar el valor de las acciones de las socias.
 
-## Discretización
+## Quantización
 
 Obtener, para cada perfil, derechos en kWh enteros 
 sin perder fracciones entre hora y hora
@@ -302,7 +302,7 @@ sin perder fracciones entre hora y hora
 - Convertir producción agregada a Wh (`*1000`)
 - Aplicar proporción: acciones / construidas
 - Suma acomulada hora a hora (integral)
-- Discretizar a kWh (`//1000`)
+- Quantizar a kWh (`//1000`)
 - Diferencia hora a hora
 
 Guardamos el remanente (en Wh) del intérvalo calculado
@@ -314,7 +314,7 @@ para usarlo para el pròximo intérvalo.
     - Consta que los que menos acciones tienen, pierden
 </div>
 
-## Discretización
+## Quantización
 
 ![](images/genkwh-rightsgranter.svg)
 
@@ -542,7 +542,7 @@ Nos han llegado las primeras lecturas tarde
 
 Nos equivocamos con el código del contador
 
-Hay que cambiar cómo se calcula
+Detectamos un error en como se calcula
 
 ...
 
