@@ -650,6 +650,23 @@ y poder mostrar dos curvas bonicas en la OV.
 	}
 
 
+## Mapa
+
+[![](https://raw.githubusercontent.com/Som-Energia/somenergia-generationkwh/master/docs/GenKWh-UsageTrackerDetails.png){style="width:50%"}
+](https://raw.githubusercontent.com/Som-Energia/somenergia-generationkwh/master/docs/GenKWh-UsageTrackerDetails.png)
+
+<div class=notes>
+Cosas viejunas:
+
+PlantMeterAccess: lo hace ahora Gisce, partimos de lo que seria PlantMeterMeasures que es el MTC `tm_profile` que importa Gisce
+
+DealsDefinition: Son los Assignments
+
+
+
+ 
+</div>
+
 ## ERP vs Pure Python
 
 La lógica de negocio se ha extraido fuera del ERP
