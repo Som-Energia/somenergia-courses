@@ -1,6 +1,6 @@
 
 # Intro {
-	data-background-image="images/logo-somenergia-nobg.svg"
+	data-background-image="images/logo-generationkwh.jpg"
 	data-background-size="80%"
 	}
 
@@ -15,14 +15,26 @@ a **precio de coste**.
 
 Las socias realizan **inversiones** para construir **plantas**
 
-A 25 años, sin intereses, carencia de un año
+Amortizadas en 25 años, sin intereses, año de carencia
 
-Una vez construidas, los kWh que se produzcan se transforman en **derechos** de uso para las inversoras, proporcionalmente a su inversión.
+Una vez construidas, los kWh que se **produzcan**
+se transforman en **derechos** de uso para las inversoras, proporcionalmente a su inversión.
 
-Los derechos se reparten entre diferentes contratos según las **asignaciones** definidas por cada inversora.
+Los derechos se **usan** en diferentes contratos según las **asignaciones** definidas por cada inversora.
 
 En las facturas se separan los kWh a **precio Generation** de los que son a **precio de mercado**.
 
+<div class=notes>
+Palabras clave:
+
+- Inversiones (€)
+- Plantas
+- Producción (kWh)
+- Derechos (kWh)
+- Uso (kWh)
+- Assignaciones (contratos, prioridad)
+- Precio Generation (€/kWh)
+</div>
 
 ## Documentación
 
@@ -38,13 +50,13 @@ En las facturas se separan los kWh a **precio Generation** de los que son a **pr
 
 ### Píndoles
 
-Formación que hicimos cuando lo pusimos en produccion
+Formación que hicimos cuando lo pusimos en producción
 
-Ahora la gestion de las inversiones tiene botones para cada operacion.
+Ahora la gestion de las inversiones tiene botones para cada operación.
 
 ### Modelos de inversión
 
-Hablaremos de ellos pero la documentacion entra  mas en detalle
+Hablaremos de ellos pero la documentación entra  mas en detalle
 
 ### Requisitos
 
@@ -77,7 +89,7 @@ Uso de derechos
 Corrección de derechos
 
 <div class=notes>
-- **Modelos de inversión:** Ciclo de vida (operaciones/estados) de una inversion: compra, pago, activacion, amortización, cancelación, desinversión...
+- **Modelos de inversión:** Ciclo de vida (operaciones/estados) de una inversion: compra, pago, activación, amortización, cancelación, desinversión...
 - **Concesión de derechos:** A partir de la producción definir que derechos van a cada socia
 - **Asignación de contratos:** Cómo se define qué contratos se benefician de los derechos de una socia
 - **Uso de derechos:** Cómo se usan (o devuelven) los derechos en las facturas
@@ -86,7 +98,7 @@ Corrección de derechos
 
 
 # Modelos de inversión {
-	data-background-image="images/logo-somenergia-nobg.svg"
+	data-background-image="images/logo-generationkwh.jpg"
 	data-background-size="80%"
 	}
 
@@ -128,7 +140,7 @@ Entre que estados transiciona
 
 ## Operaciones (ERP)
 
-TODO
+![](images/genkwh-erp-investment-actions.png)
 
 ## Generalizando
 
@@ -157,7 +169,11 @@ como operaciones del ciclo de vida.
 ¿Hay que modificar el diagrama de estados?
 
 
-# Concesión de derechos
+# Concesión de derechos {
+	data-background-image="images/logo-generationkwh.jpg"
+	data-background-size="80%"
+	}
+
 
 ## Derechos
 
@@ -174,7 +190,7 @@ Regla de tres entre:
 
 <div class=notes>
 
-Derechos = Produccion * Inversion Usuario / Inversion Total
+Derechos = Producción * Inversion Usuario / Inversion Total
 
 A menos que tenga muchas acciones,
 cada hora suele ser tan poca, que hay que ir acomulando
@@ -303,7 +319,11 @@ calcular desde el principio
 ![](images/genkwh-scripts-rightsCurve.png){style="width:90%"}
 
 
-# Asignación de contratos
+# Asignación de contratos {
+	data-background-image="images/logo-generationkwh.jpg"
+	data-background-size="80%"
+	}
+
 
 ## Asignaciones
 
@@ -334,18 +354,18 @@ En este caso es indeterminado de que inversor cogerá antes los derechos.
 
 ## Asignaciones por defecto
 
-Cuando se activa la primera inversión de una socia
+<div class=notes>
+Solo se hace al activarse
+la primera inversión de cada socia
+</div>
 
-Se hace una asignación por defecto
+Un mes antes de activarse la inversión,\
+se hace una asignación por defecto y
+se le envia a la socia por si quiere cambiarla.
 
-Se le envia un correo con la propuesta por si quiere hacer cambios
+Todos los contratos como titular o pagadora
 
-## Asignaciones por defecto
-
-Todos los contratos en que la socia es titular o pagadora
-
-Se prioriza el que tenga más consumo como titular
-
+Se prioriza el que tenga más consumo como titular\
 Si no, el que tenga más consumo como pagador
 
 El resto por debajo con la misma prioridad
@@ -377,7 +397,21 @@ Abonos, refacturaciones, borradores...
 A misma prioridad o en zona no restringida, el primero que factura se lo lleva.
 
 
-# Uso de derechos
+## Múltiples fuentes
+
+Un contrato puede recibir derechos de varios inversoras
+
+No está definido de cual recibe primero
+
+En la factura, aparecen en linias separadas con el nombre de cada inversora
+
+
+
+# Uso de derechos {
+	data-background-image="images/logo-generationkwh.jpg"
+	data-background-size="80%"
+	}
+
 
 ## Anotando el uso
 
@@ -385,9 +419,11 @@ El uso de los derechos sí que\
 se almacena por cada socia
 
 A medida que usamos kWh,\
-la curva de uso del socio va igualando sin superar,\
-a su curva de derechos
+la curva de uso del socio\
+va igualando, sin superar,\
+a su curva de derechos, hora a hora
 
+![](images/genkwh-rightsusage.svg){style="width:60%"}
 
 <div class=notes>
 Si, la curva de derechos de la socia que no almacenamos
@@ -398,29 +434,25 @@ podemos acabar teniendo derechos usados que no se han otorgado
 
 Aunque en suma sean iguales o menos,
 podrian ser mayores hora a hora.
-
-Los 
 </div>
-
-
-## Uso y retorno
-
-Cuando se crea una factura en borrador se reservan derechos.
-
-Cuando se borra, abona, rectifica... se devuelven derechos.
-
-Ojo, facturas en borrador reservan derechos\
-hay que borrarlas si no son buenas.
-
-
-## Periodos P1, P2...
-
-La facturación pide 
 
 
 ## Derechos usados
 
 ![](images/genkwh-scripts-usedRights.png){style="width:90%"}
+
+
+## Uso y retorno
+
+**Se reservan derechos**\
+cuando se crea una factura en borrador
+
+**Se devuelven derechos**\
+cuando se borra, abona, rectifica...
+
+**Ojo:** facturas en borrador reservan derechos\
+¡Hay que borrarlas si no son buenas!
+
 
 
 ## Ventana de uso
@@ -440,8 +472,6 @@ La caducidad real se extiende aproximadamente a 13 meses.
 Si hay varios periodos, tambien enmascaran la ventana las horas correspondientes.
 </div>
 
-
-
 ## Uso de derechos
 
 Dentro de la ventana de uso:
@@ -450,11 +480,147 @@ Dentro de la ventana de uso:
 
 **Se devuelven** los más modernos usados
 
-No guardamos los dias/horas de origen en las facturas
+Las facturas no se guardan\
+de qué días/horas cogieron los derechos
+
+Tampoco en la curva de uso se guarda\
+a qué facturas fueron ¿deberiamos?
+
+<div class=notes>
+Si tenemos hora de escritura, asi que tenemos una manivela
+para saber como estaba la curva a un dia concreto.
+
+No hay aún herramienta/script para mirarlo.
+
+Complicado ligarlo con facturas concretas, o abonos concretos.
+</div>
 
 
 
+## Periodos P1, P2...
 
+Se reservan derechos de forma independiente\
+para cada periodo horario de la tarifa
+
+Solo se pueden gastar los derechos\
+generados a las horas que le corresponden
+
+[](images/genkwh-factura-detalle-dh.png)
+
+
+
+# Corrección de derechos {
+	data-background-image="images/logo-generationkwh.jpg"
+	data-background-size="80%"
+	}
+
+
+## ¿Por què?
+
+Nos han llegado las primeras lecturas tarde
+
+Nos equivocamos con el código del contador
+
+Hay que cambiar cómo se calcula
+
+...
+
+:shit: happens, so :dancer:
+
+¿Reescribimos los derechos?
+
+## Problema
+
+No podemos reescribir la curva por debajo\
+porque esos derechos ya se han otorgado
+
+La curva de uso estaría por encima de los derechos otorgados.
+
+Aunque en global se den más derechos,\
+ha de ser mayor hora a hora
+
+<div class=notes>
+Recordemos que la produccion para 10 acciones
+daba cada hora un kWh si otra no.
+
+Cambios en la generación de derechos
+pueden hacer mover kWh de hora
+porque suman o dejan de sumar un kWh entero
+
+Donde deja de sumar, nos está pasando
+que se han usado derechos que ya no están.
+</div>
+
+## Solución
+
+Algoritmo para regenerar la curva,
+respetando los derechos ya otorgados
+y compensando cuando hay más.
+
+La desviación con lo real se guarda
+en la MTC `genkwh_rights_correction`
+
+<div class=notes>
+Cuando la nueva curva debiera ir por arriba de la antigua,
+es correcto y ponemos la nueva curva.
+
+Cuando la nueva curva debiera ir por debajo,
+se genera una deuda, que se compensa
+en horas posteriores,
+cuando la curva debiera ir por arriba.
+
+Si no se logra compensar todo,
+al final se guarda como remainder negativo.
+</div>
+
+## Visualmente
+
+![](images/genkwh-correction-graph.png)
+
+<div class=notes>
+Rojo: Derechos otorgados previamente
+
+Azul: Nuevos derechos calculados
+
+Verde: Derechos finales
+
+Corrección: Azul - Verde
+</div>
+
+## Curva de corrección
+
+La curva corregida es fea de enseñar
+
+Guardamos la corrección para recuperar la bonica
+
+```
+         otorgados    corrección     original
+2019-01        109             0          109
+2019-02        114             0          114
+2019-03        157            25          132
+2019-04        250            79          171
+2019-05         48          -104          152
+2019-06        201             0          201
+2019-07        192             3          189
+2019-08        160             0          160
+2019-09        112             0          112
+```
+
+<div class=notes>
+Se dió de más en marzo y abril
+porque pusimos la planta de Matallana en vez de fontivsolar.
+
+En mayo paramos la otorgación de derechos,
+la base antes de la corrección era cero, así que
+todo lo que cogimos de mas se compenso ahí.
+
+En junio y julio hay correcciónes, pero
+la suma mensual es casi es zero.
+
+Pendiente: corregir el uso de derechos
+para que sea compatible con la curva bonica
+y poder mostrar dos curvas bonicas en la OV.
+</div>
 
 
 
