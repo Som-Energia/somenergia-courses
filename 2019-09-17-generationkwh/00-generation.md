@@ -20,25 +20,25 @@ y repensar el nuevo modelo de inversión
 
 ## ¿Qué es?
 
-Una forma de **invertir en renovables** que,
-en vez de darte derecho a un interés,
-**da derecho a usar kWh producidos**
-a **precio de coste**.
+Una forma colectiva de **invertir en renovables**.\
+En vez de dar intereses :moneybag:,\
+**da derecho a usar los kWh producidos** :bulb:\
+a **precio de coste**.\
 
 ## Funcionamiento
 
 Las socias realizan **inversiones** para construir **plantas**
 
-Amortizadas en 25 años, sin intereses, año de carencia
+Se retorna en 25 años, sin intereses, año de carencia
 
-Una vez construidas, los kWh que se **produzcan**
+Una vez construidas, los **kWh producidos**
 se transforman en **derechos** de uso para las inversoras, proporcionalmente a su inversión.
 
 Los derechos se **usan** en diferentes contratos según las **asignaciones** definidas por cada inversora.
 
-En las facturas se separan los kWh a **precio Generation** de los que son a **precio de mercado**.
+En las **facturas** se separan los kWh a **precio Generation** de los que son a **precio de mercado**.
 
-<div class=notes>
+::: notes
 Palabras clave:
 
 - Inversiones (€)
@@ -48,7 +48,7 @@ Palabras clave:
 - Uso (kWh)
 - Assignaciones (contratos, prioridad)
 - Precio Generation (€/kWh)
-</div>
+:::
 
 ## Documentación
 
@@ -60,7 +60,7 @@ Palabras clave:
 
 [Módulos Generation](https://raw.githubusercontent.com/Som-Energia/somenergia-generationkwh/master/docs/GenKWh-UsageTrackerDetails.png){target=_blank}
 
-<div class=notes>
+::: notes
 
 ### Píndoles
 
@@ -87,7 +87,8 @@ Algunas de las ultimas decisiones no estan incluidas, deberian.
 - RightsPerShareCurver: ahora es `RightsGranter`
 - ProductionAggregator: ahora es un `Mix`
 - BuiltShareValue: ahora es ...
-</div>
+:::
+
 
 
 ## Road Map
@@ -104,14 +105,14 @@ Corrección de derechos
 
 Módulos (IT)
 
-<div class=notes>
+::: notes
 - **Modelos de inversión:** Ciclo de vida (operaciones/estados) de una inversion: compra, pago, activación, amortización, cancelación, desinversión...
 - **Concesión de derechos:** A partir de la producción definir que derechos van a cada socia
 - **Asignación de contratos:** Cómo se define qué contratos se benefician de los derechos de una socia
 - **Uso de derechos:** Cómo se usan (o devuelven) los derechos en las facturas
 - **Corrección de derechos:** Cómo rectificar derechos generados erróneamente
 - **Módulos:** Como està organizado el código. Solo para IT.
-</div>
+:::
 
 
 # Modelos de inversión {
@@ -143,21 +144,16 @@ Entre que estados transiciona
 ![](https://raw.githubusercontent.com/Som-Energia/somenergia-generationkwh/master/docs/inversions-states-titols5.png)
 
 
-## Operaciones
-
-- Orders (Client via form)
-- Charge (SE payment order)
-- Return (Payment order returned)
-- Discard 
-- Divest
-- Expire (Time)
-- Pay Interest
-- Amortize
-- Transfer (ownership)
-
 ## Operaciones (ERP)
 
 ![](images/genkwh-erp-investment-actions.png)
+
+::: notes
+Evita la edición directa de los campos
+que introduce inconsistencias
+
+Solo mediante operaciones, que quedan registradas.
+:::
 
 ## Generalizando
 
@@ -194,10 +190,8 @@ como operaciones del ciclo de vida.
 
 ## Derechos
 
-**kWh disponibles para uso de un socio inversor a precio Generation**
-
-Están vinculados a la hora de producción\
-Solo se pueden gastar en el mismo periodo tarifario en que fueron producidos
+**kWh a precio Generation disponibles\
+para uso de un socio inversor**
 
 Regla de tres entre:
 
@@ -205,8 +199,10 @@ Regla de tres entre:
 - la **inversión del socio** (día a día)
 - el **coste de las plantas** construidas (día a día)
 
-<div class=notes>
+Están vinculados a la hora de producción\
+Solo se pueden gastar en el mismo periodo tarifario en que fueron producidos
 
+::: notes
 Derechos = Producción * Inversion Usuario / Inversion Total
 
 A menos que tenga muchas acciones,
@@ -214,7 +210,7 @@ cada hora suele ser tan poca, que hay que ir acomulando
 fracciones de kWh hora a hora para llegar a un kWh entero.
 
 **¡Es importante gestionar los remanentes de kWh para que no se pierdan!**
-</div>
+:::
 
 
 ## Precálculo por perfil
@@ -228,10 +224,13 @@ Precalculamos para cada número de acciones (Perfil)
 La curva de derechos de un socio concreto será un collage de curvas de varios perfiles
 
 
-<div class=notes>
+::: notes
 En el ERP, las curvas según número de acciones se llaman `RightsPerShare`.
 Están almacenadas en Móngo como un `MongoTimeCurve`.
-</div>
+
+Desde el principio se generaron para de 0 a 99 acciones.\
+Y alguien invirtió 120 acciones, y ahí están también.
+:::
 
 
 ## Flujo de cálculo
@@ -239,25 +238,36 @@ Están almacenadas en Móngo como un `MongoTimeCurve`.
 ![](https://raw.githubusercontent.com/Som-Energia/somenergia-generationkwh/master/docs/PlantProducctionToUseRights.png){style="width:50%"}
 
 
-<div class=notes>
+::: notes
 1. calculamos la producción agregada
 1. calculamos los derechos para cada perfil
 1. componemos los derechos del socio a partir de los de cada perfil que adopta
 
 - La primera y segunda fase se precalculan por la noche
 - La tercera se hace en el momento de usarlos
-</div>
+:::
 
 ## Mix-Planta-Contador
 
 
-<div class=notes>
+::: notes
 - **Mix:** GenerationkWh (podria haber otros)
 - **Plant:** coste en acciones asociado, fechas activa
 - **Meter:** número de serie del contador, fechas activo
 
 ¡Meters aun no tienen `last_efective_date`!
-</div>
+
+Estaría bien meterlo en ronda para que
+si un dia tenemos que cambiar el contador
+no nos pille el toro.
+
+La interficie es el [Script Launcher](http://192.168.35.244:5000){target=_blank}
+
+- [http://192.168.35.244:5000](http://192.168.35.244:5000){target=_blank}
+- Accessible solo desde la oficina o con VPN
+- Login del ERP
+- Apartado _Projectes de Generació_
+:::
 
 
 ![](images/genkwh-scripts-plants.png){style="width:70%"}
@@ -266,12 +276,12 @@ Están almacenadas en Móngo como un `MongoTimeCurve`.
 
 ![](images/genkwh-scripts-productionCurve.png){style="widht:70%"}
 
-<div class=notes>
+::: notes
 - Antes lo leiamos nosotros de Monsol
 - Ahora lo lee Gisce de la planta directamente
 - Lo deja como `MongoTimeCurve` en la coleccion del Mongo `tm_profile`
 - Script permite otras agregaciones (mensuales, con o sin detalle por horas)
-</div>
+:::
 
 
 ## Producción agregada
@@ -294,7 +304,32 @@ Baja cuando jubilamos la planta.
 
 Sirve para relativizar el valor de las acciones de las socias.
 
-## Quantización
+## Cuantización
+
+
+![](images/genkwh-rightsgranter.svg)
+
+::: notes
+Para cada perfil inversor,
+obtener **derechos en kWh enteros** 
+sin perder fracciones entre hora y hora
+
+**Linea azul:** producción instantanea acomulada.\
+No tenemos eso, tenemos las lecturas **horarias y diferenciales**.\
+Si las acomulamos tenemos el **area azul**.
+
+- 700 acciones construidas
+- Rojo: 4 acciones
+	- 1 kWh de derechos cada 175kWh de planta
+- Verde: 7 acciones
+	- 1 kWh de derechos cada 100kWh de planta
+
+Como las acciones construidas pueden cambiar,
+aplicamos la proporción sobre las lecturas diferenciales,
+antes de hacer el cumsum.
+:::
+
+## Cuantización
 
 Obtener, para cada perfil, derechos en kWh enteros 
 sin perder fracciones entre hora y hora
@@ -302,21 +337,17 @@ sin perder fracciones entre hora y hora
 - Convertir producción agregada a Wh (`*1000`)
 - Aplicar proporción: acciones / construidas
 - Suma acomulada hora a hora (integral)
-- Quantizar a kWh (`//1000`)
+- Cuantizar a kWh (`//1000`)
 - Diferencia hora a hora
 
 Guardamos el remanente (en Wh) del intérvalo calculado
 para usarlo para el pròximo intérvalo.
 
-<div class=notes>
+::: notes
 - Los calculos los hacemos con Wh para tener más precisión
 - Es posible que no sea precisión suficiente
     - Consta que los que menos acciones tienen, pierden
-</div>
-
-## Quantización
-
-![](images/genkwh-rightsgranter.svg)
+:::
 
 ## Remanentes
 
@@ -348,15 +379,15 @@ calcular desde el principio
 
 ## Asignaciones
 
-Definen qué contratos se benefician\
-de las inversiones de un socio
+Contratos beneficiarios\
+de las inversiones de una socia
 
 Cualquier contrato de Som Energia\
-relacionado o no con el socio
+**No** se requiere vinculacion con la socia\
+(como titular, pagadora...)
 
-Puede haber más de un contrato beneficiario
-
-Se pueden establecer prioridades entre los contratos
+Puede haber más de un contrato beneficiario\
+Se establecen prioridades entre ellos
 
 <div class=notes>
 Un contrato también puede acabar beneficiandose de las inversiones de varios socios.
@@ -373,36 +404,43 @@ En este caso es indeterminado de que inversor cogerá antes los derechos.
 - Pueden tener la misma prioridad, el primero que llega se lo lleva
 </div>
 
-## Asignaciones por defecto
+## Asignación inicial
 
 <div class=notes>
 Solo se hace al activarse
 la primera inversión de cada socia
+
+Aunque la asignación inicial
+coga los contratos como pagadora o titular,
+después puede incluir el contrato que sea.
+
+También hay solo dos niveles de prioridad
+pero podemos poner los que queramos.
 </div>
 
 Un mes antes de activarse la inversión,\
 se hace una asignación por defecto y
-se le envia a la socia por si quiere cambiarla.
+se notifica a la socia por si quiere cambiarla.
 
-Todos los contratos como titular o pagadora
+**Con prioridad 0** el contrato **con más consumo**
+con la inversora como titular.
+Si no tiene contratos como titular,
+el que tenga más consumo figurando como pagadora.
 
-Se prioriza el que tenga más consumo como titular\
-Si no, el que tenga más consumo como pagador
-
-El resto por debajo con la misma prioridad
-
+**Con prioridad 1** todo el **resto de contratos**
+en los que figure **como pagadora o titular**.
 
 ## Prioridades
+
+Un contrato más prioritario tiene la opción de gastar primero los derechos,
+hasta que factura la fecha en que se han producido.
+A partir de ahí, esos derechos quedan disponibles para el resto de contratos.
+
+**Se implementa con el punto de vista inverso:**
 
 Una factura de un contrato no puede usar derechos
 generados a fechas que otro contrato más prioritario
 no haya facturado aún.
-
-**Desde el otro punto de vista:**
-
-Le damos opción al prioritario de gastar primero los derechos.
-Si el prioritario factura la fecha en que se han generado y no los gasta,
-quedan disponibles para el resto de contratos.
 
 
 ## Porqué prioridad laxa
@@ -446,7 +484,7 @@ a su curva de derechos, hora a hora
 
 ![](images/genkwh-rightsusage.svg){style="width:60%"}
 
-<div class=notes>
+::: notes
 Si, la curva de derechos de la socia que no almacenamos
 y que calculamos como collage de los perfiles que ha tenido.
 
@@ -455,7 +493,7 @@ podemos acabar teniendo derechos usados que no se han otorgado
 
 Aunque en suma sean iguales o menos,
 podrian ser mayores hora a hora.
-</div>
+:::
 
 
 ## Derechos usados
@@ -480,7 +518,7 @@ cuando se borra, abona, rectifica...
 
 ![](images/genkwh-invoice-windowing.png)
 
-<div class=notes>
+::: notes
 Una factura de un contrato no puede consumir derechos
 
 - **del futuro**: más modernos que la última fecha a facturar
@@ -491,7 +529,7 @@ Los 12 meses de caducidad se cuentan desdel inicio del periodo de facturación.
 La caducidad real se extiende aproximadamente a 13 meses.
 
 Si hay varios periodos, tambien enmascaran la ventana las horas correspondientes.
-</div>
+:::
 
 ## Uso de derechos
 
@@ -507,14 +545,14 @@ de qué días/horas cogieron los derechos
 Tampoco en la curva de uso se guarda\
 a qué facturas fueron ¿deberiamos?
 
-<div class=notes>
+::: notes
 Si tenemos hora de escritura, asi que tenemos una manivela
 para saber como estaba la curva a un dia concreto.
 
 No hay aún herramienta/script para mirarlo.
 
 Complicado ligarlo con facturas concretas, o abonos concretos.
-</div>
+:::
 
 
 
@@ -560,7 +598,7 @@ La curva de uso estaría por encima de los derechos otorgados.
 Aunque en global se den más derechos,\
 ha de ser mayor hora a hora
 
-<div class=notes>
+::: notes
 Recordemos que la produccion para 10 acciones
 daba cada hora un kWh si otra no.
 
@@ -570,18 +608,21 @@ porque suman o dejan de sumar un kWh entero
 
 Donde deja de sumar, nos está pasando
 que se han usado derechos que ya no están.
-</div>
+:::
 
 ## Solución
 
 Algoritmo para regenerar la curva,
-respetando los derechos ya otorgados
-y compensando cuando hay más.
+respetando los derechos ya otorgados.
 
-La desviación con lo real se guarda
-en la MTC `genkwh_rights_correction`
+Cuando, por respetar los derechos ya dados,\
+se dan derechos de más en algunas horas\
+se compensa en las horas posteriores en que se dió de menos.
 
-<div class=notes>
+Genera una corrección.
+
+
+::: notes
 Cuando la nueva curva debiera ir por arriba de la antigua,
 es correcto y ponemos la nueva curva.
 
@@ -592,21 +633,23 @@ cuando la curva debiera ir por arriba.
 
 Si no se logra compensar todo,
 al final se guarda como remainder negativo.
-</div>
+::: 
 
 ## Visualmente
 
 ![](images/genkwh-correction-graph.png)
 
-<div class=notes>
-Rojo: Derechos otorgados previamente
+::: notes
+**Rojo:** Derechos otorgados previamente
 
-Azul: Nuevos derechos calculados
+**Azul:** Nuevos derechos calculados
 
-Verde: Derechos finales
+**Verde:** Derechos finales
 
-Corrección: Azul - Verde
-</div>
+**Azul - Verde:** Corrección\
+Se guarda en la MTC `genkwh_rights_correction`
+
+:::
 
 ## Curva de corrección
 
@@ -627,7 +670,7 @@ Guardamos la corrección para recuperar la bonica
 2019-09        112             0          112
 ```
 
-<div class=notes>
+::: notes
 Se dió de más en marzo y abril
 porque pusimos la planta de Matallana en vez de fontivsolar.
 
@@ -641,7 +684,7 @@ la suma mensual es casi es zero.
 Pendiente: corregir el uso de derechos
 para que sea compatible con la curva bonica
 y poder mostrar dos curvas bonicas en la OV.
-</div>
+:::
 
 
 # Módulos {
@@ -655,17 +698,6 @@ y poder mostrar dos curvas bonicas en la OV.
 [![](https://raw.githubusercontent.com/Som-Energia/somenergia-generationkwh/master/docs/GenKWh-UsageTrackerDetails.png){style="width:50%"}
 ](https://raw.githubusercontent.com/Som-Energia/somenergia-generationkwh/master/docs/GenKWh-UsageTrackerDetails.png)
 
-<div class=notes>
-Cosas viejunas:
-
-PlantMeterAccess: lo hace ahora Gisce, partimos de lo que seria PlantMeterMeasures que es el MTC `tm_profile` que importa Gisce
-
-DealsDefinition: Son los Assignments
-
-
-
- 
-</div>
 
 ## ERP vs Pure Python
 
