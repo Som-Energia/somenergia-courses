@@ -693,6 +693,12 @@ y poder mostrar dos curvas bonicas en la OV.
 	}
 
 
+## IT Warning
+
+:::notes
+Esta parte de la presentación ya habla de temas de IT específicamente.
+:::
+
 ## Mapa
 
 [![](https://raw.githubusercontent.com/Som-Energia/somenergia-generationkwh/master/docs/GenKWh-UsageTrackerDetails.png){style="width:50%"}
@@ -705,33 +711,130 @@ La lógica de negocio se ha extraido fuera del ERP
 
 **Objetivo:**
 
-Poder ejecutar tests unitarios ágilmente \
+Agilizar la ejecucion de los test unitarios
+
 Facilitar una eventual migración a otro ERP o versión
 
-Es común, aunque no necesariamente bueno,
-ver que toda clase del ERP tiene su
-versión no ERP que implementa sus funcones.
+**Estrategias:**
+
+Controlador de estado
+
+Inyección y delegación
+
+
+## State controller
+
+Máquina de estados que controla una serie de atributos de un modelo del ERP.
+
+El constructor recibe los atributos leidos del ERP.
+
+Sus metodos son las acciones que cambian el estado del modelo
+(transiciones).
+
+Se le puede consultar los atributos modificados,\
+para hacer el write de vuelta al ERP.
+
+De los side effects se encarga el modelo
+
+::: notes
+La otra estratégia para abstraer lógica del ERP.
+
+También la usamos para simular ciclo de vida en las migraciónes
+sin tener que ejercitar el ERP.
+
+Ejemplo: `InvestmentState` controla el estado del modelo `Generationkwh.Investment`
+
+Tiene acciones como `order`, `pay`, `unpay`, `amortize`...
+
+No incluye funcionalidad fuera del modelo como crear otros objetos (facturas, lineas de contabilidad...)
+
+Esa funcionalidad lo hace el modelo pero deleja en el state controller los cambios en sus atributos.
+:::
+
+
+## Inyección y delegación
+
+**API:** Modelo ERP sin tabla (en memoria)
+
+**Classe pura:** Clase (no ERP) con el mismo nombre
+
+**Proveedores de datos:** Interfaz no manchada con `cursor` y `uid` para acceder a datos del ERP
+
+Cuando la API sirve una llamada:
+
+1. crea los proveedores de datos,
+1. crea la clase pura inyectandole los proveedores
+1. delega la funcionalidad a la clase pura
+
+::: notes
+En la presentación llamaremos API's a los modelos ERP sin tabla
+que usamos para albergar los puntos de entrada.
+
+Técnicamente el modelo ERP es tambien una clase Python
+pero para aclararnos llamemos clase a la que no es de ERP
+y modelo a la clase que es un modelo erp.
+:::
+
 
 ## Data providers
 
 Abstraen el acceso a datos del ERP
 
 Substituibles por mocks para testear la lógica de negocio
+en las clases puras
 
-API ha de ser independiente del ERP\
+Su interfaz ha de ser independiente del ERP\
 (menos el constructor)
 
-`ErpWrapper` recibe los parametros de ERP
-`cursor`, `uid`... y los pone disponibles como miembros
+Clase base `ErpWrapper`:\
+el constructor recibe los parametros `cursor`, `uid`\
+los otros métodos los ven como miembros.
+
+## Test Funcionales
+
+Abusamos del concepto.
+
+Son los que necesitan el ERP\
+y usan `erppeek` para testear.
+
+Intentamos que solo sean los funcionales y que la lógica esté testeada ya en los unitarios.
+
+Cubren API's (propiamente funcionales) pero también los data providers y los side effects de los modelos con state controller.
+
+::: notes
+Ahora los haríamos con el Destral
+
+Como funcionales no tendrían que ser exhaustivos.\
+Simplemente testear que se hace la delegación.\
+Los test exhaustivos irían en los unitarios del delegado.
+
+Los side effects de un `investment`, por ejemplo,
+son la creación de facturas, envio de correos...
+:::
+
 
 ## Test Helpers
 
-Los tests funcionales usan `erppeek`
-para llegar al código erp
+API's que usamos solo para testear
 
-Helpers son modelos ERP instrumentales para
-llamar y traducir parametros y retornos
-tal que se puedan enviar por XMLRPC
+Wrappers para traducir parámetros y retornos\
+a tipos serializables por XMLRPC
+
+También helpers comunes para `setUp` y `tearDown`.
+
+::: notes
+Recordemos: API es un Modulo ERP sin datos con puntos de entrada
+
+Aunque internamente en el ERP podemos pasar o retornar de todo sin problemas
+cuando llamamos una funcion via XMLRPC, se queja de:
+
+- fechas: han de ser strings o datetimes
+- namespaces: en los data providers son convenientes pero para testear hay que pasarlos a diccionarios
+- tuplas: hay que convertirlas en listas
+- None: se convierten en False
+- Excepciones: no tengo claro que pasa con ellas
+- Cualquier objeto no estandard
+:::
 
 ## Investments
 
