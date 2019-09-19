@@ -11,8 +11,8 @@ Public materials used in internal Som Energia training courses.
 - [Hackasom 2018: Open Data](2018-10-06-hackasom2018/opendata.html)
 - [Hackasom 2018: CAS](2018-10-06-hackasom2018/cas.html)
 - [Hackasom 2018: Intercoop](2018-10-06-hackasom2018/intercoop.html)
-- [Transicion Python 3 (WIP)](2019-07-24-python3transition/)
-- [Generation kWh (WIP)](2019-09-17-generationkwh/)
+- [Generation kWh: Funcionamiento interno](2019-09-17-generationkwh/)
+- [Transicion Python 3](2019-09-19-python3transition/)
 
 
 If not indicated otherwise, those materials are covered
