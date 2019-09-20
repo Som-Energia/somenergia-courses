@@ -1894,7 +1894,7 @@ urllib</code></pre>
 <section><section id="funcion-print" class="title-slide slide level1"><h1>Funcion <code>print</code></h1></section><section id="comportamiento-nuevo" class="slide level2">
 <h2>Comportamiento nuevo</h2>
 <p>En Py2 el <code>print</code> era una cláusula como el <code>return</code>.</p>
-<p>Ahora es una función.</p>
+<p>Ahora es una función built-in como <code>len()</code>.</p>
 </section><section id="estrategia-1" class="slide level2">
 <h2>Estrategia</h2>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Solo una cosa: Entre parentesis.</span></a>
@@ -2165,17 +2165,19 @@ Segun toque codifica o decodifica los argumentos usando ASCII (again!)</p>
 <p>Yo, solo para esos casos, explicitaría <code>b''</code> si es un literal directo, o, si no es literal, llamaría a encode en el momento de pasar el argumento.</p>
 <p>TODO: Investigarlo o probarlo</p>
 </aside>
-</section><section id="problema-con-open" class="slide level2">
-<h2>Problema con <code>open</code></h2>
-<p>Cuando abrimos en modo texto,</p>
-<p>Py2 trabaja en bytes, haciendo decoding ASCII implícito si le pasamos un unicode para escribir.</p>
-<p>Py3 acepta un parametro <code>encoding</code></p>
-<p>En Py2 en modo texto, lee y escribe bytes.<br />
-Usa ASCII para decodificar si le pasamos un unicode.<br />
-Hemos de codificar manualmente, si no va bien.</p>
-<p>En Py3 en modo texto, lee y escribe <code>unicode</code><br />
-codificando y decodificando a <code>utf-8</code></p>
-<p>En Py2 lee <code>bytes</code> siempre. Se usaba la libreria <code>codecs</code> para tener unicodes con utf8.</p>
+</section><section id="el-problema-de-open" class="slide level2">
+<h2>El problema de <code>open</code></h2>
+<p>Cuando abrimos en modo texto:</p>
+<p>Py2 lee y escribe <code>bytes</code>.<br />
+Si le pasamos <code>unicode</code>, codifica a ASCII implicito<br />
+Hemos de codificar explícitamente, si no va bien.</p>
+<p>En modo texto, lee y escribe <code>unicode</code><br />
+Especificamos a <code>open</code> el parámetro <code>encoding</code><br />
+Ojo que por defecto es <code>ascii</code></p>
+</section><section id="codecs.open" class="slide level2">
+<h2><code>codecs.open</code></h2>
+<p>En Py2 cuando queríamos serializar <code>unicode</code> usabamos <code>codecs</code>.</p>
+<p>Overkill en Py3, builtin <code>open</code> ya lo hace.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" title="1"><span class="im">import</span> codecs</a>
 <a class="sourceLine" id="cb23-2" title="2"><span class="cf">with</span> codecs.<span class="bu">open</span>(filename, <span class="st">'r'</span>, encoding<span class="op">=</span><span class="st">'utf8'</span>) <span class="im">as</span> f:</a>
 <a class="sourceLine" id="cb23-3" title="3">    content <span class="op">=</span> f.read() <span class="co"># siempre unicode</span></a>
@@ -2184,9 +2186,10 @@ codificando y decodificando a <code>utf-8</code></p>
 <a class="sourceLine" id="cb23-6" title="6">    f.write(b<span class="st">'Pedro'</span>) <span class="co"># En Py2 se lo traga</span></a>
 <a class="sourceLine" id="cb23-7" title="7">    f.write(b<span class="st">'María'</span>) <span class="co"># No se lo traga nadie</span></a>
 <a class="sourceLine" id="cb23-8" title="8">    f.write(<span class="st">u'María'</span>) <span class="co"># Se lo traga todo el mundo</span></a></code></pre></div>
-</section><section id="ejemplo-io.open" class="slide level2">
-<h2>Ejemplo <code>io.open</code></h2>
-<p>Es mucho mas simple si usamos <code>io.open</code>, existe en Py2 y Py3, y tiene exactamente la misma signatura que <code>open</code> en Py3. Así que la podemos usar sin complejos, y más adelante simplemente quitar el import.</p>
+</section><section id="más-simple-io.open" class="slide level2">
+<h2>Más simple <code>io.open</code></h2>
+<p>Misma interfaz que el <code>open</code> builtin en Py3.<br />
+Cuando caiga Py2, simplemente quitar el import.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" title="1">content<span class="op">=</span><span class="st">u'María'</span></a>
 <a class="sourceLine" id="cb24-2" title="2"><span class="im">from</span> io <span class="im">import</span> <span class="bu">open</span></a>
 <a class="sourceLine" id="cb24-3" title="3"><span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'w'</span>, encoding<span class="op">=</span><span class="st">'utf8'</span>) <span class="im">as</span> f:</a>
@@ -2198,6 +2201,10 @@ codificando y decodificando a <code>utf-8</code></p>
 <a class="sourceLine" id="cb24-9" title="9"></a>
 <a class="sourceLine" id="cb24-10" title="10"><span class="cf">with</span> <span class="bu">open</span>(filename, encoding<span class="op">=</span><span class="st">'utf8'</span>) <span class="im">as</span> f:</a>
 <a class="sourceLine" id="cb24-11" title="11">    result <span class="op">=</span> f.read() <span class="co"># u'María'</span></a></code></pre></div>
+<aside class="notes">
+<p><code>io.open</code> que esta definida igual en Py2.7 y Py3</p>
+<p>A imagen y semejanza del <code>open</code> builtin en Py3.</p>
+</aside>
 </section><section id="pipes-y-print" class="slide level2">
 <h2>Pipes y <code>print</code></h2>
 <p>Cuando metemos nuestro script en pipes de shell el locale de stdin/stdout pasa a ser C (ASCII)</p>
