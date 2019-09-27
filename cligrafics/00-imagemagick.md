@@ -2,19 +2,27 @@
 
 ## ¿Gráficos CLI?
 
-**¿Es un oxímoron?**
+Habiendo **Grafic** User Interfaces (GUI),\
+¿para qué quiero un Command Line Interface?\
+¿No es un **oxímoron**?
 
-Generación de documentos automática
+**Automatización con scripts:**
 
-Aplicación repetitiva de procesos\
-cuando el original va cambiando\
-o cuando hay muchos originales
+El original se actualiza y hay que reprocesar\
+Hay muchos originales que procesar igual\
+Los parámetros del procesado cambian
+
+**Conversiones rápidas**
 
 ## Herramientas
 
 **Pandoc:** Conversión de documentos de texto
 
 **Imagemagick:** Procesado de imagen
+
+**sox:** Procesado de audio
+
+**ffmpeg:** Procesado de video
 
 **PDFtk:** Manipulación de PDF's
 
@@ -81,7 +89,7 @@ convert documeto.pdf documento-pagina.png
 ::: notes
 **Ojo:**
 Para partir las páginas de un pdf,
-normalmente queremos mantener el pdf vectoriala.
+normalmente queremos mantener el pdf vectorial.
 PDFtk para eso.
 Imagemagic renderiza el raster.
 :::
@@ -101,6 +109,15 @@ convert -size 120x160 \
 	button.gif
 ```
 
+::: notes
+La documentación explica mucho de cada opción
+pero es complicado de encontrar la explicación
+general de como juntar las opciones.
+
+La clave es entender que hay diferentes tipos de opciones
+y de que tipo es cada una.
+:::
+
 ## Elementos de la CLI
 
 Entradas y salidas
@@ -112,6 +129,8 @@ Operadores de imagen
 Operadores de múltiples imágenes
 
 Operaciones de pila
+
+Operaciones de canal
 
 ::: notes
 Las **entradas y salida** especifican las fuentes y el destino de imágenes.
@@ -127,32 +146,260 @@ Los **operadores de múltiples imagenes**,
 juntan de una manera o otra
 todas las entradas especificadas con anterioridad en una sola imagen.
 
-Las **operaciones de pila**, permiten acceder a las imágenes anteriores
+Las **operaciones de pila**, permiten acceder a las imágenes anteriores, cambiar su orden...
 
 Los `\(` paréntesis escapados `\)` son útiles para limitar las imágenes afectadas 
 por los operadores.
 
 Las **opciones de configuración**, modifican valores de parámetros.
-Afecta a entradas, salidas y operadores especificadas detrás en la línia de comandos.
+Afecta a entradas, salidas y operadores especificadas después en la línia de comandos.
 No les afectan los paréntesis.
 :::
 
+## Entradas
 
-## Entradas/Salidas
+::: notes
+Se añaden a la pila de imagenes.
 
-Ficheros (con globing o patrones)
+Lo normal es que sean ficheros de imagen.
+
+Pueden ser dispositivos, entradas virtuales, tener modificadores...
+
+Pueden ser ficheros multiframe (videos o animaciones) o multi-página (pdf's),
+en ese caso se añade a la pila una imagen por frame/página.
+
+Se puede seleccionar en la entrada un recorte o un frame/página.
+
+**Importante:** La primera imagen fija los valores por defecto para la mayoría de parámetros:
+tamaño, profundidad, espacio de colores...
+:::
+
+![](images/imagemagick-input.svg)
+
+## Salida
+
+![](images/imagemagick-output.svg)
+
+::: notes
+El último parámetro.
+
+Puede ser fichero o otras cosas también:
+
+`x:` lo muestra por pantalla
+
+`-` lo envia por salida estandard
+
+`printer:` lo imprime por la impresora
+
+`null` ignora la salida
+
+Si el formato de salida soporta múltiples imagenes como frames o páginas (GIF, PDF...)
+genera un solo fichero.
+
+Si no, genera un fichero por imagen con un sufijo.
+:::
+
+## Operadores de imagen
+
+![](images/imagemagick-singleop.svg)
+
+::: notes
+Son filtros que se aplican imagen a imagen.
+
+Se aplican a todas las imagenes que tengamos en la pila
+generando nuevas versiones de éstas.
+:::
+
+## Aplicación parcial
+
+![](images/imagemagick-partialapply.svg)
+
+:::notes
+Los operadores se aplican solo a las entradas
+especificadas antes en la línia de comandos.
+
+En este ejemplo:
+
+- El `-operador1`, en naranja, no se aplica al `input3`
+- En cambio, el `-operador2`, en azul, se aplica a todos
+:::
+
+## Paréntesis
+
+![](images/imagemagick-parenthesis.svg)
+
+:::notes
+Se pueden usar los paréntesis
+(escapados con contrabarras en `bash`)
+para limitar hacia atrás el alcance de los operadores.
+
+En este otro ejemplo:
+
+- El `-operador1`, en naranja, no se aplica al `input1`
+- En cambio, el `-operador2`, en azul, una vez cerrado el paréntesis ya se aplica a todos
+:::
+
+## Operador Multi-imagen
+
+![](images/imagemagick-multiop.svg)
+
+:::notes
+Colapsan las imagenes en una (por justaposición, composición...)
+
+Si están dentro de paréntesis, sólo ve las imágenes que también están dentro.
+
+Podemos aplicar más de uno pero necesitaremos más inputs después de aplicar el primero.
+:::
+
+## Operadores de pila
+
+![](images/imagemagick-stack.svg)
+
+:::notes
+A menudo el orden de pila es demasiado extricto.
+
+Los operadores de pila alteran la pila directamente, no el contenido de las imágenes.
+
+```bash
+-clone <indexes> # Crea duplicados encima
+-delete <indexes> #  Borra de la pila
+-insert <index> # Mueve el -1 a <index>
+-swap <index>,<index> # Intercambia imagenes
+```
+
+Indices en 0 desde abajo; negativos por arriba.
+
+Secuencias `0,3,7`, intérvalos `2-7`, por la cola `-2`
+
+`+clone`, `+delete`, `+swap` es como indicar el o los últimos.
+
+seguiran siendo clones por que les aplicaremos los mismos efectos.
+:::
+
+
+## Operadores de canal
+
+## Configuración
+
+Parametrizan la lectura y escritura de imágenes
+y la aplicación de efectos.
+
+Afectan a los input, outputs, operadores, que aparezcan detrás
+en la línia de commandos
+
+No hacen nada a la imagen de por sí
+
+::: notes
+- `‑region <geometry>` Limita el efecto de subsiguientes operadores, `+region` la elimina
+- `‑adjoin`
+- `‑affine`
+- `‑alpha`
+- `‑antialias`
+- `‑authenticate`
+- `‑background`
+- `‑bias`
+- `‑black‑point‑compensation`
+- `‑blue‑primary`
+- `‑bordercolor`
+- `‑caption`
+- `‑channel`
+- `‑comment`
+- `‑compress`
+- `‑debug`
+- `‑define`
+- `‑delay`
+- `‑density`
+- `‑depth`
+- `‑direction`
+- `‑display`
+- `‑dispose`
+- `‑dither`
+- `‑encoding`
+- `‑endian`
+- `‑extract`
+- `‑family`
+- `‑fill`
+- `‑filter`
+- `‑font`
+- `‑format`
+- `‑fuzz`
+- `‑geometry`
+- `‑gravity`
+- `‑green‑primary`
+- `‑interlace`
+- `‑intent`
+- `‑interpolate`
+- `‑label`
+- `‑limit`
+- `‑linewidth`
+- `‑log`
+- `‑loop`
+- `‑mattecolor`
+- `‑monitor`
+- `‑orient`
+- `‑page`
+- `‑pointsize`
+- `‑preview`
+- `‑quality`
+- `‑quiet`
+- `‑read‑mask`
+- `‑red‑primary`
+- `‑render`
+- `‑repage`
+- `‑sampling‑factor`
+- `‑scene`
+- `‑seed`
+- `‑size`
+- `‑stretch`
+- `‑stroke`
+- `‑strokewidth`
+- `‑style`
+- `‑texture`
+- `‑tile`
+- `‑transparent‑color`
+- `‑treedepth`
+- `‑type`
+- `‑undercolor`
+- `‑units`
+- `‑verbose`
+- `‑virtual‑pixel`
+- `‑weight`
+- `‑write‑mask `
+:::
+
+
+
+
+
+# Entradas y Salida
+
+## Tipos
+
+Ficheros (globs y formateo)
 
 Imágenes y patrones built-in
 
-Standard IO y FD
+Dispositivos: stdio, pantalla, scanner, impresora...
 
-Escogiendo un frame o un recorte
+Frame/página o recorte escogido
 
-Haciendo reescalado de entrada
+Entrada reescalada
 
 Ficheros con formato explicito
 
 Índice de ficheros
+
+::: notes
+Los ficheros de entrada pueden indicarse con globing (`frame*.png`) que se resuelve a parte del propio globbing de `bash`.
+
+Por eso, si añadimos modificadores de entrada al fichero, el globbing sigue funcionando.
+
+Los ficheros de salida pueden ir con template de formateo tipo `printf` (`frame_%03d.jpg`) para las salidas múltiples.
+
+Por defecto si la salida es `frame.jpg` y hay más de una entrada, genera los nombres con `frame-%d.jpg`,
+sin cero padding que es complicado de ordenar.
+:::
+
 
 ## Imágenes built-in
 
@@ -197,7 +444,7 @@ Muy útiles para hacer pruebas.
 
 `fd:<n>` file descriptor
 
-`null` ignorada
+`null` salida ignorada
 
 
 ## Formato Explícito
@@ -375,18 +622,24 @@ No hacen nada a la imagen de por sí
 
 ## Operaciones de imagen
 
-Generan una imagen nueva para cada entrada anterior en la línea de comandos.
+Filtros: modifican una imagen generando otra
 
-Se aplican a todas las entradas especificadas antes.
+Se aplica a todas las entradas especificadas antes\
+(si no está dentro de un parèntesis)
 
 ```bash
-$ convert entrada1 -operador1 entrada2 -operador2 ...
-# src0: entrada1 | operador1 | operador2
-# src1: entrada2 | operador2
+$ convert input1 -op1 input2 -op2 ...
+# src0: input1 | op1 | op2
+# src1: input2 | op2
+
+$ convert input1 -op1 \( input2 -op2 \) -op3 ...
+# src0: input1 | op1 | op3
+# src1: input2 | op2 | op3
 ```
 
 
 ::: notes
+```bash
 ‑annotate
 ‑black‑threshold
 ‑blur
@@ -467,7 +720,8 @@ $ convert entrada1 -operador1 entrada2 -operador2 ...
 ‑version
 ‑wave
 ‑white‑point
-‑white‑threshold 
+‑white‑threshold
+```
 :::
 
 ## Operadores Multi-imàgen
@@ -487,6 +741,8 @@ genera múltiples ficheros con sufijo numérico.
 `-composite`: mezcla las imagenes con el setting `-compose`
 
 ::: notes
+
+```bash
 ‑append
 ‑affinity
 ‑average
@@ -521,7 +777,9 @@ genera múltiples ficheros con sufijo numérico.
 ‑process
 ‑quiet
 ‑swap
-‑write 
+‑write
+```
+
 :::
 
 ## Operaciones de pila
