@@ -18,6 +18,7 @@ Eix horitzontal per temes/funcionalitats \
 Serveix per pensar on posar la frontera en un disseny distribuit \
 
 ::: notes
+Exemple:
 Podem decidir que l'ERP només proveirà API estil CRUD (persistència)
 i que tota la lògica de negoci la posarem a els scripts externs,
 pero centralitzant-la a una llibreria que es replicarà a totes les
@@ -39,6 +40,7 @@ Quins valors es guarden\
 Quins es calculen\
 En quin format\
 En quin suport\
+Indexos\
 
 ## Entitats
 
@@ -83,11 +85,28 @@ S'ofereix API a nivell persistencia (orm)
 
 ## Problemes
 
-Acoblament a l'estructura de la base de dades
+**Acoblament a l'estructura de la base de dades**
 
-Acoblament amb els camps i disseny dels wizards
+Rígidesa en el disseny
 
 Ens saltem la lógica de negoci
+
+Repliquem la lógica de negoci\
+(i mantenim les répliques desigualment)
+
+**Acoblament amb els camps i disseny dels wizards**
+
+## Ús tipus CRUD
+
+No hi ha abstracció de negoci
+
+Acoblament a la representació
+
+Genera rigidesa
+
+Abstreure ops i moure-les a l'ERP
+
+Bad smell de que hi ha lógica de negoci fora.
 
 
 ## Logica de negoci fora
@@ -110,7 +129,11 @@ anar descobrint les parts comunes i definint la interfície apropiada.
 
 ## API's tipus wizard
 
-Erpppek fa servir wizards com a API:
+**Erpppek fa servir wizards com a API**
+
+Wrappejar la crida al wizard
+
+Moure-la a l'ERP, com a op de domini
 
 Extreure la lògica de negoci com a API
 
@@ -118,16 +141,6 @@ Cridar aquesta API des del wizard
 
 Cridar aquesta API des de l'erppeek
 
-
-## Ús tipus CRUD
-
-No hi ha abstracció de negoci
-
-Acoblament a la representació
-
-Genera rigidesa
-
-Abstreure ops i moure-les a l'ERP
 
 ## Procediment 
 
@@ -151,7 +164,9 @@ Errors tipogràfics silenciosos
 
 Fer servir paràmetres explicits \
 Problema: XMLRPC no soporta keywords \
-Fer servir funcions diferents com a punt d'entrada\
+
+Si els paràmetres depenen de la casuística,\
+potser convé oferir diferents punts d'entrada.
 
 
 

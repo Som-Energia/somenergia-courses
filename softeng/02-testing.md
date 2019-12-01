@@ -2,86 +2,350 @@
 
 ## Segons transparencia
 
-Com de conscients som quan escribim el test dels detalls d'implementacio:
+Com de conscients som quan escribim el test dels detalls d'implementacio?
 
-- Caixa Negra (Ho fem a cegues, entrada-sortida)
-- Caixa Grisa (Tenim una idea del que fa)
-- Caixa Blanca (Fem el test seguint el codi)
+**Caixa Negra**\
+Ho fem a cegues, entrada-sortida
 
-## Segons quan fem els testos
+**Caixa Grisa**\
+Tenim una idea del que fa
 
-- Test Last: Un cop que ja hem fet codi
-- Test driven: abans el test, de cada linia de codi
-- Behaviour driven: abans el test, de tot el codi
+**Caixa Blanca**\
+Fem el test seguint el codi
 
-Sovint el codi ja esta fet, fem-ho test last pero:
+## Segons quan els fem
 
-- Comentar el codi fet
-- Anar afegint el codi per pedaços amb l'antic de referencia
-- L'antic ens serveix per detectar els  testos necessaris:
-	- Cada condicio
-	- Cada for: un, zero, many (o zero, un, many)
+**Test Last development**\
+Un cop que ja hem fet codia (clàssic)
 
-## Segons el codi que cobreix
+**Test driven development**\
+Abans el test, de cada linia de codi
 
+**Behaviour driven development**\
+Abans el test funcional, que tot el codi
+
+
+::: notes
+
+Test Last development es el que s'ha fet de tota la vida.
+
+- Costa molt justificar fer testos de cosas que ja saps (o creus) que funcionen
+- Acaven no fent-se
+- Costos de debug d'errors posteriors
+- Regresions de coses que abans funcionaven
+
+Test driven aporta un cicle virtuos.
+
+- Sensació de progrés
+- Automatització -> feedback automatic -> ens envalentonem amb els canvis
+
+Sovint el codi ja està fet, hi ha técniques per fer-ho sistemàtic com si fos TDD.
+
+BDD implica altres coses que no pas quan fas els testos
+i es compatible amb TDD.
+Parteix dels testos funcionals.
+:::
+
+## Segons codi cobert (I)
+
+- **Unitaris:** cobreix una línia o modificació de codi
+- **Component:** un component aïllat (doubles)
+- **Integració:** cobreix la delegació a altres móduls
+	- **Bottom-up**: por capas
+	- **Big bang**: módulo coordinador
+- **Funcionals:** cobreix un cas d'ús d'usuari
+
+::: notes
 - Test unitari: Cobreix una linia de codi (o una modificacio de codi)
-	- Test exploratori: Test unitari que es fa per entendre el funcionament de códi de tercers
-	- Test de correcció: Test unitari que fem per manifestar un bug, i que després deixem per regresió
-	- Test de regresió: Quan els testos, un cop passats es continuen passant per comprovar que no tirem enrera
 - Test funcional: Cobreix un cas d'ús (nivell usuari)
+	- Deriven de l'especificació o del cas d'us feta per l'usuari
 - Test d'integració: Cobreix la comunicacio de dos moduls
 	- Bottom up: capas de abajo a arriba
 	- Big bang: Se junta todo a la vez
 - Test de component: Testeja el comportament general del component, no pas una funció
+:::
+
+## Segons codi cobert (II)
+
+- **Extrem a extrem:** Integración total del sistema en entorn realístic
+- **Aceptació:** El que fa l'usuari per donar-ho per bó
+- **Desplegament:** Els que es fan en posar a producció
+	- **Smoke:** Arrenca, respon... molt ràpids.
+	- **Sanity:** Comprovacions mínimes dels canvis aplicats.
+
+::: notes
 - Test extremo a extremo: Integracion total, emulando un caso real en entorno real
 - Test d'acceptació: Es el que fa l'usuari per donar per bo un desenvolupament
 - Test de desplegament:
 	- Test de fum: Es fa per comprovar que un desplegament mínimament correcte (arrenca, respon...)
 	- Test de sanitat: Comprovacions ràpides en desplegament per saber si funciones les noves funcionalitats i correccions
+:::
 
 
-## Casos de test
+## Segons motivació
 
-- Com decidir els casos de tests:
-	- Anàlisi de valors frontera: Trobar casos frontera de forma agregada
-	- Particions equivalents: Testeja un cas de cada partició equivalen
-	- Test per branques: un test per cada cami al codi
-	- Test de cobertura: es un check de quin codi no s'ha exercitat amb els testos
-- Test de camí daurat: Comprova una condició d'exit
-- Test de fallada: Comprova una condició de fallada
+Els unitaris també poden ser:
+
+- **Exploratori:** com funciona un codi de tercers?
+- **De correccio:** per aillar un bug detectat
+- **De regresió:** quan els seguim executant
+
+::: notes
+- **Test exploratori:** Test unitari que es fa per entendre el funcionament de códi de tercers
+- **Test de correcció:** Test unitari que fem per manifestar un bug, i que després deixem per regresió
+- **Test de regresió:** Quan els testos, un cop passats es continuen passant per comprovar que no tirem enrera
+
+Els testos de correcció son molt importants
+com a práctica de manteniment.
+Els bugs ens serveixen per definir casos d'ús
+que no haviem pensat en el desenvolupament inicial.
+
+Si deixem els exploratoris com a test de regresió
+també serveixen com alarma per detectar
+els canvis en el comportament
+del codi de tercers que es podrien donar.
+:::
 
 
-## Anàlisis estatic o dinàmic
+## Segons el cas d'ús
 
-- Dinàmics
-	- Performance profilers (valgrind)
-	- Memory profiles (callgrind)
+**Test de camí daurat:**\
+Comprova la condició d'exit principal
 
-- Test estàtics (vs dinámics): Testos que es fan analitzant el codi no executant-ho
-	- pep8: standard style checker
-	- pylint: extended style checker
-	- mccabe: cyclomatic complexity checker
-	- pyflakes: errores logicos
-	- flakes8: matxambra pyflakes i pep8
-	- mypy: static type checking
+**Test d'extensió:**\
+Comprova una condició d'exit divergent
 
+**Test de fallada:**\
+Comprova una condició de fallada
+
+
+## Segons si cal executar
+
+**Dinàmics:**\
+Necessiten executar el codi per fer la comprovació
+
+**Estàtics:**\
+Testos que es fan analitzant el codi no executant-ho
+
+::: notes
+Algunes eines Python que fan tests estàtics:
+
+- pep8: standard style checker
+- pylint: extended style checker
+- mccabe: cyclomatic complexity checker
+- pyflakes: errores logicos
+- flakes8: matxambra pyflakes i pep8
+- mypy: static type checking
+
+Algunes eines que fan tests dinàmic:
+
+- Performance profilers (valgrind)
+- Memory profiles (callgrind)
+:::
 
 ## Test no funcionals
 
 Comprova requeriments no funcionals: 
 
-- Test d'usabilitat: Se monitoriza la reacción de los usuarios interactuando con el programa
-- Test d'accessibilitat: Llista de comprovacions per facilitar l'ús a persones amb diversitat funcional
-- Test compatibilitat: Comprobar si funciona a tots els navegadors/processadors/sistemes operatius...
-- Test d'eficiencia:
-	- Test de volumen: Comprova si es processen correctament dades de diferent tamany
-	- Test d'escalabilitat: Comprova els límits del programari
-	- Test de càrrega: Es comprova la capacitat del programari
-	- Test d'estress: Comprueva como se recupera el software cuando algun recurso (CPU, Memoria, Disco, Red...) està al límite.
-	- Test de remull: Monitoritza la degeneració del software durant llargs períodes de temps.
-- Test de seguretat
-	- Test de penetracio: El fan white-hat hackers seguint els seus propis procediments
-	- Test de vulnerabilitats: Cerca de vulnerabilitats al programari
+::: columns
+:::: column
+**Usabilitat**
+::::
+:::: column
+**Accessibilitat**
+::::
+:::: column
+**Compatibilitat**
+::::
+:::
+::: columns
+:::: column
+**Eficiencia**
+::::
+:::: column
+**Seguretat**
+::::
+:::: column
+**Rendiment**
+::::
+:::
+
+
+::: notes
+- **Test d'usabilitat:**
+	Es monitoritza la reacció dels usuaris interactuant amb el programa
+- **Test d'accessibilitat:**
+	Llista de comprovacions per facilitar l'ús a persones amb diversitat funcional
+- **Test de compatibilitat:**
+	Funciona a tots els navegadors/processadors/sistemes operatius...?
+- **Test d'eficiencia:**
+	Com de ràpid s'executa el codi
+- **Test de rendiment:**
+	Com de be es comporta el sistema en desplegament
+:::
+
+## Test de rendiment
+
+::: columns
+:::: column
+**Test de Volum**\
+funciona per tots els tamanys de dades?
+::::
+:::: column
+**Test de Càrrega**\
+funciona per tots els nivells d'us?
+::::
+:::
+::: columns
+:::: column
+**Test d'Escalabilitat**\
+s'agafa més recursos quan cal?
+::::
+:::: column
+**Test de Pic**\
+respon be a pics alts puntuals?
+::::
+:::
+::: columns
+:::: column
+**Test d'Estress**\
+quin es el límit operacional?
+::::
+:::: column
+**Test de Remull**\
+es degrada mantenint la càrrega un bon temps?
+::::
+:::
+
+::: notes
+Recursos: (CPU, Memoria, Disc, Xarxa...)
+:::
+
+
+## Test de Seguretat
+
+**Test de Penetració**\
+El fan els white hat hackers seguint els seus propis procediments
+
+**Test de Vulnerabilitat**\
+Cerca de vulnerabilitats conegudes o típiques
+
+::: notes
+- Hi han eines que simulen atacs fent servir
+- Hi ha bases de dades de vulnerabilitats i payloads.
+
+https://github.com/foospidy/payloads
+:::
+
+
+# Casos de test
+
+## Quan hem testejat prou?
+
+Llei del retorn decreixent
+
+Més testos fan l'execució de testos més lenta
+
+Més testos augmenten el cost de manteniment
+
+Més testos cal implementar-los
+
+Afegirem només casos que aportin quelcom
+
+::: notes
+**Retorn decreixent:**
+_Arriba un punt que afegir més testos
+no aporta prou valor per compensar el cost d'afegir-lo_
+
+Quan els testos son lents tendim a no passar-los tant sovint.
+I no deixa de ser codi que hem de picar i sobretot
+mantenir.
+:::
+
+## Técniques
+
+:::columns
+:::: column
+
+**Montecarlo**\
+Generació aleatoria
+
+**Anàlisi de valors frontera**\
+A banda i banda d'on canvia el comportament
+
+**Particions equivalents**\
+Un cas per partició d'equivalent comportament
+::::
+::::column
+**Branch testing**\
+cada cami al codi un test
+
+**Test de cobertura**\
+eina que detecta codi no exercitat pels testos
+::::
+:::
+
+::: notes
+
+Ens ajuden a racionalitzar els casos de tests.
+
+Totes les tècniques es deixen casos
+o son inviables a full.
+:::
+
+## Montecarlo
+
+- És molt difíci amb un cas de test extrany.
+- Important: guardar el cas fallat, per reproduir-lo fora del montecarlo
+- Molt costós d'executar
+- Hi ha eines per generar-ne
+- Per definir el domini aleatori, cal un análisi de domini mínim
+- Ideal per tests de rendiment
+
+## Anàlisi de domini d'entrada
+
+Tàndem: Valors frontera + particions equivalents
+
+Un cop definits els valors frontera, generem les particions equivalents
+
+Fem servir els valors frontera com a representants de la partició.
+
+Dos casos son equivalents si tenen el mateix comportament
+
+## Branch testing
+
+Assignar un cas d'us a cada branch de codi\
+`if`, `for`...
+
+Per a codi ja escrit o que tenim clar que volem escriure
+
+Compte funcions delegades (`floor(x)` vs `x//1`)
+
+No considera comportament divergent per dades
+
+
+## Coverage testing
+
+Es fa amb eines d'anàlisi de codi
+
+Serveix per detectar alguns casos no previstos
+
+Al final fas branch testing,
+amb les seves limitacións.
+
+
+## Code guided tests
+
+Sovint el codi ja esta fet, fem-ho test last pero:
+
+- Comentar el codi fet
+- Anar afegint el codi per pedaços amb l'antic de referencia
+
+Code guided tests:
+
+- Cada condicio
+- Cada for: un, zero, many (o zero, un, many)
+
 
 # Automatització
 
@@ -122,7 +386,7 @@ class MyClass_Test(unittest.TestCase):
 # Mamba (mamba, behave, pexpect)
 with description(MyClass, "having an instance of MyClass") as self:
 	with context("in condiion A"):
-		self.confition(A)
+		self.condition(A)
 		with it("returns 666"):
 			expect(self.myMethod()).to(equal(666))
 ```
@@ -135,13 +399,29 @@ als stakeholders en l'escriptura i manteniment dels testos.
 Lliga l'especificació co-escrita amb els stake holders
 amb els testos mantinguts pels desenvolupadors.
 
-Opinió (esbiaixada he crescut amb xUnit):
 
-Als frameworks BDD els falta maduresa\
+:::columns
+**Specification tied code**\
+Es coescriu l'especificació,
+i el test fa referència al
+text de l'especificació.
+
+**Code is specification**\
+S'intenta que el codi
+expliqui el cas de test
+:::
+
+:::notes
+Opinió (esbiaixada, he crescut amb xUnit):
+
+Impressió: Als frameworks BDD els falta maduresa\
 Fan el codi de test mes complex\
 Per això dubto de qui ho fa servir coescrigui els testos\
 Quan separen especificació, el binding es fràgil\
-El que aconsegueixen ara, ben portat, es pot fer amb xUnit\
+Ben portat, es pot fer amb xUnit sense complicar tant el codi\
+Potser es la meva desconeixença
+:::
+
 
 # TDD
 
