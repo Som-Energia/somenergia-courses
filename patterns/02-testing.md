@@ -105,10 +105,10 @@ Fem codi que:
 
 ¿Qui testeja el codi de test?
 
-## Frameworks xUnit
+## Estil xUnit (TDD)
 
 ```python
-# xUnit (pyunit, unittest)
+# xUnit (unittest, nose, pytest)
 class MyClass_Test(unittest.TestCase):
 	def test_myMethod_inConditionA_returns666(self):
 		sut = MyClass()
@@ -116,10 +116,10 @@ class MyClass_Test(unittest.TestCase):
 		self.assertEqual(666, sut.myMethod())
 ```
 
-## Frameworks xExpect
+## Estil BDD
 
 ```python
-# xExpect (mamba, pexpect)
+# Mamba (mamba, behave, pexpect)
 with description(MyClass, "having an instance of MyClass") as self:
 	with context("in condiion A"):
 		self.confition(A)
@@ -127,14 +127,21 @@ with description(MyClass, "having an instance of MyClass") as self:
 			expect(self.myMethod()).to(equal(666))
 ```
 
-## xUnit vs xExpect
+## xUnit vs BDD style
 
-La intenció original d'xExpect era generar codi que puguessin
-entendre els usuaris
+La intenció original dels BDD es implicar
+als stakeholders en l'escriptura i manteniment dels testos.
 
-Es pot arribar a generar codi que no l'entenen ni els desenvolupadors.
+Lliga l'especificació co-escrita amb els stake holders
+amb els testos mantinguts pels desenvolupadors.
 
-Fer codi que el puguin entendre els usuaris com per que serveixi per algo que s'ho mirin.
+Opinió (esbiaixada he crescut amb xUnit):
+
+Als frameworks BDD els falta maduresa\
+Fan el codi de test mes complex\
+Per això dubto de qui ho fa servir coescrigui els testos\
+Quan separen especificació, el binding es fràgil\
+El que aconsegueixen ara, ben portat, es pot fer amb xUnit\
 
 # TDD
 
@@ -159,6 +166,37 @@ Fer codi que el puguin entendre els usuaris com per que serveixi per algo que s'
 	- Es poden fer diversos abans del seguent Red
 	- **Passem els testos a cada canvi**
 
+## Refactorings
+
+Són receptes per fer canvis al disseny sense canviar el comportament
+
+Reversibles: Sovint hi ha l'invers
+
+## Refactors: Receptes
+
+Renombrar o relocalitzar classes, atributs i mètodes\
+Pujar i baixar atributs i mètodes en una jerarquía de classes\
+Extreure o expandir en linia métodes, attributs o classes\
+Encapsular attributs, canviar condicionals per polimorfisme, state o strategy\
+Canviar la signatura de mètodes\
+
+
+## Passos comuns
+
+Com si fos una bastida cal tenir sempre el codi funcionant:
+
+- Duplicar l'estructura vella
+- Farcir l'estructura nova (duplicar setters)
+- Recolzar-se en l'estructura nova (getters)
+- Netejar restos de l'estructura vella
+
+Exemples:
+
+- Passar d'un literal a un atribut
+- Passar d'un objecte a una lista d'objectes
+- Canviar el contenidor dels objectes agregats
+- Substituir un component per una reimplementació
+
 ## Estructura d'un test
 
 - Setup: Es la part on posem el sistema a les condicions de test
@@ -178,34 +216,6 @@ Des del test fem inputs (setters) i revisem outputs (getters).
 - TearDown: Inputs
 
 TODO: Diagrama
-
-## Refactorings
-
-Són receptes per fer canvis al disseny sense canviar el comportament
-
-Renombrar o relocalitzar classes, atributs i mètodes\
-Pujar i baixar atributs i mètodes en una jerarquía de classes\
-Extreure o expandir en linia métodes, attributs o classes\
-Encapsular attributs, canviar condicionals per polimorfisme, state o strategy\
-Canviar la signatura de mètodes\
-
-Sovint son receptes reversibles
-
-## Passos comuns
-
-Com si fos una bastida cal tenir sempre el codi funcionant:
-
-- Duplicar l'estructura vella
-- Farcir l'estructura nova (duplicar setters)
-- Recolzar-se en l'estructura nova (getters)
-- Netejar restos de l'estructura vella
-
-Exemples:
-
-- Passar d'un literal a un atribut
-- Passar d'un objecte a una lista d'objectes
-- Canviar el contenidor dels objectes agregats
-- Substituir un component per una reimplementació
 
 
 ## I/O Indirectes
@@ -249,12 +259,16 @@ Comparar automaticament (diff) si canvia o no
 
 ## Prenent control
 
-Quan falla tenir un B2B llarg fallant
-no ajuda gaire.
+Quan falla un B2B d'un procés llarg
+no ajuda gaire a saber on esta la falla.
 
-Si es un procés llarg agafar drops intermitjos
-i partir el codi als punts de drop.
+Normalment te a veure amb els canvis que hem fet.
 
+Si no, interessa fer drops de dades intermitjos.
+
+Els punts de drop es un bon punt per posterior
+disecció del procés en mòduls testejables
+partint dels B2B.
 
 ## Nomenclatura
 
@@ -271,10 +285,37 @@ Si els simbols tenen underlines, fer-ne servir dobles per separar.
 
 `MyClass_Test.test__my_method__failsWhenShitHappens`
 
+## ¿On poso els tests?
+
+¿Carpeta `tests` o in-place?
+
+¿Prefix `test_` o sufix `_test`?
+
+Per un costat,
+la carpeta `test` separa el codi que anirà a producció
+i és costum en projectes Python.
+
+Al `setup.py` es pot excloure de la distribució per directori o per sufix al `setup.py`.
+
+Però es molt bo que quan vagis a editar un codi,
+trobis just al costat els testos que has de mantenir conjuntament.
+
+Per això: al mateix directori i amb sufix.
 
 
+## Data driven tests
 
+Quan els casos de tests es poden paremetritzar, entrada sortida
 
+Un mateix codi per diferents dades
+
+Sovint els usuaris poden escriure la taula
+
+Important documentar que aporta cada dada
+
+Helpers de setup i assert, tambe fan feina
+
+Frameworks (`ddt` per `unittest`)
 
 
 
