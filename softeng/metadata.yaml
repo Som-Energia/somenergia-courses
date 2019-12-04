@@ -9,7 +9,7 @@ transition: convex # none/fade/slide/convex/concave/zoom
 center: true
 slideNumber: true # Muestra el numero de slide
 progress: true
-#parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
+parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
 parallaxBackgroundSize: 150%
 parallaxBackgroundHorizontal: 20
 parallaxBackgroundVertical: 5
@@ -54,6 +54,7 @@ include-before: |
 			display: flex;
 		}
 		.columns .column {
+            font-size: smaller;
 			margin-left: auto;
 			margin-right: auto;
 		}

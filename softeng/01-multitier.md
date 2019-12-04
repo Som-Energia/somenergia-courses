@@ -1,74 +1,293 @@
-# Capes Aplicació
+# Arquitectura multicapa
+
+## Motivació
+
+Distribuir les responsabilitats en components
+
+Les capes estableixen punts de tall (possibles) per la componentització
+
+Aquestes capes estan en gairebé tota aplicació
+independentment del domini.
+
+Bon punt de partida, aprofitem-ho
+
+:::notes
+En anglès _multi-tier_
+
+En una aplicacio trobaràs d'altres criteris de componentització depenent del domini.
+Pero tindre uns criteris que et trobaràs sempre és un bon punt de partida.
+
+No ens ho prenem com un paradigma arquitectònic que cal seguir per nassos.
+
+Com els models UML és una eina per pensar i comunicar.
+:::
 
 ## Les capes
 
-- Vista
-- Aplicació
-- Negoci
-- Entitats
-- Persistencia
+<style>
+.isostack {
+    width: auto;
+}
+.isostack p {
+border: 1pt #fff solid;
+background: #aba;
+width: 10em;
+margin: auto;
+}
+</style>
 
-## Capes irreals
+<div class=isostack>
+Presentació
 
-Semblant a les capes OSI per xarxes \
-Les funcions hi han de ser-hi \
-Els moduls poden estar a varies capes \
-Hi ha d'altres divisions \
-Eix horitzontal per temes/funcionalitats \
-Serveix per pensar on posar la frontera en un disseny distribuit \
+Aplicació
 
-::: notes
-Exemple:
-Podem decidir que l'ERP només proveirà API estil CRUD (persistència)
-i que tota la lògica de negoci la posarem a els scripts externs,
-pero centralitzant-la a una llibreria que es replicarà a totes les
-applicacións.
+Negoci
 
-Decissions:
+Entitats
 
-- què repliquem o no
-- què centralitzem o distribuim
-- què diversifiquem o uniformem
-- quines fronteres (API's) definim
+Persistencia
+</div>
+
+:::notes
+Cada capa resol problemes que li son propis.
+
+Cada capa aïlla a la superior dels seus detalls.
+
+Acoblament unidireccional: Les capes d'adalt fan servir les de sota.
+
+- Presentació: com es presenta la informació a l'usuari, interactivitat
+- Aplicació: dialeg amb l'usuari
+- Negoci (Domini): regles/operacions propies del domini (si hagues més d'una aplicació el que fora comú)
+- Entitats: Com s'agrupa la informació en entitats, atributs i relacions
+- Persistència: Com es guarda tota aquesta informació, suport, mecanismes d'accés, indexació, backups...
 :::
 
-## Persistencia
+## Son capes irreals
 
-Base de dades, Fitxers
+Irreals com el model OSI de xarxes:
 
-Quins valors es guarden\
-Quins es calculen\
-En quin format\
-En quin suport\
-Indexos\
+No cal correspondència Component - Capa
 
-## Entitats
+Pero les funcions han de ser-hi!
 
-Els elements del negoci com están definits
+Serveixen per pensar/comunicar\
+on posar fronteres i responsabilitats
 
-Com es relacionen
-
-Les APIs CRUD son d'aquest nivell\
-(per això no m'agraden)
-
-## Negoci/Domini
-
-Lógica, operacions i restricions
-propies del domini
-
-Són idependentment de l'aplicació
-
-## Aplicació
-
-Es la lógica que regna el diàleg amb l'usuari.
-
-Quins passos presentes, que ensenyes, que no...
-
-Com transiciones de pantalla a pantalla
 
 ## Presentació
 
+::: columns
+:::: column
+<div class=isostack>
+**Presentació**
+
+Aplicació
+
+Negoci
+
+Entitats
+
+Persistencia
+</div>
+::::
+:::: column
 Com es mostra la informació a l'usuari.
+
+Elements visuals i interactius
+
+Camps, botons, widgets, taules...
+::::
+:::
+
+## Aplicació
+
+::: columns
+:::: column
+<div class=isostack>
+Presentació
+
+**Aplicació**
+
+Negoci
+
+Entitats
+
+Persistencia
+</div>
+::::
+:::: column
+Es la lógica que regna el diàleg amb l'usuari.
+
+Quins passos presentes, que ensenyes i que no,
+estat de la sessió.
+
+Com transiciones de pantalla a pantalla
+
+::::
+:::
+
+## Negoci/Domini
+
+::: columns
+:::: column
+<div class=isostack>
+Presentació
+
+Aplicació
+
+**Negoci**
+
+Entitats
+
+Persistencia
+</div>
+::::
+:::: column
+Lógica, operacions i restricions
+propies del domini
+
+Existeixen idependentment de l'aplicació
+::::
+:::
+
+
+
+## Entitats
+
+::: columns
+:::: column
+<div class=isostack>
+Presentació
+
+Aplicació
+
+Negoci
+
+**Entitats**
+
+Persistencia
+</div>
+::::
+:::: column
+Elements del negoci\
+Quins són\
+Quins atributs els defineixen\
+Com es relacionen
+::::
+:::
+
+::: notes
+Aquest nivell coincideix amb el de les APIS
+anomenades CRUD (Create, Read, Update, Delete)
+
+La lógica de negoci queda fora
+:::
+
+
+## Persistència
+
+::: columns
+:::: column
+<div class=isostack>
+Presentació
+
+Aplicació
+
+Negoci
+
+Entitats
+
+**Persistencia**
+</div>
+::::
+:::: column
+Com es guarda l'estat del sistema?\
+Base de dades? Fitxers? Online?
+
+Què es guarda?
+Què es calcula?
+
+En quin format?
+En quin suport?
+
+Indexos, rèpliques...
+::::
+:::
+
+## Divisió horitzontal
+
+Capes d'aplicació seria la divisió vertical
+
+Horitzontal: Per temàtiques o funcionalitats
+
+De la conjunció surten els components del sistema.
+
+## Decissions
+
+què repliquem o no
+
+què centralitzem o distribuim
+
+què diversifiquem o uniformem
+
+quines fronteres (API's) definim
+
+
+## Aplicació i negoci
+
+La de negoci és la lògica compartida per les aplicacions.
+
+Si tenim diverses aplicacions,\
+no dupliquem la lògica de negoci a cadascuna.
+
+Compartim un component que la contingui.
+
+Llibreria, API, servei...
+
+Mola exposar accions de negoci\
+(tambè s'en diu la capa de serveis o operacions)
+
+::: notes
+Es diferent tenir logica duplicada que replicada o compartida.
+
+La duplicació és un perill pel manteniment i la coherència.
+:::
+
+## Entitats i negoci
+
+CRUD/ORM: representació d'entitat
+
+Entitat no aporten per se lògica de negoci
+
+ORM's augmentats amb operacions de negoci?\
+Es bo per construir el nivell de _Negoci_.
+
+El problema es quan oferim l'ORM a _Aplicació_,
+permetent-li saltarse restriccións de _Negoci_.
+
+:::notes
+És bo si ho permet l'ORM augmentar les entitats amb operacions de negoci
+
+El que és perillés es oferir l'ORM com a capa de negoci,
+donat que no només ofereix aquestes operacions sinó
+també les manipulacions a baix nivell de les entitats.
+
+Si _Aplicació_ accedeix directament a una API ORM o CRUD,
+és molt possible que estigui fent lògica de _Negoci_.
+:::
+
+
+## Aplicació i presentació
+
+**Client-servidor:**\
+Al servidor només estava _Persistencia_.
+
+**LAMP clàssic:**\
+Presentació era l'HTML generat,\
+l'applicació estava al servidor.
+
+**Single Page App:**\
+Presentació i aplicació al navegador.
 
 
 ## A l'ERP
