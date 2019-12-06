@@ -593,6 +593,14 @@ Se accede a ellas con el `.`.
 
 
 No compiten con las variables y las funciones por el espacio de nombres.
+
+En interactivo puedes descubrir los que hay poniendo el punto
+y pulsando tabulador.
+
+Objetos similares tienen métodos similares,
+aunque por dentro sean muy distintos.
+
+- `count` tambien sirve para listas y tuplas.
 :::
 
 ```python
