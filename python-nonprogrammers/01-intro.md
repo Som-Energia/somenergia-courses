@@ -1,5 +1,15 @@
 # Introducción
 
+## Objetivo
+
+Introducir a personas del ET
+que no hayan programado nunca
+al lenguaje de programación Python
+
+Dos sesiones tipo _manos a la obra_ (hands-on)
+
+Final: Leer un fichero CSV, procesarlo y generar un informe chulo en Markdown
+
 ## Lenguajes
 
 
@@ -228,7 +238,9 @@ Nos la podemos saltar.
 
 De las cuatro, la primera es la única que mola.
 
-Y la última solo cuando la subsentencia sea una y corta.
+Los símbolos que abren y cierran son: `{} [] () "" '' """ """ ''' '''`
+
+La última solo es agradable cuando la subsentencia es una y corta.
 
 En el resto de casos, es código feo.
 Hay que evitar usarlos.
@@ -407,6 +419,12 @@ como `consumoEnKwh`.
 Lower Case: `sinningunadiferenciaentrepalabras`\
 Camel Case: `usamosLasMayusculasAlInicioDePalabra`\
 Underscore: `separamos_las_palabras_con_subrayados`\
+
+:::notes
+
+Para que sea un nombre explicativo suele tener varias palabras.
+Pero los nombres no pueden tener espacios. ¿Cómo hacemos que se entienda?
+:::
 
 
 ## Ops de Actualización
