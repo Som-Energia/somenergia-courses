@@ -1,5 +1,5 @@
 ---
-title: Python
+title: "Python :snake:"
 subtitle: "Para no programadores"
 author: David García Garzón
 
@@ -11,8 +11,8 @@ slideNumber: true # Muestra el numero de slide
 progress: true
 #parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg"
 parallaxBackgroundSize: 150%
-parallaxBackgroundHorizontal: 20
-parallaxBackgroundVertical: 5
+parallaxBackgroundHorizontal: 50
+parallaxBackgroundVertical: 15
 #showNotes: separate-page
 showNotes: true
 keyboard:
@@ -26,10 +26,11 @@ include-before: |
 			background-repeat: no-repeat;
 			background-size: 20%;
 			background-position: bottom left;
-			opacity: 50%;
+			opacity: 90%;
 		}
 		.reveal .slides {
 			background: #ffffffee;
+			opacity: 100%;
 		}
 		.reveal .slides .titleslide {
 			background-color: #86bc25ff;
@@ -39,7 +40,7 @@ include-before: |
 		}
 		.reveal .slides .slide.level2 h2 {
 			color: #86bc25ff;
-			//color: #480;
+			color: #480;
 		}
 		code {
 			background: #ffe;

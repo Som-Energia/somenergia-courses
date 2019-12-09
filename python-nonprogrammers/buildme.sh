@@ -8,6 +8,7 @@ firefox index.html &
 inotifywait -mr -e close_write  . --exclude pdf | while read path events file 
 do
     (echo $file | grep md$ ) ||
+    (echo $file | grep yaml$ ) ||
     (echo $file | grep png$ ) ||
 		continue
     build
