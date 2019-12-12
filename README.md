@@ -13,6 +13,10 @@ Public materials used in internal Som Energia training courses.
 - [Hackasom 2018: Intercoop](2018-10-06-hackasom2018/intercoop.html)
 - [Generation kWh: Funcionamiento interno](2019-09-17-generationkwh/)
 - [Transicion Python 3](2019-09-19-python3transition/)
+- [WIP: Python para no programadoras](python-nonprogrammers/)
+- [WIP: Multitier + testing primer](engsoft/)
+- [WIP: D3](engsoft/)
+- [WIP: CLI Graphics](cligraphics/)
 
 
 If not indicated otherwise, those materials are covered
