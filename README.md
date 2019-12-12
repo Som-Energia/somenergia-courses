@@ -15,7 +15,7 @@ Public materials used in internal Som Energia training courses.
 - [Transicion Python 3](2019-09-19-python3transition/)
 - [WIP: Python para no programadoras](python-nonprogrammers/)
 - [WIP: Multitier + testing primer](engsoft/)
-- [WIP: D3](engsoft/)
+- [WIP: D3](softeng/)
 - [WIP: CLI Graphics](cligraphics/)
 
 
