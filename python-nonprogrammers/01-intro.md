@@ -602,6 +602,45 @@ Otras se pueden importar de librerías (standard o instalables).
 También podemos definir nuestras propias funciones.
 :::
 
+
+## Ejercicio: Simular Factura
+
+Script para calcular la factura de una 2.0A
+
+Arriba los valores de entrada en variables
+
+Pon a las variables nombres decentes\
+`consumoEnKwh`, `precioPorKwDia`...
+
+Ves calculando poco a poco valores intermedios
+
+Haz un `print` del importe final.
+
+
+:::notes
+Cuando manejamos unidades, como el kWh o el kW,
+es muy util que quede claro en el nombre
+de que unidad hablamos.
+
+Por ejemplo, en vez de decir `tiempoDeEspera`,
+es más claro si ponemos `minutosDeEspera`, `segundosDeEspera` o `usegundosDeEspera`
+Asi sabemos como interpretar el número.
+
+`porcentajeIva` seria `21` mientras `factorIva` sería `0.21`.
+
+Propuesta variables de entrada:
+
+- `precioKwh`
+- `precioKwDia`
+- `consumoKwh`
+- `diasFacturados`
+- `porcentajeIva`
+- `porcentajeImpuestoElectrico`
+- `alquilerContadorDia`
+- `bonoSocial`
+:::
+
+
 # Texto
 
 ## Literales de texto `str`
