@@ -1,28 +1,6 @@
-# Arquitectura multicapa
+# Introducció
 
-## Motivació
-
-Distribuir les responsabilitats en components
-
-Les capes estableixen punts de tall (possibles) per la componentització
-
-Aquestes capes estan en gairebé tota aplicació
-independentment del domini.
-
-Bon punt de partida, aprofitem-ho
-
-:::notes
-En anglès _multi-tier_
-
-En una aplicacio trobaràs d'altres criteris de componentització depenent del domini.
-Pero tindre uns criteris que et trobaràs sempre és un bon punt de partida.
-
-No ens ho prenem com un paradigma arquitectònic que cal seguir per nassos.
-
-Com els models UML és una eina per pensar i comunicar.
-:::
-
-## Les capes
+## Objectiu formatiu
 
 <style>
 .isostack {
@@ -35,6 +13,56 @@ width: 10em;
 margin: auto;
 }
 </style>
+
+Establir vocabulari comú per modularitzar les aplicacions
+
+Revisar les forces de disseny en joc quan decidim on posar les fronteres entre components
+
+Encetar un debat estratègic pels diferents escenaris que tenim (ERP, WebApps...)
+
+:::notes
+Possiblement el que expliqui ja ho coneixeu
+perque ho heu estudiat o perque us ho heu trobat.
+
+La intenció és ordenar els conceptes que ja tenim,
+establir un punt de partida comú,
+i fer la reflexió col·lectiva de que ens estem trobant.
+:::
+
+
+## Context
+
+**Components:**\
+Com distribuim responsabilitats?\
+A on establim les fronteres?
+
+Perseguim **baix acoblament** i  **alta cohesió**
+
+La arquitectura multicapa, estableix punts possibles de tall
+per la componentització.
+
+**Independents del domini!**
+
+Bon punt de partida, aprofitem-los
+
+:::notes
+
+**Acoblament:** Interdependència entre els mòduls/component
+
+**Cohesió:** Com de interrelacinat està el contingut d'un mòdul/component
+
+En una aplicacio trobaràs d'altres criteris de componentització depenent del domini.
+Pero tindre uns criteris que et trobaràs sempre és un bon punt de partida.
+
+No ens ho prenem com un paradigma arquitectònic que cal seguir per nassos.
+
+Com els models UML és una eina per pensar i comunicar.
+:::
+
+
+# L'arquitectura Multicapa
+
+## Les capes
 
 <div class=isostack>
 Presentació
@@ -49,6 +77,8 @@ Persistencia
 </div>
 
 :::notes
+En anglès _multi-tier_
+
 Cada capa resol problemes que li son propis.
 
 Cada capa aïlla a la superior dels seus detalls.
@@ -121,7 +151,7 @@ Es la lógica que regna el diàleg amb l'usuari.
 Quins passos presentes, que ensenyes i que no,
 estat de la sessió.
 
-Com transiciones de pantalla a pantalla
+Com es transiciona de pantalla a pantalla
 
 ::::
 :::
@@ -222,6 +252,8 @@ Horitzontal: Per temàtiques o funcionalitats
 
 De la conjunció surten els components del sistema.
 
+# Forces de disseny
+
 ## Decissions
 
 què repliquem o no
@@ -296,8 +328,11 @@ l'applicació estava al servidor.
 **Single Page App:**\
 Presentació i aplicació al navegador.
 
+# ERP
 
-## A l'ERP
+## Situació
+
+Aplicacións: ERPClient, molts scripts, OV, Webforms
 
 Les aplicacions accedeixen a diferents nivells
 d'abstracció.
@@ -307,7 +342,9 @@ Hi ha lógica del negoci fora.
 S'ofereixen API's a nivell de vista (wizards)
 que haurien de ser de negoci
 
-S'ofereix API a nivell persistencia (orm)
+S'ofereix API a nivell entitats (orm)
+
+Abstracció nivell d'entitats als usuaris!
 
 ## Problemes
 
