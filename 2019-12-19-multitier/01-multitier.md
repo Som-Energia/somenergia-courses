@@ -232,6 +232,13 @@ què diversifiquem o uniformem
 
 quines fronteres (API's) definim
 
+duplicació vs replicació
+
+:::notes
+Duplicació: quan fem el mateix a diversos llocs (i cal desenvolupar-ho diverses vegades)
+
+Replicació: quan desenvolupem una cosa un cop i la repliquem a diversos puestos
+:::
 
 ## Aplicació i negoci
 
