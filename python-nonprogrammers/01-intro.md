@@ -147,6 +147,42 @@ Solo hay que aprender lo que es diferente.
 
 Si hay una forma más sencilla de hacer las cosas,
 esa es la forma que queda.
+
+### Aprende jugando
+
+[![](images/logo-codecombat.png)
+](https://codecombat.com)
+
+![](images/codecombat.jpg)
+
+Más [aquí](https://code.org/learn)
+
+:::
+
+## Elementos
+
+Lenguaje: 
+[Tutorial oficial](https://docs.python.org/3/tutorial/)
+
+Librería estandard:
+[Referencia](https://docs.python.org/3/library/)
+
+Librerías no estándards:
+[Repositorio](https://pypi.org/)
+
+Disclaimer: todo en inglés
+
+
+:::notes
+El **lenguaje** son las reglas de como decir las cosas.
+
+La **librería estándard**
+son cosas que no hace falta que programes porque ya vienen de serie
+con el intérprete.
+
+Ademas en el repositorio de paquetes Pypi,
+puedes encontrar otras **librerías no estándard** programadas por terceros
+y listas para instalar.
 :::
 
 
@@ -202,7 +238,7 @@ Se sale escribiendo `exit` o pulsando `Ctrl`+`D`
 ## Scripts
 
 Cuando el código se complica,\
-en un fichero (script)
+mejor meterlo en un fichero (script)
 
 ```python
 # miscript.py
@@ -215,8 +251,6 @@ Se ejecuta:
 $ python3 miscript.py
 hola mundo
 ```
-
-
 
 
 
@@ -255,7 +289,7 @@ miscript.py
 :::
 
 
-## Syntaxis
+## Sintaxis general
 
 ```python
 # Despues de la almohadilla son comentarios, los ignora
@@ -331,35 +365,6 @@ Si partimos líneas, aunque no se exije, mejor indentar para que se lea mejor.
 
 
 
-## Por tu cuenta
-
-
-Lenguaje: 
-[Tutorial oficial](https://docs.python.org/3/tutorial/)
-
-Librería estandard:
-[Referencia](https://docs.python.org/3/library/)
-
-Librerías no estándards:
-[Repositorio](https://pypi.org/)
-
-Disclaimer: todo en inglés
-
-
-:::notes
-El **lenguaje** son las reglas de como decir las cosas.
-
-La **librería estándard**
-son cosas que no hace falta que programes porque ya vienen de serie
-con el intérprete.
-
-Ademas en el repositorio de paquetes Pypi,
-puedes encontrar otras **librerías no estándard** programadas por terceros
-y listas para instalar.
-
-:::
-
-
 
 # Calculadora
 
@@ -392,63 +397,6 @@ No sorprende que llamemos operador al signo `+`,
 pero hay otros operadores no tan evidentes.
 :::
 
-
-## Literales básicos
-
-```python
->>> -12 # un número entero (int)
--12
->>> 12.34 # un número con decimales (float)
-12.34
->>> 2+3j # un número complejo (complex)
-(2+3j)
->>> 'un texto' # un texto (str)
-'un texto'
->>> None # el no-objeto (NoneType), el intérprete ni lo imprime
->>> True # un valor lógico (bool), su antitesis es False
-True
-```
-
-:::notes
-Todo los datos tienen un _tipo_ asociado.
-
-- Con los tipos numéricos (`int`, `float`, `complex`) podemos hacer operaciones aritméticas.
-	- Usamos el `.` para los decimales, notación anglosajona
-	- Usamos la `j` para el número imaginario `i`, notación ingenieril
-- Con los textos (`str`) podemos concatenarlos, substituir, partir, buscar...
-- El no-valor `None` (`NoneType`) representa el concepto de ningún valor, más útil de lo que parece.
-- Los valores lógicos (`bool`) representan una condición que puede ser cierta o falsa, y sirven para tomar decisiones.
-:::
-
-## Literales estructuras
-
-```python
->>> 12, 23 # una tupla (tuple) con dos enteros
-(12, 23)
-
->>> [1, 2, 3, 1] # una lista (list) con 4 enteros
-[1, 2, 3, 1]
-
->>> {1, 2, 3, 1} # un conjunto (set) con 4... ops, 3 enteros
-{1, 2, 3}
-
->>> # un diccionario (dict) 2 con parejas clave: valor
->>> { 'David': 40, 'Aitor': 25 }
-{ 'David': 40, 'Aitor': 25 }
-```
-:::notes
-TODO: Moverlo a cuando empecemos con las estructuras?
-
-- Las tuplas (`tuple`) son parejas, trios... de valores que juntamos para pasarlos juntos como un solo valor.
-- Las listas (`list`) son como las tuplas pero podemos insertar y eliminar elementos.
-- Los conjuntos (`set`) son como las listas, pero no guarda el orden entre los elementos, y descarta los valores repetidos (por eso, en el ejemplo, uno de los dos 1 desaparece).
-- Los diccionarios (`dict`) contienen parejas clave-valor, en los que se puede acceder al valor indicando la clave.
-
-Los valores pueden ser no solo enteros.
-Pueden ser incluso otras estructuras anidadas.
-
-Volveremos a ellas. De momento, veamos que podemos hacer con los datos simples.
-:::
 
 ## Operadores numéricos
 
@@ -575,34 +523,6 @@ print(costeFactura)
 ::::
 :::
 
-## Llamando funciones
-
-```python
->>> max(30,500)  # le pasamos dos parámetros, retorna un valor
-500
->>> min(30,500) + 4  # usamos el valor retornado en una expresión
-34
->>> min(max(30,400),100)  # el resultado de una como parametro
-30
-```
-
-`max` y `min` son funciones _built-in_\
-Podremos tambien definir nuestras funciones\
-o importarlas de librerías.
-
-:::notes
-`max` retorna el mayor valor de los pasados por parámetro y `min` el menor.
-
-Ya hemos usado una función: `print`. Retorna `None`.
-
-Las funciones built-in como `print` o `max` siempre estan disponibles en el lenguaje.
-
-Otras se pueden importar de librerías (standard o instalables).
-
-También podemos definir nuestras propias funciones.
-:::
-
-
 ## Ejercicio: Simular Factura
 
 Script para calcular la factura de una 2.0A
@@ -638,10 +558,210 @@ Propuesta variables de entrada:
 - `porcentajeImpuestoElectrico`
 - `alquilerContadorDia`
 - `bonoSocial`
+
+Para redondear a dos decimales el importe puedes usar la funcion `round`.
+El segundo parámetro es el número de decimales.
+
+:::
+
+## Simulador de factura
+
+::: columns
+:::: column
+
+```python
+# Depende de la factura
+potenciaKw = 3.3
+consumoKwh = 100
+diasFacturados = 30
+```
+::::
+::::column
+```python
+# Fijo hasta cambio tarifas
+precioKwh = 0.139
+precioKwDia = 0.104229
+diasAnuales = 365
+alquilerContadorAnual = 9.72
+bonoSocialDia = 0.02
+impuestoElectricoPercent = 5.11
+ivaPercent = 21
+```
+::::
+:::
+
+::: notes
+```python
+# Calculos
+
+importeEnergia = potenciaKw * diasFacturados * precioKwDia
+importePotencia = consumoKwh * precioKwh
+importeElectricidad = importeEnergia + importePotencia
+
+importeElectricidad *= (1 + porcentajeImpuestoElectrico/100)
+baseImposable = 0
+baseImposable += importeElectricidad
+baseImposable += bonoSocialDia * diasFacturados
+baseImposable += alquilerContadorAnual*diasFacturados/diasAnuales
+importe = baseImponible * (1 + porcentajeIva/100)
+
+print("Importe de la factura:", importe)
+```
+:::
+
+## Llamando funciones
+
+```python
+>>> max(30,500)  # le pasamos dos parámetros, retorna un valor
+500
+>>> min(30,500) + 4  # usamos el valor retornado en una expresión
+34
+>>> min(max(30,400),100)  # el resultado de una como parametro
+30
+>>> round(30.3262342, 2) # redondea a 2 decimales
+30.33
+```
+
+`round`, `max` y `min` son funciones _built-in_\
+Podemos importar otras funciones de librerias\
+o definir las nuestras
+
+:::notes
+Las funciones como en mates, reciben parámetros y retornan valores.
+
+Estan parametrizadas.
+
+El anterior script daba un importe con demasiados decimales.
+Podemos usar la función `round` para redondear a un número de decimales dado.
+
+`max` retorna el mayor valor de los pasados por parámetro y `min` el menor.
+
+Ya hemos usado una función: `print`. Retorna `None`.
+
+Las funciones built-in como `print`, `round` o `max` siempre estan disponibles en el lenguaje.
+
+Otras se pueden importar de librerías (standard o instalables).
+
+También podemos definir nuestras propias funciones.
 :::
 
 
+
+## Primera función propia
+
+```python
+
+def aplicaPercent(valor, percent):
+	return valor*(1 + percent/100)
+
+...
+totalElectricidad = aplicaPercent(
+	importePotencia + importeEnergia,
+	percentImpuestoElectrico)
+...
+importeFactura = aplicaPercent(baseImponible, percentIva)
+
+```
+
+::: notes
+En el anterior ejercicio hemos tenido que aplicar
+el porcentaje dos veces.
+
+Tienes que entender la fórmula para saber que estas haciendo un porcentaje.
+
+Extraigamos esa fórmula como función.
+
+El nombre de la función ayuda a entender que hacemos.
+:::
+
+# Tipos de datos
+
+## Literales básicos
+
+```python
+>>> -12 # un número entero (int)
+-12
+>>> 12.34 # un número con decimales (float)
+12.34
+>>> 2+3j # un número complejo (complex)
+(2+3j)
+>>> 'un texto' # un texto (str)
+'un texto'
+>>> None # el no-objeto (NoneType), el intérprete ni lo imprime
+>>> True # un valor lógico (bool), su antitesis es False
+True
+```
+
+:::notes
+Todo los datos tienen un _tipo_ asociado.
+
+Podemos ver el tipo de una expresión con la funcion `type`
+
+- Con los tipos numéricos (`int`, `float`, `complex`) podemos hacer operaciones aritméticas.
+	- Usamos el `.` para los decimales, notación anglosajona
+	- Usamos la `j` para el número imaginario `i`, notación ingenieril
+- Con los textos (`str`) podemos concatenarlos, substituir, partir, buscar...
+- El no-valor `None` (`NoneType`) representa el concepto de ningún valor, más útil de lo que parece.
+- Los valores lógicos (`bool`) representan una condición que puede ser cierta o falsa, y sirven para tomar decisiones.
+:::
+
+## Literales estructuras
+
+```python
+>>> 12, 23 # una tupla (tuple) con dos enteros
+(12, 23)
+
+>>> [1, 2, 3, 1] # una lista (list) con 4 enteros
+[1, 2, 3, 1]
+
+>>> {1, 2, 3, 1} # un conjunto (set) con 4... ops, 3 enteros
+{1, 2, 3}
+
+>>> # un diccionario (dict) 2 con parejas clave: valor
+>>> { 'David': 40, 'Aitor': 25 }
+{ 'David': 40, 'Aitor': 25 }
+```
+:::notes
+- Las tuplas (`tuple`) son parejas, trios... de valores que juntamos para pasarlos juntos como un solo valor.
+- Las listas (`list`) son como las tuplas pero podemos insertar y eliminar elementos.
+- Los conjuntos (`set`) son como las listas, pero no guarda el orden entre los elementos, y descarta los valores repetidos (por eso, en el ejemplo, uno de los dos 1 desaparece).
+- Los diccionarios (`dict`) contienen parejas clave-valor, en los que se puede acceder al valor indicando la clave.
+
+Los valores pueden ser no solo enteros.
+Pueden ser incluso otras estructuras anidadas.
+
+Volveremos a ellas. De momento, veamos que podemos hacer con los datos simples.
+:::
+
+## Anidando
+
+```python
+course = {
+	"name": "Python for non-programers",
+	"sessions": [
+		{
+			"name": "Session 01: Basics",
+			"teacher": "David",
+			"durationMinutes": 120,
+			"content": [
+				"Programming: the Python interpreter",
+				"Calculator, managing numbers",
+				"Data types",
+				"Managing strings",
+			]
+		},
+		{
+			"name": "Session 01: Tooling",
+			...
+		}
+	],
+}
+
+```
+
+
 # Texto
+
 
 ## Literales de texto `str`
 
@@ -649,17 +769,15 @@ Propuesta variables de entrada:
 # Varios delimitadores, útil si contiene comillas
 print('Comillas simples')
 print("Comillas dobles")
-print('''Triples comillas simples''')
+print'''Triples comillas simples''') # Para texto multilínia
 print("""Triples comillas dobles""")
+
 # Útiles si el texto tiene comillas
 print('Me dijo: "Adios" y se fue')
 print("Castellar de N'Hug")
+
 # Tambien podemos escapar con la contrabarra
 print('Usando la contrabarra para \'escapar\' la comilla')
-# Carácteres especiales indicados con contrabarra y una letra
-print("Primera linia\nSegunda linia") # Salto de linia \n
-print("Primer campo\tSegundo campo") # Tabulador \t
-print("La contra barra: \\") # Contrabarra se escapa a si misma
 ```
 
 :::notes
@@ -667,22 +785,27 @@ Los literales de texto, `str`, se limitan con comillas dobles `"hola"` o sencill
 
 Aprovechamos eso para usar la que no este en el texto.
 
+Las triples comillas (o triples dobles comillas)
+sirven para hacer textos multilínea.
+
 Si el texto contiene los dos tipos de comillas tenemos otras opciones:
 
 - escaparla con `\` o
 - usar triples comillas (dobles o sencillas)
 
-La contrabarra tiene un significado especial.
-Indica que el siguiente caracter no se interpreta como normalmente,
-decimos que lo _escapa_.
-
-Hay combinaciones de escape para representar carácteres especiales
-como `\n` y `\t` que serán importantes para nuestra meta
-de leer una hoja de cálculo. Los usaremos de separadores.
 :::
 
-## Rutas de carpetas en Windows
+## Escapando
 
+
+```python
+# Carácteres especiales indicados con contrabarra y una letra
+print("Primera linia\nSegunda linia") # Salto de linia \n
+print("Primer campo\tSegundo campo") # Tabulador \t
+print("La contra barra: \\") # Contrabarra se escapa a si misma
+```
+
+Ojo, indicando ficheros en Windows:
 
 ```python
 >>> # Las contrabarras se convierten en un tab y un salto de línea
@@ -691,11 +814,17 @@ c:      emp
 ewitem
 >>> print("c:\\temp\\newitem") # Escapando contrabarras
 c:\temp\newitem
->>> print(r"c:\temp\newitem") # Texto 'en crudo', prefijo 'r'
-c:\temp\newitem
 ```
 
 :::notes
+La contrabarra tiene un significado especial.
+Indica que el siguiente caracter no se interpreta de la forma normal,
+decimos que lo _escapa_.
+
+Hay combinaciones de escape para representar carácteres especiales
+como `\n` y `\t` que serán importantes para nuestra meta
+de leer una hoja de cálculo. Los usaremos de separadores.
+
 Las contrabarras son un problema en windows
 porque se usan para indicar la ruta de un fichero.
 
@@ -704,6 +833,11 @@ Las tenemos que doblar para que no pasen cosas raras.
 O podemos desactivar las secuencias de escape con el prefijo `r''`
 (raw, crudo)
 así la ruta se lee más simple.
+```python
+# Texto 'en crudo', prefijo 'r'
+>>> print(r"c:\temp\newitem")
+c:\temp\newitem
+```
 :::
 
 ## Ops con texto
@@ -870,6 +1004,194 @@ Mejor usar variables intermedias con nombres buenos, o incluso...
 :::
 
 
+## Formateando
+
+Texto con prefijo `f`:
+entre corchetes, expresión a substituir
+
+```python
+>>> print(f"El importe de la factura es {importeFactura}€")
+El importe de la factura es 48.447344323€
+```
+
+Indicando el formato.
+[Mini lenguaje de formato](https://docs.python.org/3/library/string.html#format-specification-mini-language)
+
+
+```python
+>>> print(f"El importe de la factura es {importeFactura:10.2f}€")
+El importe de la factura es     48.45€
+```
+:::notes
+El prefijo `f` indicamos que es un template de formato.
+
+Lo que hay entre `{ }` lo evalua y lo substituye.
+
+El `:` indica una especificación de formato.
+
+En el ejemplo, `f` indica que es un formateo de números con decimales (float-point),
+el 2 despues del punto indica que muestre dos decimales.
+el 10 de antes indica que todo ocupe 10 espacios.
+
+:::
+
+
+# Decisiones
+
+## Booleanos (`bool`)
+
+`True` y `False`
+
+Sirven para tomar decisiones
+según lo que se encuentra el script
+
+Es lo que da inteligencia al ordenador
+
+¿Cómo los obtenemos?
+
+## Ops relacionales
+
+`< <= == != >= >`
+
+```python
+>>> a = 3
+>>> 1<a  # operador de inequalidad 'menor que'
+True
+>>> 10<a
+False
+>>> 1 <= a <= 10  # ¿del 1 al 10, ambos incluidos?
+True
+>>> 'alfredo' < 'benito'  # orden alfabético
+True
+>>> 'alfredo' == 'alfredo' # igualdad
+True
+>>> 'alfredo' != 'alfredo' # desigualdad
+False
+```
+
+## Ops de identidad `is`
+
+`is` ¿Son el mismo objeto?\
+`==` ¿Tienen un valor equivalente?\
+
+:::notes
+Inmutables (numbers, tuple, str, bool): si tienen el mismo tipo y valor son el mismo objeto
+
+Mutables (list, dict, set): aunque tengan el mismo valor han de ser el mismo objeto
+
+Las listas (mutables) se pueden modificar manteniendo su identidad.
+
+Las tuplas (immutables) no se pueden modificar, cada tupla con un contenido diferente se considera un objeto diferente.
+Dos tuplas construidas en sitios diferentes, pero con el mismo contenido, se consideran la misma tupla.
+:::
+
+```python
+10 == 10.0 # int y floats tienen valores equivalentes
+10 is 10.0 # pero no son el mismo objeto
+v = 'valor'
+v is 'valor' # True, strings son inmutables
+l=[1,2,3]
+l == [1,2,3] # True, tienen los mismos valores
+l is [1,2,3] # False, mismo valor pero son dos listas diferentes
+l2=l
+l is l2 # True, los dos apuntan a la misma lista
+t=1,2,3
+t is 1,2,3 # True, tupla inmutable
+```
+
+## Sent. condicional `if`
+
+
+```python
+if name is 'Aitor':
+	print("Hola Aitor, bienvenido a casa")
+if name is not 'Aitor':
+	print("Fuera intruso!")
+```
+
+## Sent. alternativa `else`
+
+
+```python
+if name is 'Aitor':
+	print("Hola Aitor, bienvenido a casa")
+else:
+	print("Fuera intruso!")
+```
+
+## Sent. alternativa `elif`
+
+
+```python
+if name is 'Aitor':
+	print("Hola Aitor, bienvenido a casa")
+else:
+	if name is 'David':
+		print("Hola David, sientate, Aitor no tardará en llegar")
+	else:
+		print("Fuera intruso!")
+```
+```python
+if name is 'Aitor':
+	print("Hola Aitor, bienvenido a casa")
+elif name is 'David':
+	print("Hola David, sientate, Aitor no tardará en llegar")
+else:
+	print("Fuera intruso!")
+```
+
+:::notes
+Si no se cumple la primera condición, a menudo
+queremos comprobar otra segunda.
+Eso acaba haciendo niveles y niveles.
+Con la sentencia `elif` podemos seguir poniendo
+condiciones alternativas en el mismo nivel.
+:::
+
+## Operadores booleanos
+
+`and not or`
+
+Combinan booleanos y generan booleanos
+
+```python
+pasaEsto or pasaAquello  # con que pase alguna pasa
+                         # solo si no pasa ninguna no pasa
+
+pasaEsto and pasaAquello # tienen que pasar las dos
+	                     # si una no pasa no pasa
+
+not pasaEsto      # Pasa cuando no pasaEsto,
+                  # y no pasa cuando pasaEsto
+```
+
+## Operadores booleanos
+
+::: columns
+:::: column
+a     |   b   |	a or b
+:----:+:-----:+:-------:
+**True**  | **True**  | **True**   
+**True**  | _False_ | **True**   
+_False_ | **True**  | **True**   
+_False_ | _False_ | _False_  
+::::
+:::: column
+a     |   b   | a and b
+:----:+:-----:+:-------:
+**True**  | **True**  | **True**    
+**True**  | _False_ | _False_   
+_False_ | **True**  | _False_   
+_False_ | _False_ | _False_   
+::::
+:::
+
+a     |	not a
+:----:+:--------:
+**True**  | _False_
+_False_ | **True**
+
+
 # Funciones
 
 ## Definir funciones `def`
@@ -976,179 +1298,4 @@ Primero los posicionales
 Fijaos que la sintaxis es similar en la llamada
 como en la definición de valor por defecto.
 :::
-
-# Rellenando con `format`
-
-## Posicionalmente
-
-Los corchetes indican donde va el parámetro a insertar
-
-```python
->>> "El resultado es {}".format(4)
-El resultado es 4
-
->>> "{} tiene {} puntos".format("Aitor", 100)
-Aitor tiene 100 puntos
-```
-
-## Con claves
-
-Cuando empezamos a añadir parámetros,
-igual que con las funciones,
-podemos perdernos contando.
-
-```python
->>> "{name} tiene {points} puntos".format(
-...     name="Aitor",
-...     points=100,
-... )
-Aitor tiene 100 puntos
-```
-
-:::notes
-:::
-
-## Controlando el formato
-
-Los `:` indican una cadena de formato.
-
-```python
->>> 'El saldo al dia de hoy es {saldo:08.2f}€'.format(saldo=34.2)
-'El saldo al dia de hoy es 00034.20€'
-```
-
-Rellena con `0` a la izquierda hasta que ocupe 8 caràcteres, 2 de los cuales serán decimales.
-
-[Mini lenguaje de formato](https://docs.python.org/3/library/string.html#format-specification-mini-language)
-
-# Decisiones
-
-## Booleanos (`bool`)
-
-`True` y `False`
-
-Sirven para tomar decisiones
-según lo que se encuentra el script
-
-Es lo que da inteligencia al ordenador
-
-¿Cómo los obtenemos?
-
-## Ops relacionales
-
-`< <= == != >= >`
-
-```python
->>> a = 3
->>> 1<a  # operador de inequalidad 'menor que'
-True
->>> 10<a
-False
->>> 1 <= a <= 10  # ¿del 1 al 10, ambos incluidos?
-True
->>> 'alfredo' < 'benito'  # orden alfabético
-True
->>> 'alfredo' == 'alfredo' # igualdad
-True
->>> 'alfredo' != 'alfredo' # desigualdad
-False
-```
-
-## Ops de identidad `is`
-
-¿Son el mismo objeto?
-No si tienen el mismo valor, si no si son el mismo objeto.
-
-:::notes
-Inmutables (numbers, tuple, str, bool): mismo valor ok
-
-Mutables (list, dict, set): aunque tengan el mismo valor han de ser el mismo objeto.
-:::
-
-```python
-v = 'valor'
-v is 'valor' # True, strings son inmutables
-t=1,2,3
-t is 1,2,3 # True, tupla inmutable
-l=[1,2,3]
-l is [1,2,3] # False, mismo valor pero son dos listas diferentes
-l2=l
-l is l2 # True, los dos apuntan a la misma lista
-```
-
-## Sent. condicional `if`
-
-
-```python
-if name is 'Aitor':
-	print("Hola Aitor, bienvenido a casa")
-if name is not 'Aitor':
-	print("Fuera intruso!")
-```
-
-## Sent. alternativa `else`
-
-
-```python
-if name is 'Aitor':
-	print("Hola Aitor, bienvenido a casa")
-else:
-	print("Fuera intruso!")
-```
-
-## Sent. alternativa `elif`
-
-
-```python
-if name is 'Aitor':
-	print("Hola Aitor, bienvenido a casa")
-else:
-	if name is 'David':
-		print("Hola David, sientate, Aitor no tardará en llegar")
-	else:
-		print("Fuera intruso!")
-```
-```python
-if name is 'Aitor':
-	print("Hola Aitor, bienvenido a casa")
-elif name is 'David':
-	print("Hola David, sientate, Aitor no tardará en llegar")
-else:
-	print("Fuera intruso!")
-```
-
-:::notes
-Si no se cumple la primera condición, a menudo
-queremos comprobar otra segunda.
-Eso acaba haciendo niveles y niveles.
-Con la sentencia `elif` podemos seguir poniendo
-condiciones alternativas en el mismo nivel.
-:::
-
-## Operadores booleanos
-
-`and not or`
-
-Combinan booleanos y generan booleanos
-
-```python
-pasaEsto or pasaAquello  # con que pase alguna pasa
-                         # solo si no pasa ninguna no pasa
-
-pasaEsto and pasaAquello # tienen que pasar las dos
-	                     # si una no pasa no pasa
-
-not pasaEsto      # Pasa cuando no pasaEsto,
-                  # y no pasa cuando pasaEsto
-```
-
-## Operadores booleanos
-
-a | 	b |	a or b |	a and b |	not a
---+-------+--------+------------+----------
-True  | True  | True  | True  | False
-True  | False | True  | False | False
-False | True  | True  | False | True
-False | False | False | False | True
-
 
