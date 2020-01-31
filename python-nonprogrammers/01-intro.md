@@ -2,13 +2,14 @@
 
 ## Objetivo
 
-Introducir a personas del ET
+Introducir
+el lenguaje de programación Python
+a personas del ET
 que no hayan programado nunca
-al lenguaje de programación Python
 
 Dos sesiones estilo _manos a la obra_ (hands-on)
 
-Meta: Leer una hoja de cálculo, procesarla y generar un informe chulo
+Meta: Leer una hoja de cálculo, procesarla y generar un informe con cara y ojos
 
 Los ejemplos de la presentación los podeis copiar
 en vuestros ordenadores
@@ -49,29 +50,23 @@ Lidiaban con lenguajes primitivos o directamente código máquina.
 para comunicarnos con la máquina
 
 Los **lenguajes de programación** nos abstraen de la máquina
-para que nos concentremos en el problema,\
+para concentrarnos en el problema,\
 
 :::columns
 ::::column
-y, así, llegar [más allá](https://github.com/casper-astro?language=python):
+y, así, llegar [más lejos](https://github.com/casper-astro?language=python):
+
+¿Cómo se pasa de **Código fuente** a **Código máquina**?
 ::::
 ::::column
-![](images/blackhole.jpg){style=width:40%}
+![](images/blackhole-bouman.jpg){style=width:70%}
 ::::
 :::
 
-¿Cómo se pasa de **Código fuente** a **Código máquina**?
 
 :::notes
 No todos los lenguajes consiguen abstraer igual de bien.
 Algunos incluso se meten en medio.
-
-Un buen lenguaje de programación nos abstraerá
-del hierro e incluso del lenguaje y nos permitirá
-pensar en el problema.
-
-Usando lenguajes de más alto nivel (más lejanos del hierro)
-nos permite también ir más allá en lo que programamos.
 
 Python es un lenguaje fácil de aprender (**escalon de entrada bajo**)
 pero que al mismo tiempo permite crear aplicaciones industriales, científicas y empresariales muy complejas... (**alto techo**)
@@ -87,7 +82,7 @@ _Traductor de libros_
 
 Genera un ejecutable
 
-Se ejecuta sin código ni compilador
+Se ejecuta el binario, sin código ni compilador
 
 C, C++, Java, Pascal...
 :::
@@ -98,7 +93,7 @@ _Traducción simultanea_
 
 Ejecuta mientras interpreta
 
-Necesitas interprete y código
+Necesitas interprete y código para ejecutar
 
 Python, Perl, Bash, PHP...
 ::::
@@ -110,19 +105,24 @@ Para traducir el código fuente en código máquina, usamos **compiladores** o *
 Los **compiladores** son como traductores de libros.
 Se tiran meses traduciendo correctamente un libro.
 Cuando lo publican ya està, la traducción es lo que necesitas,
-no necesitas ni el original en inglés ni al traductor.
+no necesitas ni el original ni al traductor.
+Los compiladores de forma similar generan un binario.
+Ese binario es lo único  que se necesita para ejecutar el programa.
 
 Los **interpretes** son más como la traducción simultània.
 Van ejecutando a medida que traducen.
 No se lo puede currar tanto, pero es más rápida y flexible.
-Eso sí, necesitas al interprete al lado para funcionar.
+Eso sí, necesitas al interprete al lado para funcionar
+y siempre el código fuente.
+
 
 **Python usa intérprete**
 :::
 
 ## Python mola
 
-Es muy fácil de empezar
+
+Es muy fácil de aprender
 
 No te limita cuando quieres crecer
 
@@ -152,8 +152,6 @@ esa es la forma que queda.
 
 [![](images/logo-codecombat.png)
 ](https://codecombat.com)
-
-![](images/codecombat.jpg)
 
 Más [aquí](https://code.org/learn)
 
@@ -296,7 +294,7 @@ miscript.py
 print("Hola Mundo") # Una sentencia por línia
 print("Hola caracola")
 
-# Sentencias con : empiezan sub sentencias indentadas
+# Sentencias con ':' empiezan subsentencias indentadas
 if True:
     print("Primera subsentencia")
     print("Segunda subsentencia")
@@ -347,9 +345,11 @@ if True: print("subsentencia rápida")
 ::: notes
 Norma: Una sentencia por linea.
 
-Nos la podemos saltar.
+A veces conviene saltárselas.
+Por ejemplo si tenemos lineas demasiado largas y conviene partirlas.
 
-De las cuatro, la primera es la única que mola.
+De las cuatro formas de romper la regla de una sentencia por linia,
+la primera es la única que mola.
 
 Los símbolos que abren y cierran son: `{} [] () "" '' """ """ ''' '''`
 
@@ -362,7 +362,6 @@ Se lee mejor el código con líneas cortas.
 
 Si partimos líneas, aunque no se exije, mejor indentar para que se lea mejor.
 :::
-
 
 
 
