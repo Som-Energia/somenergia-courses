@@ -14,7 +14,7 @@ Public materials used in internal Som Energia training courses.
 - [Generation kWh: Funcionamiento interno](2019-09-17-generationkwh)
 - [Transicion Python 3](2019-09-19-python3transition)
 - [Arquitectures Multicapa](2019-12-19-multitier)
-- [WIP: Python para no programadoras](python-nonprogrammers)
+- [Python para no programadoras](2020-02-06-python-nonprogrammers)
 - [WIP: Testing primer](softeng)
 - [WIP: D3](d3)
 - [WIP: CLI Graphics](cligraphics/)
