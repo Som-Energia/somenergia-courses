@@ -1,5 +1,7 @@
 # Introducción
 
+# Sesión 1 <br><small>2020-02-06</small><br> :snake:
+
 ## Objetivo
 
 Introducir
@@ -420,8 +422,7 @@ pero hay otros operadores no tan evidentes.
 A destacar:
 
 - Usamos el `*` para la multiplicación,
-	- Si no te sorprende es que ya has programado o has editado hojas de cálculo.
-	- En mates, se usa el punto elevado, la cruz o simplemente la juxtaposición.
+    - Como como en las hojas de cálculo
 - Los diferentes tipos de división
 - El doble `**` para la potencia.
 	- Otros lenguajes usan el `^` o no tienen el operador.
@@ -1033,6 +1034,15 @@ el 2 despues del punto indica que muestre dos decimales.
 el 10 de antes indica que todo ocupe 10 espacios.
 
 :::
+
+
+# Sesión 2 <br><small>2020-02-13</small><br> :snake: :snake:
+
+## Recordatorio
+
+Numeros, Textos, Estructuras
+
+Operaciones, Funciones, Métodos
 
 
 # Decisiones
