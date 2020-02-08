@@ -2,9 +2,23 @@
 
 # Repaso
 
-## Sesion Anterior
+## Sesión Anterior
 
 <asciinema-player src="sessio1-ascii.cast"></asciinema-player>
+
+:::notes
+Esto que parece un video es una sesion grabada de consola
+mientras estuve haciendo la clase.
+
+Puedes reproducirlo, pararlo, avanzarlo igual que un vídeo,
+pero, también, puedes seleccionar el texto de los comandos y copiarlos
+en tu consola, porque es texto, no imagen.
+
+La sesión se queda muchos ratos parada,
+de cuando estaba explicando cosas o atendiendo vuestras consultas,
+intentare grabar una sesión sin interrupciones
+y a ver si puedo añadirle el audio.
+:::
 
 ## Modos de ejecución
 
