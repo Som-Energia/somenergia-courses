@@ -19,6 +19,8 @@ keyboard:
   46: prev
   13: alert('hello')
 include-before: |
+	<link rel="stylesheet" type="text/css" href="./asciinema-player.css" />
+	<script src="./asciinema-player.js"></script>
 	<style>
 		.reveal {
 			background: #d5e20f88;

@@ -2,6 +2,10 @@
 
 # Repaso
 
+## Sesion Anterior
+
+<asciinema-player src="sessio1-ascii.cast"></asciinema-player>
+
 ## Modos de ejecución
 
 El **interprete interactivo** `ipython3`.\
