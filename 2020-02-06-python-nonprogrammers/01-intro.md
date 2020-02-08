@@ -1,6 +1,6 @@
-# Introducción
-
 # Sesión 1 <br><small>2020-02-06</small><br> :snake:
+
+# Introducción
 
 ## Objetivo
 
@@ -938,6 +938,8 @@ El índice final no se incluye
 'ogaleicrum'
 ```
 
+
+
 ## Métodos de textos
 
 :::notes
@@ -974,6 +976,24 @@ aunque por dentro sean muy distintos.
 'XXXracadXXXra'
 ```
 
+## Listas y textos
+
+Textos y listas, ambos son secuencias de cosas.\
+Comparten algunas operaciones.
+
+**Ejercicio:** Prueba en el interactivo:
+
+```python
+milista = [1,2,3,4,"cinco",6,7,"ocho"]
+len(milista)
+milista.count('cinco')
+7 in milista
+milista[0]
+milista[-1]
+milista[3:8]
+milista[::-1]
+```
+
 ## Partiendo y juntando
 
 ```python
@@ -993,6 +1013,8 @@ con underlines `"una_frase_con_palabras"` o
 en camell case `"unaFraseConPalabras"`
 
 :::notes
+
+Solucion al ejercicio:
 ```python
 literal = 'Una frase con palabras'
 underline = '_'.join(literal.lower().split())
@@ -1000,7 +1022,33 @@ camellcase = literal[0].lower()+''.join(literal.title().split())[1:]
 ```
 
 Si te encuentras ese código lo tienes que escudriñar.
-Mejor usar variables intermedias con nombres buenos, o incluso...
+Mejor usar variables intermedias con nombres buenos.
+
+Si quieres reusar el código, define una función:
+
+```python
+def underline(frase):
+	# "una frase en minúsculas"
+	enMinusculas = frase.lower()
+	# ["una", "frase", "en", "minúsculas"]
+	partida = enMinusculas.split()
+	# "una_frase_en_minúsculas"
+	return '_'.join(frasePartida)
+
+def camellCase(frase):
+	# "Una Frase Con Palabras"
+	titled = frase.title()
+	# ["Una", "Frase", "Con", "Palabras"]
+	partido = titled.partido()
+	# "UnaFraseConPalabras"
+	rejuntado = ''.join(partido)
+	# "unaFraseConPalabras"
+	return rejuntado[0].lower() + rejuntado[1:]
+
+unafrase = "Una frase en minúsculas"
+print(underline(unafrase))
+print(camellCase(unafrase))
+```
 :::
 
 
@@ -1035,276 +1083,4 @@ el 10 de antes indica que todo ocupe 10 espacios.
 
 :::
 
-
-# Sesión 2 <br><small>2020-02-13</small><br> :snake: :snake:
-
-## Recordatorio
-
-Numeros, Textos, Estructuras
-
-Operaciones, Funciones, Métodos
-
-
-# Decisiones
-
-## Booleanos (`bool`)
-
-`True` y `False`
-
-Sirven para tomar decisiones
-según lo que se encuentra el script
-
-Es lo que da inteligencia al ordenador
-
-¿Cómo los obtenemos?
-
-## Ops relacionales
-
-`< <= == != >= >`
-
-```python
->>> a = 3
->>> 1<a  # operador de inequalidad 'menor que'
-True
->>> 10<a
-False
->>> 1 <= a <= 10  # ¿del 1 al 10, ambos incluidos?
-True
->>> 'alfredo' < 'benito'  # orden alfabético
-True
->>> 'alfredo' == 'alfredo' # igualdad
-True
->>> 'alfredo' != 'alfredo' # desigualdad
-False
-```
-
-## Ops de identidad `is`
-
-`is` ¿Son el mismo objeto?\
-`==` ¿Tienen un valor equivalente?\
-
-:::notes
-Inmutables (numbers, tuple, str, bool): si tienen el mismo tipo y valor son el mismo objeto
-
-Mutables (list, dict, set): aunque tengan el mismo valor han de ser el mismo objeto
-
-Las listas (mutables) se pueden modificar manteniendo su identidad.
-
-Las tuplas (immutables) no se pueden modificar, cada tupla con un contenido diferente se considera un objeto diferente.
-Dos tuplas construidas en sitios diferentes, pero con el mismo contenido, se consideran la misma tupla.
-:::
-
-```python
-10 == 10.0 # int y floats tienen valores equivalentes
-10 is 10.0 # pero no son el mismo objeto
-v = 'valor'
-v is 'valor' # True, strings son inmutables
-l=[1,2,3]
-l == [1,2,3] # True, tienen los mismos valores
-l is [1,2,3] # False, mismo valor pero son dos listas diferentes
-l2=l
-l is l2 # True, los dos apuntan a la misma lista
-t=1,2,3
-t is 1,2,3 # True, tupla inmutable
-```
-
-## Sent. condicional `if`
-
-
-```python
-if name is 'Aitor':
-	print("Hola Aitor, bienvenido a casa")
-if name is not 'Aitor':
-	print("Fuera intruso!")
-```
-
-## Sent. alternativa `else`
-
-
-```python
-if name is 'Aitor':
-	print("Hola Aitor, bienvenido a casa")
-else:
-	print("Fuera intruso!")
-```
-
-## Sent. alternativa `elif`
-
-
-```python
-if name is 'Aitor':
-	print("Hola Aitor, bienvenido a casa")
-else:
-	if name is 'David':
-		print("Hola David, sientate, Aitor no tardará en llegar")
-	else:
-		print("Fuera intruso!")
-```
-```python
-if name is 'Aitor':
-	print("Hola Aitor, bienvenido a casa")
-elif name is 'David':
-	print("Hola David, sientate, Aitor no tardará en llegar")
-else:
-	print("Fuera intruso!")
-```
-
-:::notes
-Si no se cumple la primera condición, a menudo
-queremos comprobar otra segunda.
-Eso acaba haciendo niveles y niveles.
-Con la sentencia `elif` podemos seguir poniendo
-condiciones alternativas en el mismo nivel.
-:::
-
-## Operadores booleanos
-
-`and not or`
-
-Combinan booleanos y generan booleanos
-
-```python
-pasaEsto or pasaAquello  # con que pase alguna pasa
-                         # solo si no pasa ninguna no pasa
-
-pasaEsto and pasaAquello # tienen que pasar las dos
-	                     # si una no pasa no pasa
-
-not pasaEsto      # Pasa cuando no pasaEsto,
-                  # y no pasa cuando pasaEsto
-```
-
-## Operadores booleanos
-
-::: columns
-:::: column
-a     |   b   |	a or b
-:----:+:-----:+:-------:
-**True**  | **True**  | **True**   
-**True**  | _False_ | **True**   
-_False_ | **True**  | **True**   
-_False_ | _False_ | _False_  
-::::
-:::: column
-a     |   b   | a and b
-:----:+:-----:+:-------:
-**True**  | **True**  | **True**    
-**True**  | _False_ | _False_   
-_False_ | **True**  | _False_   
-_False_ | _False_ | _False_   
-::::
-:::
-
-a     |	not a
-:----:+:--------:
-**True**  | _False_
-_False_ | **True**
-
-
-# Funciones
-
-## Definir funciones `def`
-
-```python
->>> def media(a, b):
-...     suma = a+b
-...     return suma/2
-...
->>> media(3, 1)
-2.0
->>> media(4, 5)
-4.5
->>> suma
-NameError: name 'suma' is not defined
-```
-
-:::notes
-Permiten reutilizar código,
-y ¡ponerle nombre!
-Si le ponemos un buen nombre,
-no hace falta que miremos el código para entender que pasa.
-
-- `a` y `b` son los parametros
-- adoptan diferentes valores cada vez que llamamos la funcion
-- `suma` es una variable local
-- `a`, `b`, `suma` no estan definidos fuera de la función. Que no choquen variables ayuda
-- `return` indica el valor que retornarà la función
-- el `return` sale de la funcion y no ejecuta nada más, si hubiera más subsentencias no las ejecutaría
-- si llegase al final de la función sin encontrar un `return`, retornaria `None`
-- `media` es un nombre, igual que una variable, si definimos una variable con ese nombre ocultara la función
-:::
-
-## Parámetros opcionales
-
-Hacemos un parámetro opcional dándole
-un valor por defecto en la definición.
-
-```python
->>> def aplicaIva(baseImponible, factorIva=0.21):
-...    return baseImponible*(1+factorIva)
-...
->>> aplicaIva(100)
-121.0
->>> aplicaIva(100, 0.07)
-107.0
-```
-
-:::notes
-Si asignamos un valor en la definicion del paràmetro,
-podemos no especificarlo.
-:::
-
-## Parámetros opcionales
-
-Se rellenan por posición.
-
-```python
->>> def prueba(a,b,c='c',d='d'):
-...    print(a,b,c,d)
-...
->>> prueba(1)
-TypeError: prueba() takes at least 2 arguments (1 given)
->>> prueba(1,2)
-1 2 c d
->>> prueba(1,2,3)
-1 2 3 d
->>> prueba(1,2,3,4)
-1 2 3 4
->>> prueba(1,2,3,4,5)
-TypeError: prueba() takes at most 4 arguments (5 given)
-```
-
-¿Que pasa si queremos pasar el segundo opcional pero dejar el primero por defecto?
-
-
-## Parámetros opcionales
-
-Los opcionales tienen que ser los últimos paràmetros.
-
-```python
->>> def prueba(a,b,c='c',d):
-...    print(a,b,c,d)
-...
-SyntaxError: non-default argument follows default argument
-```
-
-¿Que pasa si queremos pasar el segundo opcional pero dejar el primero por defecto?
-
-## Parámetros por clave
-
-```python
->>> aplicaIva(100, factorIva=0.07)
-107
-```
-Ayuda la lectura, cuando hay varios parámetros
-
-Permite reordenar los parámetros respecto la definición
-
-Primero los posicionales
-
-
-:::notes
-Fijaos que la sintaxis es similar en la llamada
-como en la definición de valor por defecto.
-:::
 
