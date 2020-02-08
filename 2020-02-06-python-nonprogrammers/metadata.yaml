@@ -48,6 +48,9 @@ include-before: |
 			padding: 3px;
 			color: #500;
 		}
+		.reveal div.sourceCode {
+			margin: 0 0;
+		}
 		.slide strong {
 			color: #060;
 		}

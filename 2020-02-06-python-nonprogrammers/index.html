@@ -1670,6 +1670,9 @@ background-color: #F0F1EB; } }
         padding: 3px;
         color: #500;
     }
+    .reveal div.sourceCode {
+        margin: 0 0;
+    }
     .slide strong {
         color: #060;
     }
@@ -2415,6 +2418,16 @@ Comparten algunas operaciones.</p>
 </section></section>
 <section id="sesión-2-2020-02-13" class="title-slide slide level1"><h1>Sesión 2 <br><small>2020-02-13</small><br> <span class="emoji" data-emoji="snake">🐍</span> <span class="emoji" data-emoji="snake">🐍</span></h1></section>
 <section><section id="repaso" class="title-slide slide level1"><h1>Repaso</h1></section>
+<section id="modos-de-ejecución" class="slide level2">
+<h2>Modos de ejecución</h2>
+<p>El <strong>interprete interactivo</strong> <code>ipython3</code>.<br />
+Para ejecutar comandos en vivo y explorar.<br />
+Histórico editable de comandos<br />
+Autocompletar con el tabulador</p>
+<p>Los <strong>scripts</strong>: cuando la cosa se complica,<br />
+mejor tener los comandos en un fichero de texto .py<br />
+y lanzarlos de golpe con el intérprete</p>
+</section>
 <section id="sintaxis" class="slide level2">
 <h2>Sintaxis</h2>
 <p>La sintaxis general: una línea por sentencia<br />
@@ -2464,7 +2477,7 @@ Hoy los veremos</p>
 <p>Tomar decisiones</p>
 <p>Recorrer estructuras</p>
 <p>Usar diccionarios</p>
-<p>Instalar e importar librerías</p>
+<p>Usar librerías</p>
 <p>Manipular ficheros</p>
 </section></section>
 <section><section id="decisiones" class="title-slide slide level1"><h1>Decisiones</h1></section>
@@ -2546,18 +2559,33 @@ si la condición se cumple</p>
 <p>Si no se cumple la primera condición, a menudo queremos comprobar otra segunda. Eso acaba haciendo niveles y niveles. Con la sentencia <code>elif</code> podemos seguir poniendo condiciones alternativas en el mismo nivel.</p>
 </aside>
 </section>
+<section id="mútiples-elif" class="slide level2">
+<h2>Mútiples <code>elif</code></h2>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>guests <span class="op">=</span> <span class="st">&quot;Adria Lucia Manel Vero&quot;</span>.split()</span>
+<span id="cb48-2"><a href="#cb48-2"></a>owner <span class="op">=</span> <span class="st">&quot;Carme&quot;</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a></span>
+<span id="cb48-4"><a href="#cb48-4"></a>name <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;¿Quien vive?</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb48-5"><a href="#cb48-5"></a><span class="cf">if</span> name <span class="op">==</span> owner:</span>
+<span id="cb48-6"><a href="#cb48-6"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Hola </span><span class="sc">{</span>owner<span class="sc">}</span><span class="ss">, bienvenida a casa&quot;</span>)</span>
+<span id="cb48-7"><a href="#cb48-7"></a><span class="cf">elif</span> name <span class="kw">in</span> guests:</span>
+<span id="cb48-8"><a href="#cb48-8"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Hola </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">, sientate, </span><span class="sc">{</span>owner<span class="sc">}</span><span class="ss"> no tardará en llegar&quot;</span>)</span>
+<span id="cb48-9"><a href="#cb48-9"></a><span class="cf">elif</span> name <span class="op">==</span> <span class="st">&quot;El de la luz&quot;</span>:</span>
+<span id="cb48-10"><a href="#cb48-10"></a>    <span class="bu">print</span>(<span class="st">&quot;Deje de intentar timarme que estoy en Som Energia&quot;</span>)</span>
+<span id="cb48-11"><a href="#cb48-11"></a><span class="cf">else</span>:</span>
+<span id="cb48-12"><a href="#cb48-12"></a>    <span class="bu">print</span>(<span class="st">&quot;Fuera intruso!&quot;</span>)</span></code></pre></div>
+</section>
 <section id="operadores-booleanos" class="slide level2">
 <h2>Operadores booleanos</h2>
 <p><code>and not or</code></p>
 <p>Combinan booleanos y generan booleanos</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>pasaEsto <span class="kw">or</span> pasaAquello  <span class="co"># con que pase alguna pasa</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a>                         <span class="co"># solo si no pasa ninguna no pasa</span></span>
-<span id="cb48-3"><a href="#cb48-3"></a></span>
-<span id="cb48-4"><a href="#cb48-4"></a>pasaEsto <span class="kw">and</span> pasaAquello <span class="co"># tienen que pasar las dos</span></span>
-<span id="cb48-5"><a href="#cb48-5"></a>                         <span class="co"># si una no pasa no pasa</span></span>
-<span id="cb48-6"><a href="#cb48-6"></a></span>
-<span id="cb48-7"><a href="#cb48-7"></a><span class="kw">not</span> pasaEsto      <span class="co"># Pasa cuando no pasaEsto,</span></span>
-<span id="cb48-8"><a href="#cb48-8"></a>                  <span class="co"># y no pasa cuando pasaEsto</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>pasaEsto <span class="kw">or</span> pasaAquello  <span class="co"># con que pase alguna pasa</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>                         <span class="co"># solo si no pasa ninguna no pasa</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a></span>
+<span id="cb49-4"><a href="#cb49-4"></a>pasaEsto <span class="kw">and</span> pasaAquello <span class="co"># tienen que pasar las dos</span></span>
+<span id="cb49-5"><a href="#cb49-5"></a>                         <span class="co"># si una no pasa no pasa</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a></span>
+<span id="cb49-7"><a href="#cb49-7"></a><span class="kw">not</span> pasaEsto      <span class="co"># Pasa cuando no pasaEsto,</span></span>
+<span id="cb49-8"><a href="#cb49-8"></a>                  <span class="co"># y no pasa cuando pasaEsto</span></span></code></pre></div>
 </section>
 <section id="operadores-booleanos-1" class="slide level2">
 <h2>Operadores booleanos</h2>
@@ -2654,20 +2682,20 @@ si la condición se cumple</p>
 Estructuras vacías: <code>&quot;&quot;</code> <code>{}</code> <code>[]</code> …<br />
 El no-objeto: <code>None</code><br />
 </p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>alumnos <span class="op">=</span> [ .... ]</span>
-<span id="cb49-2"><a href="#cb49-2"></a><span class="co"># Estas condiciones serian equivalentes</span></span>
-<span id="cb49-3"><a href="#cb49-3"></a><span class="cf">if</span> <span class="bu">len</span>(alumnos) <span class="op">!=</span> <span class="dv">0</span>: ...    <span class="co"># bool False o True</span></span>
-<span id="cb49-4"><a href="#cb49-4"></a><span class="cf">if</span> <span class="bu">len</span>(alumnos): ...         <span class="co"># int  0 o diferente de 0</span></span>
-<span id="cb49-5"><a href="#cb49-5"></a><span class="cf">if</span> alumnos: ...              <span class="co"># list [] o llena</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>alumnos <span class="op">=</span> [ .... ]</span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="co"># Estas condiciones serian equivalentes</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a><span class="cf">if</span> <span class="bu">len</span>(alumnos) <span class="op">!=</span> <span class="dv">0</span>: ...    <span class="co"># bool False o True</span></span>
+<span id="cb50-4"><a href="#cb50-4"></a><span class="cf">if</span> <span class="bu">len</span>(alumnos): ...         <span class="co"># int  0 o diferente de 0</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a><span class="cf">if</span> alumnos: ...              <span class="co"># list [] o llena</span></span></code></pre></div>
 </section></section>
-<section><section id="recorridos" class="title-slide slide level1"><h1>Recorridos</h1></section>
+<section><section id="recorridos-iteraciones" class="title-slide slide level1"><h1>Recorridos<br>(Iteraciones)</h1></section>
 <section id="sentencia-for" class="slide level2">
 <h2>Sentencia <code>for</code></h2>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>milista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span>
-<span id="cb50-2"><a href="#cb50-2"></a></span>
-<span id="cb50-3"><a href="#cb50-3"></a><span class="cf">for</span> numero <span class="kw">in</span> milista:    <span class="co"># Ojo, no olvides los dos puntos!</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a>    <span class="bu">print</span>(<span class="ss">f&quot;El numero es </span><span class="sc">{</span>numero<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb50-5"><a href="#cb50-5"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Su cuadrado es </span><span class="sc">{</span>numero<span class="op">*</span>numero<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>milista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span>
+<span id="cb51-2"><a href="#cb51-2"></a></span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="cf">for</span> numero <span class="kw">in</span> milista:    <span class="co"># Ojo, no olvides los dos puntos!</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a>    <span class="bu">print</span>(<span class="ss">f&quot;El numero es </span><span class="sc">{</span>numero<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb51-5"><a href="#cb51-5"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Su cuadrado es </span><span class="sc">{</span>numero<span class="op">*</span>numero<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
 <p><code>numero</code> es una variable que va adoptando los sucesivos valores de <code>milista</code></p>
 <p>Para cada valor se ejecutan las subsentencias.</p>
 <aside class="notes">
@@ -2683,11 +2711,11 @@ o cualquier cosa que contenga o genere elementos.</p>
 <p>¿Textos? Pruébalo:</p>
 <div class="columns">
 <div class="column">
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>equipo <span class="op">=</span> <span class="st">&quot;tigres&quot;</span>.upper()</span>
-<span id="cb51-2"><a href="#cb51-2"></a><span class="cf">for</span> letra <span class="kw">in</span> equipo:</span>
-<span id="cb51-3"><a href="#cb51-3"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Dame una </span><span class="sc">{</span>letra<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb51-4"><a href="#cb51-4"></a></span>
-<span id="cb51-5"><a href="#cb51-5"></a><span class="bu">print</span>(<span class="ss">f&quot;¡¡¡</span><span class="sc">{</span>equipo<span class="sc">}</span><span class="ss">!!!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>equipo <span class="op">=</span> <span class="st">&quot;tigres&quot;</span>.upper()</span>
+<span id="cb52-2"><a href="#cb52-2"></a><span class="cf">for</span> letra <span class="kw">in</span> equipo:</span>
+<span id="cb52-3"><a href="#cb52-3"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Dame una </span><span class="sc">{</span>letra<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb52-4"><a href="#cb52-4"></a></span>
+<span id="cb52-5"><a href="#cb52-5"></a><span class="bu">print</span>(<span class="ss">f&quot;¡¡¡</span><span class="sc">{</span>equipo<span class="sc">}</span><span class="ss">!!!&quot;</span>)</span></code></pre></div>
 </div><div class="column">
 <pre><code>¡Dame una &#39;T&#39;!
 ¡Dame una &#39;I&#39;!
@@ -2699,7 +2727,7 @@ o cualquier cosa que contenga o genere elementos.</p>
 </div>
 </div>
 <aside class="notes">
-<p>Con propiedad <em>iterables</em>, no recorribles.</p>
+<p>Para ser correctos, se llaman <em>iterables</em>, no recorribles.</p>
 </aside>
 </section>
 <section id="intérvalos-range" class="slide level2">
@@ -2709,24 +2737,24 @@ o cualquier cosa que contenga o genere elementos.</p>
 no crea una lista de 2000000 numeros en memoria</p>
 <div class="columns">
 <div class="column">
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb53-2"><a href="#cb53-2"></a>    <span class="bu">print</span>(i)</span>
-<span id="cb53-3"><a href="#cb53-3"></a></span>
-<span id="cb53-4"><a href="#cb53-4"></a><span class="co"># Similar a los [slices]</span></span>
-<span id="cb53-5"><a href="#cb53-5"></a><span class="bu">range</span>(<span class="dv">10</span>) <span class="co"># 0 to 9</span></span>
-<span id="cb53-6"><a href="#cb53-6"></a><span class="bu">range</span>(<span class="dv">3</span>,<span class="dv">10</span>) <span class="co"># 3 to 9</span></span>
-<span id="cb53-7"><a href="#cb53-7"></a><span class="bu">range</span>(<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">2</span>) <span class="co"># 3, 5, 7, 9</span></span>
-<span id="cb53-8"><a href="#cb53-8"></a><span class="bu">range</span>(<span class="dv">10</span>,<span class="dv">3</span>) <span class="co"># Empty</span></span>
-<span id="cb53-9"><a href="#cb53-9"></a><span class="bu">range</span>(<span class="dv">10</span>,<span class="dv">3</span>,<span class="op">-</span><span class="dv">2</span>) <span class="co"># 10, 8, 6, 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb54-2"><a href="#cb54-2"></a>    <span class="bu">print</span>(i)</span>
+<span id="cb54-3"><a href="#cb54-3"></a></span>
+<span id="cb54-4"><a href="#cb54-4"></a><span class="co"># Similar a los [slices]</span></span>
+<span id="cb54-5"><a href="#cb54-5"></a><span class="bu">range</span>(<span class="dv">10</span>) <span class="co"># 0 to 9</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a><span class="bu">range</span>(<span class="dv">3</span>,<span class="dv">10</span>) <span class="co"># 3 to 9</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a><span class="bu">range</span>(<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">2</span>) <span class="co"># 3, 5, 7, 9</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a><span class="bu">range</span>(<span class="dv">10</span>,<span class="dv">3</span>) <span class="co"># Empty</span></span>
+<span id="cb54-9"><a href="#cb54-9"></a><span class="bu">range</span>(<span class="dv">10</span>,<span class="dv">3</span>,<span class="op">-</span><span class="dv">2</span>) <span class="co"># 10, 8, 6, 4</span></span></code></pre></div>
 </div><div class="column">
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># Common operators</span></span>
-<span id="cb54-2"><a href="#cb54-2"></a>r <span class="op">=</span> <span class="bu">range</span>(<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">2</span>) <span class="co"># 3, 5, 7, 9</span></span>
-<span id="cb54-3"><a href="#cb54-3"></a><span class="bu">len</span>(r) <span class="co"># 4</span></span>
-<span id="cb54-4"><a href="#cb54-4"></a><span class="dv">7</span> <span class="kw">in</span> r <span class="co"># True</span></span>
-<span id="cb54-5"><a href="#cb54-5"></a><span class="dv">6</span> <span class="kw">in</span> r <span class="co"># False</span></span>
-<span id="cb54-6"><a href="#cb54-6"></a><span class="dv">6</span> <span class="kw">not</span> <span class="kw">in</span> r <span class="co"># True</span></span>
-<span id="cb54-7"><a href="#cb54-7"></a>r.index(<span class="dv">7</span>) <span class="co"># 2</span></span>
-<span id="cb54-8"><a href="#cb54-8"></a>r[<span class="dv">2</span>:] <span class="co"># 7, 9</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># Common operators</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>r <span class="op">=</span> <span class="bu">range</span>(<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">2</span>) <span class="co"># 3, 5, 7, 9</span></span>
+<span id="cb55-3"><a href="#cb55-3"></a><span class="bu">len</span>(r) <span class="co"># 4</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a><span class="dv">7</span> <span class="kw">in</span> r <span class="co"># True</span></span>
+<span id="cb55-5"><a href="#cb55-5"></a><span class="dv">6</span> <span class="kw">in</span> r <span class="co"># False</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a><span class="dv">6</span> <span class="kw">not</span> <span class="kw">in</span> r <span class="co"># True</span></span>
+<span id="cb55-7"><a href="#cb55-7"></a>r.index(<span class="dv">7</span>) <span class="co"># 2</span></span>
+<span id="cb55-8"><a href="#cb55-8"></a>r[<span class="dv">2</span>:] <span class="co"># 7, 9</span></span></code></pre></div>
 </div>
 </div>
 <aside class="notes">
@@ -2738,41 +2766,55 @@ no crea una lista de 2000000 numeros en memoria</p>
 </section>
 <section id="listas-del-tirón" class="slide level2">
 <h2>Listas del tirón</h2>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>l <span class="op">=</span> [ x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>) ] <span class="co"># [0, 1, 4, 9, 16, 25]</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a>l <span class="op">=</span> [ x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span> ] <span class="co"># [0, 1, 4, 16, 25]</span></span>
-<span id="cb55-3"><a href="#cb55-3"></a><span class="co"># Parecido a SQL: SELECT .. FROM ... WHERE</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a>l <span class="op">=</span> [ <span class="co"># Como se suele complicar, lo formateamos asi:</span></span>
-<span id="cb55-5"><a href="#cb55-5"></a>    (x, x<span class="op">*</span>x, x<span class="op">*</span>x<span class="op">*</span>x)   <span class="co"># Trio: x, el cuadrado y el cubo</span></span>
-<span id="cb55-6"><a href="#cb55-6"></a>    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)</span>
-<span id="cb55-7"><a href="#cb55-7"></a>    <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span></span>
-<span id="cb55-8"><a href="#cb55-8"></a>]</span>
-<span id="cb55-9"><a href="#cb55-9"></a><span class="co"># Si en vez de [] usamos () no se crea una lista</span></span>
-<span id="cb55-10"><a href="#cb55-10"></a><span class="co"># es un generador de elementos como el range</span></span>
-<span id="cb55-11"><a href="#cb55-11"></a>g <span class="op">=</span> ( x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">60000</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span> )</span>
-<span id="cb55-12"><a href="#cb55-12"></a><span class="co"># No generar listas intermedias acelera la ejecución</span></span></code></pre></div>
+<div class="columns">
+<div class="column">
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>l <span class="op">=</span> []</span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>):</span>
+<span id="cb56-3"><a href="#cb56-3"></a>    l<span class="op">+=</span>[x<span class="op">*</span>x]</span></code></pre></div>
+</div><div class="column">
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># [0, 1, 4, 9, 16, 25]</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>l <span class="op">=</span> [ x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>) ]</span></code></pre></div>
+</div>
+</div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>l <span class="op">=</span> [ x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span> ] <span class="co"># [0, 1, 4, 16, 25]</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>l <span class="op">=</span> [ <span class="co"># Como se suele complicar, lo formateamos asi:</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a>    (x, x<span class="op">*</span>x, x<span class="op">*</span>x<span class="op">*</span>x)   <span class="co"># Trio: x, el cuadrado y el cubo</span></span>
+<span id="cb58-4"><a href="#cb58-4"></a>    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)</span>
+<span id="cb58-5"><a href="#cb58-5"></a>    <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a>]</span>
+<span id="cb58-7"><a href="#cb58-7"></a><span class="co"># Si en vez de [] usamos () no se crea una lista</span></span>
+<span id="cb58-8"><a href="#cb58-8"></a><span class="co"># es un generador de elementos como el range</span></span>
+<span id="cb58-9"><a href="#cb58-9"></a>g <span class="op">=</span> ( x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">60000</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span> )</span>
+<span id="cb58-10"><a href="#cb58-10"></a><span class="co"># No generar listas intermedias acelera la ejecución</span></span></code></pre></div>
 <aside class="notes">
 <p>En inglés se llaman <em>comprehension lists</em> pero me da mucho palo llamarlas así porque cuesta pronunciarlo, y no entiendo que significado aporta comprehension.</p>
 <p>Sirven para generar una lista nueva a partir de un iterable.</p>
+<p>Tienen una estructora similar al SQL: SELECT .. FROM … WHERE</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>[</span>
+<span id="cb59-2"><a href="#cb59-2"></a>    item_expression</span>
+<span id="cb59-3"><a href="#cb59-3"></a>    <span class="cf">for</span> var <span class="kw">in</span> iterable</span>
+<span id="cb59-4"><a href="#cb59-4"></a>    <span class="cf">if</span> item_condition</span>
+<span id="cb59-5"><a href="#cb59-5"></a>]</span></code></pre></div>
 <p>Ojo, el <code>for</code> va sin <code>:</code></p>
 <p>Podemos añadirle una condición de filtro con el <code>if</code> final. Tambien sin <code>:</code></p>
 </aside>
 </section>
-<section id="filtres-iteradors" class="slide level2">
-<h2>Filtres iteradors</h2>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a><span class="op">&gt;&gt;&gt;</span> guests <span class="op">=</span> [<span class="st">&quot;Vane&quot;</span>, <span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Pau&quot;</span>]</span>
-<span id="cb56-2"><a href="#cb56-2"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">enumerate</span>(guests)]</span>
-<span id="cb56-3"><a href="#cb56-3"></a>[(<span class="dv">0</span>,<span class="st">&quot;Vane&quot;</span>), (<span class="dv">1</span>,<span class="st">&quot;Sergi&quot;</span>), (<span class="dv">2</span>,<span class="st">&quot;Albert&quot;</span>), (<span class="dv">3</span>,<span class="st">&quot;Pau&quot;</span>)]</span>
-<span id="cb56-4"><a href="#cb56-4"></a></span>
-<span id="cb56-5"><a href="#cb56-5"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">sorted</span>(guests)]</span>
-<span id="cb56-6"><a href="#cb56-6"></a>[<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;Vane&quot;</span>]</span>
-<span id="cb56-7"><a href="#cb56-7"></a></span>
-<span id="cb56-8"><a href="#cb56-8"></a><span class="op">&gt;&gt;&gt;</span> gustos <span class="op">=</span> [<span class="st">&quot;fresas&quot;</span>, <span class="st">&quot;tomates&quot;</span>, <span class="st">&quot;alcachofas&quot;</span>, <span class="st">&quot;chocolate&quot;</span> ]</span>
-<span id="cb56-9"><a href="#cb56-9"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">zip</span>(guests, gustos)]</span>
-<span id="cb56-10"><a href="#cb56-10"></a>[ (<span class="st">&quot;Vane&quot;</span>, <span class="st">&quot;fresas&quot;</span>),</span>
-<span id="cb56-11"><a href="#cb56-11"></a>  (<span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;tomates&quot;</span>),</span>
-<span id="cb56-12"><a href="#cb56-12"></a>  (<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;alcachofas&quot;</span>),</span>
-<span id="cb56-13"><a href="#cb56-13"></a>  (<span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;chocolate&quot;</span>),</span>
-<span id="cb56-14"><a href="#cb56-14"></a>]</span></code></pre></div>
+<section id="filtros-iteradores" class="slide level2">
+<h2>Filtros iteradores</h2>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a><span class="op">&gt;&gt;&gt;</span> guests <span class="op">=</span> [<span class="st">&quot;Vane&quot;</span>, <span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Pau&quot;</span>]</span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">enumerate</span>(guests)]</span>
+<span id="cb60-3"><a href="#cb60-3"></a>[(<span class="dv">0</span>,<span class="st">&quot;Vane&quot;</span>), (<span class="dv">1</span>,<span class="st">&quot;Sergi&quot;</span>), (<span class="dv">2</span>,<span class="st">&quot;Albert&quot;</span>), (<span class="dv">3</span>,<span class="st">&quot;Pau&quot;</span>)]</span>
+<span id="cb60-4"><a href="#cb60-4"></a></span>
+<span id="cb60-5"><a href="#cb60-5"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">sorted</span>(guests)]</span>
+<span id="cb60-6"><a href="#cb60-6"></a>[<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;Vane&quot;</span>]</span>
+<span id="cb60-7"><a href="#cb60-7"></a></span>
+<span id="cb60-8"><a href="#cb60-8"></a><span class="op">&gt;&gt;&gt;</span> gustos <span class="op">=</span> [<span class="st">&quot;fresas&quot;</span>, <span class="st">&quot;tomates&quot;</span>, <span class="st">&quot;alcachofas&quot;</span>, <span class="st">&quot;chocolate&quot;</span> ]</span>
+<span id="cb60-9"><a href="#cb60-9"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">zip</span>(guests, gustos)]</span>
+<span id="cb60-10"><a href="#cb60-10"></a>[ (<span class="st">&quot;Vane&quot;</span>, <span class="st">&quot;fresas&quot;</span>),</span>
+<span id="cb60-11"><a href="#cb60-11"></a>  (<span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;tomates&quot;</span>),</span>
+<span id="cb60-12"><a href="#cb60-12"></a>  (<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;alcachofas&quot;</span>),</span>
+<span id="cb60-13"><a href="#cb60-13"></a>  (<span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;chocolate&quot;</span>),</span>
+<span id="cb60-14"><a href="#cb60-14"></a>]</span></code></pre></div>
 </section></section>
 <section><section id="librerías" class="title-slide slide level1"><h1>Librerías</h1></section>
 <section id="reutilizando-código" class="slide level2">
@@ -2786,8 +2828,8 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 <code>from . import mimodulo</code></p>
 <p><strong>Librerías externas</strong><br />
 <code>pip install &lt;paquete&gt;</code></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a><span class="im">import</span> math</span>
-<span id="cb57-2"><a href="#cb57-2"></a>math.cos(angulo)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a><span class="im">import</span> math</span>
+<span id="cb61-2"><a href="#cb61-2"></a>math.cos(angulo)</span></code></pre></div>
 </section></section>
 <section><section id="ficheros" class="title-slide slide level1"><h1>Ficheros</h1></section>
 <section id="importar-librerías" class="slide level2">
@@ -2797,16 +2839,16 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 <section><section id="funciones" class="title-slide slide level1"><h1>Funciones</h1></section>
 <section id="definir-funciones-def" class="slide level2">
 <h2>Definir funciones <code>def</code></h2>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> media(a, b):</span>
-<span id="cb58-2"><a href="#cb58-2"></a>...     suma <span class="op">=</span> a<span class="op">+</span>b</span>
-<span id="cb58-3"><a href="#cb58-3"></a>...     <span class="cf">return</span> suma<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a>...</span>
-<span id="cb58-5"><a href="#cb58-5"></a><span class="op">&gt;&gt;&gt;</span> media(<span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb58-6"><a href="#cb58-6"></a><span class="fl">2.0</span></span>
-<span id="cb58-7"><a href="#cb58-7"></a><span class="op">&gt;&gt;&gt;</span> media(<span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb58-8"><a href="#cb58-8"></a><span class="fl">4.5</span></span>
-<span id="cb58-9"><a href="#cb58-9"></a><span class="op">&gt;&gt;&gt;</span> suma</span>
-<span id="cb58-10"><a href="#cb58-10"></a><span class="pp">NameError</span>: name <span class="st">&#39;suma&#39;</span> <span class="kw">is</span> <span class="kw">not</span> defined</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> media(a, b):</span>
+<span id="cb62-2"><a href="#cb62-2"></a>...     suma <span class="op">=</span> a<span class="op">+</span>b</span>
+<span id="cb62-3"><a href="#cb62-3"></a>...     <span class="cf">return</span> suma<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a>...</span>
+<span id="cb62-5"><a href="#cb62-5"></a><span class="op">&gt;&gt;&gt;</span> media(<span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb62-6"><a href="#cb62-6"></a><span class="fl">2.0</span></span>
+<span id="cb62-7"><a href="#cb62-7"></a><span class="op">&gt;&gt;&gt;</span> media(<span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb62-8"><a href="#cb62-8"></a><span class="fl">4.5</span></span>
+<span id="cb62-9"><a href="#cb62-9"></a><span class="op">&gt;&gt;&gt;</span> suma</span>
+<span id="cb62-10"><a href="#cb62-10"></a><span class="pp">NameError</span>: name <span class="st">&#39;suma&#39;</span> <span class="kw">is</span> <span class="kw">not</span> defined</span></code></pre></div>
 <aside class="notes">
 <p>Permiten reutilizar código, y ¡ponerle nombre! Si le ponemos un buen nombre, no hace falta que miremos el código para entender que pasa.</p>
 <ul>
@@ -2824,13 +2866,13 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 <section id="parámetros-opcionales" class="slide level2">
 <h2>Parámetros opcionales</h2>
 <p>Hacemos un parámetro opcional dándole un valor por defecto en la definición.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> aplicaIva(baseImponible, factorIva<span class="op">=</span><span class="fl">0.21</span>):</span>
-<span id="cb59-2"><a href="#cb59-2"></a>...    <span class="cf">return</span> baseImponible<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>factorIva)</span>
-<span id="cb59-3"><a href="#cb59-3"></a>...</span>
-<span id="cb59-4"><a href="#cb59-4"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>)</span>
-<span id="cb59-5"><a href="#cb59-5"></a><span class="fl">121.0</span></span>
-<span id="cb59-6"><a href="#cb59-6"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>, <span class="fl">0.07</span>)</span>
-<span id="cb59-7"><a href="#cb59-7"></a><span class="fl">107.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> aplicaIva(baseImponible, factorIva<span class="op">=</span><span class="fl">0.21</span>):</span>
+<span id="cb63-2"><a href="#cb63-2"></a>...    <span class="cf">return</span> baseImponible<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>factorIva)</span>
+<span id="cb63-3"><a href="#cb63-3"></a>...</span>
+<span id="cb63-4"><a href="#cb63-4"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>)</span>
+<span id="cb63-5"><a href="#cb63-5"></a><span class="fl">121.0</span></span>
+<span id="cb63-6"><a href="#cb63-6"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>, <span class="fl">0.07</span>)</span>
+<span id="cb63-7"><a href="#cb63-7"></a><span class="fl">107.0</span></span></code></pre></div>
 <aside class="notes">
 <p>Si asignamos un valor en la definicion del paràmetro, podemos no especificarlo.</p>
 </aside>
@@ -2838,34 +2880,34 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 <section id="parámetros-opcionales-1" class="slide level2">
 <h2>Parámetros opcionales</h2>
 <p>Se rellenan por posición.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> prueba(a,b,c<span class="op">=</span><span class="st">&#39;c&#39;</span>,d<span class="op">=</span><span class="st">&#39;d&#39;</span>):</span>
-<span id="cb60-2"><a href="#cb60-2"></a>...    <span class="bu">print</span>(a,b,c,d)</span>
-<span id="cb60-3"><a href="#cb60-3"></a>...</span>
-<span id="cb60-4"><a href="#cb60-4"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>)</span>
-<span id="cb60-5"><a href="#cb60-5"></a><span class="pp">TypeError</span>: prueba() takes at least <span class="dv">2</span> arguments (<span class="dv">1</span> given)</span>
-<span id="cb60-6"><a href="#cb60-6"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb60-7"><a href="#cb60-7"></a><span class="dv">1</span> <span class="dv">2</span> c d</span>
-<span id="cb60-8"><a href="#cb60-8"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb60-9"><a href="#cb60-9"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> d</span>
-<span id="cb60-10"><a href="#cb60-10"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
-<span id="cb60-11"><a href="#cb60-11"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span></span>
-<span id="cb60-12"><a href="#cb60-12"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
-<span id="cb60-13"><a href="#cb60-13"></a><span class="pp">TypeError</span>: prueba() takes at most <span class="dv">4</span> arguments (<span class="dv">5</span> given)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> prueba(a,b,c<span class="op">=</span><span class="st">&#39;c&#39;</span>,d<span class="op">=</span><span class="st">&#39;d&#39;</span>):</span>
+<span id="cb64-2"><a href="#cb64-2"></a>...    <span class="bu">print</span>(a,b,c,d)</span>
+<span id="cb64-3"><a href="#cb64-3"></a>...</span>
+<span id="cb64-4"><a href="#cb64-4"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>)</span>
+<span id="cb64-5"><a href="#cb64-5"></a><span class="pp">TypeError</span>: prueba() takes at least <span class="dv">2</span> arguments (<span class="dv">1</span> given)</span>
+<span id="cb64-6"><a href="#cb64-6"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb64-7"><a href="#cb64-7"></a><span class="dv">1</span> <span class="dv">2</span> c d</span>
+<span id="cb64-8"><a href="#cb64-8"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb64-9"><a href="#cb64-9"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> d</span>
+<span id="cb64-10"><a href="#cb64-10"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb64-11"><a href="#cb64-11"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span></span>
+<span id="cb64-12"><a href="#cb64-12"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb64-13"><a href="#cb64-13"></a><span class="pp">TypeError</span>: prueba() takes at most <span class="dv">4</span> arguments (<span class="dv">5</span> given)</span></code></pre></div>
 <p>¿Que pasa si queremos pasar el segundo opcional pero dejar el primero por defecto?</p>
 </section>
 <section id="parámetros-opcionales-2" class="slide level2">
 <h2>Parámetros opcionales</h2>
 <p>Los opcionales tienen que ser los últimos paràmetros.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> prueba(a,b,c<span class="op">=</span><span class="st">&#39;c&#39;</span>,d):</span>
-<span id="cb61-2"><a href="#cb61-2"></a>...    <span class="bu">print</span>(a,b,c,d)</span>
-<span id="cb61-3"><a href="#cb61-3"></a>...</span>
-<span id="cb61-4"><a href="#cb61-4"></a><span class="pp">SyntaxError</span>: non<span class="op">-</span>default argument follows default argument</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> prueba(a,b,c<span class="op">=</span><span class="st">&#39;c&#39;</span>,d):</span>
+<span id="cb65-2"><a href="#cb65-2"></a>...    <span class="bu">print</span>(a,b,c,d)</span>
+<span id="cb65-3"><a href="#cb65-3"></a>...</span>
+<span id="cb65-4"><a href="#cb65-4"></a><span class="pp">SyntaxError</span>: non<span class="op">-</span>default argument follows default argument</span></code></pre></div>
 <p>¿Que pasa si queremos pasar el segundo opcional pero dejar el primero por defecto?</p>
 </section>
 <section id="parámetros-por-clave" class="slide level2">
 <h2>Parámetros por clave</h2>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>, factorIva<span class="op">=</span><span class="fl">0.07</span>)</span>
-<span id="cb62-2"><a href="#cb62-2"></a><span class="dv">107</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>, factorIva<span class="op">=</span><span class="fl">0.07</span>)</span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="dv">107</span></span></code></pre></div>
 <p>Ayuda la lectura, cuando hay varios parámetros</p>
 <p>Permite reordenar los parámetros respecto la definición</p>
 <p>Primero los posicionales</p>
@@ -2880,15 +2922,15 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 </p>
 <p>Dos listas pueden coincidir en contenido<br />
 pero su identidad es diferente.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a>l1 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
-<span id="cb63-2"><a href="#cb63-2"></a>l2 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>] <span class="co"># el mismo contenido pero otra lista</span></span>
-<span id="cb63-3"><a href="#cb63-3"></a>l3 <span class="op">=</span> l1 <span class="co"># l3 apunta a la misma lista que l1</span></span>
-<span id="cb63-4"><a href="#cb63-4"></a>l1 <span class="op">==</span> l2  <span class="co">#  True, tiene el mismo contenido</span></span>
-<span id="cb63-5"><a href="#cb63-5"></a>l1 <span class="kw">is</span> l2  <span class="co">#  False, son dos listas diferentes</span></span>
-<span id="cb63-6"><a href="#cb63-6"></a>l1 <span class="kw">is</span> l3  <span class="co">#  True, apuntan a la misma lista</span></span>
-<span id="cb63-7"><a href="#cb63-7"></a>l1 <span class="op">+=</span> [<span class="dv">4</span>,<span class="dv">5</span>] <span class="co"># Concatenamos</span></span>
-<span id="cb63-8"><a href="#cb63-8"></a>l2     <span class="co"># [1,2,3] sin modificar, *es* otra lista</span></span>
-<span id="cb63-9"><a href="#cb63-9"></a>l3     <span class="co"># [1,2,3,4,5] actualizada via l1, *es* la misma lista</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1"></a>l1 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb67-2"><a href="#cb67-2"></a>l2 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>] <span class="co"># el mismo contenido pero otra lista</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a>l3 <span class="op">=</span> l1 <span class="co"># l3 apunta a la misma lista que l1</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a>l1 <span class="op">==</span> l2  <span class="co">#  True, tiene el mismo contenido</span></span>
+<span id="cb67-5"><a href="#cb67-5"></a>l1 <span class="kw">is</span> l2  <span class="co">#  False, son dos listas diferentes</span></span>
+<span id="cb67-6"><a href="#cb67-6"></a>l1 <span class="kw">is</span> l3  <span class="co">#  True, apuntan a la misma lista</span></span>
+<span id="cb67-7"><a href="#cb67-7"></a>l1 <span class="op">+=</span> [<span class="dv">4</span>,<span class="dv">5</span>] <span class="co"># Concatenamos</span></span>
+<span id="cb67-8"><a href="#cb67-8"></a>l2     <span class="co"># [1,2,3] sin modificar, *es* otra lista</span></span>
+<span id="cb67-9"><a href="#cb67-9"></a>l3     <span class="co"># [1,2,3,4,5] actualizada via l1, *es* la misma lista</span></span></code></pre></div>
 <aside class="notes">
 <p><strong>Culturilla</strong></p>
 <p>Datos inmutables (numbers, str, bool): si tienen el mismo tipo y valor son el mismo objeto</p>

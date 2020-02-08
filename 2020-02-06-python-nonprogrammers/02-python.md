@@ -2,6 +2,17 @@
 
 # Repaso
 
+## Modos de ejecución
+
+El **interprete interactivo** `ipython3`.\
+Para ejecutar comandos en vivo y explorar.\
+Histórico editable de comandos\
+Autocompletar con el tabulador
+
+Los **scripts**: cuando la cosa se complica,\
+mejor tener los comandos en un fichero de texto .py\
+y lanzarlos de golpe con el intérprete
+
 ## Sintaxis
 
 La sintaxis general: una línea por sentencia\
@@ -85,7 +96,7 @@ Recorrer estructuras
 
 Usar diccionarios
 
-Instalar e importar librerías
+Usar librerías
 
 Manipular ficheros
 
@@ -209,6 +220,23 @@ Con la sentencia `elif` podemos seguir poniendo
 condiciones alternativas en el mismo nivel.
 :::
 
+## Mútiples `elif`
+
+```python
+guests = "Adria Lucia Manel Vero".split()
+owner = "Carme"
+
+name = input("¿Quien vive?\n")
+if name == owner:
+	print(f"Hola {owner}, bienvenida a casa")
+elif name in guests:
+	print(f"Hola {name}, sientate, {owner} no tardará en llegar")
+elif name == "El de la luz":
+	print("Deje de intentar timarme que estoy en Som Energia")
+else:
+	print("Fuera intruso!")
+```
+
 ## Operadores booleanos
 
 `and not or`
@@ -272,7 +300,7 @@ if alumnos: ...              # list [] o llena
 
 
 
-# Recorridos
+# Recorridos<br>(Iteraciones)
 
 ## Sentencia `for`
 
@@ -332,7 +360,8 @@ print(f"¡¡¡{equipo}!!!")
 
 
 :::notes
-Con propiedad _iterables_, no recorribles.
+Para ser correctos,
+se llaman _iterables_, no recorribles.
 
 
 :::
@@ -386,10 +415,26 @@ por ser secuencias.
 
 ## Listas del tirón
 
+:::columns
+::::column
 ```python
-l = [ x*x for x in range(6) ] # [0, 1, 4, 9, 16, 25]
+l = []
+for x in range(6):
+	l+=[x*x]
+```
+::::
+::::column
+```python
+# [0, 1, 4, 9, 16, 25]
+l = [ x*x for x in range(6) ]
+```
+::::
+:::
+
+
+
+```python
 l = [ x*x for x in range(6) if x % 3 ] # [0, 1, 4, 16, 25]
-# Parecido a SQL: SELECT .. FROM ... WHERE
 l = [ # Como se suele complicar, lo formateamos asi:
 	(x, x*x, x*x*x)   # Trio: x, el cuadrado y el cubo
 	for x in range(6)
@@ -408,6 +453,17 @@ porque cuesta pronunciarlo, y no entiendo que significado aporta comprehension.
 
 Sirven para generar una lista nueva a partir de un iterable.
 
+Tienen una estructora similar al SQL:
+SELECT .. FROM ... WHERE
+
+```python
+[
+	item_expression
+	for var in iterable
+	if item_condition
+]
+```
+
 Ojo, el `for` va sin `:`
 
 Podemos añadirle una condición de filtro con el `if` final.
@@ -415,7 +471,7 @@ Tambien sin `:`
 :::
 
 
-## Filtres iteradors
+## Filtros iteradores
 
 ```python
 >>> guests = ["Vane", "Sergi", "Albert", "Pau"]
