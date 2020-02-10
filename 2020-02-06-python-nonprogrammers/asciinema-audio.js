@@ -7,7 +7,7 @@ window.onload = function() {
 		var source = document.createElement('source');
 		source.setAttribute('src', audioSrc);
 		source.setAttribute('type', audioType);
-		audio.appendChild(srcElement);
+		audio.appendChild(source);
 		cast.parentNode.appendChild(audio);
 
 		cast.addEventListener('play', function(e) {
