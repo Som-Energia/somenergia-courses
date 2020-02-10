@@ -2,7 +2,7 @@ window.onload = function() {
 	function bindAudio(cast) {
 		var audioSrc = cast.getAttribute("audiosrc");
 		var audioType = cast.getAttribute("audiotype");
-		if (audioSrc==="") continue;
+		if (audioSrc==="") return;
 		var audio = document.createElement('audio');
 		var source = document.createElement('source');
 		source.setAttribute('src', audioSrc);

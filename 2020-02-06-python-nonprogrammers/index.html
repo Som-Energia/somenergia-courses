@@ -5423,7 +5423,7 @@ B(c);a=null!=a&&(a.m&64||q===a.G)?P(U,a):a;a=D.c(a,Gl);return wy(a)}}(b,c,a)],nu
 	function bindAudio(cast) {
 		var audioSrc = cast.getAttribute("audiosrc");
 		var audioType = cast.getAttribute("audiotype");
-		if (audioSrc==="") continue;
+		if (audioSrc==="") return;
 		var audio = document.createElement('audio');
 		var source = document.createElement('source');
 		source.setAttribute('src', audioSrc);
@@ -6250,14 +6250,6 @@ Comparten algunas operaciones.</p>
 </section></section>
 <section id="sesión-2-2020-02-13" class="title-slide slide level1"><h1>Sesión 2 <br><small>2020-02-13</small><br> <span class="emoji" data-emoji="snake">🐍</span> <span class="emoji" data-emoji="snake">🐍</span></h1></section>
 <section><section id="repaso" class="title-slide slide level1"><h1>Repaso</h1></section>
-<section id="sesión-anterior" class="slide level2">
-<h2>Sesión Anterior</h2>
-<p><asciinema-player id="cast-01-01" src="01-01-modosejecucion.cast" audiosrc="01-01-modosejecucion.mp4" audiotype="audio/mpeg"></asciinema-player></p>
-<aside class="notes">
-<p>Esto es una captura de la sessión anterior. Aunque lo parezca no es un video, es texto animado. Puedes parar y copiar las sentencias para probarlas en tu intérprete.</p>
-<p>La sesión se queda muchos ratos parada, de cuando estaba explicando cosas o atendiendo vuestras consultas, intentare grabar una sesión sin interrupciones y a ver si puedo añadirle el audio.</p>
-</aside>
-</section>
 <section id="modos-de-ejecución-1" class="slide level2">
 <h2>Modos de ejecución</h2>
 <p>El <strong>interprete interactivo</strong> <code>ipython3</code>.<br />

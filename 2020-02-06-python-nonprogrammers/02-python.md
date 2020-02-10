@@ -2,26 +2,6 @@
 
 # Repaso
 
-## Sesión Anterior
-
-<asciinema-player
-	id='cast-01-01'
-	src="01-01-modosejecucion.cast"
-	audiosrc="01-01-modosejecucion.mp4"
-	audiotype="audio/mpeg"
-></asciinema-player>
-
-:::notes
-Esto es una captura de la sessión anterior.
-Aunque lo parezca no es un video, es texto animado.
-Puedes parar y copiar las sentencias para probarlas en tu intérprete.
-
-La sesión se queda muchos ratos parada,
-de cuando estaba explicando cosas o atendiendo vuestras consultas,
-intentare grabar una sesión sin interrupciones
-y a ver si puedo añadirle el audio.
-:::
-
 ## Modos de ejecución
 
 El **interprete interactivo** `ipython3`.\
