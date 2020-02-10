@@ -5419,6 +5419,37 @@ B(c);a=null!=a&&(a.m&64||q===a.G)?P(U,a):a;a=D.c(a,Gl);return wy(a)}}(b,c,a)],nu
 //# sourceMappingURL=asciinema-player.js.map
 
 </script>
+<script>window.onload = function() {
+	function bindAudio(cast) {
+		var audioSrc = cast.getAttribute("audiosrc");
+		var audioType = cast.getAttribute("audiotype");
+		if (audioSrc==="") continue;
+		var audio = document.createElement('audio');
+		var source = document.createElement('source');
+		source.setAttribute('src', audioSrc);
+		source.setAttribute('type', audioType);
+		audio.appendChild(srcElement);
+		cast.parentNode.appendChild(audio);
+
+		cast.addEventListener('play', function(e) {
+			audio.play();
+			audio.currentTime = cast.currentTime;
+		});
+		cast.addEventListener('pause', function(){
+			audio.pause();
+		});
+		cast.addEventListener('seek', function(){
+			audio.currentTime = cast.currentTime;
+		});
+	}
+
+	var players = document.getElementsByTagName('asciinema-player');
+	for (let i = 0; i < players.length; i++) {
+		bindAudio(players.item(i));
+	}
+};
+
+</script>
 <style>
     .reveal {
         background: #d5e20f88;
@@ -5563,6 +5594,7 @@ Tiene huevos de pascua…</p>
 <p>Lenguaje: <a href="https://docs.python.org/3/tutorial/">Tutorial oficial</a></p>
 <p>Librería estandard: <a href="https://docs.python.org/3/library/">Referencia</a></p>
 <p>Librerías no estándards: <a href="https://pypi.org/">Repositorio</a></p>
+<p>Tened los enlaces a mano para consulta</p>
 <p>Disclaimer: todo en inglés</p>
 <aside class="notes">
 <p>El <strong>lenguaje</strong> son las reglas de como decir las cosas.</p>
@@ -6194,18 +6226,39 @@ Comparten algunas operaciones.</p>
 <p>En el ejemplo, <code>f</code> indica que es un formateo de números con decimales (float-point), el 2 despues del punto indica que muestre dos decimales. el 10 de antes indica que todo ocupe 10 espacios.</p>
 </aside>
 </section></section>
+<section><section id="sesiones-en-vivo" class="title-slide slide level1"><h1>Sesiones en vivo</h1></section>
+<section id="qué-es-esto" class="slide level2">
+<h2>¿Qué es esto?</h2>
+<p>A continuación hemos montado unas animaciones con audio que reproducen la sesión en vivo que se hizo en la formación.</p>
+<p>Es texto. Puedes seleccionar los comandos y copiarlos en tu intérprete.</p>
+</section>
+<section id="modos-de-ejecución" class="slide level2">
+<h2>Modos de ejecución</h2>
+<p><asciinema-player src="01-01-modosejecucion.cast" audiosrc="01-01-modosejecucion.mp3" audiotype="audio/mpeg"></asciinema-player></p>
+</section>
+<section id="sintaxis-general-1" class="slide level2">
+<h2>Sintaxis general</h2>
+<p><asciinema-player src="01-02-sintaxisgeneral.cast" audiosrc="01-02-sintaxisgeneral.mp3" audiotype="audio/mpeg"></asciinema-player></p>
+</section>
+<section id="calculadora-1" class="slide level2">
+<h2>Calculadora</h2>
+<p><asciinema-player src="01-03-calculadora.cast" audiosrc="01-03-calculadora.mp3" audiotype="audio/mpeg"></asciinema-player></p>
+</section>
+<section id="textos" class="slide level2">
+<h2>Textos</h2>
+<p><asciinema-player src="01-04-textos.cast" audiosrc="01-04-textos.mp3" audiotype="audio/mpeg"></asciinema-player></p>
+</section></section>
 <section id="sesión-2-2020-02-13" class="title-slide slide level1"><h1>Sesión 2 <br><small>2020-02-13</small><br> <span class="emoji" data-emoji="snake">🐍</span> <span class="emoji" data-emoji="snake">🐍</span></h1></section>
 <section><section id="repaso" class="title-slide slide level1"><h1>Repaso</h1></section>
 <section id="sesión-anterior" class="slide level2">
 <h2>Sesión Anterior</h2>
-<p><asciinema-player src="sessio1-ascii.cast"></asciinema-player></p>
+<p><asciinema-player id="cast-01-01" src="01-01-modosejecucion.cast" audiosrc="01-01-modosejecucion.mp4" audiotype="audio/mpeg"></asciinema-player></p>
 <aside class="notes">
-<p>Esto que parece un video es una sesion grabada de consola mientras estuve haciendo la clase.</p>
-<p>Puedes reproducirlo, pararlo, avanzarlo igual que un vídeo, pero, también, puedes seleccionar el texto de los comandos y copiarlos en tu consola, porque es texto, no imagen.</p>
+<p>Esto es una captura de la sessión anterior. Aunque lo parezca no es un video, es texto animado. Puedes parar y copiar las sentencias para probarlas en tu intérprete.</p>
 <p>La sesión se queda muchos ratos parada, de cuando estaba explicando cosas o atendiendo vuestras consultas, intentare grabar una sesión sin interrupciones y a ver si puedo añadirle el audio.</p>
 </aside>
 </section>
-<section id="modos-de-ejecución" class="slide level2">
+<section id="modos-de-ejecución-1" class="slide level2">
 <h2>Modos de ejecución</h2>
 <p>El <strong>interprete interactivo</strong> <code>ipython3</code>.<br />
 Para ejecutar comandos en vivo y explorar.<br />

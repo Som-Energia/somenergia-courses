@@ -4,15 +4,17 @@
 
 ## Sesión Anterior
 
-<asciinema-player src="sessio1-ascii.cast"></asciinema-player>
+<asciinema-player
+	id='cast-01-01'
+	src="01-01-modosejecucion.cast"
+	audiosrc="01-01-modosejecucion.mp4"
+	audiotype="audio/mpeg"
+></asciinema-player>
 
 :::notes
-Esto que parece un video es una sesion grabada de consola
-mientras estuve haciendo la clase.
-
-Puedes reproducirlo, pararlo, avanzarlo igual que un vídeo,
-pero, también, puedes seleccionar el texto de los comandos y copiarlos
-en tu consola, porque es texto, no imagen.
+Esto es una captura de la sessión anterior.
+Aunque lo parezca no es un video, es texto animado.
+Puedes parar y copiar las sentencias para probarlas en tu intérprete.
 
 La sesión se queda muchos ratos parada,
 de cuando estaba explicando cosas o atendiendo vuestras consultas,

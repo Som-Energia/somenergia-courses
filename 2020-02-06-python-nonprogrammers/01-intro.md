@@ -170,6 +170,8 @@ Librería estandard:
 Librerías no estándards:
 [Repositorio](https://pypi.org/)
 
+Tened los enlaces a mano para consulta
+
 Disclaimer: todo en inglés
 
 
@@ -1082,5 +1084,52 @@ el 2 despues del punto indica que muestre dos decimales.
 el 10 de antes indica que todo ocupe 10 espacios.
 
 :::
+
+# Sesiones en vivo
+
+## ¿Qué es esto?
+
+A continuación hemos montado
+unas animaciones con audio
+que reproducen la sesión en vivo
+que se hizo en la formación.
+
+Es texto. Puedes seleccionar los comandos
+y copiarlos en tu intérprete.
+
+
+## Modos de ejecución
+
+<asciinema-player
+	src="01-01-modosejecucion.cast"
+	audiosrc="01-01-modosejecucion.mp3"
+	audiotype="audio/mpeg"
+></asciinema-player>
+
+## Sintaxis general
+
+<asciinema-player
+	src="01-02-sintaxisgeneral.cast"
+	audiosrc="01-02-sintaxisgeneral.mp3"
+	audiotype="audio/mpeg"
+></asciinema-player>
+
+
+## Calculadora
+
+<asciinema-player
+	src="01-03-calculadora.cast"
+	audiosrc="01-03-calculadora.mp3"
+	audiotype="audio/mpeg"
+></asciinema-player>
+
+
+## Textos
+
+<asciinema-player
+	src="01-04-textos.cast"
+	audiosrc="01-04-textos.mp3"
+	audiotype="audio/mpeg"
+></asciinema-player>
 
 
