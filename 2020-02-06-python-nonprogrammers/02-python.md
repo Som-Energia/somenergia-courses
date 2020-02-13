@@ -931,7 +931,7 @@ for i, linea in enumerate(contingut.split('\n')):
         continue
     noms = linea.split()
     for nom in noms:
-        sortida += f"{nom}: {i}\n"
+        sortida += f"  {nom}: {i}\n"
 print(sortida)
 ```
 :::
@@ -958,9 +958,9 @@ for i, linea in enumerate(contingut.split('\n')):
         continue
     noms = linea.split()
     for nom in noms:
-        sortida += f"{nom}: {i}\n"
+        sortida += f"  {nom}: {i}\n"
 
-fitxeryaml = fitxeryaml.with_suffix(".yaml")
+fitxeryaml = fitxertaules.with_suffix(".yaml")
 fitxeryaml.write_text(sortida, encoding='utf8')
 ```
 :::
@@ -989,9 +989,9 @@ sortida = 'taules:\n'
 for i, linea in enumerate(taules):
     noms = linea.split()
     for nom in noms:
-        sortida += f"{nom}: {i}\n"
+        sortida += f"  {nom}: {i}\n"
 
-fitxeryaml = fitxeryaml.with_suffix(".yaml")
+fitxeryaml = fitxertaules.with_suffix(".yaml")
 fitxeryaml.write_text(sortida, encoding='utf8')
 ```
 :::
