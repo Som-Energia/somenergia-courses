@@ -466,6 +466,46 @@ Podemos aplicarle las operaciones que tienen en común listas y textos
 por ser secuencias.
 :::
 
+
+## Filtros iteradores
+
+```python
+>>> guests = ["Vane", "Sergi", "Albert", "Pau"]
+>>> list(sorted(guests))
+["Albert", "Sergi", "Pau", "Vane"]
+
+>>> list(reversed(guests))
+["Pau", "Albert", "Sergi", "Vane"]
+
+>>> list(enumerate(guests))
+[(0,"Vane"), (1,"Sergi"), (2,"Albert"), (3,"Pau")]
+
+>>> gustos = ["fresas", "tomates", "alcachofas", "chocolate" ]
+>>> list(zip(guests, gustos)])
+[ ("Vane", "fresas"),
+  ("Sergi", "tomates"),
+  ("Albert", "alcachofas"),
+  ("Pau", "chocolate"),
+]
+```
+
+:::notes
+`list` toma un iterable y lo convierte en lista.
+Nos sirve para "aterrizar" un iterable como el `range` que
+solo genera elementos cuando lo usamos.
+
+Las siguientes funciones generan elementos pero
+crean una lista, por eso usamos `list` para 
+
+`enumerate`: genera elementos emparejados con su índice.
+
+`sorted`: genera los elementos en orden (numerico, alfabetico...)
+
+`reversed`: genera los elementos en el orden inverso al que están
+
+`zip`: empareja elementos de diferentes iterables, el primero con el primero, el segundo con el segundo...
+:::
+
 ## Listas del tirón
 
 Construyendo una lista a partir de otra (o un iterable)
@@ -535,27 +575,6 @@ g = ( x*x for x in range(60000) if x % 3 )
 ```
 
 
-## Filtros iteradores
-
-```python
->>> guests = ["Vane", "Sergi", "Albert", "Pau"]
->>> [x for x in enumerate(guests)]
-[(0,"Vane"), (1,"Sergi"), (2,"Albert"), (3,"Pau")]
-
->>> [x for x in sorted(guests)]
-["Albert", "Sergi", "Pau", "Vane"]
-
->>> gustos = ["fresas", "tomates", "alcachofas", "chocolate" ]
->>> [x for x in zip(guests, gustos)]
-[ ("Vane", "fresas"),
-  ("Sergi", "tomates"),
-  ("Albert", "alcachofas"),
-  ("Pau", "chocolate"),
-]
-```
-
-
-
 # Ficheros
 
 ## `pathlib`
@@ -587,13 +606,13 @@ Path da acceso al sistema de ficheros
 csv = Path('mifichero.txt')
 
 escrito = """\
-Primera linia
-Segunda linia
+Primera línea
+Segunda línea
 """
 csv.write_text(escrito, encoding='utf8')
 
 leido = csv.read_text(encoding='utf8')
-# "Primera linia\nSegunda linia\n"
+# "Primera línea\nSegunda línea\n"
 ```
 
 :::notes
@@ -618,7 +637,7 @@ no podemos cargarlos todos en memoria.
 ```python
 with csv.open(encoding='utf8') as file:
 	for nline, line in enumerate(file):
-		print(f"Contenido de la linia {nline+1}: {line}")
+		print(f"Contenido de la línea {nline+1}: {line}")
 ```
 
 :::notes
@@ -628,7 +647,7 @@ Abre el fichero y lo cierra cuando salimos.
 Fijaros que no quita el `\n` final,
 cuando hacemos `print` hace dos saltos.
 
-La ultima linia vacia y sin salto.
+La ultima línea vacia y sin salto.
 :::
 
 
@@ -695,9 +714,9 @@ p.rename("nuevonombre")
 ## Pasos
 
 - Obtener el contenido del fichero
-- Separarlo por lineas
-- Descartar lineas vacias
-- Descartar lineas de sala
+- Separarlo por líneas
+- Descartar líneas vacias
+- Descartar líneas de sala
 - Partir los nombres
 - Lista de listas de mesa
 - Escribir la salida
@@ -739,6 +758,244 @@ taules:
   ...
 ```
 :::
+
+## Obtener contenido del fichero
+
+Pista: usar `Path` y `read_text`
+
+Asegúrate de que el fichero está en el
+directorio de trabajo actual.
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+```
+:::
+
+
+## Separarlo por líneas
+
+Hay que partir el texto por los `'\n'` (saltos de línea)
+
+Pista: `'abracadabra'.split('a')` partía el texto con las `'a'`
+
+Obtendremos una lista\
+cada elemento será una línia
+
+Hacemos un `for` para las líneas y las imprimimos separadas
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+for linea in contingut.split('\n'):
+    print("Linea: {linea}")
+
+```
+:::
+
+
+## Filtrar las líneas vacias
+
+Haremos un `continue`, si la linea esta vacía
+
+Pista: el texto evalua falso cuando està vacio
+
+Ojo: hay líneas no tan vacias, tienen espacios.\
+El método `linea.strip()` quita espacios delante y detras.
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+for linea in contingut.split('\n'):
+    if not linea.strip():
+        continue
+    print("Linea: {linea}")
+
+```
+:::
+
+
+## Filtrar los nombres de las salas
+
+Haremos un `continue` también si la primera letra de línea es un `'#'`
+
+Pregunta: ¿Lo miraremos antes o despues de mirar si la línea esta vacia?
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+for linea in contingut.split('\n'):
+    if not linea.strip():
+        continue
+    if linea[0] == "#":
+        continue
+    print("Linea: {linea}")
+
+```
+:::
+
+
+
+## Convertir las líneas en lista de nombres
+
+Pista: Un `split` sin parametros, separaba palabras.
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+for linea in contingut.split('\n'):
+    if not linea.strip():
+        continue
+    if linea[0] == "#":
+        continue
+    noms = linea.split()
+    print("Noms: {noms}")
+
+```
+:::
+
+
+## Enumerar las mesas
+
+Podemos usar `enumerate` pero\
+¿Como saltamos las líneas ignoradas?
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+for i, linea in enumerate(contingut.split('\n')):
+    if not linea.strip():
+        continue
+    if linea[0] == "#":
+        continue
+    noms = linea.split()
+    print("Noms {i}: {noms}")
+```
+:::
+
+## Iteramos para cada nombre
+
+Acomulamos un texto de salida.
+
+Un `for` dentro del `for`, para cada nombre en la linia.
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+for i, linea in enumerate(contingut.split('\n')):
+    if not linea.strip():
+        continue
+    if linea[0] == "#":
+        continue
+    noms = linea.split()
+    for nom in noms:
+        print("A {nom} li toca la taula {i}")
+```
+:::
+
+
+## Construimos el texto de salida
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+sortida = 'taules:\n'
+for i, linea in enumerate(contingut.split('\n')):
+    if not linea.strip():
+        continue
+    if linea[0] == "#":
+        continue
+    noms = linea.split()
+    for nom in noms:
+        sortida += f"{nom}: {i}\n"
+print(sortida)
+```
+:::
+
+
+## Escribim el fitxer de sortida
+
+
+Usamos `.with_suffix` para obtener la ruta con la extensión cambiada.
+
+Usamos `write_text`.
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+sortida = 'taules:\n'
+for i, linea in enumerate(contingut.split('\n')):
+    if not linea.strip():
+        continue
+    if linea[0] == "#":
+        continue
+    noms = linea.split()
+    for nom in noms:
+        sortida += f"{nom}: {i}\n"
+
+fitxeryaml = fitxeryaml.with_suffix(".yaml")
+fitxeryaml.write_text(sortida, encoding='utf8')
+```
+:::
+
+## Huecos en los numeros de mesa
+
+El enumerate se cuela las mesas que se salta.
+
+Construyamos una lista intermedia que solo tenga mesas y enumeremos esa.
+
+:::notes
+```python
+from pathlib import Path
+
+fitxertaules = Path('mapataules.txt')
+contingut = fitxertaules.read_text(encoding='utf8')
+taules = []
+for linea in contingut.split('\n'):
+    if not linea.strip():
+        continue
+    if linea[0] == "#":
+        continue
+    taules += [linea]
+
+sortida = 'taules:\n'
+for i, linea in enumerate(taules):
+    noms = linea.split()
+    for nom in noms:
+        sortida += f"{nom}: {i}\n"
+
+fitxeryaml = fitxeryaml.with_suffix(".yaml")
+fitxeryaml.write_text(sortida, encoding='utf8')
+```
+:::
+
 
 ## Para casa
 
