@@ -88,6 +88,9 @@ Sacar elementos de una secuencia con `[]`
 Algo de formateo basico
 :::
 
+## ¿Qué os costó entender más?
+
+
 ## ¿Y hoy qué?
 
 Tomar decisiones
@@ -119,9 +122,35 @@ No hay forma de que cada cual configure la suya
 
 Joan se ha currado un [mapa de mesas](mapataules.txt)
 
-El tomatic necesita un formato especifico\
-hacerlo a mano es tedioso
+```markdown
+# INFERN
 
+carles monica
+nuri marta
+manel   carol
+
+# CASADEMONT
+
+erola
+sergi  vic gemma   mar
+rogerlf	pau joan  adria
+...
+
+```
+
+El tomatic necesita un formato especifico (YAML)\
+pero convertirlo a mano es tedioso y me puedo equivocar
+
+```yaml
+taules:
+  carles: 0
+  monica: 0
+  nuri: 1
+  marta: 1
+  manel: 2
+  carol: 2
+  ...
+```
 :::
 
 
@@ -526,32 +555,6 @@ g = ( x*x for x in range(60000) if x % 3 )
 ```
 
 
-# Librerías
-
-## Reutilizando código
-
-Las **_built in_** siempre están ahí:\
-`print`, `round`, `max`, `min`, `sum`, `len`...
-
-**Librerías estandards**\
-Vienen con el lenguaje pero hay que importarlas.\
-`import math`
-
-**Tus librerías**\
-`from . import mimodulo`
-
-
-**Librerías externas**\
-`pip install <paquete>`
-
-
-```python
-import math
-math.cos(angulo)
-```
-
-
-
 
 # Ficheros
 
@@ -564,10 +567,10 @@ Provee objetos `Path`
 ```python
 from pathlib import Path
 
-home = Path.home() # el directorio de usuario
-config = home / 'miconfig.ini' # navegación
-current = Path.cwd() # el directorio de trabajo
 p = Path('/home/user/.config')
+home = Path.home() # el directorio de usuario
+current = Path.cwd() # el directorio de trabajo
+config = home / 'miconfig.ini' # navegación con operador /
 ```
 
 :::notes
@@ -583,11 +586,11 @@ Path da acceso al sistema de ficheros
 ```python
 csv = Path('mifichero.txt')
 
-aEscribir = """\
+escrito = """\
 Primera linia
 Segunda linia
 """
-csv.write_text(aEscribir, encoding='utf8')
+csv.write_text(escrito, encoding='utf8')
 
 leido = csv.read_text(encoding='utf8')
 # "Primera linia\nSegunda linia\n"
@@ -631,24 +634,18 @@ La ultima linia vacia y sin salto.
 
 ## Partes del path
 
-```path
->>> p = Path('/home/vokimon/Documents/manualdepython.tar.gz')
->>> p.parts
-('/', 'home', 'vokimon', 'Documents', 'manualdepython.tar.gz')
->>> p.root
-'/'
->>> p.parent
-'/home/vokimon/Documents'
->>> p.parents
-[ '/home/vokimon/Documents', '/home/vokimon', '/home', '/' ]
->>> p.name
-'manualdepython.tar.gz'
->>> p.suffix
-'.gz'
->>> p.suffixes
-['.tar', '.gz' ]
->>> p.stem
-'manualdepython.tar'
+```python
+p = Path('/home/vokimon/Documents/manual.tar.gz')
+p.parts # ('/', 'home', 'vokimon', 'Documents', 'manual.tar.gz')
+p.root # '/'
+p.parent # '/home/vokimon/Documents'
+p.parents # [ '/home/vokimon', '/home', '/' ]
+p.name # 'manualdepython.tar.gz'
+p.suffix # '.gz'
+p.suffixes # ['.tar', '.gz' ]
+p.stem # 'manualdepython.tar'
+p.with_suffix('.zip') # Path('/home/vokimon/Documents/manual.zip')
+```
 
 ## Busqueda
 
@@ -693,156 +690,75 @@ p.mkdir(parents=True, exists_ok=true) # crea el directorio y los padres, si no e
 p.rename("nuevonombre")
 ```
 
-# Descarte
+# Ejercicio Mesas
 
-# Funciones
+## Pasos
 
-## Definir funciones `def`
-
-```python
->>> def media(a, b):
-...     suma = a+b
-...     return suma/2
-...
->>> media(3, 1)
-2.0
->>> media(4, 5)
-4.5
->>> suma
-NameError: name 'suma' is not defined
-```
-
-:::notes
-Permiten reutilizar código,
-y ¡ponerle nombre!
-Si le ponemos un buen nombre,
-no hace falta que miremos el código para entender que pasa.
-
-- `a` y `b` son los parametros
-- adoptan diferentes valores cada vez que llamamos la funcion
-- `suma` es una variable local
-- `a`, `b`, `suma` no estan definidos fuera de la función. Que no choquen variables ayuda
-- `return` indica el valor que retornarà la función
-- el `return` sale de la funcion y no ejecuta nada más, si hubiera más subsentencias no las ejecutaría
-- si llegase al final de la función sin encontrar un `return`, retornaria `None`
-- `media` es un nombre, igual que una variable, si definimos una variable con ese nombre ocultara la función
-:::
-
-## Parámetros opcionales
-
-Hacemos un parámetro opcional dándole
-un valor por defecto en la definición.
-
-```python
->>> def aplicaIva(baseImponible, factorIva=0.21):
-...    return baseImponible*(1+factorIva)
-...
->>> aplicaIva(100)
-121.0
->>> aplicaIva(100, 0.07)
-107.0
-```
-
-:::notes
-Si asignamos un valor en la definicion del paràmetro,
-podemos no especificarlo.
-:::
-
-## Parámetros opcionales
-
-Se rellenan por posición.
-
-```python
->>> def prueba(a,b,c='c',d='d'):
-...    print(a,b,c,d)
-...
->>> prueba(1)
-TypeError: prueba() takes at least 2 arguments (1 given)
->>> prueba(1,2)
-1 2 c d
->>> prueba(1,2,3)
-1 2 3 d
->>> prueba(1,2,3,4)
-1 2 3 4
->>> prueba(1,2,3,4,5)
-TypeError: prueba() takes at most 4 arguments (5 given)
-```
-
-¿Que pasa si queremos pasar el segundo opcional pero dejar el primero por defecto?
-
-
-## Parámetros opcionales
-
-Los opcionales tienen que ser los últimos paràmetros.
-
-```python
->>> def prueba(a,b,c='c',d):
-...    print(a,b,c,d)
-...
-SyntaxError: non-default argument follows default argument
-```
-
-¿Que pasa si queremos pasar el segundo opcional pero dejar el primero por defecto?
-
-## Parámetros por clave
-
-```python
->>> aplicaIva(100, factorIva=0.07)
-107
-```
-Ayuda la lectura, cuando hay varios parámetros
-
-Permite reordenar los parámetros respecto la definición
-
-Primero los posicionales
-
-
-:::notes
-Fijaos que la sintaxis es similar en la llamada
-como en la definición de valor por defecto.
-:::
-
-
-
-## Ops de identidad `is`
-
-`is` ¿Son el mismo objeto?\
-`==` ¿Tienen un valor equivalente?\
-
-Dos listas pueden coincidir en contenido\
-pero su identidad es diferente.
-
-
-```python
-l1 = [1,2,3]
-l2 = [1,2,3] # el mismo contenido pero otra lista
-l3 = l1 # l3 apunta a la misma lista que l1
-l1 == l2  #  True, tiene el mismo contenido
-l1 is l2  #  False, son dos listas diferentes
-l1 is l3  #  True, apuntan a la misma lista
-l1 += [4,5] # Concatenamos
-l2     # [1,2,3] sin modificar, *es* otra lista
-l3     # [1,2,3,4,5] actualizada via l1, *es* la misma lista
-```
+- Obtener el contenido del fichero
+- Separarlo por lineas
+- Descartar lineas vacias
+- Descartar lineas de sala
+- Partir los nombres
+- Lista de listas de mesa
+- Escribir la salida
 
 ::: notes
-**Culturilla**
+Para generar graellas se tienen en cuenta las mesas para evitar conversaciones cruzadas.
 
-Datos inmutables (numbers, str, bool): si tienen el mismo tipo y valor son el mismo objeto
+No hay forma de que cada cual configure la suya
 
-- el `4` es el `4` siempre
-- el `1.0` no es el `1` aunque se comparan iguales
+Joan se ha currado un [mapa de mesas](mapataules.txt)
 
-Datos mutables (list, dict, set): tienen identidad y valor independiente.
+```markdown
+# INFERN
 
-- pueden modificar su contenido manteniendo su identidad
-- dos estructuras con el mismo contenido tienen indentidades independientes
+carles monica
+nuri marta
+manel   carol
 
-La tupla es la única estructura que es inmutable
+# CASADEMONT
 
-- la pareja (tupla) `(3,6)` siempre sera esa pareja
-- Las tuplas (immutables) no se pueden modificar, cada tupla con un contenido diferente se considera un objeto diferente.
-- Dos tuplas construidas en sitios diferentes, pero con el mismo contenido, se consideran la misma tupla.
+erola
+sergi  vic gemma   mar
+rogerlf	pau joan  adria
+...
+
+```
+
+El tomatic necesita un formato especifico (YAML)\
+pero convertirlo a mano es tedioso y me puedo equivocar
+
+```yaml
+taules:
+  carles: 0
+  monica: 0
+  nuri: 1
+  marta: 1
+  manel: 2
+  carol: 2
+  ...
+```
 :::
+
+## Para casa
+
+Generar los grupos (salas)
+
+```yaml
+groups:
+  casademont:
+    - carles
+    - monica
+    - nuri
+    - marta
+    - manel
+    - carol
+  infern:
+    - 
+  ...
+
+```
+
+
 
 

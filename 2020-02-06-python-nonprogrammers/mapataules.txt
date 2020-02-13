@@ -1,9 +1,10 @@
 # INFERN
 
+            
 carles monica
-nuri marta
+nuri marta  
 manel   carol
-       
+
 # CASADEMONT
 
 erola
@@ -12,17 +13,16 @@ rogerlf	pau joan  adria
 carme   merce hermigg
 silvia tania   pere
 maria   joanb  albert   judith
-        
+
 # BALNEARI
 
-otilia  gabriel guifre  roger       
+otilia  gabriel guifre  roger
 eloi vane mariona  francesc
 vero  albertg  joanm    aram
 berta   joel cire    monicag
-nuria   annab    olga    yolanda     
+nuria   annab    olga    yolanda
 victor  javi
 
-            
 
 # LA MINA
 
