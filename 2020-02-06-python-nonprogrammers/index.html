@@ -6624,7 +6624,8 @@ no crea una lista de 2000000 numeros en memoria</p>
 <span id="cb57-5"><a href="#cb57-5"></a><span class="dv">6</span> <span class="kw">in</span> r <span class="co"># False</span></span>
 <span id="cb57-6"><a href="#cb57-6"></a><span class="dv">6</span> <span class="kw">not</span> <span class="kw">in</span> r <span class="co"># True</span></span>
 <span id="cb57-7"><a href="#cb57-7"></a>r.index(<span class="dv">7</span>) <span class="co"># 2</span></span>
-<span id="cb57-8"><a href="#cb57-8"></a>r[<span class="dv">2</span>:] <span class="co"># 7, 9</span></span></code></pre></div>
+<span id="cb57-8"><a href="#cb57-8"></a>r[<span class="dv">2</span>:] <span class="co"># 7, 9</span></span>
+<span id="cb57-9"><a href="#cb57-9"></a><span class="bu">list</span>(r) <span class="co"># [3,5,7,9]</span></span></code></pre></div>
 </div>
 </div>
 <aside class="notes">
@@ -6632,6 +6633,7 @@ no crea una lista de 2000000 numeros en memoria</p>
 <p>Genera una secuencia pero queda definido por un inicio, un fin y un paso.</p>
 <p>No genera los números si no se necesitan.</p>
 <p>Podemos aplicarle las operaciones que tienen en común listas y textos por ser secuencias.</p>
+<p><code>list</code> toma un iterable y lo convierte en lista. Nos sirve para “aterrizar” un iterable como el <code>range</code> que solo genera elementos cuando lo usamos.</p>
 </aside>
 </section>
 <section id="filtros-iteradores" class="slide level2">
@@ -6654,11 +6656,11 @@ no crea una lista de 2000000 numeros en memoria</p>
 <span id="cb58-16"><a href="#cb58-16"></a>  (<span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;chocolate&quot;</span>),</span>
 <span id="cb58-17"><a href="#cb58-17"></a>]</span></code></pre></div>
 <aside class="notes">
-<p><code>list</code> toma un iterable y lo convierte en lista. Nos sirve para “aterrizar” un iterable como el <code>range</code> que solo genera elementos cuando lo usamos.</p>
-<p>Las siguientes funciones generan elementos pero crean una lista, por eso usamos <code>list</code> para</p>
-<p><code>enumerate</code>: genera elementos emparejados con su índice.</p>
+<p>Las siguientes funciones generan elementos a partir de iterables pero no crean una lista en memoria,</p>
+<p>Usamos <code>list</code> para ver lo que generan. Normalmente se usan en un <code>for</code>.</p>
 <p><code>sorted</code>: genera los elementos en orden (numerico, alfabetico…)</p>
 <p><code>reversed</code>: genera los elementos en el orden inverso al que están</p>
+<p><code>enumerate</code>: genera elementos emparejados con su índice.</p>
 <p><code>zip</code>: empareja elementos de diferentes iterables, el primero con el primero, el segundo con el segundo…</p>
 </aside>
 </section>

@@ -451,6 +451,7 @@ len(r) # 4
 6 not in r # True
 r.index(7) # 2
 r[2:] # 7, 9
+list(r) # [3,5,7,9]
 ```
 ::::
 :::
@@ -464,6 +465,11 @@ No genera los números si no se necesitan.
 
 Podemos aplicarle las operaciones que tienen en común listas y textos
 por ser secuencias.
+
+`list` toma un iterable y lo convierte en lista.
+Nos sirve para "aterrizar" un iterable como el `range` que
+solo genera elementos cuando lo usamos.
+
 :::
 
 
@@ -490,18 +496,18 @@ por ser secuencias.
 ```
 
 :::notes
-`list` toma un iterable y lo convierte en lista.
-Nos sirve para "aterrizar" un iterable como el `range` que
-solo genera elementos cuando lo usamos.
+Las siguientes funciones generan elementos
+a partir de iterables
+pero no crean una lista en memoria,
 
-Las siguientes funciones generan elementos pero
-crean una lista, por eso usamos `list` para 
-
-`enumerate`: genera elementos emparejados con su índice.
+Usamos `list` para ver lo que generan.
+Normalmente se usan en un `for`.
 
 `sorted`: genera los elementos en orden (numerico, alfabetico...)
 
 `reversed`: genera los elementos en el orden inverso al que están
+
+`enumerate`: genera elementos emparejados con su índice.
 
 `zip`: empareja elementos de diferentes iterables, el primero con el primero, el segundo con el segundo...
 :::
