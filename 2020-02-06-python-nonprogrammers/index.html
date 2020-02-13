@@ -6229,8 +6229,9 @@ Comparten algunas operaciones.</p>
 <section><section id="sesiones-en-vivo" class="title-slide slide level1"><h1>Sesiones en vivo</h1></section>
 <section id="qué-es-esto" class="slide level2">
 <h2>¿Qué es esto?</h2>
-<p>A continuación hemos montado unas animaciones con audio que reproducen la sesión en vivo que se hizo en la formación.</p>
-<p>Es texto. Puedes seleccionar los comandos y copiarlos en tu intérprete.</p>
+<p>Las siguientes diapos contienen consolas animadas con audio que reproducen la sesión en vivo que se hizo en la formación.</p>
+<p>No es video es texto animado.<br />
+Puedes seleccionar el texto de los comandos y copiarlos en tu intérprete.</p>
 </section>
 <section id="modos-de-ejecución" class="slide level2">
 <h2>Modos de ejecución</h2>
@@ -6246,6 +6247,7 @@ Comparten algunas operaciones.</p>
 </section>
 <section id="textos" class="slide level2">
 <h2>Textos</h2>
+<p>PENDIENTE</p>
 <p><asciinema-player src="01-04-textos.cast" audiosrc="01-04-textos.mp3" audiotype="audio/mpeg"></asciinema-player></p>
 </section></section>
 <section id="sesión-2-2020-02-13" class="title-slide slide level1"><h1>Sesión 2 <br><small>2020-02-13</small><br> <span class="emoji" data-emoji="snake">🐍</span> <span class="emoji" data-emoji="snake">🐍</span></h1></section>
@@ -6308,9 +6310,23 @@ Hoy los veremos</p>
 <h2>¿Y hoy qué?</h2>
 <p>Tomar decisiones</p>
 <p>Recorrer estructuras</p>
-<p>Usar diccionarios</p>
 <p>Usar librerías</p>
 <p>Manipular ficheros</p>
+</section>
+<section id="ejercicio" class="slide level2">
+<h2>Ejercicio</h2>
+<p>Evitar conversaciones cruzadas en teléfono</p>
+<p>Las graellas usan la definición de mesa</p>
+<p>Complicado que cada cual se lo configure</p>
+<p>Joan nos ha pasado <a href="mapataules.txt">un fichero con las mesas</a>.</p>
+<p>Tomatic las necesita en otro formato.</p>
+<aside class="notes">
+<p>Para generar graellas se tienen en cuenta las mesas para evitar conversaciones cruzadas.</p>
+<p>No hay forma de que cada cual configure la suya</p>
+<p>Joan se ha currado un <a href="mapataules.txt">mapa de mesas</a></p>
+<p>El tomatic necesita un formato especifico<br />
+hacerlo a mano es tedioso</p>
+</aside>
 </section></section>
 <section><section id="decisiones" class="title-slide slide level1"><h1>Decisiones</h1></section>
 <section id="booleanos-bool" class="slide level2">
@@ -6598,55 +6614,66 @@ no crea una lista de 2000000 numeros en memoria</p>
 </section>
 <section id="listas-del-tirón" class="slide level2">
 <h2>Listas del tirón</h2>
+<p>Construyendo una lista a partir de otra (o un iterable)</p>
 <div class="columns">
 <div class="column">
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>l <span class="op">=</span> []</span>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>squares <span class="op">=</span> []</span>
 <span id="cb56-2"><a href="#cb56-2"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>):</span>
-<span id="cb56-3"><a href="#cb56-3"></a>    l<span class="op">+=</span>[x<span class="op">*</span>x]</span></code></pre></div>
+<span id="cb56-3"><a href="#cb56-3"></a>    squares<span class="op">+=</span>[x<span class="op">*</span>x]</span></code></pre></div>
 </div><div class="column">
 <div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># [0, 1, 4, 9, 16, 25]</span></span>
-<span id="cb57-2"><a href="#cb57-2"></a>l <span class="op">=</span> [ x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>) ]</span></code></pre></div>
+<span id="cb57-2"><a href="#cb57-2"></a>squares<span class="op">=</span>[x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)]</span></code></pre></div>
 </div>
 </div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>l <span class="op">=</span> [ x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span> ] <span class="co"># [0, 1, 4, 16, 25]</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a>l <span class="op">=</span> [ <span class="co"># Como se suele complicar, lo formateamos asi:</span></span>
-<span id="cb58-3"><a href="#cb58-3"></a>    (x, x<span class="op">*</span>x, x<span class="op">*</span>x<span class="op">*</span>x)   <span class="co"># Trio: x, el cuadrado y el cubo</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a>    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)</span>
-<span id="cb58-5"><a href="#cb58-5"></a>    <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span></span>
-<span id="cb58-6"><a href="#cb58-6"></a>]</span>
-<span id="cb58-7"><a href="#cb58-7"></a><span class="co"># Si en vez de [] usamos () no se crea una lista</span></span>
-<span id="cb58-8"><a href="#cb58-8"></a><span class="co"># es un generador de elementos como el range</span></span>
-<span id="cb58-9"><a href="#cb58-9"></a>g <span class="op">=</span> ( x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">60000</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span> )</span>
-<span id="cb58-10"><a href="#cb58-10"></a><span class="co"># No generar listas intermedias acelera la ejecución</span></span></code></pre></div>
 <aside class="notes">
 <p>En inglés se llaman <em>comprehension lists</em> pero me da mucho palo llamarlas así porque cuesta pronunciarlo, y no entiendo que significado aporta comprehension.</p>
 <p>Sirven para generar una lista nueva a partir de un iterable.</p>
+<p>Ojo, el <code>for</code> va sin <code>:</code></p>
+</aside>
+</section>
+<section id="filtrando-elementos" class="slide level2">
+<h2>Filtrando elementos</h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>l <span class="op">=</span> [ x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span> ] <span class="co"># [0, 1, 4, 16, 25]</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a></span>
+<span id="cb58-3"><a href="#cb58-3"></a><span class="co"># Como se suele complicar, lo formateamos asi:</span></span>
+<span id="cb58-4"><a href="#cb58-4"></a>l <span class="op">=</span> [</span>
+<span id="cb58-5"><a href="#cb58-5"></a>    (x, x<span class="op">*</span>x, x<span class="op">*</span>x<span class="op">*</span>x)   <span class="co"># Trio: x, el cuadrado y el cubo</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a>    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)</span>
+<span id="cb58-7"><a href="#cb58-7"></a>    <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span></span>
+<span id="cb58-8"><a href="#cb58-8"></a>]</span></code></pre></div>
+<aside class="notes">
+<p>Podemos añadirle una condición de filtro con el <code>if</code> final. Tambien sin <code>:</code></p>
 <p>Tienen una estructora similar al SQL: SELECT .. FROM … WHERE</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>[</span>
 <span id="cb59-2"><a href="#cb59-2"></a>    item_expression</span>
 <span id="cb59-3"><a href="#cb59-3"></a>    <span class="cf">for</span> var <span class="kw">in</span> iterable</span>
 <span id="cb59-4"><a href="#cb59-4"></a>    <span class="cf">if</span> item_condition</span>
 <span id="cb59-5"><a href="#cb59-5"></a>]</span></code></pre></div>
-<p>Ojo, el <code>for</code> va sin <code>:</code></p>
-<p>Podemos añadirle una condición de filtro con el <code>if</code> final. Tambien sin <code>:</code></p>
 </aside>
+</section>
+<section id="generador-del-tiron" class="slide level2">
+<h2>Generador del tiron</h2>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a><span class="co"># Si en vez de [] usamos () no se crea una lista</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="co"># es un generador de elementos como el range</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a>g <span class="op">=</span> ( x<span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">60000</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">3</span> )</span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="co"># No generar listas intermedias acelera la ejecución</span></span></code></pre></div>
 </section>
 <section id="filtros-iteradores" class="slide level2">
 <h2>Filtros iteradores</h2>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a><span class="op">&gt;&gt;&gt;</span> guests <span class="op">=</span> [<span class="st">&quot;Vane&quot;</span>, <span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Pau&quot;</span>]</span>
-<span id="cb60-2"><a href="#cb60-2"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">enumerate</span>(guests)]</span>
-<span id="cb60-3"><a href="#cb60-3"></a>[(<span class="dv">0</span>,<span class="st">&quot;Vane&quot;</span>), (<span class="dv">1</span>,<span class="st">&quot;Sergi&quot;</span>), (<span class="dv">2</span>,<span class="st">&quot;Albert&quot;</span>), (<span class="dv">3</span>,<span class="st">&quot;Pau&quot;</span>)]</span>
-<span id="cb60-4"><a href="#cb60-4"></a></span>
-<span id="cb60-5"><a href="#cb60-5"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">sorted</span>(guests)]</span>
-<span id="cb60-6"><a href="#cb60-6"></a>[<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;Vane&quot;</span>]</span>
-<span id="cb60-7"><a href="#cb60-7"></a></span>
-<span id="cb60-8"><a href="#cb60-8"></a><span class="op">&gt;&gt;&gt;</span> gustos <span class="op">=</span> [<span class="st">&quot;fresas&quot;</span>, <span class="st">&quot;tomates&quot;</span>, <span class="st">&quot;alcachofas&quot;</span>, <span class="st">&quot;chocolate&quot;</span> ]</span>
-<span id="cb60-9"><a href="#cb60-9"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">zip</span>(guests, gustos)]</span>
-<span id="cb60-10"><a href="#cb60-10"></a>[ (<span class="st">&quot;Vane&quot;</span>, <span class="st">&quot;fresas&quot;</span>),</span>
-<span id="cb60-11"><a href="#cb60-11"></a>  (<span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;tomates&quot;</span>),</span>
-<span id="cb60-12"><a href="#cb60-12"></a>  (<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;alcachofas&quot;</span>),</span>
-<span id="cb60-13"><a href="#cb60-13"></a>  (<span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;chocolate&quot;</span>),</span>
-<span id="cb60-14"><a href="#cb60-14"></a>]</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a><span class="op">&gt;&gt;&gt;</span> guests <span class="op">=</span> [<span class="st">&quot;Vane&quot;</span>, <span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Pau&quot;</span>]</span>
+<span id="cb61-2"><a href="#cb61-2"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">enumerate</span>(guests)]</span>
+<span id="cb61-3"><a href="#cb61-3"></a>[(<span class="dv">0</span>,<span class="st">&quot;Vane&quot;</span>), (<span class="dv">1</span>,<span class="st">&quot;Sergi&quot;</span>), (<span class="dv">2</span>,<span class="st">&quot;Albert&quot;</span>), (<span class="dv">3</span>,<span class="st">&quot;Pau&quot;</span>)]</span>
+<span id="cb61-4"><a href="#cb61-4"></a></span>
+<span id="cb61-5"><a href="#cb61-5"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">sorted</span>(guests)]</span>
+<span id="cb61-6"><a href="#cb61-6"></a>[<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;Vane&quot;</span>]</span>
+<span id="cb61-7"><a href="#cb61-7"></a></span>
+<span id="cb61-8"><a href="#cb61-8"></a><span class="op">&gt;&gt;&gt;</span> gustos <span class="op">=</span> [<span class="st">&quot;fresas&quot;</span>, <span class="st">&quot;tomates&quot;</span>, <span class="st">&quot;alcachofas&quot;</span>, <span class="st">&quot;chocolate&quot;</span> ]</span>
+<span id="cb61-9"><a href="#cb61-9"></a><span class="op">&gt;&gt;&gt;</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">zip</span>(guests, gustos)]</span>
+<span id="cb61-10"><a href="#cb61-10"></a>[ (<span class="st">&quot;Vane&quot;</span>, <span class="st">&quot;fresas&quot;</span>),</span>
+<span id="cb61-11"><a href="#cb61-11"></a>  (<span class="st">&quot;Sergi&quot;</span>, <span class="st">&quot;tomates&quot;</span>),</span>
+<span id="cb61-12"><a href="#cb61-12"></a>  (<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;alcachofas&quot;</span>),</span>
+<span id="cb61-13"><a href="#cb61-13"></a>  (<span class="st">&quot;Pau&quot;</span>, <span class="st">&quot;chocolate&quot;</span>),</span>
+<span id="cb61-14"><a href="#cb61-14"></a>]</span></code></pre></div>
 </section></section>
 <section><section id="librerías" class="title-slide slide level1"><h1>Librerías</h1></section>
 <section id="reutilizando-código" class="slide level2">
@@ -6660,27 +6687,126 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 <code>from . import mimodulo</code></p>
 <p><strong>Librerías externas</strong><br />
 <code>pip install &lt;paquete&gt;</code></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a><span class="im">import</span> math</span>
-<span id="cb61-2"><a href="#cb61-2"></a>math.cos(angulo)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="im">import</span> math</span>
+<span id="cb62-2"><a href="#cb62-2"></a>math.cos(angulo)</span></code></pre></div>
 </section></section>
 <section><section id="ficheros" class="title-slide slide level1"><h1>Ficheros</h1></section>
-<section id="importar-librerías" class="slide level2">
-<h2>Importar librerías</h2>
+<section id="pathlib" class="slide level2">
+<h2><code>pathlib</code></h2>
+<p>Es una libreria estandard</p>
+<p>Provee objetos <code>Path</code></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb63-2"><a href="#cb63-2"></a></span>
+<span id="cb63-3"><a href="#cb63-3"></a>home <span class="op">=</span> Path.home() <span class="co"># el directorio de usuario</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a>config <span class="op">=</span> home <span class="op">/</span> <span class="st">&#39;miconfig.ini&#39;</span> <span class="co"># navegación</span></span>
+<span id="cb63-5"><a href="#cb63-5"></a>current <span class="op">=</span> Path.cwd() <span class="co"># el directorio de trabajo</span></span>
+<span id="cb63-6"><a href="#cb63-6"></a>p <span class="op">=</span> Path(<span class="st">&#39;/home/user/.config&#39;</span>)</span></code></pre></div>
+<aside class="notes">
+<p><code>pathlib</code> es una librería estandard. No hay que instalarla pero hay que importarla en el script.</p>
+<p>Path da acceso al sistema de ficheros</p>
+</aside>
+</section>
+<section id="leer-y-escribir" class="slide level2">
+<h2>Leer y escribir</h2>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1"></a>csv <span class="op">=</span> Path(<span class="st">&#39;mifichero.txt&#39;</span>)</span>
+<span id="cb64-2"><a href="#cb64-2"></a></span>
+<span id="cb64-3"><a href="#cb64-3"></a>aEscribir <span class="op">=</span> <span class="st">&quot;&quot;&quot;\</span></span>
+<span id="cb64-4"><a href="#cb64-4"></a><span class="st">Primera linia</span></span>
+<span id="cb64-5"><a href="#cb64-5"></a><span class="st">Segunda linia</span></span>
+<span id="cb64-6"><a href="#cb64-6"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb64-7"><a href="#cb64-7"></a>csv.write_text(aEscribir, encoding<span class="op">=</span><span class="st">&#39;utf8&#39;</span>)</span>
+<span id="cb64-8"><a href="#cb64-8"></a></span>
+<span id="cb64-9"><a href="#cb64-9"></a>leido <span class="op">=</span> csv.read_text(encoding<span class="op">=</span><span class="st">&#39;utf8&#39;</span>)</span>
+<span id="cb64-10"><a href="#cb64-10"></a><span class="co"># &quot;Primera linia\nSegunda linia\n&quot;</span></span></code></pre></div>
+<aside class="notes">
+<p>Si siempre trabajamos con UTF-8, nos vamos a evitar muchos problemas con los acentos y otros carácteres especiales.</p>
+<ul>
+<li>Cuando exportemos archivos, utf8.</li>
+<li>Cuando editemos código, utf8</li>
+<li>cuando leamos o escrivamos ficheros desde el código, utf8</li>
+</ul>
+<p>Evitar cosas como: ASCII, Latin1, UTF16, ISO6889-15, CP885, UCS…</p>
+<p>Si el fichero existe lo machaca.</p>
+</aside>
+</section>
+<section id="lectura-progresiva" class="slide level2">
+<h2>Lectura progresiva</h2>
+<p>La forma para ficheros grandes, no podemos cargarlos todos en memoria.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a><span class="cf">with</span> csv.<span class="bu">open</span>(encoding<span class="op">=</span><span class="st">&#39;utf8&#39;</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb65-2"><a href="#cb65-2"></a>    <span class="cf">for</span> nline, line <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">file</span>):</span>
+<span id="cb65-3"><a href="#cb65-3"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Contenido de la linia </span><span class="sc">{</span>nline<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>line<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<aside class="notes">
+<p><code>with</code> controla el recurso. Abre el fichero y lo cierra cuando salimos.</p>
+<p>Fijaros que no quita el <code>\n</code> final, cuando hacemos <code>print</code> hace dos saltos.</p>
+<p>La ultima linia vacia y sin salto.</p>
+</aside>
+</section>
+<section id="partes-del-path" class="slide level2">
+<h2>Partes del path</h2>
+<pre class="path"><code>&gt;&gt;&gt; p = Path(&#39;/home/vokimon/Documents/manualdepython.tar.gz&#39;)
+&gt;&gt;&gt; p.parts
+(&#39;/&#39;, &#39;home&#39;, &#39;vokimon&#39;, &#39;Documents&#39;, &#39;manualdepython.tar.gz&#39;)
+&gt;&gt;&gt; p.root
+&#39;/&#39;
+&gt;&gt;&gt; p.parent
+&#39;/home/vokimon/Documents&#39;
+&gt;&gt;&gt; p.parents
+[ &#39;/home/vokimon/Documents&#39;, &#39;/home/vokimon&#39;, &#39;/home&#39;, &#39;/&#39; ]
+&gt;&gt;&gt; p.name
+&#39;manualdepython.tar.gz&#39;
+&gt;&gt;&gt; p.suffix
+&#39;.gz&#39;
+&gt;&gt;&gt; p.suffixes
+[&#39;.tar&#39;, &#39;.gz&#39; ]
+&gt;&gt;&gt; p.stem
+&#39;manualdepython.tar&#39;
+
+## Busqueda
+
+```python
+# Todos los ficheros de texto del directorio actual
+[x for x in Path(&quot;.&quot;).glob(&#39;*.txt&#39;)]
+
+# Lo mismo pero mirando subdirectorios
+[x for x in Path(&quot;.&quot;).glob(&#39;**/*.txt&#39;)] 
+
+for child in Path(&#39;.&#39;).iterdir():
+    ....</code></pre>
+<aside class="notes">
+<p>Devuelve un iterable con todos los elementos que concuerden</p>
+<p>El doble asterisco quiere decir que desciende en los subdirectorios</p>
+</aside>
+</section>
+<section id="propiedades" class="slide level2">
+<h2>Propiedades</h2>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1"></a>p.exists() <span class="co"># existe el path</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a>p.is_dir() <span class="co"># es un directorio</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a>p.is_file() <span class="co"># es un fichero</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a>p.owner() <span class="co"># propietario del fichero</span></span></code></pre></div>
+</section>
+<section id="operaciones" class="slide level2">
+<h2>Operaciones</h2>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1"></a>p.remove() <span class="co"># borra fichero</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a>p.rmdir() <span class="co"># borra directorio vacio</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a></span>
+<span id="cb68-4"><a href="#cb68-4"></a>p.mkdir(parents<span class="op">=</span><span class="va">True</span>, exists_ok<span class="op">=</span>true) <span class="co"># crea el directorio y los padres, si no existen</span></span>
+<span id="cb68-5"><a href="#cb68-5"></a><span class="co"># si es un directorio mueve, sino mueve y renombra</span></span>
+<span id="cb68-6"><a href="#cb68-6"></a>p.rename(<span class="st">&quot;nuevonombre&quot;</span>)</span></code></pre></div>
 </section></section>
 <section id="descarte" class="title-slide slide level1"><h1>Descarte</h1></section>
 <section><section id="funciones" class="title-slide slide level1"><h1>Funciones</h1></section>
 <section id="definir-funciones-def" class="slide level2">
 <h2>Definir funciones <code>def</code></h2>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> media(a, b):</span>
-<span id="cb62-2"><a href="#cb62-2"></a>...     suma <span class="op">=</span> a<span class="op">+</span>b</span>
-<span id="cb62-3"><a href="#cb62-3"></a>...     <span class="cf">return</span> suma<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb62-4"><a href="#cb62-4"></a>...</span>
-<span id="cb62-5"><a href="#cb62-5"></a><span class="op">&gt;&gt;&gt;</span> media(<span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb62-6"><a href="#cb62-6"></a><span class="fl">2.0</span></span>
-<span id="cb62-7"><a href="#cb62-7"></a><span class="op">&gt;&gt;&gt;</span> media(<span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb62-8"><a href="#cb62-8"></a><span class="fl">4.5</span></span>
-<span id="cb62-9"><a href="#cb62-9"></a><span class="op">&gt;&gt;&gt;</span> suma</span>
-<span id="cb62-10"><a href="#cb62-10"></a><span class="pp">NameError</span>: name <span class="st">&#39;suma&#39;</span> <span class="kw">is</span> <span class="kw">not</span> defined</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> media(a, b):</span>
+<span id="cb69-2"><a href="#cb69-2"></a>...     suma <span class="op">=</span> a<span class="op">+</span>b</span>
+<span id="cb69-3"><a href="#cb69-3"></a>...     <span class="cf">return</span> suma<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb69-4"><a href="#cb69-4"></a>...</span>
+<span id="cb69-5"><a href="#cb69-5"></a><span class="op">&gt;&gt;&gt;</span> media(<span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb69-6"><a href="#cb69-6"></a><span class="fl">2.0</span></span>
+<span id="cb69-7"><a href="#cb69-7"></a><span class="op">&gt;&gt;&gt;</span> media(<span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb69-8"><a href="#cb69-8"></a><span class="fl">4.5</span></span>
+<span id="cb69-9"><a href="#cb69-9"></a><span class="op">&gt;&gt;&gt;</span> suma</span>
+<span id="cb69-10"><a href="#cb69-10"></a><span class="pp">NameError</span>: name <span class="st">&#39;suma&#39;</span> <span class="kw">is</span> <span class="kw">not</span> defined</span></code></pre></div>
 <aside class="notes">
 <p>Permiten reutilizar código, y ¡ponerle nombre! Si le ponemos un buen nombre, no hace falta que miremos el código para entender que pasa.</p>
 <ul>
@@ -6698,13 +6824,13 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 <section id="parámetros-opcionales" class="slide level2">
 <h2>Parámetros opcionales</h2>
 <p>Hacemos un parámetro opcional dándole un valor por defecto en la definición.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> aplicaIva(baseImponible, factorIva<span class="op">=</span><span class="fl">0.21</span>):</span>
-<span id="cb63-2"><a href="#cb63-2"></a>...    <span class="cf">return</span> baseImponible<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>factorIva)</span>
-<span id="cb63-3"><a href="#cb63-3"></a>...</span>
-<span id="cb63-4"><a href="#cb63-4"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>)</span>
-<span id="cb63-5"><a href="#cb63-5"></a><span class="fl">121.0</span></span>
-<span id="cb63-6"><a href="#cb63-6"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>, <span class="fl">0.07</span>)</span>
-<span id="cb63-7"><a href="#cb63-7"></a><span class="fl">107.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> aplicaIva(baseImponible, factorIva<span class="op">=</span><span class="fl">0.21</span>):</span>
+<span id="cb70-2"><a href="#cb70-2"></a>...    <span class="cf">return</span> baseImponible<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>factorIva)</span>
+<span id="cb70-3"><a href="#cb70-3"></a>...</span>
+<span id="cb70-4"><a href="#cb70-4"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>)</span>
+<span id="cb70-5"><a href="#cb70-5"></a><span class="fl">121.0</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>, <span class="fl">0.07</span>)</span>
+<span id="cb70-7"><a href="#cb70-7"></a><span class="fl">107.0</span></span></code></pre></div>
 <aside class="notes">
 <p>Si asignamos un valor en la definicion del paràmetro, podemos no especificarlo.</p>
 </aside>
@@ -6712,34 +6838,34 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 <section id="parámetros-opcionales-1" class="slide level2">
 <h2>Parámetros opcionales</h2>
 <p>Se rellenan por posición.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> prueba(a,b,c<span class="op">=</span><span class="st">&#39;c&#39;</span>,d<span class="op">=</span><span class="st">&#39;d&#39;</span>):</span>
-<span id="cb64-2"><a href="#cb64-2"></a>...    <span class="bu">print</span>(a,b,c,d)</span>
-<span id="cb64-3"><a href="#cb64-3"></a>...</span>
-<span id="cb64-4"><a href="#cb64-4"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>)</span>
-<span id="cb64-5"><a href="#cb64-5"></a><span class="pp">TypeError</span>: prueba() takes at least <span class="dv">2</span> arguments (<span class="dv">1</span> given)</span>
-<span id="cb64-6"><a href="#cb64-6"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb64-7"><a href="#cb64-7"></a><span class="dv">1</span> <span class="dv">2</span> c d</span>
-<span id="cb64-8"><a href="#cb64-8"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb64-9"><a href="#cb64-9"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> d</span>
-<span id="cb64-10"><a href="#cb64-10"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
-<span id="cb64-11"><a href="#cb64-11"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span></span>
-<span id="cb64-12"><a href="#cb64-12"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
-<span id="cb64-13"><a href="#cb64-13"></a><span class="pp">TypeError</span>: prueba() takes at most <span class="dv">4</span> arguments (<span class="dv">5</span> given)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> prueba(a,b,c<span class="op">=</span><span class="st">&#39;c&#39;</span>,d<span class="op">=</span><span class="st">&#39;d&#39;</span>):</span>
+<span id="cb71-2"><a href="#cb71-2"></a>...    <span class="bu">print</span>(a,b,c,d)</span>
+<span id="cb71-3"><a href="#cb71-3"></a>...</span>
+<span id="cb71-4"><a href="#cb71-4"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>)</span>
+<span id="cb71-5"><a href="#cb71-5"></a><span class="pp">TypeError</span>: prueba() takes at least <span class="dv">2</span> arguments (<span class="dv">1</span> given)</span>
+<span id="cb71-6"><a href="#cb71-6"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb71-7"><a href="#cb71-7"></a><span class="dv">1</span> <span class="dv">2</span> c d</span>
+<span id="cb71-8"><a href="#cb71-8"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb71-9"><a href="#cb71-9"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> d</span>
+<span id="cb71-10"><a href="#cb71-10"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb71-11"><a href="#cb71-11"></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span></span>
+<span id="cb71-12"><a href="#cb71-12"></a><span class="op">&gt;&gt;&gt;</span> prueba(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb71-13"><a href="#cb71-13"></a><span class="pp">TypeError</span>: prueba() takes at most <span class="dv">4</span> arguments (<span class="dv">5</span> given)</span></code></pre></div>
 <p>¿Que pasa si queremos pasar el segundo opcional pero dejar el primero por defecto?</p>
 </section>
 <section id="parámetros-opcionales-2" class="slide level2">
 <h2>Parámetros opcionales</h2>
 <p>Los opcionales tienen que ser los últimos paràmetros.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> prueba(a,b,c<span class="op">=</span><span class="st">&#39;c&#39;</span>,d):</span>
-<span id="cb65-2"><a href="#cb65-2"></a>...    <span class="bu">print</span>(a,b,c,d)</span>
-<span id="cb65-3"><a href="#cb65-3"></a>...</span>
-<span id="cb65-4"><a href="#cb65-4"></a><span class="pp">SyntaxError</span>: non<span class="op">-</span>default argument follows default argument</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> prueba(a,b,c<span class="op">=</span><span class="st">&#39;c&#39;</span>,d):</span>
+<span id="cb72-2"><a href="#cb72-2"></a>...    <span class="bu">print</span>(a,b,c,d)</span>
+<span id="cb72-3"><a href="#cb72-3"></a>...</span>
+<span id="cb72-4"><a href="#cb72-4"></a><span class="pp">SyntaxError</span>: non<span class="op">-</span>default argument follows default argument</span></code></pre></div>
 <p>¿Que pasa si queremos pasar el segundo opcional pero dejar el primero por defecto?</p>
 </section>
 <section id="parámetros-por-clave" class="slide level2">
 <h2>Parámetros por clave</h2>
-<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>, factorIva<span class="op">=</span><span class="fl">0.07</span>)</span>
-<span id="cb66-2"><a href="#cb66-2"></a><span class="dv">107</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1"></a><span class="op">&gt;&gt;&gt;</span> aplicaIva(<span class="dv">100</span>, factorIva<span class="op">=</span><span class="fl">0.07</span>)</span>
+<span id="cb73-2"><a href="#cb73-2"></a><span class="dv">107</span></span></code></pre></div>
 <p>Ayuda la lectura, cuando hay varios parámetros</p>
 <p>Permite reordenar los parámetros respecto la definición</p>
 <p>Primero los posicionales</p>
@@ -6754,15 +6880,15 @@ Vienen con el lenguaje pero hay que importarlas.<br />
 </p>
 <p>Dos listas pueden coincidir en contenido<br />
 pero su identidad es diferente.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1"></a>l1 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
-<span id="cb67-2"><a href="#cb67-2"></a>l2 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>] <span class="co"># el mismo contenido pero otra lista</span></span>
-<span id="cb67-3"><a href="#cb67-3"></a>l3 <span class="op">=</span> l1 <span class="co"># l3 apunta a la misma lista que l1</span></span>
-<span id="cb67-4"><a href="#cb67-4"></a>l1 <span class="op">==</span> l2  <span class="co">#  True, tiene el mismo contenido</span></span>
-<span id="cb67-5"><a href="#cb67-5"></a>l1 <span class="kw">is</span> l2  <span class="co">#  False, son dos listas diferentes</span></span>
-<span id="cb67-6"><a href="#cb67-6"></a>l1 <span class="kw">is</span> l3  <span class="co">#  True, apuntan a la misma lista</span></span>
-<span id="cb67-7"><a href="#cb67-7"></a>l1 <span class="op">+=</span> [<span class="dv">4</span>,<span class="dv">5</span>] <span class="co"># Concatenamos</span></span>
-<span id="cb67-8"><a href="#cb67-8"></a>l2     <span class="co"># [1,2,3] sin modificar, *es* otra lista</span></span>
-<span id="cb67-9"><a href="#cb67-9"></a>l3     <span class="co"># [1,2,3,4,5] actualizada via l1, *es* la misma lista</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1"></a>l1 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb74-2"><a href="#cb74-2"></a>l2 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>] <span class="co"># el mismo contenido pero otra lista</span></span>
+<span id="cb74-3"><a href="#cb74-3"></a>l3 <span class="op">=</span> l1 <span class="co"># l3 apunta a la misma lista que l1</span></span>
+<span id="cb74-4"><a href="#cb74-4"></a>l1 <span class="op">==</span> l2  <span class="co">#  True, tiene el mismo contenido</span></span>
+<span id="cb74-5"><a href="#cb74-5"></a>l1 <span class="kw">is</span> l2  <span class="co">#  False, son dos listas diferentes</span></span>
+<span id="cb74-6"><a href="#cb74-6"></a>l1 <span class="kw">is</span> l3  <span class="co">#  True, apuntan a la misma lista</span></span>
+<span id="cb74-7"><a href="#cb74-7"></a>l1 <span class="op">+=</span> [<span class="dv">4</span>,<span class="dv">5</span>] <span class="co"># Concatenamos</span></span>
+<span id="cb74-8"><a href="#cb74-8"></a>l2     <span class="co"># [1,2,3] sin modificar, *es* otra lista</span></span>
+<span id="cb74-9"><a href="#cb74-9"></a>l3     <span class="co"># [1,2,3,4,5] actualizada via l1, *es* la misma lista</span></span></code></pre></div>
 <aside class="notes">
 <p><strong>Culturilla</strong></p>
 <p>Datos inmutables (numbers, str, bool): si tienen el mismo tipo y valor son el mismo objeto</p>

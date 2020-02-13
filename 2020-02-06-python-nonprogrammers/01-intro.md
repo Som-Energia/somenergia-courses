@@ -1089,12 +1089,13 @@ el 10 de antes indica que todo ocupe 10 espacios.
 
 ## ¿Qué es esto?
 
-A continuación hemos montado
-unas animaciones con audio
+Las siguientes diapos contienen
+consolas animadas con audio
 que reproducen la sesión en vivo
 que se hizo en la formación.
 
-Es texto. Puedes seleccionar los comandos
+No es video es texto animado.\
+Puedes seleccionar el texto de los comandos
 y copiarlos en tu intérprete.
 
 
@@ -1125,6 +1126,8 @@ y copiarlos en tu intérprete.
 
 
 ## Textos
+
+PENDIENTE
 
 <asciinema-player
 	src="01-04-textos.cast"

@@ -94,11 +94,35 @@ Tomar decisiones
 
 Recorrer estructuras
 
-Usar diccionarios
-
 Usar librerías
 
 Manipular ficheros
+
+## Ejercicio
+
+Evitar conversaciones cruzadas en teléfono
+
+Las graellas usan la definición de mesa
+
+Complicado que cada cual se lo configure
+
+Joan nos ha pasado [un fichero con las mesas](mapataules.txt).
+
+Tomatic las necesita en otro formato.
+
+
+
+::: notes
+Para generar graellas se tienen en cuenta las mesas para evitar conversaciones cruzadas.
+
+No hay forma de que cada cual configure la suya
+
+Joan se ha currado un [mapa de mesas](mapataules.txt)
+
+El tomatic necesita un formato especifico\
+hacerlo a mano es tedioso
+
+:::
 
 
 # Decisiones
@@ -415,36 +439,23 @@ por ser secuencias.
 
 ## Listas del tirón
 
+Construyendo una lista a partir de otra (o un iterable)
+
 :::columns
 ::::column
 ```python
-l = []
+squares = []
 for x in range(6):
-	l+=[x*x]
+	squares+=[x*x]
 ```
 ::::
 ::::column
 ```python
 # [0, 1, 4, 9, 16, 25]
-l = [ x*x for x in range(6) ]
+squares=[x*x for x in range(6)]
 ```
 ::::
 :::
-
-
-
-```python
-l = [ x*x for x in range(6) if x % 3 ] # [0, 1, 4, 16, 25]
-l = [ # Como se suele complicar, lo formateamos asi:
-	(x, x*x, x*x*x)   # Trio: x, el cuadrado y el cubo
-	for x in range(6)
-	if x % 3
-]
-# Si en vez de [] usamos () no se crea una lista
-# es un generador de elementos como el range
-g = ( x*x for x in range(60000) if x % 3 )
-# No generar listas intermedias acelera la ejecución
-```
 
 :::notes
 En inglés se llaman _comprehension lists_
@@ -452,6 +463,26 @@ pero me da mucho palo llamarlas así
 porque cuesta pronunciarlo, y no entiendo que significado aporta comprehension.
 
 Sirven para generar una lista nueva a partir de un iterable.
+
+Ojo, el `for` va sin `:`
+:::
+
+## Filtrando elementos
+
+```python
+l = [ x*x for x in range(6) if x % 3 ] # [0, 1, 4, 16, 25]
+
+# Como se suele complicar, lo formateamos asi:
+l = [
+	(x, x*x, x*x*x)   # Trio: x, el cuadrado y el cubo
+	for x in range(6)
+	if x % 3
+]
+```
+
+:::notes
+Podemos añadirle una condición de filtro con el `if` final.
+Tambien sin `:`
 
 Tienen una estructora similar al SQL:
 SELECT .. FROM ... WHERE
@@ -463,12 +494,16 @@ SELECT .. FROM ... WHERE
 	if item_condition
 ]
 ```
-
-Ojo, el `for` va sin `:`
-
-Podemos añadirle una condición de filtro con el `if` final.
-Tambien sin `:`
 :::
+
+## Generador del tiron
+
+```python
+# Si en vez de [] usamos () no se crea una lista
+# es un generador de elementos como el range
+g = ( x*x for x in range(60000) if x % 3 )
+# No generar listas intermedias acelera la ejecución
+```
 
 
 ## Filtros iteradores
@@ -520,13 +555,143 @@ math.cos(angulo)
 
 # Ficheros
 
+## `pathlib`
 
-## Importar librerías
+Es una libreria estandard
+
+Provee objetos `Path`
+
+```python
+from pathlib import Path
+
+home = Path.home() # el directorio de usuario
+config = home / 'miconfig.ini' # navegación
+current = Path.cwd() # el directorio de trabajo
+p = Path('/home/user/.config')
+```
+
+:::notes
+`pathlib` es una librería estandard.
+No hay que instalarla pero hay que importarla en el script.
+
+Path da acceso al sistema de ficheros
+:::
+
+
+## Leer y escribir
+
+```python
+csv = Path('mifichero.txt')
+
+aEscribir = """\
+Primera linia
+Segunda linia
+"""
+csv.write_text(aEscribir, encoding='utf8')
+
+leido = csv.read_text(encoding='utf8')
+# "Primera linia\nSegunda linia\n"
+```
+
+:::notes
+Si siempre trabajamos con UTF-8,
+nos vamos a evitar muchos problemas
+con los acentos y otros carácteres especiales.
+
+- Cuando exportemos archivos, utf8.
+- Cuando editemos código, utf8
+- cuando leamos o escrivamos ficheros desde el código, utf8
+
+Evitar cosas como: ASCII, Latin1, UTF16, ISO6889-15, CP885, UCS...
+
+Si el fichero existe lo machaca.
+:::
+
+## Lectura progresiva
+
+La forma para ficheros grandes,
+no podemos cargarlos todos en memoria.
+
+```python
+with csv.open(encoding='utf8') as file:
+	for nline, line in enumerate(file):
+		print(f"Contenido de la linia {nline+1}: {line}")
+```
+
+:::notes
+`with` controla el recurso.
+Abre el fichero y lo cierra cuando salimos.
+
+Fijaros que no quita el `\n` final,
+cuando hacemos `print` hace dos saltos.
+
+La ultima linia vacia y sin salto.
+:::
+
+
+## Partes del path
+
+```path
+>>> p = Path('/home/vokimon/Documents/manualdepython.tar.gz')
+>>> p.parts
+('/', 'home', 'vokimon', 'Documents', 'manualdepython.tar.gz')
+>>> p.root
+'/'
+>>> p.parent
+'/home/vokimon/Documents'
+>>> p.parents
+[ '/home/vokimon/Documents', '/home/vokimon', '/home', '/' ]
+>>> p.name
+'manualdepython.tar.gz'
+>>> p.suffix
+'.gz'
+>>> p.suffixes
+['.tar', '.gz' ]
+>>> p.stem
+'manualdepython.tar'
+
+## Busqueda
+
+```python
+# Todos los ficheros de texto del directorio actual
+[x for x in Path(".").glob('*.txt')]
+
+# Lo mismo pero mirando subdirectorios
+[x for x in Path(".").glob('**/*.txt')] 
+
+for child in Path('.').iterdir():
+	....
+```
 
 
 
 
+:::notes
+Devuelve un iterable con todos los elementos que concuerden
 
+El doble asterisco quiere decir que desciende en los subdirectorios
+:::
+
+## Propiedades
+
+```python
+p.exists() # existe el path
+p.is_dir() # es un directorio
+p.is_file() # es un fichero
+p.owner() # propietario del fichero
+
+```
+
+## Operaciones
+
+```python
+p.remove() # borra fichero
+p.rmdir() # borra directorio vacio
+
+p.mkdir(parents=True, exists_ok=true) # crea el directorio y los padres, si no existen
+# si es un directorio mueve, sino mueve y renombra
+p.rename("nuevonombre")
+```
 
 # Descarte
 
