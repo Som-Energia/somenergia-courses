@@ -1690,304 +1690,40 @@ background-color: #F0F1EB; } }
   <p class="author">David García Garzón</p>
 </section>
 
-<section><section id="arquitectura-multicapa" class="title-slide slide level1"><h1>Arquitectura multicapa</h1></section>
-<section id="motivació" class="slide level2">
-<h2>Motivació</h2>
-<p>Distribuir les responsabilitats en components</p>
-<p>Les capes estableixen punts de tall (possibles) per la componentització</p>
-<p>Aquestes capes estan en gairebé tota aplicació independentment del domini.</p>
-<p>Bon punt de partida, aprofitem-ho</p>
-<aside class="notes">
-<p>En anglès <em>multi-tier</em></p>
-<p>En una aplicacio trobaràs d’altres criteris de componentització depenent del domini. Pero tindre uns criteris que et trobaràs sempre és un bon punt de partida.</p>
-<p>No ens ho prenem com un paradigma arquitectònic que cal seguir per nassos.</p>
-<p>Com els models UML és una eina per pensar i comunicar.</p>
-</aside>
-</section>
-<section id="les-capes" class="slide level2">
-<h2>Les capes</h2>
-<style>
-.isostack {
-    width: auto;
-}
-.isostack p {
-border: 1pt #fff solid;
-background: #aba;
-width: 10em;
-margin: auto;
-}
-</style>
-<div class="isostack">
-<p>Presentació</p>
-<p>Aplicació</p>
-<p>Negoci</p>
-<p>Entitats</p>
-<p>Persistencia</p>
-</div>
-<aside class="notes">
-<p>Cada capa resol problemes que li son propis.</p>
-<p>Cada capa aïlla a la superior dels seus detalls.</p>
-<p>Acoblament unidireccional: Les capes d’adalt fan servir les de sota.</p>
-<ul>
-<li>Presentació: com es presenta la informació a l’usuari, interactivitat</li>
-<li>Aplicació: dialeg amb l’usuari</li>
-<li>Negoci (Domini): regles/operacions propies del domini (si hagues més d’una aplicació el que fora comú)</li>
-<li>Entitats: Com s’agrupa la informació en entitats, atributs i relacions</li>
-<li>Persistència: Com es guarda tota aquesta informació, suport, mecanismes d’accés, indexació, backups…</li>
-</ul>
-</aside>
-</section>
-<section id="son-capes-irreals" class="slide level2">
-<h2>Son capes irreals</h2>
-<p>Irreals com el model OSI de xarxes:</p>
-<p>No cal correspondència Component - Capa</p>
-<p>Pero les funcions han de ser-hi!</p>
-<p>Serveixen per pensar/comunicar<br />
-on posar fronteres i responsabilitats</p>
-</section>
-<section id="presentació" class="slide level2">
-<h2>Presentació</h2>
-<div class="columns">
-<div class="column">
-<div class="isostack">
-<p><strong>Presentació</strong></p>
-<p>Aplicació</p>
-<p>Negoci</p>
-<p>Entitats</p>
-<p>Persistencia</p>
-</div>
-</div><div class="column">
-<p>Com es mostra la informació a l’usuari.</p>
-<p>Elements visuals i interactius</p>
-<p>Camps, botons, widgets, taules…</p>
-</div>
-</div>
-</section>
-<section id="aplicació" class="slide level2">
-<h2>Aplicació</h2>
-<div class="columns">
-<div class="column">
-<div class="isostack">
-<p>Presentació</p>
-<p><strong>Aplicació</strong></p>
-<p>Negoci</p>
-<p>Entitats</p>
-<p>Persistencia</p>
-</div>
-</div><div class="column">
-<p>Es la lógica que regna el diàleg amb l’usuari.</p>
-<p>Quins passos presentes, que ensenyes i que no, estat de la sessió.</p>
-<p>Com transiciones de pantalla a pantalla</p>
-</div>
-</div>
-</section>
-<section id="negocidomini" class="slide level2">
-<h2>Negoci/Domini</h2>
-<div class="columns">
-<div class="column">
-<div class="isostack">
-<p>Presentació</p>
-<p>Aplicació</p>
-<p><strong>Negoci</strong></p>
-<p>Entitats</p>
-<p>Persistencia</p>
-</div>
-</div><div class="column">
-<p>Lógica, operacions i restricions propies del domini</p>
-<p>Existeixen idependentment de l’aplicació</p>
-</div>
-</div>
-</section>
-<section id="entitats" class="slide level2">
-<h2>Entitats</h2>
-<div class="columns">
-<div class="column">
-<div class="isostack">
-<p>Presentació</p>
-<p>Aplicació</p>
-<p>Negoci</p>
-<p><strong>Entitats</strong></p>
-<p>Persistencia</p>
-</div>
-</div><div class="column">
-<p>Elements del negoci<br />
-Quins són<br />
-Quins atributs els defineixen<br />
-Com es relacionen</p>
-</div>
-</div>
-<aside class="notes">
-<p>Aquest nivell coincideix amb el de les APIS anomenades CRUD (Create, Read, Update, Delete)</p>
-<p>La lógica de negoci queda fora</p>
-</aside>
-</section>
-<section id="persistència" class="slide level2">
-<h2>Persistència</h2>
-<div class="columns">
-<div class="column">
-<div class="isostack">
-<p>Presentació</p>
-<p>Aplicació</p>
-<p>Negoci</p>
-<p>Entitats</p>
-<p><strong>Persistencia</strong></p>
-</div>
-</div><div class="column">
-<p>Com es guarda l’estat del sistema?<br />
-Base de dades? Fitxers? Online?</p>
-<p>Què es guarda? Què es calcula?</p>
-<p>En quin format? En quin suport?</p>
-<p>Indexos, rèpliques…</p>
-</div>
-</div>
-</section>
-<section id="divisió-horitzontal" class="slide level2">
-<h2>Divisió horitzontal</h2>
-<p>Capes d’aplicació seria la divisió vertical</p>
-<p>Horitzontal: Per temàtiques o funcionalitats</p>
-<p>De la conjunció surten els components del sistema.</p>
-</section>
-<section id="decissions" class="slide level2">
-<h2>Decissions</h2>
-<p>què repliquem o no</p>
-<p>què centralitzem o distribuim</p>
-<p>què diversifiquem o uniformem</p>
-<p>quines fronteres (API’s) definim</p>
-<p>duplicació vs replicació</p>
-<aside class="notes">
-<p>Duplicació: quan fem el mateix a diversos llocs (i cal desenvolupar-ho diverses vegades)</p>
-<p>Replicació: quan desenvolupem una cosa un cop i la repliquem a diversos puestos</p>
-</aside>
-</section>
-<section id="aplicació-i-negoci" class="slide level2">
-<h2>Aplicació i negoci</h2>
-<p>La de negoci és la lògica compartida per les aplicacions.</p>
-<p>Si tenim diverses aplicacions,<br />
-no dupliquem la lògica de negoci a cadascuna.</p>
-<p>Compartim un component que la contingui.</p>
-<p>Llibreria, API, servei…</p>
-<p>Mola exposar accions de negoci<br />
-(tambè s’en diu la capa de serveis o operacions)</p>
-<aside class="notes">
-<p>Es diferent tenir logica duplicada que replicada o compartida.</p>
-<p>La duplicació és un perill pel manteniment i la coherència.</p>
-</aside>
-</section>
-<section id="entitats-i-negoci" class="slide level2">
-<h2>Entitats i negoci</h2>
-<p>CRUD/ORM: representació d’entitat</p>
-<p>Entitat no aporten per se lògica de negoci</p>
-<p>ORM’s augmentats amb operacions de negoci?<br />
-Es bo per construir el nivell de <em>Negoci</em>.</p>
-<p>El problema es quan oferim l’ORM a <em>Aplicació</em>, permetent-li saltarse restriccións de <em>Negoci</em>.</p>
-<aside class="notes">
-<p>És bo si ho permet l’ORM augmentar les entitats amb operacions de negoci</p>
-<p>El que és perillés es oferir l’ORM com a capa de negoci, donat que no només ofereix aquestes operacions sinó també les manipulacions a baix nivell de les entitats.</p>
-<p>Si <em>Aplicació</em> accedeix directament a una API ORM o CRUD, és molt possible que estigui fent lògica de <em>Negoci</em>.</p>
-</aside>
-</section>
-<section id="aplicació-i-presentació" class="slide level2">
-<h2>Aplicació i presentació</h2>
-<p><strong>Client-servidor:</strong><br />
-Al servidor només estava <em>Persistencia</em>.</p>
-<p><strong>LAMP clàssic:</strong><br />
-Presentació era l’HTML generat,<br />
-l’applicació estava al servidor.</p>
-<p><strong>Single Page App:</strong><br />
-Presentació i aplicació al navegador.</p>
-</section>
-<section id="a-lerp" class="slide level2">
-<h2>A l’ERP</h2>
-<p>Les aplicacions accedeixen a diferents nivells d’abstracció.</p>
-<p>Hi ha lógica del negoci fora.</p>
-<p>S’ofereixen API’s a nivell de vista (wizards) que haurien de ser de negoci</p>
-<p>S’ofereix API a nivell persistencia (orm)</p>
-</section>
-<section id="problemes" class="slide level2">
-<h2>Problemes</h2>
-<p><strong>Acoblament a l’estructura de la base de dades</strong></p>
-<p>Rígidesa en el disseny</p>
-<p>Ens saltem la lógica de negoci</p>
-<p>Repliquem la lógica de negoci<br />
-(i mantenim les répliques desigualment)</p>
-<p><strong>Acoblament amb els camps i disseny dels wizards</strong></p>
-</section>
-<section id="ús-tipus-crud" class="slide level2">
-<h2>Ús tipus CRUD</h2>
-<p>No hi ha abstracció de negoci</p>
-<p>Acoblament a la representació</p>
-<p>Genera rigidesa</p>
-<p>Abstreure ops i moure-les a l’ERP</p>
-<p>Bad smell de que hi ha lógica de negoci fora.</p>
-</section>
-<section id="logica-de-negoci-fora" class="slide level2">
-<h2>Logica de negoci fora</h2>
-<p>Ficar la lògica de negoci dintre de l’ERP</p>
-<p>Definir interfície que segueixi aquesta lògica de negoci</p>
-<p>Operacions de negoci</p>
-<aside class="notes">
-<p>Es el que hem fet amb el <code>Partner.become_member</code></p>
-<p>És el que hem anat fent al webforms.</p>
-<p>Al webforms ho hem anat fent de forma progressiva per anar descobrint les parts comunes i definint la interfície apropiada.</p>
-</aside>
-</section>
-<section id="apis-tipus-wizard" class="slide level2">
-<h2>API’s tipus wizard</h2>
-<p><strong>Erpppek fa servir wizards com a API</strong></p>
-<p>Wrappejar la crida al wizard</p>
-<p>Moure-la a l’ERP, com a op de domini</p>
-<p>Extreure la lògica de negoci com a API</p>
-<p>Cridar aquesta API des del wizard</p>
-<p>Cridar aquesta API des de l’erppeek</p>
-</section>
-<section id="procediment" class="slide level2">
-<h2>Procediment</h2>
-<p><strong>Abstreure ops a l’erppeek</strong><br />
-cobertes amb tests!<br />
-si no tenim, b2b i/o funcionals d’allò que ho crida<br />
-unitaris després de la funció extreta</p>
-<p><strong>Replicar-les a l’ERP com a API accessible</strong><br />
-Intentar replicar els casos unitaris a destral<br />
-Delegar mantenint testos interns i externs<br />
-</p>
-</section>
-<section id="apis-amb-diccionaris" class="slide level2">
-<h2>API’s amb diccionaris</h2>
-<p>Pot semblar còmode<br />
-‘flexibilitza’ els arguments que es passen</p>
-<p>Complica l’ús:<br />
-Signatura ja no es documentació<br />
-Errors tipogràfics silenciosos</p>
-<p>Fer servir paràmetres explicits<br />
-Problema: XMLRPC no soporta keywords<br />
-</p>
-<p>Si els paràmetres depenen de la casuística,<br />
-potser convé oferir diferents punts d’entrada.</p>
-</section></section>
 <section><section id="tipus-de-testos" class="title-slide slide level1"><h1>Tipus de testos</h1></section>
-<section id="segons-transparencia" class="slide level2">
-<h2>Segons transparencia</h2>
-<p>Com de conscients som quan escribim el test dels detalls d’implementacio?</p>
-<p><strong>Caixa Negra</strong><br />
-Ho fem a cegues, entrada-sortida</p>
-<p><strong>Caixa Grisa</strong><br />
-Tenim una idea del que fa</p>
-<p><strong>Caixa Blanca</strong><br />
-Fem el test seguint el codi</p>
+<section id="segons-qui-els-comprova" class="slide level2">
+<h2>Segons qui els comprova</h2>
+<p><strong>Test supervisats:</strong><br />
+Algú ha de validar que els resultats son bons</p>
+<p><strong>Test automatitzats:</strong><br />
+L’ordinador fa la validació i només es queixa quan fallen</p>
+<p><strong>Tests amb referencia validada:</strong><br />
+Es comprova la sortida del cas la primera vegada y cada cop que canvia el comportament</p>
+<aside class="notes">
+<p>Supervisats: Main amb prints</p>
+<p>Automatitzats: Frameworks xunit</p>
+<p>Referencia validada: <a href="https://github.com/vokimon/back2back">back2back</a>, <a href="https://jestjs.io/docs/en/snapshot-testing">snapshot</a>…</p>
+</aside>
 </section>
 <section id="segons-quan-els-fem" class="slide level2">
 <h2>Segons quan els fem</h2>
 <p><strong>Test Last development</strong><br />
-Un cop que ja hem fet codia (clàssic)</p>
+Un cop que ja hem fet codi (clàssic)</p>
 <p><strong>Test driven development</strong><br />
 Abans el test, de cada linia de codi</p>
 <p><strong>Behaviour driven development</strong><br />
 Abans el test funcional, que tot el codi</p>
 <aside class="notes">
+<ul>
+<li>Com justifiqueu invertir en test un el codi funciona?</li>
+<li>Per que creieu que es bo el TDD?</li>
+<li>Sempre el podem aplicar?</li>
+<li>Heu treballat amb BDD?</li>
+</ul>
 <p>Test Last development es el que s’ha fet de tota la vida.</p>
 <ul>
 <li>Costa molt justificar fer testos de cosas que ja saps (o creus) que funcionen</li>
-<li>Acaven no fent-se</li>
+<li>Acaben no fent-se</li>
 <li>Costos de debug d’errors posteriors</li>
 <li>Regresions de coses que abans funcionaven</li>
 </ul>
@@ -1999,6 +1735,16 @@ Abans el test funcional, que tot el codi</p>
 <p>Sovint el codi ja està fet, hi ha técniques per fer-ho sistemàtic com si fos TDD.</p>
 <p>BDD implica altres coses que no pas quan fas els testos i es compatible amb TDD. Parteix dels testos funcionals.</p>
 </aside>
+</section>
+<section id="segons-transparencia" class="slide level2">
+<h2>Segons transparencia</h2>
+<p>Com de conscients som quan escribim el test dels detalls d’implementacio?</p>
+<p><strong>Caixa Negra</strong><br />
+Ho fem a cegues, entrada-sortida</p>
+<p><strong>Caixa Grisa</strong><br />
+Tenim una idea del que fa</p>
+<p><strong>Caixa Blanca</strong><br />
+Fem el test seguint el codi</p>
 </section>
 <section id="segons-codi-cobert-i" class="slide level2">
 <h2>Segons codi cobert (I)</h2>
@@ -2041,7 +1787,7 @@ Abans el test funcional, que tot el codi</p>
 </ul>
 <aside class="notes">
 <ul>
-<li>Test extremo a extremo: Integracion total, emulando un caso real en entorno real</li>
+<li>Test extremo a extremo: Integracion total, emulando un caso real en entorno real. Frontend, backend…</li>
 <li>Test d’acceptació: Es el que fa l’usuari per donar per bo un desenvolupament</li>
 <li>Test de desplegament:
 <ul>
@@ -2182,10 +1928,12 @@ Cerca de vulnerabilitats conegudes o típiques</p>
 <section><section id="casos-de-test" class="title-slide slide level1"><h1>Casos de test</h1></section>
 <section id="quan-hem-testejat-prou" class="slide level2">
 <h2>Quan hem testejat prou?</h2>
-<p>Llei del retorn decreixent</p>
-<p>Més testos fan l’execució de testos més lenta</p>
-<p>Més testos augmenten el cost de manteniment</p>
-<p>Més testos cal implementar-los</p>
+<p>Llei del retorn decreixent.</p>
+<p>Compte, no son gratis, si fem masses testos…</p>
+<p>Costa implementar-los<br />
+Costa mantenir-los<br />
+L’execució dels testos triga més<br />
+</p>
 <p>Afegirem només casos que aportin quelcom</p>
 <aside class="notes">
 <p><strong>Retorn decreixent:</strong> <em>Arriba un punt que afegir més testos no aporta prou valor per compensar el cost d’afegir-lo</em></p>
@@ -2196,17 +1944,17 @@ Cerca de vulnerabilitats conegudes o típiques</p>
 <h2>Técniques</h2>
 <div class="columns">
 <div class="column">
+<p><strong>Branch testing</strong><br />
+cada cami al codi un test</p>
+<p><strong>Test de cobertura</strong><br />
+eina que detecta codi no exercitat pels testos</p>
+</div><div class="column">
 <p><strong>Montecarlo</strong><br />
 Generació aleatoria</p>
 <p><strong>Anàlisi de valors frontera</strong><br />
 A banda i banda d’on canvia el comportament</p>
 <p><strong>Particions equivalents</strong><br />
 Un cas per partició d’equivalent comportament</p>
-</div><div class="column">
-<p><strong>Branch testing</strong><br />
-cada cami al codi un test</p>
-<p><strong>Test de cobertura</strong><br />
-eina que detecta codi no exercitat pels testos</p>
 </div>
 </div>
 <aside class="notes">
@@ -2216,21 +1964,15 @@ eina que detecta codi no exercitat pels testos</p>
 </section>
 <section id="montecarlo" class="slide level2">
 <h2>Montecarlo</h2>
-<ul>
-<li>És molt difíci amb un cas de test extrany.</li>
-<li>Important: guardar el cas fallat, per reproduir-lo fora del montecarlo</li>
-<li>Molt costós d’executar</li>
-<li>Hi ha eines per generar-ne</li>
-<li>Per definir el domini aleatori, cal un análisi de domini mínim</li>
-<li>Ideal per tests de rendiment</li>
-</ul>
-</section>
-<section id="anàlisi-de-domini-dentrada" class="slide level2">
-<h2>Anàlisi de domini d’entrada</h2>
-<p>Tàndem: Valors frontera + particions equivalents</p>
-<p>Un cop definits els valors frontera, generem les particions equivalents</p>
-<p>Fem servir els valors frontera com a representants de la partició.</p>
-<p>Dos casos son equivalents si tenen el mateix comportament</p>
+<p>És molt difíci donar amb cas de test extrany.</p>
+<p>Important: guardar el cas fallat, per reproduir-lo fora del montecarlo</p>
+<p>Molt costós d’executar</p>
+<p>Hi ha eines per generar-ne</p>
+<p>Per definir el domini aleatori, cal un análisi de domini mínim</p>
+<p>Ideal per tests de rendiment</p>
+<aside class="notes">
+<p>En Python, la libreria <code>faker</code> es bestial para generar, nombres, direcciones, nifs…</p>
+</aside>
 </section>
 <section id="branch-testing" class="slide level2">
 <h2>Branch testing</h2>
@@ -2239,6 +1981,13 @@ eina que detecta codi no exercitat pels testos</p>
 <p>Per a codi ja escrit o que tenim clar que volem escriure</p>
 <p>Compte funcions delegades (<code>floor(x)</code> vs <code>x//1</code>)</p>
 <p>No considera comportament divergent per dades</p>
+</section>
+<section id="anàlisi-de-domini-dentrada" class="slide level2">
+<h2>Anàlisi de domini d’entrada</h2>
+<p>Tàndem: Valors frontera + particions equivalents</p>
+<p>Un cop definits els valors frontera, generem les particions equivalents</p>
+<p>Fem servir els valors frontera com a representants de la partició.</p>
+<p>Dos casos son equivalents si tenen el mateix comportament</p>
 </section>
 <section id="coverage-testing" class="slide level2">
 <h2>Coverage testing</h2>
@@ -2260,7 +2009,7 @@ eina que detecta codi no exercitat pels testos</p>
 </ul>
 </section></section>
 <section><section id="automatització" class="title-slide slide level1"><h1>Automatització</h1></section>
-<section id="motivació-1" class="slide level2">
+<section id="motivació" class="slide level2">
 <h2>Motivació</h2>
 <p>Clàssic: Executar el codi i comprovar el resultat esperat</p>
 <p>Conseqüències:</p>
@@ -2320,8 +2069,13 @@ Potser es la meva desconeixença</p>
 <section><section id="tdd" class="title-slide slide level1"><h1>TDD</h1></section>
 <section id="red-green-refactor" class="slide level2">
 <h2>Red-Green-Refactor</h2>
-<ul>
-<li>Red: Fem un test que falli
+<p><strong>Red:</strong> Fem un test que falli</p>
+<p><strong>Green:</strong> Fem lo minim per que passi ràpid</p>
+<p><strong>Refactor:</strong> Millorem el codi, reduint entropia i preparant per seguent red</p>
+</section>
+<section id="red" class="slide level2">
+<h2>Red</h2>
+<p><strong>Escrivim un nou test que falli</strong></p>
 <ul>
 <li>ens fa pensar en la interfície primer</li>
 <li>en pensar-les des del test, genera interfícies testables</li>
@@ -2329,8 +2083,11 @@ Potser es la meva desconeixença</p>
 <li>petarà fins que no tinguem la API (ERROR), llavors fallarà (FAIL)</li>
 <li>la fallada es obligatoria perque testeja que el test funciona</li>
 <li>Criteri de limitació: si no trobem un test que falli, es que no cal el test</li>
-</ul></li>
-<li>Green: Fem lo minim per que passi ràpid
+</ul>
+</section>
+<section id="green" class="slide level2">
+<h2>Green</h2>
+<p><strong>Fem lo minim per que passi ràpid</strong></p>
 <ul>
 <li>No ens preocupa si el codi es correcte</li>
 <li>Si no ho podem fer rapid,
@@ -2338,7 +2095,12 @@ Potser es la meva desconeixença</p>
 <li>tirem enrera i refactoritzem per facilitar-ho</li>
 <li>o plantejem un test diferent, més proper</li>
 </ul></li>
-</ul></li>
+</ul>
+</section>
+<section id="refactor" class="slide level2">
+<h2>Refactor</h2>
+<p><strong>Millorem el codi, reduint entropia i preparant per seguent red</strong></p>
+<ul>
 <li>Refactor: Millorem el codi
 <ul>
 <li>No afegim funcionalitat</li>

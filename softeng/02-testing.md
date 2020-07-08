@@ -1,22 +1,32 @@
 # Tipus de testos
 
-## Segons transparencia
+## Segons qui els comprova
 
-Com de conscients som quan escribim el test dels detalls d'implementacio?
+**Test supervisats:**\
+Algú ha de validar que els resultats son bons
 
-**Caixa Negra**\
-Ho fem a cegues, entrada-sortida
+**Test automatitzats:**\
+L'ordinador fa la validació i només es queixa quan fallen
 
-**Caixa Grisa**\
-Tenim una idea del que fa
+**Tests amb referencia validada:**\
+Es comprova la sortida del cas la primera
+vegada y cada cop que canvia el comportament
 
-**Caixa Blanca**\
-Fem el test seguint el codi
+::: notes
+Supervisats: Main amb prints
+
+Automatitzats: Frameworks xunit
+
+Referencia validada:
+[back2back](https://github.com/vokimon/back2back),
+[snapshot](https://jestjs.io/docs/en/snapshot-testing)...
+:::
+
 
 ## Segons quan els fem
 
 **Test Last development**\
-Un cop que ja hem fet codia (clàssic)
+Un cop que ja hem fet codi (clàssic)
 
 **Test driven development**\
 Abans el test, de cada linia de codi
@@ -27,10 +37,15 @@ Abans el test funcional, que tot el codi
 
 ::: notes
 
+- Com justifiqueu invertir en test un el codi funciona?
+- Per que creieu que es bo el TDD?
+- Sempre el podem aplicar?
+- Heu treballat amb BDD?
+
 Test Last development es el que s'ha fet de tota la vida.
 
 - Costa molt justificar fer testos de cosas que ja saps (o creus) que funcionen
-- Acaven no fent-se
+- Acaben no fent-se
 - Costos de debug d'errors posteriors
 - Regresions de coses que abans funcionaven
 
@@ -45,6 +60,19 @@ BDD implica altres coses que no pas quan fas els testos
 i es compatible amb TDD.
 Parteix dels testos funcionals.
 :::
+
+## Segons transparencia
+
+Com de conscients som quan escribim el test dels detalls d'implementacio?
+
+**Caixa Negra**\
+Ho fem a cegues, entrada-sortida
+
+**Caixa Grisa**\
+Tenim una idea del que fa
+
+**Caixa Blanca**\
+Fem el test seguint el codi
 
 ## Segons codi cobert (I)
 
@@ -74,7 +102,7 @@ Parteix dels testos funcionals.
 	- **Sanity:** Comprovacions mínimes dels canvis aplicats.
 
 ::: notes
-- Test extremo a extremo: Integracion total, emulando un caso real en entorno real
+- Test extremo a extremo: Integracion total, emulando un caso real en entorno real. Frontend, backend...
 - Test d'acceptació: Es el que fa l'usuari per donar per bo un desenvolupament
 - Test de desplegament:
 	- Test de fum: Es fa per comprovar que un desplegament mínimament correcte (arrenca, respon...)
@@ -242,13 +270,13 @@ https://github.com/foospidy/payloads
 
 ## Quan hem testejat prou?
 
-Llei del retorn decreixent
+Llei del retorn decreixent.
 
-Més testos fan l'execució de testos més lenta
+Compte, no son gratis, si fem masses testos...
 
-Més testos augmenten el cost de manteniment
-
-Més testos cal implementar-los
+Costa implementar-los\
+Costa mantenir-los\
+L'execució dels testos triga més\
 
 Afegirem només casos que aportin quelcom
 
@@ -265,6 +293,13 @@ mantenir.
 ## Técniques
 
 :::columns
+::::column
+**Branch testing**\
+cada cami al codi un test
+
+**Test de cobertura**\
+eina que detecta codi no exercitat pels testos
+::::
 :::: column
 
 **Montecarlo**\
@@ -275,13 +310,6 @@ A banda i banda d'on canvia el comportament
 
 **Particions equivalents**\
 Un cas per partició d'equivalent comportament
-::::
-::::column
-**Branch testing**\
-cada cami al codi un test
-
-**Test de cobertura**\
-eina que detecta codi no exercitat pels testos
 ::::
 :::
 
@@ -295,22 +323,22 @@ o son inviables a full.
 
 ## Montecarlo
 
-- És molt difíci amb un cas de test extrany.
-- Important: guardar el cas fallat, per reproduir-lo fora del montecarlo
-- Molt costós d'executar
-- Hi ha eines per generar-ne
-- Per definir el domini aleatori, cal un análisi de domini mínim
-- Ideal per tests de rendiment
+És molt difíci donar amb cas de test extrany.
 
-## Anàlisi de domini d'entrada
+Important: guardar el cas fallat, per reproduir-lo fora del montecarlo
 
-Tàndem: Valors frontera + particions equivalents
+Molt costós d'executar
 
-Un cop definits els valors frontera, generem les particions equivalents
+Hi ha eines per generar-ne
 
-Fem servir els valors frontera com a representants de la partició.
+Per definir el domini aleatori, cal un análisi de domini mínim
 
-Dos casos son equivalents si tenen el mateix comportament
+Ideal per tests de rendiment
+
+
+::: notes
+En Python, la libreria `faker` es bestial para generar, nombres, direcciones, nifs...
+:::
 
 ## Branch testing
 
@@ -322,6 +350,16 @@ Per a codi ja escrit o que tenim clar que volem escriure
 Compte funcions delegades (`floor(x)` vs `x//1`)
 
 No considera comportament divergent per dades
+
+## Anàlisi de domini d'entrada
+
+Tàndem: Valors frontera + particions equivalents
+
+Un cop definits els valors frontera, generem les particions equivalents
+
+Fem servir els valors frontera com a representants de la partició.
+
+Dos casos son equivalents si tenen el mateix comportament
 
 
 ## Coverage testing
@@ -427,18 +465,36 @@ Potser es la meva desconeixença
 
 ## Red-Green-Refactor
 
-- Red: Fem un test que falli
-	- ens fa pensar en la interfície primer
-	- en pensar-les des del test, genera interfícies testables
-	- ens provocara crear classes i/o mètodes buits
-	- petarà fins que no tinguem la API (ERROR), llavors fallarà  (FAIL)
-	- la fallada es obligatoria perque testeja que el test funciona
-	- Criteri de limitació: si no trobem un test que falli, es que no cal el test
-- Green: Fem lo minim per que passi ràpid
-	- No ens preocupa si el codi es correcte
-	- Si no ho podem fer rapid,
-		- tirem enrera i refactoritzem per facilitar-ho
-		- o plantejem un test diferent, més proper
+**Red:** Fem un test que falli
+
+**Green:** Fem lo minim per que passi ràpid
+
+**Refactor:** Millorem el codi, reduint entropia i preparant per seguent red
+
+
+## Red
+
+**Escrivim un nou test que falli**
+
+- ens fa pensar en la interfície primer
+- en pensar-les des del test, genera interfícies testables
+- ens provocara crear classes i/o mètodes buits
+- petarà fins que no tinguem la API (ERROR), llavors fallarà  (FAIL)
+- la fallada es obligatoria perque testeja que el test funciona
+- Criteri de limitació: si no trobem un test que falli, es que no cal el test
+
+## Green
+**Fem lo minim per que passi ràpid**
+
+- No ens preocupa si el codi es correcte
+- Si no ho podem fer rapid,
+	- tirem enrera i refactoritzem per facilitar-ho
+	- o plantejem un test diferent, més proper
+
+
+## Refactor
+**Millorem el codi, reduint entropia i preparant per seguent red**
+
 - Refactor: Millorem el codi
 	- No afegim funcionalitat
 	- Reduim entropia i duplicació al codi
