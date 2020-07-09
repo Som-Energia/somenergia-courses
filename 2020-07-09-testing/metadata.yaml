@@ -1,6 +1,6 @@
 ---
-title: Enginyeria del Software
-subtitle: a Som energia
+title: Testing
+subtitle: Un marc comú per Som energia
 author: David García Garzón
 
 theme: serif # beige/black/blood/league/moon/night/serif/simple/sky/solarized/white
@@ -26,16 +26,18 @@ include-before: |
 			background-repeat: no-repeat;
 			background-size: 20%;
 			background-position: bottom left;
-			opacity: 50%;
+			opacity: 80%;
 		}
 		.reveal .slides {
 			background: #ffffffee;
 		}
 		.reveal .slides .titleslide {
 			background-color: #86bc25ff;
+			background-color: red;
 		}
-		.reveal .slides .titleslide h1 {
-			color: white;
+		.reveal .slides .title-slide h1 {
+			font-size: 3em;
+			color: #569c15ff;
 		}
 		.reveal .slides .slide.level2 h2 {
 			color: #86bc25ff;

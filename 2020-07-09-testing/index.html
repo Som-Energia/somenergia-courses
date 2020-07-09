@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="David García Garzón">
-  <title>Enginyeria del Software</title>
+  <title>Testing</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -1648,16 +1648,18 @@ background-color: #F0F1EB; } }
         background-repeat: no-repeat;
         background-size: 20%;
         background-position: bottom left;
-        opacity: 50%;
+        opacity: 80%;
     }
     .reveal .slides {
         background: #ffffffee;
     }
     .reveal .slides .titleslide {
         background-color: #86bc25ff;
+        background-color: red;
     }
-    .reveal .slides .titleslide h1 {
-        color: white;
+    .reveal .slides .title-slide h1 {
+        font-size: 3em;
+        color: #569c15ff;
     }
     .reveal .slides .slide.level2 h2 {
         color: #86bc25ff;
@@ -1685,18 +1687,124 @@ background-color: #F0F1EB; } }
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Enginyeria del Software</h1>
-  <p class="subtitle">a Som energia</p>
+  <h1 class="title">Testing</h1>
+  <p class="subtitle">Un marc comú per Som energia</p>
   <p class="author">David García Garzón</p>
 </section>
 
+<section><section id="introducció" class="title-slide slide level1"><h1>Introducció</h1></section>
+<section id="objectius" class="slide level2">
+<h2>Objectius</h2>
+<p>Establir un marc comú entre nosaltres</p>
+<p>Base teòrica</p>
+<p>Vocabulari comú (tipus de tests, activitats…)</p>
+<p>Diferents aproximacions per fer-los</p>
+<p>Com abordar testos complexos</p>
+</section>
+<section id="sense-tdd" class="slide level2">
+<h2>Sense TDD?</h2>
+<p>Com ho feu sense TDD?</p>
+<ul>
+<li>Afegim funcionalitat</li>
+<li>Mostrem resultats</li>
+<li>Comprobem si son bons</li>
+<li>Repetim</li>
+</ul>
+<p>Només tornem a comprovar funcionalitats del passat quan entrem en mode paranoid.</p>
+<p>Sindrome del ‘no ho toquis’</p>
+</section>
+<section id="i-les-ui" class="slide level2">
+<h2>I les UI?</h2>
+<p>Clickem i clickem fins que peta</p>
+<p>Itineraris de proves</p>
+<p>Molt feixuc</p>
+</section>
+<section id="automatització" class="slide level2">
+<h2>Automatització</h2>
+<p>Evitem la validació manual</p>
+<p>Codi que comprova que els resultats son correctes</p>
+<p>Només ens molesta quan quelcom va malment</p>
+<p>Permet executar els testos moltes vegades</p>
+<p>Evitem regresions, ens envalentona</p>
+<p>Compte: El test esdevé codi que cal mantenir</p>
+<p>Frameworks (<code>unittest</code>, <code>nose</code>, <code>pytest</code>…)</p>
+</section>
+<section id="com-automatitzar" class="slide level2">
+<h2>Com automatitzar</h2>
+<p>Fem codi que:</p>
+<ul>
+<li>Construeixi la situació de test (fixture)</li>
+<li>Comprobi que el resultat es l’esperat</li>
+<li>Només ens alerti si no ho és</li>
+</ul>
+<p>¿Qui testeja el codi de test?</p>
+</section>
+<section id="estil-xunit-tdd" class="slide level2">
+<h2>Estil xUnit (TDD)</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># xUnit (unittest, nose, pytest)</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">class</span> MyClass_Test(unittest.TestCase):</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">def</span> test_myMethod_inConditionA_returns666(<span class="va">self</span>):</span>
+<span id="cb1-4"><a href="#cb1-4"></a>        sut <span class="op">=</span> MyClass()</span>
+<span id="cb1-5"><a href="#cb1-5"></a>        sut.setConditionA()</span>
+<span id="cb1-6"><a href="#cb1-6"></a>        <span class="va">self</span>.assertEqual(<span class="dv">666</span>, sut.myMethod())</span></code></pre></div>
+</section>
+<section id="estil-bdd" class="slide level2">
+<h2>Estil BDD</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Mamba (mamba, behave, pexpect)</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="cf">with</span> description(MyClass, <span class="st">&quot;having an instance of MyClass&quot;</span>) <span class="im">as</span> <span class="va">self</span>:</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">with</span> context(<span class="st">&quot;in condiion A&quot;</span>):</span>
+<span id="cb2-4"><a href="#cb2-4"></a>        <span class="va">self</span>.condition(A)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>        <span class="cf">with</span> it(<span class="st">&quot;returns 666&quot;</span>):</span>
+<span id="cb2-6"><a href="#cb2-6"></a>            expect(<span class="va">self</span>.myMethod()).to(equal(<span class="dv">666</span>))</span></code></pre></div>
+</section>
+<section id="xunit-vs-bdd-style" class="slide level2">
+<h2>xUnit vs BDD style</h2>
+<p>La intenció original dels BDD es implicar als stakeholders en l’escriptura i manteniment dels testos.</p>
+<p>Lliga l’especificació co-escrita amb els stake holders amb els testos mantinguts pels desenvolupadors.</p>
+<div class="columns">
+<p><strong>Specification tied code</strong><br />
+Es coescriu l’especificació, i el test fa referència al text de l’especificació.</p><p><strong>Code is specification</strong><br />
+S’intenta que el codi expliqui el cas de test</p>
+</div>
+<aside class="notes">
+<p>Opinió (esbiaixada, he crescut amb xUnit):</p>
+<p>Impressió: Als frameworks BDD els falta maduresa<br />
+Fan el codi de test mes complex<br />
+Per això dubto de qui ho fa servir coescrigui els testos<br />
+Quan separen especificació, el binding es fràgil<br />
+Ben portat, es pot fer amb xUnit sense complicar tant el codi<br />
+Potser es la meva desconeixença</p>
+</aside>
+</section>
+<section id="abans-o-després" class="slide level2">
+<h2>Abans o després?</h2>
+<p>Afegir un test quan el codi ja funciona:</p>
+<ul>
+<li>Fa mandra, ja funciona</li>
+<li>Com sabem que el test funciona?</li>
+</ul>
+<p>Si fem el test quan la funcionalitat encara no hi és, estarem comprovant que realment ho detecta.</p>
+<p>Per codi antic, que volem cobrir, hi ha estratègies.</p>
+</section>
+<section id="els-problemos" class="slide level2">
+<h2>Els problemos</h2>
+<p>M’he <em>oblidat</em> testejar i ho vull cobrir a posteriori</p>
+<p>Vull pendre el control d’un sistema que no tè testos</p>
+<p>El comportament de la unitat depén d’una segona</p>
+<p>El resultat es massa gran per ficar-ho al codi</p>
+<p>El comportament es aleatori o fràgil</p>
+<p>Vull automatitzar testos d’una interficie</p>
+<aside class="notes">
+<p>No cobriré totes les preguntes pero pregunteu si us interessa</p>
+</aside>
+</section></section>
 <section><section id="tipus-de-testos" class="title-slide slide level1"><h1>Tipus de testos</h1></section>
-<section id="segons-qui-els-comprova" class="slide level2">
-<h2>Segons qui els comprova</h2>
+<section id="supervisió-o-automatització" class="slide level2">
+<h2>Supervisió o automatització</h2>
 <p><strong>Test supervisats:</strong><br />
 Algú ha de validar que els resultats son bons</p>
 <p><strong>Test automatitzats:</strong><br />
-L’ordinador fa la validació i només es queixa quan fallen</p>
+L’ordinador fa la validació</p>
 <p><strong>Tests amb referencia validada:</strong><br />
 Es comprova la sortida del cas la primera vegada y cada cop que canvia el comportament</p>
 <aside class="notes">
@@ -1705,72 +1813,38 @@ Es comprova la sortida del cas la primera vegada y cada cop que canvia el compor
 <p>Referencia validada: <a href="https://github.com/vokimon/back2back">back2back</a>, <a href="https://jestjs.io/docs/en/snapshot-testing">snapshot</a>…</p>
 </aside>
 </section>
-<section id="segons-quan-els-fem" class="slide level2">
-<h2>Segons quan els fem</h2>
-<p><strong>Test Last development</strong><br />
-Un cop que ja hem fet codi (clàssic)</p>
-<p><strong>Test driven development</strong><br />
-Abans el test, de cada linia de codi</p>
-<p><strong>Behaviour driven development</strong><br />
-Abans el test funcional, que tot el codi</p>
-<aside class="notes">
-<ul>
-<li>Com justifiqueu invertir en test un el codi funciona?</li>
-<li>Per que creieu que es bo el TDD?</li>
-<li>Sempre el podem aplicar?</li>
-<li>Heu treballat amb BDD?</li>
-</ul>
-<p>Test Last development es el que s’ha fet de tota la vida.</p>
-<ul>
-<li>Costa molt justificar fer testos de cosas que ja saps (o creus) que funcionen</li>
-<li>Acaben no fent-se</li>
-<li>Costos de debug d’errors posteriors</li>
-<li>Regresions de coses que abans funcionaven</li>
-</ul>
-<p>Test driven aporta un cicle virtuos.</p>
-<ul>
-<li>Sensació de progrés</li>
-<li>Automatització -&gt; feedback automatic -&gt; ens envalentonem amb els canvis</li>
-</ul>
-<p>Sovint el codi ja està fet, hi ha técniques per fer-ho sistemàtic com si fos TDD.</p>
-<p>BDD implica altres coses que no pas quan fas els testos i es compatible amb TDD. Parteix dels testos funcionals.</p>
-</aside>
-</section>
 <section id="segons-transparencia" class="slide level2">
 <h2>Segons transparencia</h2>
 <p>Com de conscients som quan escribim el test dels detalls d’implementacio?</p>
+<p>Testos de <strong>caixa negra</strong>, <strong>grisa</strong> o <strong>blanca</strong></p>
+<aside class="notes">
 <p><strong>Caixa Negra</strong><br />
 Ho fem a cegues, entrada-sortida</p>
 <p><strong>Caixa Grisa</strong><br />
 Tenim una idea del que fa</p>
 <p><strong>Caixa Blanca</strong><br />
 Fem el test seguint el codi</p>
+</aside>
 </section>
 <section id="segons-codi-cobert-i" class="slide level2">
 <h2>Segons codi cobert (I)</h2>
-<ul>
-<li><strong>Unitaris:</strong> cobreix una línia o modificació de codi</li>
-<li><strong>Component:</strong> un component aïllat (doubles)</li>
-<li><strong>Integració:</strong> cobreix la delegació a altres móduls
-<ul>
-<li><strong>Bottom-up</strong>: por capas</li>
-<li><strong>Big bang</strong>: módulo coordinador</li>
-</ul></li>
-<li><strong>Funcionals:</strong> cobreix un cas d’ús d’usuari</li>
-</ul>
+<p><strong>Unitaris</strong> vs <strong>Funcionals</strong></p>
+<p><strong>Component</strong> vs <strong>Integració</strong></p>
+<p>Integració <strong>Bottom-up</strong> vs <strong>Big bang</strong></p>
+<p><strong>Important:</strong> Els testos d’integració no han de testejar tots els casos dels components <strong>només que es delega de forma correcta en els components</strong>.</p>
 <aside class="notes">
 <ul>
-<li>Test unitari: Cobreix una linia de codi (o una modificacio de codi)</li>
-<li>Test funcional: Cobreix un cas d’ús (nivell usuari)
+<li><strong>Test unitari:</strong> Cobreix una linia de codi (o una modificacio de codi)</li>
+<li><strong>Test funcional:</strong> Cobreix un cas d’ús (nivell usuari)
 <ul>
 <li>Deriven de l’especificació o del cas d’us feta per l’usuari</li>
 </ul></li>
-<li>Test d’integració: Cobreix la comunicacio de dos moduls
+<li><strong>Test de component:</strong> Testeja el comportament general del component, no pas una funció</li>
+<li><strong>Test d’integració:</strong> Cobreix la comunicacio de dos moduls
 <ul>
-<li>Bottom up: capas de abajo a arriba</li>
-<li>Big bang: Se junta todo a la vez</li>
+<li><strong>Bottom up test:</strong> capas de abajo a arriba</li>
+<li><strong>Big bang test:</strong> Se junta todo a la vez en un modulo coordinador</li>
 </ul></li>
-<li>Test de component: Testeja el comportament general del component, no pas una funció</li>
 </ul>
 </aside>
 </section>
@@ -1787,7 +1861,7 @@ Fem el test seguint el codi</p>
 </ul>
 <aside class="notes">
 <ul>
-<li>Test extremo a extremo: Integracion total, emulando un caso real en entorno real. Frontend, backend…</li>
+<li>Test extrem a extrem: Integracio total, emula un caso real en entorno real. Frontend, backend…</li>
 <li>Test d’acceptació: Es el que fa l’usuari per donar per bo un desenvolupament</li>
 <li>Test de desplegament:
 <ul>
@@ -1795,21 +1869,27 @@ Fem el test seguint el codi</p>
 <li>Test de sanitat: Comprovacions ràpides en desplegament per saber si funciones les noves funcionalitats i correccions</li>
 </ul></li>
 </ul>
+<p>Interessant per Som:</p>
+<ul>
+<li>Començar a automatitzar els testos de desplegament</li>
+<li>Donar suport en eines i metodologia per fer el test d’acceptació</li>
+<li>Tenir testos end-to-end (cypress)</li>
+</ul>
 </aside>
 </section>
 <section id="segons-motivació" class="slide level2">
 <h2>Segons motivació</h2>
 <p>Els unitaris també poden ser:</p>
 <ul>
+<li><strong>De regresió:</strong> quan els seguim executant</li>
 <li><strong>Exploratori:</strong> com funciona un codi de tercers?</li>
 <li><strong>De correccio:</strong> per aillar un bug detectat</li>
-<li><strong>De regresió:</strong> quan els seguim executant</li>
 </ul>
 <aside class="notes">
 <ul>
-<li><strong>Test exploratori:</strong> Test unitari que es fa per entendre el funcionament de códi de tercers</li>
-<li><strong>Test de correcció:</strong> Test unitari que fem per manifestar un bug, i que després deixem per regresió</li>
 <li><strong>Test de regresió:</strong> Quan els testos, un cop passats es continuen passant per comprovar que no tirem enrera</li>
+<li><strong>Test exploratori:</strong> Test unitari que es fa per entendre el funcionament de códi de tercers (llibreries, api’s, mòduls d’altres partners…)</li>
+<li><strong>Test de correcció:</strong> Test unitari que fem per manifestar un bug, i que després deixem per regresió</li>
 </ul>
 <p>Els testos de correcció son molt importants com a práctica de manteniment. Els bugs ens serveixen per definir casos d’ús que no haviem pensat en el desenvolupament inicial.</p>
 <p>Si deixem els exploratoris com a test de regresió també serveixen com alarma per detectar els canvis en el comportament del codi de tercers que es podrien donar.</p>
@@ -1942,6 +2022,8 @@ L’execució dels testos triga més<br />
 </section>
 <section id="técniques" class="slide level2">
 <h2>Técniques</h2>
+<p><strong>Montecarlo</strong><br />
+Generació aleatoria</p>
 <div class="columns">
 <div class="column">
 <p><strong>Branch testing</strong><br />
@@ -1949,8 +2031,6 @@ cada cami al codi un test</p>
 <p><strong>Test de cobertura</strong><br />
 eina que detecta codi no exercitat pels testos</p>
 </div><div class="column">
-<p><strong>Montecarlo</strong><br />
-Generació aleatoria</p>
 <p><strong>Anàlisi de valors frontera</strong><br />
 A banda i banda d’on canvia el comportament</p>
 <p><strong>Particions equivalents</strong><br />
@@ -1997,74 +2077,18 @@ Un cas per partició d’equivalent comportament</p>
 </section>
 <section id="code-guided-tests" class="slide level2">
 <h2>Code guided tests</h2>
-<p>Sovint el codi ja esta fet, fem-ho test last pero:</p>
+<p>Sovint el codi ja esta fet, fem-ho test-last</p>
+<p>Estrategia:</p>
 <ul>
 <li>Comentar el codi fet</li>
-<li>Anar afegint el codi per pedaços amb l’antic de referencia</li>
+<li>Anar afegint el codi per pedaços</li>
+<li>Mantenim l’antic de referencia</li>
 </ul>
 <p>Code guided tests:</p>
 <ul>
 <li>Cada condicio</li>
 <li>Cada for: un, zero, many (o zero, un, many)</li>
 </ul>
-</section></section>
-<section><section id="automatització" class="title-slide slide level1"><h1>Automatització</h1></section>
-<section id="motivació" class="slide level2">
-<h2>Motivació</h2>
-<p>Clàssic: Executar el codi i comprovar el resultat esperat</p>
-<p>Conseqüències:</p>
-<ul>
-<li>Costa molt de comprovar els resultats a mà</li>
-<li>No repetim aquesta mateixa comprovació quan fem la següent funcionalitat</li>
-<li>Tenim regressions</li>
-</ul>
-</section>
-<section id="solució" class="slide level2">
-<h2>Solució</h2>
-<p>Fem codi que:</p>
-<ul>
-<li>Construeixi la situació de test (fixture)</li>
-<li>Comprobi que el resultat es l’esperat</li>
-<li>Només ens alerti si no ho és</li>
-</ul>
-<p>¿Qui testeja el codi de test?</p>
-</section>
-<section id="estil-xunit-tdd" class="slide level2">
-<h2>Estil xUnit (TDD)</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># xUnit (unittest, nose, pytest)</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">class</span> MyClass_Test(unittest.TestCase):</span>
-<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">def</span> test_myMethod_inConditionA_returns666(<span class="va">self</span>):</span>
-<span id="cb1-4"><a href="#cb1-4"></a>        sut <span class="op">=</span> MyClass()</span>
-<span id="cb1-5"><a href="#cb1-5"></a>        sut.setConditionA()</span>
-<span id="cb1-6"><a href="#cb1-6"></a>        <span class="va">self</span>.assertEqual(<span class="dv">666</span>, sut.myMethod())</span></code></pre></div>
-</section>
-<section id="estil-bdd" class="slide level2">
-<h2>Estil BDD</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Mamba (mamba, behave, pexpect)</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="cf">with</span> description(MyClass, <span class="st">&quot;having an instance of MyClass&quot;</span>) <span class="im">as</span> <span class="va">self</span>:</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">with</span> context(<span class="st">&quot;in condiion A&quot;</span>):</span>
-<span id="cb2-4"><a href="#cb2-4"></a>        <span class="va">self</span>.condition(A)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>        <span class="cf">with</span> it(<span class="st">&quot;returns 666&quot;</span>):</span>
-<span id="cb2-6"><a href="#cb2-6"></a>            expect(<span class="va">self</span>.myMethod()).to(equal(<span class="dv">666</span>))</span></code></pre></div>
-</section>
-<section id="xunit-vs-bdd-style" class="slide level2">
-<h2>xUnit vs BDD style</h2>
-<p>La intenció original dels BDD es implicar als stakeholders en l’escriptura i manteniment dels testos.</p>
-<p>Lliga l’especificació co-escrita amb els stake holders amb els testos mantinguts pels desenvolupadors.</p>
-<div class="columns">
-<p><strong>Specification tied code</strong><br />
-Es coescriu l’especificació, i el test fa referència al text de l’especificació.</p><p><strong>Code is specification</strong><br />
-S’intenta que el codi expliqui el cas de test</p>
-</div>
-<aside class="notes">
-<p>Opinió (esbiaixada, he crescut amb xUnit):</p>
-<p>Impressió: Als frameworks BDD els falta maduresa<br />
-Fan el codi de test mes complex<br />
-Per això dubto de qui ho fa servir coescrigui els testos<br />
-Quan separen especificació, el binding es fràgil<br />
-Ben portat, es pot fer amb xUnit sense complicar tant el codi<br />
-Potser es la meva desconeixença</p>
-</aside>
 </section></section>
 <section><section id="tdd" class="title-slide slide level1"><h1>TDD</h1></section>
 <section id="red-green-refactor" class="slide level2">
@@ -2092,69 +2116,92 @@ Potser es la meva desconeixença</p>
 <li>No ens preocupa si el codi es correcte</li>
 <li>Si no ho podem fer rapid,
 <ul>
-<li>tirem enrera i refactoritzem per facilitar-ho</li>
-<li>o plantejem un test diferent, més proper</li>
+<li>tirem enrera el red i refactoritzem per facilitar-ho</li>
+<li>o plantejem un altre test més assequible</li>
 </ul></li>
+<li>Molta cura de no afegir funcionalitat no coberta</li>
 </ul>
 </section>
 <section id="refactor" class="slide level2">
 <h2>Refactor</h2>
 <p><strong>Millorem el codi, reduint entropia i preparant per seguent red</strong></p>
 <ul>
-<li>Refactor: Millorem el codi
-<ul>
 <li>No afegim funcionalitat</li>
 <li>Reduim entropia i duplicació al codi</li>
 <li>O fem espai per la pròxima funcionalitat</li>
 <li>Es poden fer diversos abans del seguent Red</li>
 <li><strong>Passem els testos a cada canvi</strong></li>
-</ul></li>
 </ul>
 </section>
 <section id="refactorings" class="slide level2">
 <h2>Refactorings</h2>
 <p>Són receptes per fer canvis al disseny sense canviar el comportament</p>
 <p>Reversibles: Sovint hi ha l’invers</p>
-</section>
-<section id="refactors-receptes" class="slide level2">
-<h2>Refactors: Receptes</h2>
-<p>Renombrar o relocalitzar classes, atributs i mètodes<br />
-Pujar i baixar atributs i mètodes en una jerarquía de classes<br />
-Extreure o expandir en linia métodes, attributs o classes<br />
-Encapsular attributs, canviar condicionals per polimorfisme, state o strategy<br />
-Canviar la signatura de mètodes<br />
-</p>
+<aside class="notes">
+<ul>
+<li>Renombrar o relocalitzar classes, atributs i mètodes<br />
+</li>
+<li>Pujar i baixar atributs i mètodes en una jerarquía de classes<br />
+</li>
+<li>Extreure o expandir en linia métodes, attributs o classes<br />
+</li>
+<li>Encapsular attributs, canviar condicionals per polimorfisme, state o strategy<br />
+</li>
+<li>Canviar la signatura de mètodes<br />
+</li>
+</ul>
+</aside>
 </section>
 <section id="passos-comuns" class="slide level2">
 <h2>Passos comuns</h2>
-<p>Com si fos una bastida cal tenir sempre el codi funcionant:</p>
+<p>Com si fos una bastida cal tenir sempre el codi funcionant, que l’edifici no caigui en cap moment:</p>
 <ul>
 <li>Duplicar l’estructura vella</li>
 <li>Farcir l’estructura nova (duplicar setters)</li>
 <li>Recolzar-se en l’estructura nova (getters)</li>
 <li>Netejar restos de l’estructura vella</li>
 </ul>
-<p>Exemples:</p>
+</section>
+<section id="exemples" class="slide level2">
+<h2>Exemples</h2>
+<p><strong>Com ho farieu en aquests casos?</strong></p>
+<p>Passar d’un literal a un atribut</p>
+<p>Passar d’un objecte a una lista d’objectes</p>
+<p>Canviar el contenidor dels objectes agregats</p>
+<p>Substituir un component per una reimplementació</p>
+</section>
+<section id="sobredisseny" class="slide level2">
+<h2>Sobredisseny</h2>
+<p>Implementació que dona cabuda a funcionalitats que encara no soportem</p>
+<p>És una tendencia en la programació tradicional:</p>
 <ul>
-<li>Passar d’un literal a un atribut</li>
-<li>Passar d’un objecte a una lista d’objectes</li>
-<li>Canviar el contenidor dels objectes agregats</li>
-<li>Substituir un component per una reimplementació</li>
+<li>Complexitat innecessària i potser mal dirigida</li>
+<li>Codi més difícil de mantenir</li>
 </ul>
+<p>En TDD, només en el refactoring previ a la introducció de la funcionalitat</p>
+<p>Sol ser bo refactoritzar per treure’l</p>
+</section>
+<section id="optimitzacións" class="slide level2">
+<h2>Optimitzacións</h2>
 </section>
 <section id="estructura-dun-test" class="slide level2">
 <h2>Estructura d’un test</h2>
+<figure>
+<img data-src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4wLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL1RSLzIwMDEvUFItU1ZHLTIwMDEwNzE5L0RURC9zdmcxMC5kdGQiPgo8c3ZnIHdpZHRoPSIxOGNtIiBoZWlnaHQ9IjEwY20iIHZpZXdCb3g9IjIwOSAxNTQgMzQ0IDE5NyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGRlZnMvPgogIDxnIGlkPSJGb25zIj4KICAgIDxlbGxpcHNlIHN0eWxlPSJmaWxsOiAjZDg2MzRiOyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZTogbm9uZSIgY3g9IjIyMSIgY3k9IjI3MCIgcng9IjEwIiByeT0iMTAiLz4KICAgIDxnPgogICAgICA8ZWxsaXBzZSBzdHlsZT0iZmlsbDogI2ZmZmZmZjsgZmlsbC1vcGFjaXR5OiAxOyBzdHJva2Utb3BhY2l0eTogMTsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICNkODYzNGIiIGN4PSIyNjYiIGN5PSIzMzIiIHJ4PSIxNSIgcnk9IjE1Ii8+CiAgICAgIDxlbGxpcHNlIHN0eWxlPSJmaWxsOiAjZDg2MzRiOyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZTogbm9uZSIgY3g9IjI2NiIgY3k9IjMzMiIgcng9IjEwIiByeT0iMTAiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cmVjdCBzdHlsZT0iZmlsbDogI2U4YjQ1ZTsgZmlsbC1vcGFjaXR5OiAxOyBzdHJva2Utb3BhY2l0eTogMTsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICNkODYzNGIiIHg9IjI0MCIgeT0iMTkwIiB3aWR0aD0iODAiIGhlaWdodD0iMzYiIHJ4PSIxMCIgcnk9IjEwIi8+CiAgICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuNzk5OCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7IGZpbGwtb3BhY2l0eTogMTsgc3Ryb2tlOiBub25lO3RleHQtYW5jaG9yOm1pZGRsZTtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMjgwIiB5PSIyMTEuNTg3Ij4KICAgICAgICA8dHNwYW4geD0iMjgwIiB5PSIyMTEuNTg3Ij5BPC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9nPgogICAgPGc+CiAgICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjZThiNDVlOyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZS1vcGFjaXR5OiAxOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2ZmMDJkOSIgeD0iMzg5LjUzNCIgeT0iMzEzLjk1IiB3aWR0aD0iODAiIGhlaWdodD0iMzYiIHJ4PSIxMCIgcnk9IjEwIi8+CiAgICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuNzk5OCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7IGZpbGwtb3BhY2l0eTogMTsgc3Ryb2tlOiBub25lO3RleHQtYW5jaG9yOm1pZGRsZTtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iNDI5LjUzNCIgeT0iMzM1LjUzNyI+CiAgICAgICAgPHRzcGFuIHg9IjQyOS41MzQiIHk9IjMzNS41MzciPkM8L3RzcGFuPgogICAgICA8L3RleHQ+CiAgICA8L2c+CiAgICA8Zz4KICAgICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNlOGI0NWU7IGZpbGwtb3BhY2l0eTogMTsgc3Ryb2tlLW9wYWNpdHk6IDE7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDA1NDA1IiB4PSIzODkuNiIgeT0iMTg5LjkiIHdpZHRoPSI4MCIgaGVpZ2h0PSIzNiIgcng9IjEwIiByeT0iMTAiLz4KICAgICAgPHRleHQgZm9udC1zaXplPSIxMi43OTk4IiBzdHlsZT0iZmlsbDogIzAwMDAwMDsgZmlsbC1vcGFjaXR5OiAxOyBzdHJva2U6IG5vbmU7dGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSI0MjkuNiIgeT0iMjExLjQ4NyI+CiAgICAgICAgPHRzcGFuIHg9IjQyOS42IiB5PSIyMTEuNDg3Ij5CPC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9nPgogICAgPGc+CiAgICAgIDxwb2x5bGluZSBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlLW9wYWNpdHk6IDE7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDA1NDA1IiBwb2ludHM9IjIzMi4wMDUsMjcwIDI4MCwyNzAgMjgwLDIzMS40ODEgIi8+CiAgICAgIDxwb2x5bGluZSBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlLW9wYWNpdHk6IDE7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDA1NDA1IiBwb2ludHM9IjI4NSwyMzkuMjQ1IDI4MCwyMjkuMjQ1IDI3NSwyMzkuMjQ1ICIvPgogICAgPC9nPgogICAgPGc+CiAgICAgIDxwb2x5bGluZSBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlLW9wYWNpdHk6IDE7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDA1NDA1IiBwb2ludHM9IjMyMS4wMDUsMjA4IDM1NS4zLDIwOCAzNTUuMywyMDcuOSAzODQuMTIzLDIwNy45ICIvPgogICAgICA8cG9seWxpbmUgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZS1vcGFjaXR5OiAxOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwNTQwNSIgcG9pbnRzPSIzNzYuMzU5LDIxMi45IDM4Ni4zNTksMjA3LjkgMzc2LjM1OSwyMDIuOSAiLz4KICAgICAgPHRleHQgZm9udC1zaXplPSIxMi43OTk4IiBzdHlsZT0iZmlsbDogIzAwMDAwMDsgZmlsbC1vcGFjaXR5OiAxOyBzdHJva2U6IG5vbmU7dGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSIzNTMuNjQzIiB5PSIyMDQuNjMyIj5zZXR0ZXIoKTwvdGV4dD4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cG9seWxpbmUgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZS1vcGFjaXR5OiAxOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwMDAwMCIgcG9pbnRzPSI0MjkuNiwxODguOTIzIDQyOS42LDE1OC44OTEgNTAwLjYwNSwxNTguODkxIDUwMC42MDUsMjA3LjkgNDc1LjA3LDIwNy45ICIvPgogICAgICA8cG9seWxpbmUgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZS1vcGFjaXR5OiAxOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwMDAwMCIgcG9pbnRzPSI0ODIuODM0LDIwMi45IDQ3Mi44MzQsMjA3LjkgNDgyLjgzNCwyMTIuOSAiLz4KICAgICAgPHRleHQgZm9udC1zaXplPSIxMi43OTk4IiBzdHlsZT0iZmlsbDogIzAwMDAwMDsgZmlsbC1vcGFjaXR5OiAxOyBzdHJva2U6IG5vbmU7dGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSI1MzMiIHk9IjE4NSI+W2NvbmQyXTwvdGV4dD4KICAgICAgPHRleHQgZm9udC1zaXplPSIxMi43OTk4IiBzdHlsZT0iZmlsbDogIzAwMDAwMDsgZmlsbC1vcGFjaXR5OiAxOyBzdHJva2U6IG5vbmU7dGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSI1MjkiIHk9IjE2NiI+c2V0dGVyKCk8L3RleHQ+CiAgICA8L2c+CiAgICA8Zz4KICAgICAgPHBvbHlsaW5lIHN0eWxlPSJmaWxsOiBub25lOyBzdHJva2Utb3BhY2l0eTogMTsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICNmZjAwMDAiIHBvaW50cz0iNDI5LjYsMjI2Ljg4MSA0MjkuNiwyNjguOTI1IDQyOS41MzQsMjY4LjkyNSA0MjkuNTM0LDMwOC40OSAiLz4KICAgICAgPHBvbHlsaW5lIHN0eWxlPSJmaWxsOiBub25lOyBzdHJva2Utb3BhY2l0eTogMTsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICNmZjAwMDAiIHBvaW50cz0iNDI0LjUzNCwzMDAuNzI2IDQyOS41MzQsMzEwLjcyNiA0MzQuNTM0LDMwMC43MjYgIi8+CiAgICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuNzk5OCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7IGZpbGwtb3BhY2l0eTogMTsgc3Ryb2tlOiBub25lO3RleHQtYW5jaG9yOm1pZGRsZTtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iNDU3LjYxNyIgeT0iMjg5Ij5bY29uZDFdPC90ZXh0PgogICAgICA8dGV4dCBmb250LXNpemU9IjEyLjc5OTgiIHN0eWxlPSJmaWxsOiAjMDAwMDAwOyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZTogbm9uZTt0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjQ1OS4xMTciIHk9IjI2OSI+c2V0dGVyKCk8L3RleHQ+CiAgICA8L2c+CiAgICA8Zz4KICAgICAgPHBvbHlsaW5lIHN0eWxlPSJmaWxsOiBub25lOyBzdHJva2Utb3BhY2l0eTogMTsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMxYjZiYjYiIHBvaW50cz0iMzg4LjU0MSwzMzEuOTUgMzM1LjY1MSwzMzEuOTUgMzM1LjY1MSwzMzIgMjg2LjQ3NCwzMzIgIi8+CiAgICAgIDxwb2x5bGluZSBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlLW9wYWNpdHk6IDE7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMWI2YmI2IiBwb2ludHM9IjI5NC4yMzgsMzI3IDI4NC4yMzgsMzMyIDI5NC4yMzgsMzM3ICIvPgogICAgICA8dGV4dCBmb250LXNpemU9IjEyLjc5OTgiIHN0eWxlPSJmaWxsOiAjMDAwMDAwOyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZTogbm9uZTt0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjM0Ny41MTciIHk9IjMyNy4xNDkiPnNldHRlcigpPC90ZXh0PgogICAgPC9nPgogICAgPGc+CiAgICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjZThiNDVlOyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZS1vcGFjaXR5OiAxOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZS1saW5lam9pbjogcm91bmQ7IHN0cm9rZTogI2Q4NjM0YiIgeD0iMjQwIiB5PSIxOTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIzNiIgcng9IjEwIiByeT0iMTAiLz4KICAgICAgPHRleHQgZm9udC1zaXplPSIxMi43OTk4IiBzdHlsZT0iZmlsbDogIzAwMDAwMDsgZmlsbC1vcGFjaXR5OiAxOyBzdHJva2U6IG5vbmU7dGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSIyODAiIHk9IjIxMS41ODciPgogICAgICAgIDx0c3BhbiB4PSIyODAiIHk9IjIxMS41ODciPkE8L3RzcGFuPgogICAgICA8L3RleHQ+CiAgICA8L2c+CiAgICA8dGV4dCBmb250LXNpemU9IjIyLjU3NzQiIHN0eWxlPSJmaWxsOiAjZmYwMmQ5OyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZTogbm9uZTt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iNDcwLjAzNCIgeT0iMzIzLjcwMyI+CiAgICAgIDx0c3BhbiB4PSI0NzAuMDM0IiB5PSIzMjMuNzAzIj4/PC90c3Bhbj4KICAgIDwvdGV4dD4KICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDU0MDU7IGZpbGwtb3BhY2l0eTogMTsgc3Ryb2tlOiBub25lO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6NzAwIiB4PSIzNjAuMTUyIiB5PSIxNzcuMDY2Ij4KICAgICAgPHRzcGFuIHg9IjM2MC4xNTIiIHk9IjE3Ny4wNjYiPjEuIFNldCBVcDwvdHNwYW4+CiAgICA8L3RleHQ+CiAgICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjZmYwMDAwOyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZTogbm9uZTt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0OjcwMCIgeD0iNDQ0LjExNCIgeT0iMjQ1LjE5NyI+CiAgICAgIDx0c3BhbiB4PSI0NDQuMTE0IiB5PSIyNDUuMTk3Ij4yLiBFeGVyY2lzZTwvdHNwYW4+CiAgICA8L3RleHQ+CiAgICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjZmYwMmQ5OyBmaWxsLW9wYWNpdHk6IDE7IHN0cm9rZTogbm9uZTt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0OjcwMCIgeD0iNDc2LjM4OSIgeT0iMzM4LjU5NiI+CiAgICAgIDx0c3BhbiB4PSI0NzYuMzg5IiB5PSIzMzguNTk2Ij4zLiBBc3NlcnQ8L3RzcGFuPgogICAgPC90ZXh0PgogICAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzFiNmJiNjsgZmlsbC1vcGFjaXR5OiAxOyBzdHJva2U6IG5vbmU7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDo3MDAiIHg9IjI4Ni4yMjEiIHk9IjMwNC4xMTkiPgogICAgICA8dHNwYW4geD0iMjg2LjIyMSIgeT0iMzA0LjExOSI+NC4gVGVhciBEb3duPC90c3Bhbj4KICAgIDwvdGV4dD4KICA8L2c+Cjwvc3ZnPgo=" alt /><figcaption>Testing com diagrama d’estats</figcaption>
+</figure>
+<aside class="notes">
 <ul>
-<li>Setup: Es la part on posem el sistema a les condicions de test</li>
-<li>Exercise: Es la part on s’executa el codi que volem testejar</li>
-<li>Assert: Es la part on comprovem que l’estat es el dessitjat</li>
-<li>Tear Down: Es la part on deixem el sistema net i llest pel segûent test</li>
+<li><strong>Set Up:</strong> Es la part on posem el sistema a les condicions de test</li>
+<li><strong>Exercise:</strong> Es la part on s’executa el codi que volem testejar</li>
+<li><strong>Assert:</strong> Es la part on comprovem que l’estat es el dessitjat</li>
+<li><strong>Tear Down:</strong> Es la part on deixem el sistema net i llest pel segûent test</li>
 </ul>
-<p>TODO: Diagrama d’estats</p>
+</aside>
 </section>
 <section id="inputs-i-outputs" class="slide level2">
 <h2>Inputs i outputs</h2>
-<p>Des del test fem inputs (setters) i revisem outputs (getters).</p>
+<p>Inputs: el que rep l’unitat (crides, paràmetres…)</p>
+<p>Outputs: el que ofereix l’unitat (retorns…)</p>
 <ul>
 <li>Setup: Inputs</li>
 <li>Exercise: Inputs (o outputs)</li>
@@ -2171,13 +2218,11 @@ Canviar la signatura de mètodes<br />
 </section>
 <section id="test-doubles" class="slide level2">
 <h2>Test doubles</h2>
-<ul>
-<li>Dummy object: Does not provide inputs or outputs (se requiere el objeto pero no se usa para el caso)</li>
-<li>Test Stub: Provides indirect inputs (ignoring outputs)</li>
-<li>Test Spy: Records indirect outputs, and may provide indirect inputs</li>
-<li>Mock Object: Asserts indirect outputs, and may provide indirect inputs</li>
-<li>Fake Object: Objetos que no queremos usar (correo, impresoras, SMS’s…)</li>
-</ul>
+<p><strong>Dummy object:</strong> Does not provide inputs or outputs (se requiere el objeto pero no se usa para el caso)</p>
+<p><strong>Test Stub:</strong> Provides indirect inputs (ignoring outputs)</p>
+<p><strong>Test Spy:</strong> Records indirect outputs, and may provide indirect inputs</p>
+<p><strong>Mock Object:</strong> Asserts indirect outputs, and may provide indirect inputs</p>
+<p><strong>Fake Object:</strong> Objetos que no queremos usar (correo, impresoras, SMS’s…)</p>
 </section></section>
 <section><section id="caracteristiques" class="title-slide slide level1"><h1>Caracteristiques</h1></section>
 <section id="fragilitat" class="slide level2">

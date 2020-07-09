@@ -1,12 +1,160 @@
+# Introducció
+
+## Objectius
+
+Establir un marc comú entre nosaltres
+
+Base teòrica
+
+Vocabulari comú (tipus de tests, activitats...)
+
+Diferents aproximacions per fer-los
+
+Com abordar testos complexos
+
+## Sense TDD?
+
+Com ho feu sense TDD?
+
+- Afegim funcionalitat
+- Mostrem resultats
+- Comprobem si son bons
+- Repetim
+
+Només tornem a comprovar funcionalitats del passat
+quan entrem en mode paranoid.
+
+Sindrome del 'no ho toquis'
+
+## I les UI?
+
+Clickem i clickem fins que peta
+
+Itineraris de proves
+
+Molt feixuc
+
+
+## Automatització
+
+Evitem la validació manual
+
+Codi que comprova que els resultats son correctes
+
+Només ens molesta quan quelcom va malment
+
+Permet executar els testos moltes vegades
+
+Evitem regresions, ens envalentona
+
+Compte: El test esdevé codi que cal mantenir
+
+Frameworks (`unittest`, `nose`, `pytest`...)
+
+
+## Com automatitzar
+
+Fem codi que:
+
+- Construeixi la situació de test (fixture)
+- Comprobi que el resultat es l'esperat
+- Només ens alerti si no ho és
+
+¿Qui testeja el codi de test?
+
+## Estil xUnit (TDD)
+
+```python
+# xUnit (unittest, nose, pytest)
+class MyClass_Test(unittest.TestCase):
+	def test_myMethod_inConditionA_returns666(self):
+		sut = MyClass()
+		sut.setConditionA()
+		self.assertEqual(666, sut.myMethod())
+```
+
+## Estil BDD
+
+```python
+# Mamba (mamba, behave, pexpect)
+with description(MyClass, "having an instance of MyClass") as self:
+	with context("in condiion A"):
+		self.condition(A)
+		with it("returns 666"):
+			expect(self.myMethod()).to(equal(666))
+```
+
+## xUnit vs BDD style
+
+La intenció original dels BDD es implicar
+als stakeholders en l'escriptura i manteniment dels testos.
+
+Lliga l'especificació co-escrita amb els stake holders
+amb els testos mantinguts pels desenvolupadors.
+
+
+:::columns
+**Specification tied code**\
+Es coescriu l'especificació,
+i el test fa referència al
+text de l'especificació.
+
+**Code is specification**\
+S'intenta que el codi
+expliqui el cas de test
+:::
+
+:::notes
+Opinió (esbiaixada, he crescut amb xUnit):
+
+Impressió: Als frameworks BDD els falta maduresa\
+Fan el codi de test mes complex\
+Per això dubto de qui ho fa servir coescrigui els testos\
+Quan separen especificació, el binding es fràgil\
+Ben portat, es pot fer amb xUnit sense complicar tant el codi\
+Potser es la meva desconeixença
+:::
+
+## Abans o després?
+
+Afegir un test quan el codi ja funciona:
+
+- Fa mandra, ja funciona
+- Com sabem que el test funciona?
+
+Si fem el test quan la funcionalitat encara no hi és,
+estarem comprovant que realment ho detecta.
+
+Per codi antic, que volem cobrir, hi ha estratègies.
+
+## Els problemos
+
+M'he *oblidat* testejar i ho vull cobrir a posteriori
+
+Vull pendre el control d'un sistema que no tè testos
+
+El comportament de la unitat depén d'una segona
+
+El resultat es massa gran per ficar-ho al codi
+
+El comportament es aleatori o fràgil
+
+Vull automatitzar testos d'una interficie
+
+::: notes
+No cobriré totes les preguntes pero pregunteu si us interessa
+:::
+
+
 # Tipus de testos
 
-## Segons qui els comprova
+## Supervisió o automatització
 
 **Test supervisats:**\
 Algú ha de validar que els resultats son bons
 
 **Test automatitzats:**\
-L'ordinador fa la validació i només es queixa quan fallen
+L'ordinador fa la validació
 
 **Tests amb referencia validada:**\
 Es comprova la sortida del cas la primera
@@ -23,48 +171,13 @@ Referencia validada:
 :::
 
 
-## Segons quan els fem
-
-**Test Last development**\
-Un cop que ja hem fet codi (clàssic)
-
-**Test driven development**\
-Abans el test, de cada linia de codi
-
-**Behaviour driven development**\
-Abans el test funcional, que tot el codi
-
-
-::: notes
-
-- Com justifiqueu invertir en test un el codi funciona?
-- Per que creieu que es bo el TDD?
-- Sempre el podem aplicar?
-- Heu treballat amb BDD?
-
-Test Last development es el que s'ha fet de tota la vida.
-
-- Costa molt justificar fer testos de cosas que ja saps (o creus) que funcionen
-- Acaben no fent-se
-- Costos de debug d'errors posteriors
-- Regresions de coses que abans funcionaven
-
-Test driven aporta un cicle virtuos.
-
-- Sensació de progrés
-- Automatització -> feedback automatic -> ens envalentonem amb els canvis
-
-Sovint el codi ja està fet, hi ha técniques per fer-ho sistemàtic com si fos TDD.
-
-BDD implica altres coses que no pas quan fas els testos
-i es compatible amb TDD.
-Parteix dels testos funcionals.
-:::
-
 ## Segons transparencia
 
 Com de conscients som quan escribim el test dels detalls d'implementacio?
 
+Testos de **caixa negra**, **grisa** o **blanca**
+
+::: notes
 **Caixa Negra**\
 Ho fem a cegues, entrada-sortida
 
@@ -73,24 +186,28 @@ Tenim una idea del que fa
 
 **Caixa Blanca**\
 Fem el test seguint el codi
+:::
+
 
 ## Segons codi cobert (I)
 
-- **Unitaris:** cobreix una línia o modificació de codi
-- **Component:** un component aïllat (doubles)
-- **Integració:** cobreix la delegació a altres móduls
-	- **Bottom-up**: por capas
-	- **Big bang**: módulo coordinador
-- **Funcionals:** cobreix un cas d'ús d'usuari
+**Unitaris** vs **Funcionals**
+
+**Component** vs **Integració**
+
+Integració **Bottom-up** vs **Big bang**
+
+**Important:** Els testos d'integració no han de testejar tots els casos dels components
+**només que es delega de forma correcta en els components**.
 
 ::: notes
-- Test unitari: Cobreix una linia de codi (o una modificacio de codi)
-- Test funcional: Cobreix un cas d'ús (nivell usuari)
+- **Test unitari:** Cobreix una linia de codi (o una modificacio de codi)
+- **Test funcional:** Cobreix un cas d'ús (nivell usuari)
 	- Deriven de l'especificació o del cas d'us feta per l'usuari
-- Test d'integració: Cobreix la comunicacio de dos moduls
-	- Bottom up: capas de abajo a arriba
-	- Big bang: Se junta todo a la vez
-- Test de component: Testeja el comportament general del component, no pas una funció
+- **Test de component:** Testeja el comportament general del component, no pas una funció
+- **Test d'integració:** Cobreix la comunicacio de dos moduls
+	- **Bottom up test:** capas de abajo a arriba
+	- **Big bang test:** Se junta todo a la vez en un modulo coordinador
 :::
 
 ## Segons codi cobert (II)
@@ -102,11 +219,17 @@ Fem el test seguint el codi
 	- **Sanity:** Comprovacions mínimes dels canvis aplicats.
 
 ::: notes
-- Test extremo a extremo: Integracion total, emulando un caso real en entorno real. Frontend, backend...
+- Test extrem a extrem: Integracio total, emula un caso real en entorno real. Frontend, backend...
 - Test d'acceptació: Es el que fa l'usuari per donar per bo un desenvolupament
 - Test de desplegament:
 	- Test de fum: Es fa per comprovar que un desplegament mínimament correcte (arrenca, respon...)
 	- Test de sanitat: Comprovacions ràpides en desplegament per saber si funciones les noves funcionalitats i correccions
+
+Interessant per Som:
+
+- Començar a automatitzar els testos de desplegament
+- Donar suport en eines i metodologia per fer el test d'acceptació
+- Tenir testos end-to-end (cypress)
 :::
 
 
@@ -114,14 +237,14 @@ Fem el test seguint el codi
 
 Els unitaris també poden ser:
 
+- **De regresió:** quan els seguim executant
 - **Exploratori:** com funciona un codi de tercers?
 - **De correccio:** per aillar un bug detectat
-- **De regresió:** quan els seguim executant
 
 ::: notes
-- **Test exploratori:** Test unitari que es fa per entendre el funcionament de códi de tercers
-- **Test de correcció:** Test unitari que fem per manifestar un bug, i que després deixem per regresió
 - **Test de regresió:** Quan els testos, un cop passats es continuen passant per comprovar que no tirem enrera
+- **Test exploratori:** Test unitari que es fa per entendre el funcionament de códi de tercers (llibreries, api's, mòduls d'altres partners...)
+- **Test de correcció:** Test unitari que fem per manifestar un bug, i que després deixem per regresió
 
 Els testos de correcció son molt importants
 com a práctica de manteniment.
@@ -292,6 +415,9 @@ mantenir.
 
 ## Técniques
 
+**Montecarlo**\
+Generació aleatoria
+
 :::columns
 ::::column
 **Branch testing**\
@@ -301,9 +427,6 @@ cada cami al codi un test
 eina que detecta codi no exercitat pels testos
 ::::
 :::: column
-
-**Montecarlo**\
-Generació aleatoria
 
 **Anàlisi de valors frontera**\
 A banda i banda d'on canvia el comportament
@@ -374,91 +497,19 @@ amb les seves limitacións.
 
 ## Code guided tests
 
-Sovint el codi ja esta fet, fem-ho test last pero:
+Sovint el codi ja esta fet, fem-ho test-last
+
+Estrategia:
 
 - Comentar el codi fet
-- Anar afegint el codi per pedaços amb l'antic de referencia
+- Anar afegint el codi per pedaços
+- Mantenim l'antic de referencia
 
 Code guided tests:
 
 - Cada condicio
 - Cada for: un, zero, many (o zero, un, many)
 
-
-# Automatització
-
-## Motivació
-
-Clàssic: Executar el codi i comprovar el resultat esperat
-
-Conseqüències:
-
-- Costa molt de comprovar els resultats a mà
-- No repetim aquesta mateixa comprovació quan fem la següent funcionalitat
-- Tenim regressions
-
-## Solució
-
-Fem codi que:
-
-- Construeixi la situació de test (fixture)
-- Comprobi que el resultat es l'esperat
-- Només ens alerti si no ho és
-
-¿Qui testeja el codi de test?
-
-## Estil xUnit (TDD)
-
-```python
-# xUnit (unittest, nose, pytest)
-class MyClass_Test(unittest.TestCase):
-	def test_myMethod_inConditionA_returns666(self):
-		sut = MyClass()
-		sut.setConditionA()
-		self.assertEqual(666, sut.myMethod())
-```
-
-## Estil BDD
-
-```python
-# Mamba (mamba, behave, pexpect)
-with description(MyClass, "having an instance of MyClass") as self:
-	with context("in condiion A"):
-		self.condition(A)
-		with it("returns 666"):
-			expect(self.myMethod()).to(equal(666))
-```
-
-## xUnit vs BDD style
-
-La intenció original dels BDD es implicar
-als stakeholders en l'escriptura i manteniment dels testos.
-
-Lliga l'especificació co-escrita amb els stake holders
-amb els testos mantinguts pels desenvolupadors.
-
-
-:::columns
-**Specification tied code**\
-Es coescriu l'especificació,
-i el test fa referència al
-text de l'especificació.
-
-**Code is specification**\
-S'intenta que el codi
-expliqui el cas de test
-:::
-
-:::notes
-Opinió (esbiaixada, he crescut amb xUnit):
-
-Impressió: Als frameworks BDD els falta maduresa\
-Fan el codi de test mes complex\
-Per això dubto de qui ho fa servir coescrigui els testos\
-Quan separen especificació, el binding es fràgil\
-Ben portat, es pot fer amb xUnit sense complicar tant el codi\
-Potser es la meva desconeixença
-:::
 
 
 # TDD
@@ -484,23 +535,24 @@ Potser es la meva desconeixença
 - Criteri de limitació: si no trobem un test que falli, es que no cal el test
 
 ## Green
+
 **Fem lo minim per que passi ràpid**
 
 - No ens preocupa si el codi es correcte
 - Si no ho podem fer rapid,
-	- tirem enrera i refactoritzem per facilitar-ho
-	- o plantejem un test diferent, més proper
-
+	- tirem enrera el red i refactoritzem per facilitar-ho
+	- o plantejem un altre test més assequible
+- Molta cura de no afegir funcionalitat no coberta
 
 ## Refactor
+
 **Millorem el codi, reduint entropia i preparant per seguent red**
 
-- Refactor: Millorem el codi
-	- No afegim funcionalitat
-	- Reduim entropia i duplicació al codi
-	- O fem espai per la pròxima funcionalitat
-	- Es poden fer diversos abans del seguent Red
-	- **Passem els testos a cada canvi**
+- No afegim funcionalitat
+- Reduim entropia i duplicació al codi
+- O fem espai per la pròxima funcionalitat
+- Es poden fer diversos abans del seguent Red
+- **Passem els testos a cada canvi**
 
 ## Refactorings
 
@@ -508,43 +560,68 @@ Són receptes per fer canvis al disseny sense canviar el comportament
 
 Reversibles: Sovint hi ha l'invers
 
-## Refactors: Receptes
-
-Renombrar o relocalitzar classes, atributs i mètodes\
-Pujar i baixar atributs i mètodes en una jerarquía de classes\
-Extreure o expandir en linia métodes, attributs o classes\
-Encapsular attributs, canviar condicionals per polimorfisme, state o strategy\
-Canviar la signatura de mètodes\
-
+::: notes
+- Renombrar o relocalitzar classes, atributs i mètodes\
+- Pujar i baixar atributs i mètodes en una jerarquía de classes\
+- Extreure o expandir en linia métodes, attributs o classes\
+- Encapsular attributs, canviar condicionals per polimorfisme, state o strategy\
+- Canviar la signatura de mètodes\
+:::
 
 ## Passos comuns
 
-Com si fos una bastida cal tenir sempre el codi funcionant:
+Com si fos una bastida cal tenir sempre el codi funcionant, que l'edifici no caigui en cap moment:
 
 - Duplicar l'estructura vella
 - Farcir l'estructura nova (duplicar setters)
 - Recolzar-se en l'estructura nova (getters)
 - Netejar restos de l'estructura vella
 
-Exemples:
+## Exemples
 
-- Passar d'un literal a un atribut
-- Passar d'un objecte a una lista d'objectes
-- Canviar el contenidor dels objectes agregats
-- Substituir un component per una reimplementació
+**Com ho farieu en aquests casos?**
+
+Passar d'un literal a un atribut
+
+Passar d'un objecte a una lista d'objectes
+
+Canviar el contenidor dels objectes agregats
+
+Substituir un component per una reimplementació
+
+## Sobredisseny
+
+Implementació que dona cabuda a funcionalitats que encara no soportem
+
+És una tendencia en la programació tradicional:
+
+- Complexitat innecessària i potser mal dirigida
+- Codi més difícil de mantenir
+
+En TDD, només en el refactoring previ a la introducció de la funcionalitat
+
+Sol ser bo refactoritzar per treure'l
+
+## Optimitzacións
+
+
 
 ## Estructura d'un test
 
-- Setup: Es la part on posem el sistema a les condicions de test
-- Exercise: Es la part on s'executa el codi que volem testejar
-- Assert: Es la part on comprovem que l'estat es el dessitjat
-- Tear Down: Es la part on deixem el sistema net i llest pel segûent test
+![Testing com diagrama d'estats](images/testing-testcaseAsStates.svg)
 
-TODO: Diagrama d'estats
+::: notes
+- **Set Up:** Es la part on posem el sistema a les condicions de test
+- **Exercise:** Es la part on s'executa el codi que volem testejar
+- **Assert:** Es la part on comprovem que l'estat es el dessitjat
+- **Tear Down:** Es la part on deixem el sistema net i llest pel segûent test
+:::
 
 ## Inputs i outputs
 
-Des del test fem inputs (setters) i revisem outputs (getters).
+Inputs: el que rep l'unitat (crides, paràmetres...)
+
+Outputs: el que ofereix l'unitat (retorns...)
 
 - Setup: Inputs
 - Exercise: Inputs (o outputs)
@@ -564,11 +641,15 @@ TODO: Diagrama
 
 ## Test doubles
 
-- Dummy object: Does not provide inputs or outputs (se requiere el objeto pero no se usa para el caso)
-- Test Stub: Provides indirect inputs (ignoring outputs)
-- Test Spy: Records indirect outputs, and may provide indirect inputs
-- Mock Object: Asserts indirect outputs, and may provide indirect inputs
-- Fake Object: Objetos que no queremos usar (correo, impresoras, SMS's...)
+**Dummy object:** Does not provide inputs or outputs (se requiere el objeto pero no se usa para el caso)
+
+**Test Stub:** Provides indirect inputs (ignoring outputs)
+
+**Test Spy:** Records indirect outputs, and may provide indirect inputs
+
+**Mock Object:** Asserts indirect outputs, and may provide indirect inputs
+
+**Fake Object:** Objetos que no queremos usar (correo, impresoras, SMS's...)
 
 # Caracteristiques
 
