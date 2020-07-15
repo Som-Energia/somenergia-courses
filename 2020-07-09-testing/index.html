@@ -1703,17 +1703,18 @@ background-color: #F0F1EB; } }
 </section>
 <section id="sense-tdd" class="slide level2">
 <h2>Sense TDD?</h2>
-<p>Com ho feu sense TDD?</p>
+<p>Com ho feiem sense TDD?</p>
 <ul>
 <li>Afegim funcionalitat</li>
-<li>Mostrem resultats</li>
+<li>Mostrem resultats al main</li>
 <li>Comprovem si son bons</li>
-<li>Repetim</li>
+<li>Següent funcionalitat</li>
 </ul>
 <p>Només tornem a comprovar funcionalitats del passat quan entrem en mode paranoid.</p>
 <p>Sindrome del ‘no ho toquis’</p>
 <aside class="notes">
 <p>Valorem els testos. D’on venim?</p>
+<p>‘Només quan entrem en mode paranoid’ no vol dir que no entressim sovint</p>
 </aside>
 </section>
 <section id="i-les-ui" class="slide level2">
@@ -1727,7 +1728,7 @@ background-color: #F0F1EB; } }
 <p>Evitem la validació manual</p>
 <p>Permet executar els testos moltes vegades</p>
 <p>Evitem regresions, ens envalentona</p>
-<p>Frameworks (<code>unittest</code>, <code>nose</code>, <code>pytest</code>…)</p>
+<p>Frameworks: <code>unittest</code>, <code>nose</code>, <code>pytest</code>, <code>jest</code>, <code>mamba</code>…</p>
 </section>
 <section id="com-automatitzar" class="slide level2">
 <h2>Com automatitzar</h2>
@@ -2294,15 +2295,19 @@ Separa testos de codi de producció</p>
 <p>Per això la meva opció: al mateix directori i amb sufix.</p>
 </aside>
 </section>
-<section id="helpers" class="slide level2">
-<h2>Helpers</h2>
+<section id="test-helpers" class="slide level2">
+<h2>Test Helpers</h2>
 <p>El codi de test cal mantenir-ho també.<br />
 Codi replicat és el dimoni del manteniment.</p>
 <p>Extreure codi comú.</p>
 <p>Desofusca la intenció del test:<br />
 treu detalls d’en mig darrera d’un bon nom.</p>
-<p>Consell: esperar a tenir un parell de testos abans de fer l’extracció d’un helper.</p>
-<p>Explicita que es un setup, assert, teardown…</p>
+<p>Consell: per una millor abstracció, esperar a tenir alguns testos que la necessitin</p>
+<p>Modifiquem el test, testejem-lo provocant fallades</p>
+<aside class="notes">
+<p>Els helpers generalment s’apliquen a una fase del test (setup, teardown…)</p>
+<p>Si es un assert <code>assertAquestaCondicio(...)</code></p>
+</aside>
 </section></section>
 <section><section id="refactoritzant" class="title-slide slide level1"><h1>Refactoritzant</h1></section>
 <section id="receptes" class="slide level2">

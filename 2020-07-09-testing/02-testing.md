@@ -14,12 +14,12 @@ Com abordar testos complexos
 
 ## Sense TDD?
 
-Com ho feu sense TDD?
+Com ho feiem sense TDD?
 
 - Afegim funcionalitat
-- Mostrem resultats
+- Mostrem resultats al main
 - Comprovem si son bons
-- Repetim
+- Següent funcionalitat
 
 Només tornem a comprovar funcionalitats del passat
 quan entrem en mode paranoid.
@@ -28,6 +28,8 @@ Sindrome del 'no ho toquis'
 
 ::: notes
 Valorem els testos. D'on venim?
+
+'Només quan entrem en mode paranoid' no vol dir que no entressim sovint
 :::
 
 ## I les UI?
@@ -47,7 +49,7 @@ Permet executar els testos moltes vegades
 
 Evitem regresions, ens envalentona
 
-Frameworks (`unittest`, `nose`, `pytest`...)
+Frameworks: `unittest`, `nose`, `pytest`, `jest`, `mamba`...
 
 
 ## Com automatitzar
@@ -766,7 +768,7 @@ trobis just al costat els testos que has de mantenir conjuntament.
 Per això la meva opció: al mateix directori i amb sufix.
 :::
 
-## Helpers
+## Test Helpers
 
 El codi de test cal mantenir-ho també.\
 Codi replicat és el dimoni del manteniment.
@@ -776,10 +778,17 @@ Extreure codi comú.
 Desofusca la intenció del test:\
 treu detalls d'en mig darrera d'un bon nom.
 
-Consell: esperar a tenir un parell de testos
-abans de fer l'extracció d'un helper.
+Consell: per una millor abstracció, esperar a tenir alguns testos que la necessitin
 
-Explicita que es un setup, assert, teardown...
+Modifiquem el test, testejem-lo provocant fallades
+
+
+::: notes
+Els helpers generalment s'apliquen a una fase del test (setup, teardown...)
+
+Si es un assert `assertAquestaCondicio(...)`
+
+:::
 
 # Refactoritzant
 
