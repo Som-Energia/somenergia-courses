@@ -4,9 +4,9 @@
 
 Establir un marc comú entre nosaltres
 
-Base teòrica
+Base teòrica (tipus de tests, mantras...)
 
-Vocabulari comú (tipus de tests, activitats...)
+Vocabulari comú (per entendre'ns)
 
 Diferents aproximacions per fer-los
 
@@ -18,13 +18,17 @@ Com ho feu sense TDD?
 
 - Afegim funcionalitat
 - Mostrem resultats
-- Comprobem si son bons
+- Comprovem si son bons
 - Repetim
 
 Només tornem a comprovar funcionalitats del passat
 quan entrem en mode paranoid.
 
 Sindrome del 'no ho toquis'
+
+::: notes
+Valorem els testos. D'on venim?
+:::
 
 ## I les UI?
 
@@ -39,15 +43,9 @@ Molt feixuc
 
 Evitem la validació manual
 
-Codi que comprova que els resultats son correctes
-
-Només ens molesta quan quelcom va malment
-
 Permet executar els testos moltes vegades
 
 Evitem regresions, ens envalentona
-
-Compte: El test esdevé codi que cal mantenir
 
 Frameworks (`unittest`, `nose`, `pytest`...)
 
@@ -57,67 +55,16 @@ Frameworks (`unittest`, `nose`, `pytest`...)
 Fem codi que:
 
 - Construeixi la situació de test (fixture)
-- Comprobi que el resultat es l'esperat
+- Comprobi que el resultat és l'esperat
 - Només ens alerti si no ho és
 
-¿Qui testeja el codi de test?
+Si el test és codi, ¿qui testeja el codi de test?
 
-## Estil xUnit (TDD)
-
-```python
-# xUnit (unittest, nose, pytest)
-class MyClass_Test(unittest.TestCase):
-	def test_myMethod_inConditionA_returns666(self):
-		sut = MyClass()
-		sut.setConditionA()
-		self.assertEqual(666, sut.myMethod())
-```
-
-## Estil BDD
-
-```python
-# Mamba (mamba, behave, pexpect)
-with description(MyClass, "having an instance of MyClass") as self:
-	with context("in condiion A"):
-		self.condition(A)
-		with it("returns 666"):
-			expect(self.myMethod()).to(equal(666))
-```
-
-## xUnit vs BDD style
-
-La intenció original dels BDD es implicar
-als stakeholders en l'escriptura i manteniment dels testos.
-
-Lliga l'especificació co-escrita amb els stake holders
-amb els testos mantinguts pels desenvolupadors.
-
-
-:::columns
-**Specification tied code**\
-Es coescriu l'especificació,
-i el test fa referència al
-text de l'especificació.
-
-**Code is specification**\
-S'intenta que el codi
-expliqui el cas de test
-:::
-
-:::notes
-Opinió (esbiaixada, he crescut amb xUnit):
-
-Impressió: Als frameworks BDD els falta maduresa\
-Fan el codi de test mes complex\
-Per això dubto de qui ho fa servir coescrigui els testos\
-Quan separen especificació, el binding es fràgil\
-Ben portat, es pot fer amb xUnit sense complicar tant el codi\
-Potser es la meva desconeixença
-:::
+Si el test és codi, caldrà mantenir-ho
 
 ## Abans o després?
 
-Afegir un test quan el codi ja funciona:
+Automatitzar un test quan el codi ja funciona:
 
 - Fa mandra, ja funciona
 - Com sabem que el test funciona?
@@ -127,36 +74,74 @@ estarem comprovant que realment ho detecta.
 
 Per codi antic, que volem cobrir, hi ha estratègies.
 
-## Els problemos
+## Els mantras
 
-M'he *oblidat* testejar i ho vull cobrir a posteriori
+Red - Green - Refactor
 
-Vull pendre el control d'un sistema que no tè testos
+SetUp - Exercise - Assert - TearDown
 
-El comportament de la unitat depén d'una segona
+Duplicate - Fill - Relay - Clean
 
-El resultat es massa gran per ficar-ho al codi
+## Ordre del matí
 
-El comportament es aleatori o fràgil
+1. Tipus de testos
+1. TDD
+1. Trobant els casos
+1. Escrivint testos
+1. Refactoritzant
+1. Solucionant pollos
 
-Vull automatitzar testos d'una interficie
 
-::: notes
-No cobriré totes les preguntes pero pregunteu si us interessa
+:::notes
+**Tipus de testos**
+
+Per reflexionar sobre els que fem i deixem de fer
+i establir vocabulari comú.
+
+**TDD**
+
+Sense entrar-hi gaire, ja el coneixem.
+Repasem algunes coses clau.
+Si surten dubtes entrem.
+
+**Trobant els casos**
+
+Com determinar els casos a testejar
+
+**Escrivint testos**
+
+Guía per com escriure els testos.
+
+**Refactoritzant**
+
+Algunes consideracions respecte el refactoring.
+Què és, com el fem, criteris...
+
+**Solucionant pollos**
+
+Gestionant aquelles situacions que semblen que no es poden gestionar correctament
+
+- M'he *oblidat* testejar i ho vull cobrir a posteriori
+- Vull pendre el control d'un sistema que no tè testos
+- Un component que depén d'altre
+- El resultat és massa gran per ficar-ho al codi
+- El comportament és aleatori o fràgil
+- Vull automatitzar testos d'una interficie
+
 :::
 
 
 # Tipus de testos
 
-## Supervisió o automatització
+## Validació
 
 **Test supervisats:**\
-Algú ha de validar que els resultats son bons
+Un humà ha de validar que els resultats son bons
 
 **Test automatitzats:**\
 L'ordinador fa la validació
 
-**Tests amb referencia validada:**\
+**Tests amb referència validada:**\
 Es comprova la sortida del cas la primera
 vegada y cada cop que canvia el comportament
 
@@ -165,31 +150,45 @@ Supervisats: Main amb prints
 
 Automatitzats: Frameworks xunit
 
-Referencia validada:
+Referència validada:
 [back2back](https://github.com/vokimon/back2back),
 [snapshot](https://jestjs.io/docs/en/snapshot-testing)...
+
+Reflexions per som:
+
+- Automatitzats és millor que referència validada (fràgils i més manteniment)
+- Referència validada és millor que supervisats
+- Ambits on costa automatitzar: UI, validació usuari...
+- Hem de tendir a erradicar-los
 :::
 
 
-## Segons transparencia
 
-Com de conscients som quan escribim el test dels detalls d'implementacio?
+## Transparència
 
-Testos de **caixa negra**, **grisa** o **blanca**
+Com de conscients som dels detalls de la implementació quan escrivim el test?
+
+Testos de **caixa negra**\
+Testos de **caixa grisa**\
+Testos de **caixa blanca**\
 
 ::: notes
 **Caixa Negra**\
-Ho fem a cegues, entrada-sortida
-
-**Caixa Grisa**\
-Tenim una idea del que fa
+Testejem sense coneixer el codi, només la especificació.
 
 **Caixa Blanca**\
-Fem el test seguint el codi
+Fem el test seguint el codi.
+
+**Caixa Grisa**\
+Sense accés complert al codi, fent servir per exemple documentació de disseny.
+
+Els testos de caixa negra parteixen de l'especificació.
+
+Els testos de caixa blanca pot examinar el codi per determinar les particions equivalents o analitzar els límits.
 :::
 
 
-## Segons codi cobert (I)
+## Abast (I)
 
 **Unitaris** vs **Funcionals**
 
@@ -208,15 +207,27 @@ Integració **Bottom-up** vs **Big bang**
 - **Test d'integració:** Cobreix la comunicacio de dos moduls
 	- **Bottom up test:** capas de abajo a arriba
 	- **Big bang test:** Se junta todo a la vez en un modulo coordinador
+
+
+Reflexions per Som:
+
+- Tests d'integració que passem tots els casos dels components integrats
+	- Més tests costen de mantenir
+- Tests que son d'integració i haurien de ser de component
+	- Triguen més en executar-se
+	- Fer servir mocks
 :::
 
-## Segons codi cobert (II)
+## Abast (II)
 
-- **Extrem a extrem:** Integración total del sistema en entorn realístic
-- **Aceptació:** El que fa l'usuari per donar-ho per bó
-- **Desplegament:** Els que es fan en posar a producció
-	- **Smoke:** Arrenca, respon... molt ràpids.
-	- **Sanity:** Comprovacions mínimes dels canvis aplicats.
+**Aceptació:** El que fa l'usuari per donar-ho per bó
+
+**Extrem a extrem:** Integración total del sistema en entorn realístic
+
+**Desplegament:** Els que es fan en posar a producció
+
+- **Smoke:** Arrenca, respon... molt ràpids.
+- **Sanity:** Els canvis aplicats hi son
 
 ::: notes
 - Test extrem a extrem: Integracio total, emula un caso real en entorno real. Frontend, backend...
@@ -233,13 +244,14 @@ Interessant per Som:
 :::
 
 
-## Segons motivació
+## Motivació
 
-Els unitaris també poden ser:
+Per què l'afegeixes?
 
+- **De progressió:** comprova noves funcionalitats
 - **De regresió:** quan els seguim executant
-- **Exploratori:** com funciona un codi de tercers?
 - **De correccio:** per aillar un bug detectat
+- **Exploratori:** com funciona un codi de tercers?
 
 ::: notes
 - **Test de regresió:** Quan els testos, un cop passats es continuen passant per comprovar que no tirem enrera
@@ -258,16 +270,41 @@ del codi de tercers que es podrien donar.
 :::
 
 
-## Segons el cas d'ús
+## Cas d'ús
 
 **Test de camí daurat:**\
-Comprova la condició d'exit principal
+Comprova la condició d'èxit principal
 
 **Test d'extensió:**\
-Comprova una condició d'exit divergent
+Comprova una condició d'èxit divergent
 
 **Test de fallada:**\
 Comprova una condició de fallada
+
+::: notes
+El **camí daurat** és el cas d'us d'èxit més típic o més il·lustratiu.
+Per exemple:
+
+> Una persona física que és socia vol fer un contracte 2.0A, com a titular i pagadora, sense cèntim voluntari i sense cap documentació.
+
+Les extensions serien les derivacions d'aquest cas que tenen sortides diferents.
+
+> Exemples
+> 
+> - Amb DH
+> - Amb 3.0A
+> - Contracta una persona jurídica
+> - Persona no socia convidada
+> - Un altre pagador (to kill)
+
+Els casos de fallada serien els que no acaben bé.
+
+> Exemples
+>
+> - quan el CUPS te un cas obert,
+> - quan la persona esta en una blacklist...
+
+:::
 
 
 ## Segons si cal executar
@@ -360,7 +397,7 @@ respon be a pics alts puntuals?
 ::: columns
 :::: column
 **Test d'Estress**\
-quin es el límit operacional?
+quin és el límit operacional?
 ::::
 :::: column
 **Test de Remull**\
@@ -386,10 +423,72 @@ Cerca de vulnerabilitats conegudes o típiques
 - Hi ha bases de dades de vulnerabilitats i payloads.
 
 https://github.com/foospidy/payloads
+
+
+- Anàlisis estàtic de patrons de codi vulnerables
+- Dependències amb vulnerabilitats conegudes
 :::
 
 
-# Casos de test
+# TDD
+
+## Red-Green-Refactor
+
+**Red:** Fem un test que falli
+
+**Green:** Fem lo minim per que passi ràpid
+
+**Refactor:** Millorem el codi, reduint entropia i preparant per seguent red
+
+:::notes
+TDD és una metodologia que prentén establir un cicle virtuós
+entre diferents aspectes de la programació.
+
+Si testejes a priori
+
+- Testejes el test
+- Et dona un límit de què testejar
+- Et dona sensació de progrés
+- Et dona confiança per fer canvis
+- Pots simplificar el codi sense por
+- El codi queda més net i fàcil de mantenir
+- Es soluciona el canvi climàtic i la fam al món
+:::
+
+## Red
+
+**Escrivim un nou test que falli**
+
+- ens fa pensar en la interfície primer
+- les pensem des del test, interfícies testables
+- donarà errors (ERROR) fins que creem classes i mètodes buits fins arribar a la fallada (FAIL)
+- el FAIL és el test del test, **obligatori!!**
+
+**Criteri de limitació:**\
+si no podem fer que el test falli, no calia fer-lo
+
+## Green
+
+**Fem lo minim per que passi ràpid**
+
+- No ens preocupa si el codi és correcte
+- Si no ho podem fer rapid,
+	- tirem enrera el red i refactoritzem per facilitar-ho
+	- o plantejem un altre test més assequible
+- Molta cura de no afegir funcionalitat no coberta
+
+## Refactor
+
+**Millorem el codi**
+
+- No afegim funcionalitat
+- Reduim entropia i duplicació al codi
+- O fem espai per la pròxima funcionalitat
+- Es poden fer diversos abans del seguent Red
+- **Passem els testos a cada canvi**
+
+
+# Trobant<br>casos de test
 
 ## Quan hem testejat prou?
 
@@ -416,10 +515,13 @@ mantenir.
 ## Técniques
 
 **Montecarlo**\
-Generació aleatoria
+Generació aleatoria de casos\
+(casos petits? casinos?)
 
 :::columns
 ::::column
+**Anàlisi de fluxe**
+
 **Branch testing**\
 cada cami al codi un test
 
@@ -427,12 +529,13 @@ cada cami al codi un test
 eina que detecta codi no exercitat pels testos
 ::::
 :::: column
+**Anàlisi domini d'entrada**
 
-**Anàlisi de valors frontera**\
+**Valors frontera**\
 A banda i banda d'on canvia el comportament
 
 **Particions equivalents**\
-Un cas per partició d'equivalent comportament
+Un cas per partició de comportament equivalent
 ::::
 :::
 
@@ -460,7 +563,7 @@ Ideal per tests de rendiment
 
 
 ::: notes
-En Python, la libreria `faker` es bestial para generar, nombres, direcciones, nifs...
+En Python, la libreria `faker` és bestial para generar, nombres, direcciones, nifs...
 :::
 
 ## Branch testing
@@ -468,11 +571,32 @@ En Python, la libreria `faker` es bestial para generar, nombres, direcciones, ni
 Assignar un cas d'us a cada branch de codi\
 `if`, `for`...
 
+**Compte:** No considera comportament divergent per dades quan cridem a terceres funcions o operadors
+
+Exemple: `floor(x)` vs `x//1` amb negatius
+
+::: notes
 Per a codi ja escrit o que tenim clar que volem escriure
 
-Compte funcions delegades (`floor(x)` vs `x//1`)
+Quan tenim un `if`, un test per quan la condició és certa o és falsa.
 
-No considera comportament divergent per dades
+Si la condició és una convinació de condicións, ho fem per cadascuna.
+
+Quan tenim un `for` fem-ho per _one_(1), _none_(0), _many_(2)
+
+Si hi ha condicions de `break`, `continue`, `return` a dins del for
+les testejem com un `if`.
+:::
+
+## Coverage testing
+
+Es fa amb eines d'anàlisi de codi
+
+Serveix per detectar alguns casos no previstos
+
+Al final fas branch testing,
+amb les seves limitacións.
+
 
 ## Anàlisi de domini d'entrada
 
@@ -485,126 +609,7 @@ Fem servir els valors frontera com a representants de la partició.
 Dos casos son equivalents si tenen el mateix comportament
 
 
-## Coverage testing
-
-Es fa amb eines d'anàlisi de codi
-
-Serveix per detectar alguns casos no previstos
-
-Al final fas branch testing,
-amb les seves limitacións.
-
-
-## Code guided tests
-
-Sovint el codi ja esta fet, fem-ho test-last
-
-Estrategia:
-
-- Comentar el codi fet
-- Anar afegint el codi per pedaços
-- Mantenim l'antic de referencia
-
-Code guided tests:
-
-- Cada condicio
-- Cada for: un, zero, many (o zero, un, many)
-
-
-
-# TDD
-
-## Red-Green-Refactor
-
-**Red:** Fem un test que falli
-
-**Green:** Fem lo minim per que passi ràpid
-
-**Refactor:** Millorem el codi, reduint entropia i preparant per seguent red
-
-
-## Red
-
-**Escrivim un nou test que falli**
-
-- ens fa pensar en la interfície primer
-- en pensar-les des del test, genera interfícies testables
-- ens provocara crear classes i/o mètodes buits
-- petarà fins que no tinguem la API (ERROR), llavors fallarà  (FAIL)
-- la fallada es obligatoria perque testeja que el test funciona
-- Criteri de limitació: si no trobem un test que falli, es que no cal el test
-
-## Green
-
-**Fem lo minim per que passi ràpid**
-
-- No ens preocupa si el codi es correcte
-- Si no ho podem fer rapid,
-	- tirem enrera el red i refactoritzem per facilitar-ho
-	- o plantejem un altre test més assequible
-- Molta cura de no afegir funcionalitat no coberta
-
-## Refactor
-
-**Millorem el codi, reduint entropia i preparant per seguent red**
-
-- No afegim funcionalitat
-- Reduim entropia i duplicació al codi
-- O fem espai per la pròxima funcionalitat
-- Es poden fer diversos abans del seguent Red
-- **Passem els testos a cada canvi**
-
-## Refactorings
-
-Són receptes per fer canvis al disseny sense canviar el comportament
-
-Reversibles: Sovint hi ha l'invers
-
-::: notes
-- Renombrar o relocalitzar classes, atributs i mètodes\
-- Pujar i baixar atributs i mètodes en una jerarquía de classes\
-- Extreure o expandir en linia métodes, attributs o classes\
-- Encapsular attributs, canviar condicionals per polimorfisme, state o strategy\
-- Canviar la signatura de mètodes\
-:::
-
-## Passos comuns
-
-Com si fos una bastida cal tenir sempre el codi funcionant, que l'edifici no caigui en cap moment:
-
-- Duplicar l'estructura vella
-- Farcir l'estructura nova (duplicar setters)
-- Recolzar-se en l'estructura nova (getters)
-- Netejar restos de l'estructura vella
-
-## Exemples
-
-**Com ho farieu en aquests casos?**
-
-Passar d'un literal a un atribut
-
-Passar d'un objecte a una lista d'objectes
-
-Canviar el contenidor dels objectes agregats
-
-Substituir un component per una reimplementació
-
-## Sobredisseny
-
-Implementació que dona cabuda a funcionalitats que encara no soportem
-
-És una tendencia en la programació tradicional:
-
-- Complexitat innecessària i potser mal dirigida
-- Codi més difícil de mantenir
-
-En TDD, només en el refactoring previ a la introducció de la funcionalitat
-
-Sol ser bo refactoritzar per treure'l
-
-## Optimitzacións
-
-
+# Escrivint els testos
 
 ## Estructura d'un test
 
@@ -613,12 +618,39 @@ Sol ser bo refactoritzar per treure'l
 ::: notes
 - **Set Up:** Es la part on posem el sistema a les condicions de test
 - **Exercise:** Es la part on s'executa el codi que volem testejar
-- **Assert:** Es la part on comprovem que l'estat es el dessitjat
+- **Assert:** Es la part on comprovem que l'estat és el dessitjat
 - **Tear Down:** Es la part on deixem el sistema net i llest pel segûent test
+
+Recordeu: Setup i tearDown no són només els mètodes del TestCase.
+Els mètodes setUp i tearDown, contenen les passes comunes per tots els mètodes de test.
+Cada mètode de test afegeix el seu propi setup.
+
+Si pensem el sistema com a un complex diagrama d'estats,
+
+- Cada cas de test comprova una aresta del diagrama.
+- El **set up** posa el sistema en el estat de partida
+- El **exercise** provoca la transició
+- L'**assert** comprova que som a l'estat on toca
+- El **tear down** torna el sistema a l'estat inicial
+
 :::
+
+## Comandes i consultes
+
+És práctic tenir els mètodes dividits en
+
+**comandes** (setters) que modifiquen estat\
+	Els fem servir al **setUp**, **tearDown**
+
+**consultes** (getters) que no alteren l'estat\
+	Els fem servir per l'**assert**
+
 
 ## Inputs i outputs
 
+![](images/testing-sut-direct-io.svg)
+
+::: notes
 Inputs: el que rep l'unitat (crides, paràmetres...)
 
 Outputs: el que ofereix l'unitat (retorns...)
@@ -628,97 +660,389 @@ Outputs: el que ofereix l'unitat (retorns...)
 - Assert: Outputs
 - TearDown: Inputs
 
-TODO: Diagrama
+Què fem quan l'estat depén d'un tercer component?
+::::
+
+## Estil xUnit (TDD)
+
+```python
+# xUnit (unittest, nose, pytest)
+class MyClass_Test(unittest.TestCase):
+
+	def test_myMethod_inConditionA_returns666(self):
+		sut = MyClass()
+		sut.setConditionA()
+		self.assertEqual(666, sut.myMethod())
+```
+
+## Estil BDD
+
+```python
+# Mamba (mamba, behave, pexpect)
+with description("having an instance of MyClass") as self:
+	instance = MyClass()
+	with context("in condition A"):
+		instance.setConditionA()
+		with it("returns 666"):
+			expect(instance.myGetter()).to(equal(666))
+```
+
+:::notes
+
+La intenció original dels BDD és implicar
+als stakeholders en l'escriptura i manteniment dels testos.
+
+Lliga l'especificació co-escrita amb els stake holders
+amb els testos mantinguts pels desenvolupadors.
 
 
-## I/O Indirectes
+:::columns
+**Specification tied code**\
+Es coescriu l'especificació,
+i el test fa referència al
+text de l'especificació.
 
-No totes les sortides ni totes les entrades son accessibles des del test
+**Code is specification**\
+S'intenta que el codi
+expliqui el cas de test
+:::
 
-Alguns depenen de tercers objectes.
+Opinió (esbiaixada, he crescut amb xUnit):
 
-TODO: Diagrama
-
-## Test doubles
-
-**Dummy object:** Does not provide inputs or outputs (se requiere el objeto pero no se usa para el caso)
-
-**Test Stub:** Provides indirect inputs (ignoring outputs)
-
-**Test Spy:** Records indirect outputs, and may provide indirect inputs
-
-**Mock Object:** Asserts indirect outputs, and may provide indirect inputs
-
-**Fake Object:** Objetos que no queremos usar (correo, impresoras, SMS's...)
-
-# Caracteristiques
-
-## Fragilitat
-
-Un test es fràgil quan es possible que en algún moment falli,
-tot i que la funcionalitat no s'hagi trencat.
-
-- Depén de dades de producció
-- Depén de la data actual
-- Depén de esdeveniments aleatoris
-
-## Back-2-Back tests
-
-Per agafar control codi no cobert
-
-Per comparar sortides difícils d'escriure
-
-Trobar casos significatius
-
-Generar una sortida per ells (referencia)
-
-Comparar automaticament (diff) si canvia o no
-
-## Prenent control
-
-Quan falla un B2B d'un procés llarg
-no ajuda gaire a saber on esta la falla.
-
-Normalment te a veure amb els canvis que hem fet.
-
-Si no, interessa fer drops de dades intermitjos.
-
-Els punts de drop es un bon punt per posterior
-disecció del procés en mòduls testejables
-partint dels B2B.
+Impressió: Als frameworks BDD els falta maduresa\
+Fan el codi de test mes complex\
+Per això dubto de qui ho fa servir coescrigui els testos\
+Quan separen especificació, el binding és fràgil\
+Ben portat, es pot fer amb xUnit sense complicar tant el codi\
+Potser és la meva desconeixença
+:::
 
 ## Nomenclatura
 
-Una bona nomenclatura permet identificar el test fàcilment
+Objectiu: identificar el propòsit del test
 
-Si testejem `myMethod` de `MyClass` en una condició de test concreta:
+Testejem `myMethod` de `MyClass` en una condició de test concreta
+(i esperem alguna cosa):
 
-`MyClass_Test.test_myMethod_failsWhenShitHappens`
+```
+MyClass_Test.test_myMethod_whenThisHappens_fails
+MyClass_Test.test__my_method__whenThisHappens_fails
+```
+
+classe - mètode - condicio - (opcional) conseqüència
+
+::: notes
 
 Combinació de camell case i underlines per localitzar millor
 classe, metode i condicions.
 
 Si els simbols tenen underlines, fer-ne servir dobles per separar.
-
-`MyClass_Test.test__my_method__failsWhenShitHappens`
+:::
 
 ## ¿On poso els tests?
 
-¿Carpeta `tests` o in-place?
+¿Carpeta `tests` o de costat?
 
 ¿Prefix `test_` o sufix `_test`?
 
+Editar sempre en parells codi + test\
+Directori o prefix els allunya
+
+Carpeta `test` comú a la comunitat Python\
+Separa testos de codi de producció
+
+Al `setup.py` podem separar per suffix
+
+::: notes
 Per un costat,
 la carpeta `test` separa el codi que anirà a producció
 i és costum en projectes Python.
 
 Al `setup.py` es pot excloure de la distribució per directori o per sufix al `setup.py`.
 
-Però es molt bo que quan vagis a editar un codi,
+Però és molt bo que quan vagis a editar un codi,
 trobis just al costat els testos que has de mantenir conjuntament.
 
-Per això: al mateix directori i amb sufix.
+Per això la meva opció: al mateix directori i amb sufix.
+:::
 
+## Helpers
+
+El codi de test cal mantenir-ho també.\
+Codi replicat és el dimoni del manteniment.
+
+Extreure codi comú.
+
+Desofusca la intenció del test:\
+treu detalls d'en mig darrera d'un bon nom.
+
+Consell: esperar a tenir un parell de testos
+abans de fer l'extracció d'un helper.
+
+Explicita que es un setup, assert, teardown...
+
+# Refactoritzant
+
+## Receptes
+
+Fowler te receptes per modificar un artefacte d'implementació en una direcció
+
+"Artefactes" poden ser un atribut, un literal, un métode, un condicional, la signatura...
+
+Reversibles: Sovint hi ha de complementaris
+
+::: notes
+- Renombrar o relocalitzar classes, atributs i mètodes
+- Pujar i baixar atributs i mètodes en una jerarquía de classes
+- Extreure o expandir en linia métodes, attributs o classes
+- Encapsular attributs, canviar condicionals per polimorfisme, state o strategy
+- Canviar la signatura de mètodes
+
+Son reversibles perque origen i destí son equivalents.
+
+El fet que sigui reversible ens fa ser valentes.
+Els podem aplicar i desaplicar-los després si convingués.
+:::
+
+
+## Passos comuns
+
+Com si fos una bastida cal tenir sempre el codi funcionant, que l'edifici no caigui en cap moment:
+
+- **Duplicar** l'estructura vella
+- **Farcir** l'estructura nova (duplicar setters)
+- **Recolzar-se** en l'estructura nova (getters)
+- **Netejar** restos de l'estructura vella
+
+::: notes
+
+**Com ho farieu en aquests casos?**
+
+Modificar la signatura de la funció
+
+Atribut objecte a atribut lista d'objectes
+
+Passar d'un literal a un atribut
+
+Canviar el contenidor dels objectes agregats
+
+Substituir un component per una reimplementació
+:::
+
+
+## Sobredisseny
+
+Dona cabuda a possibles funcionalitats futures que encara no suportem.\
+Tradicionalment: "disseny previsor", pero\
+
+- Complexitat innecessària i potser mal dirigida
+- Codi més difícil de mantenir
+
+En TDD, només es fa en el refactoring previ a la introducció de la funcionalitat
+
+Si n'hi ha, és bo refactoritzar per treure'l.\
+Recorda: És reversible.
+
+::: notes
+**Exemple:** si preveiem que una persona pot tenir més d'un telèfon
+podem representar el telefon com una llista de telèfons.
+Però, si, a la interfície d'usuari,
+no hem implementat la possibilitat de afegir múltiples
+telèfons és un sobredisseny que complica la lògica.
+És un cas d'ús que encara no hem abordat per priorització.
+
+Si ens ho trobem, refactoritzem per simplificar-ho.
+Així, mentres que no ho necessitem, el codi és més simple.
+
+Ara bé, el dia que ens requereixen tenir-ho, podem fer un refactoring
+de convertir un atribut a una llista i ja ens cap.
+
+Evidentment una bona encapsulació de les funcionalitats ajuda.
+:::
+
+## Optimitzacións
+
+Un altre ús bon del refactoring.\
+Amb els testos, dona molta seguretat.
+
+**Compte:** Tendeix a codi ménys flexible.
+
+**Com ho apliquem?**\
+No aplicar-ho d'hora.\
+Esperar a que estigui quasi complert.\
+Amb profilers, només als colls d'ampolla.\
+Mantenir la resta flexible.
+
+
+# Solucionant pollos
+
+## Els pollos
+
+M'he *oblidat* testejar i ho vull cobrir a posteriori
+
+Vull pendre el control d'un sistema que no tè testos
+
+Un component que depén d'altre
+
+El resultat és massa gran per ficar-ho al codi
+
+El comportament és aleatori o fràgil
+
+Vull automatitzar testos d'una interficie
+
+
+## Testejant codi ja fet
+
+Si es tracta d'un cas, que hem implementat sense test
+
+Modifiquem el codi que sembla no testejat per no fer el que fa
+
+Si aixeca un test, estava cobert, sinó, fem el test que l'aixequi.
+
+## Code guided tests
+
+Si no és un cas sino tot un métode
+
+- Comentar el codi fet
+- Anar afegint el codi per pedaços
+- Mantenim l'antic de referència
+
+:::notes
+Motivem-nos: No tant per testejar el codi que potser sabem que funciona sinó per testejar el test.
+:::
+
+## I/O Indirectes
+
+Algunes entrades i sortides es fan amb tercers,
+no pas amb el test.
+
+![](images/testing-sut-indirect-io.svg)
+
+::: notes
+Si volguessim **controlar l'estat**, hauríem de controlar els **retorns** dels tercers cridats.
+
+Si volguessim **comprovar l'estat**, hauríem de conèixer quines **crides** i quins **paràmetres** han rebut els tercers cridats.
+
+Com qui fa la crida els l'objecte, els rols d'entrada i sortida s'inverteixen.
+
+:::
+
+
+## Test doubles
+
+::: columns
+:::: column
+
+**Dummy object:** Es demana un parametre, no es fa servir
+
+**Test Stub:** Retorna respostes enlatadas. Ignorant parametres.
+
+**Test Spy:** Stub que, a més, registra les crides que s'en fan. El test les comprova.
+
+::::
+:::: column
+**Mock Object:** Li programes una expectació i el ja fa la comprovació. 
+
+**Fake Object:** Implementación funcional de la interficie. \
+	pe. Simular una base de datos o api con objetos en memoria
+
+**Verified Fake Object:** 
+::::
+:::
+
+
+::: notes
+Gerard Meszaros introdujo una clasificación a sabiendas de que habia gente que llamaba a todo Stub o Fake o Mock.
+
+Aunque se tiende a usar, a menudo se mezcla. Intentemos usarla.
+
+Fowler dixit (Mocks aren't Stubs)[https://martinfowler.com/articles/mocksArentStubs.html]
+:::
+
+
+## Perills dobles
+
+Els dobles son codi
+
+Si l'objecte doblat evoluciona cal actualitzar-los
+
+Si fem un Fake que passa els mateixos testos, ens adonarem!
+
+
+## Fragilitat
+
+Un test és fràgil quan és possible que en algún moment falli,
+tot i que la funcionalitat no s'hagi trencat.
+
+- Depén de dades de producció
+- Depén de la data actual
+- Depén de esdeveniments aleatoris
+
+## Desfragilitzant
+::: columns
+:::: column
+**Dades de producció**
+
+- Comprovar de casos
+- Cercador de casos
+- Extractor de casos
+- Casos sintètics
+- Double de font de dades
+::::
+::::column
+**Aleatori**
+
+- Generador substituible
+- Injecció de dependencies
+- Context handler
+
+**Data actual**
+
+- Parametre today
+- Mockup datetime
+::::
+:::
+
+
+::: notes
+**Comprovador de casos:** Test extra comprova que el cas seleccionat te les característiques dessitjades
+
+**Cercador de casos:** Helper que cerca un cas amb unes característiques concretes
+
+**Extractor de casos:** Genera dades sintètiques a partir de casos reals
+
+**Dades sintètiques:** Les construim amb codi o declarativament
+:::
+
+## Back-2-Back tests
+
+**Utilitat**
+
+Per agafar control codi no cobert\
+Per comparar sortides difícils d'escriure
+
+**Com funcionen**
+
+Es seleccionen entrades de casos significatius
+
+Es genera una sortida per ells (referència)
+
+Es compara automaticament (diff) si canvia o no
+
+Mecanisme per acceptar una nova referència
+
+## Prenent control
+
+Quan falla un B2B d'un procés llarg,
+no ajuda gaire a saber on esta la falla.
+
+Normalment te a veure amb els canvis que hem fet.
+
+Si no, interessa fer drops de dades intermitges.
+
+Els punts de drop és un bon punt per posterior
+disecció del procés en mòduls testejables
+partint dels B2B.
 
 ## Data driven tests
 
@@ -733,11 +1057,6 @@ Important documentar que aporta cada dada
 Helpers de setup i assert, tambe fan feina
 
 Frameworks (`ddt` per `unittest`)
-
-
-
-
-
 
 
 

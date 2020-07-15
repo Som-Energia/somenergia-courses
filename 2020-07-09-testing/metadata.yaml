@@ -5,7 +5,7 @@ author: David García Garzón
 
 theme: serif # beige/black/blood/league/moon/night/serif/simple/sky/solarized/white
 history: true # no vuelvas al principo con F5
-transition: convex # none/fade/slide/convex/concave/zoom
+transition: slide # none/fade/slide/convex/concave/zoom
 center: true
 slideNumber: true # Muestra el numero de slide
 progress: true
