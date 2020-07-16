@@ -4,13 +4,11 @@
 
 Establir un marc comú entre nosaltres
 
-Base teòrica (tipus de tests, mantras...)
-
-Vocabulari comú (per entendre'ns)
+Tipus de tests, vocabulari, mantras...
 
 Diferents aproximacions per fer-los
 
-Com abordar testos complexos
+Cóm abordar testos complexos
 
 ## Sense TDD?
 
@@ -29,7 +27,7 @@ Sindrome del 'no ho toquis'
 ::: notes
 Valorem els testos. D'on venim?
 
-'Només quan entrem en mode paranoid' no vol dir que no entressim sovint
+'Només quan entrem en mode paranoid' no vol dir que no entrèssim sovint
 :::
 
 ## I les UI?
@@ -600,6 +598,21 @@ Al final fas branch testing,
 amb les seves limitacións.
 
 
+:::columns
+::::column
+![](images/testing-coverage-report.png)
+::::
+::::column
+```bash
+pip install pytest-cov
+pytest --cov mymodule mymodule
+coverage html # to dump an html report at covhtml/
+coveralls # to publish in [coveralls.io](https://coveralls.io) (for travis.yaml)
+```
+::::
+:::
+
+
 ## Anàlisi de domini d'entrada
 
 Tàndem: Valors frontera + particions equivalents
@@ -796,14 +809,14 @@ Si es un assert `assertAquestaCondicio(...)`
 
 Fowler te receptes per modificar un artefacte d'implementació en una direcció
 
-"Artefactes" poden ser un atribut, un literal, un métode, un condicional, la signatura...
+"Artefactes" poden ser un atribut, un literal, un mètode, un condicional, la signatura...
 
 Reversibles: Sovint hi ha de complementaris
 
 ::: notes
 - Renombrar o relocalitzar classes, atributs i mètodes
 - Pujar i baixar atributs i mètodes en una jerarquía de classes
-- Extreure o expandir en linia métodes, attributs o classes
+- Extreure o expandir en linia mètodes, attributs o classes
 - Encapsular attributs, canviar condicionals per polimorfisme, state o strategy
 - Canviar la signatura de mètodes
 
@@ -811,6 +824,9 @@ Son reversibles perque origen i destí son equivalents.
 
 El fet que sigui reversible ens fa ser valentes.
 Els podem aplicar i desaplicar-los després si convingués.
+
+Sovint els veiem com el _gran refactor_ però la idea es anar
+refactoritzant cada nou test per que no s'acomuli l'entropia.
 :::
 
 
@@ -910,7 +926,7 @@ Si aixeca un test, estava cobert, sinó, fem el test que l'aixequi.
 
 ## Code guided tests
 
-Si no és un cas sino tot un métode
+Si no és un cas sino tot un mètode
 
 - Comentar el codi fet
 - Anar afegint el codi per pedaços
@@ -928,9 +944,9 @@ no pas amb el test.
 ![](images/testing-sut-indirect-io.svg)
 
 ::: notes
-Si volguessim **controlar l'estat**, hauríem de controlar els **retorns** dels tercers cridats.
+Si volguèssim **controlar l'estat**, hauríem de controlar els **retorns** dels tercers cridats.
 
-Si volguessim **comprovar l'estat**, hauríem de conèixer quines **crides** i quins **paràmetres** han rebut els tercers cridats.
+Si volguèssim **comprovar l'estat**, hauríem de conèixer quines **crides** i quins **paràmetres** han rebut els tercers cridats.
 
 Com qui fa la crida els l'objecte, els rols d'entrada i sortida s'inverteixen.
 
