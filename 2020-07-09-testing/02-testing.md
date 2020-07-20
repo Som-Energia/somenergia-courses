@@ -960,7 +960,7 @@ Com qui fa la crida els l'objecte, els rols d'entrada i sortida s'inverteixen.
 
 **Dummy object:** Es demana un parametre, no es fa servir
 
-**Test Stub:** Retorna respostes enlatadas. Ignorant parametres.
+**Test Stub:** Retorna respostes enllaunades. Ignora parametres.
 
 **Test Spy:** Stub que, a més, registra les crides que s'en fan. El test les comprova.
 
@@ -1082,6 +1082,22 @@ Important documentar que aporta cada dada
 Helpers de setup i assert, tambe fan feina
 
 Frameworks (`ddt` per `unittest`)
+
+
+## Addendum
+
+[Mixer](https://github.com/klen/mixer): Define fixtures para Django via faker
+
+[Travis](https://travis.io): Integració contínua
+
+[Behave](https://behave.readthedocs.io/en/latest/)
+Libreria que enlaza la especificacion BDD
+con el código de test tipo TDD.
+
+[Freezgun](https://github.com/spulec/freezegun/) Libreria para mockear datetime
+
+[Fast tests for slow services: why you should use verified fakes](https://pythonspeed.com/articles/verified-fakes/)
+
 
 
 
