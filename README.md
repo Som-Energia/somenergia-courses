@@ -16,6 +16,7 @@ Public materials used in internal Som Energia training courses.
 - [Arquitectures Multicapa](2019-12-19-multitier)
 - [Python para no programadoras](2020-02-06-python-nonprogrammers)
 - [Testing](2020-07-09-testing)
+- [Mocking](2020-09-10-python-mock)
 - [WIP: D3](d3)
 - [WIP: CLI Graphics](cligraphics/)
 
