@@ -1,7 +1,7 @@
 ---
-title: Testing
-subtitle: Un marc comú per Som energia
-author: David García Garzón
+title: Mocking en Python
+subtitle: Una petita introducció
+author: Marité Guerrieri
 
 theme: serif # beige/black/blood/league/moon/night/serif/simple/sky/solarized/white
 history: true # no vuelvas al principo con F5

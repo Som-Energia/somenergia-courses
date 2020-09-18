@@ -1,60 +1,80 @@
-Mocking en Python
-Una petita introducció
+# Introducció
 
-Què és mocking?
-Un objecte mock subtitueix i imita un objecte real en un entorno de testing.
+## Què és mocking?
+Un objecte mock substitueix i imita un objecte real en un entorno de testing.
 
-Llibreries per treballar Mocks in Python
-unitests
-nose
-pytest
+## Llibreries per treballar Mocks in Python
 
-La llibreria unittest de Python
+- unittests
+- nose
+- pytest
+
+## La llibreria unittest
+
 La llibreria unittest de Python inclou un subpaquet anomenat unittest.mock.
+
+##
 Aquesta llibreria provee:
-un objecte Mock que imitarà objectes reals
-la funció patch() que reemplaça objectes amb Mock instances, patch() es pot fer servir com a un decorator o un context manager
+
+- un objecte Mock que imitarà objectes reals
+- la funció patch() que reemplaça objectes amb Mock instances, patch() es pot fer servir com a un decorator o un context manager
+
+## Instal.lació
 Per instal·lar la llibreria unittest.mock en versions de python anteriors a 3.3: pip install mock.
+
 La documentació de la llibraria és aquí: https://docs.python.org/3/library/unittest.mock.html
 
+## Codi exemple utilitzat
 
+```python
 
-Codi exemple utilitzat
 class MyClass():
     def my_method(self):
         pass  
-
 
 class SomeOtherClassThatUsesMyClass():
     def method_under_test(self):
         myclass = MyClass()
         return myclass.my_method()
+```
 
-Importar la llibreria Mock
+## Importar la llibreria Mock
+
+```python
 from mock import patch, Mock
+```
 
+# @patch.object
 
-@patch.object
-Mockejar un mètode en una classe i retornar un valor específic
-
-Decorator
+##
+### Mockejar un mètode en una classe i retornar un valor específic
+#### Decorator
+```python
 @patch.object(my_module.MyClass, 'my_method')
 def test_my_method_shouldReturnTrue_whenMyMethodReturnsSomeValue(self, mock_my_method):
     mock_my_method.return_value=True
     some_other_class =  SomeOtherClassThatUsesMyClass()
     result = some_other_class.method_under_test()
     self.assertTrue(result)
-Context manager
+```
+##
+#### Context manager
+```python
 def test_my_method_shouldReturnTrue_whenMyMethodReturnsSomeValue(self):
     with patch('my_module.MyClass') as mock_my_method:
         mock_my_method.return_value=True
         some_other_class =  SomeOtherClassThatUsesMyClass()
         result = some_other_class.method_under_test()
         self.assertTrue(result)
+```
 
-Exemples en ERP
+## Exemples en ERP
+
 addons/gisce/SomEnergia/som_polissa_administradora/tests/tests_administradora.py
 
+## 
+
+```python
 def add_contract_administrator(self, cursor, uid, polissa_id, partner_id, context=None):
     	if context is None:
         		context = {}
@@ -73,8 +93,10 @@ def test_add_contract_administrator__polissa_invalid_partner(self, mock_validate
     	result = pol_obj.add_contract_administrator(self.cursor, self.uid, polissa_id, partner_id, context={})
 
     	self.assertFalse(result) 
+```
+## 
 
-
+```python
 def add_contract_administrator(self, cursor, uid, polissa_id, partner_id, context=None):
     	...
     	if not self.validate_partner(cursor, uid, partner_id):
@@ -96,11 +118,14 @@ def test_add_contract_administrator__polissa_without_administradora(self, mock_v
 
     	self.assertTrue(result) 
                    ….
+```
 
+## 
 
+```python
 def add_contract_administrator(self, cursor, uid, polissa_id, partner_id, context=None):
     	...
-    	if not self.validate_partner(cursor, uid, partner_id):
+		if not self.validate_partner(cursor, uid, partner_id):
         		return False
 	administradora = self.read(cursor, uid, polissa_id, [‘administradora’])[‘administradora’]
 	….
@@ -123,11 +148,14 @@ def test_add_contract_administrator__polissa_without_administradora(self, mock_v
                    admin_cat = pol_obj.get_admin_cat(self.cursor, self.uid)
 
                    self.assertEqual(admin_cat.id, partner.category_id[0].id)
+```
 
+# side_effect
 
-side_effect
-Mockejar un mètode en una classe amb @patch.object i retornar un valor different cada vegada que es crida
+##
+#### Mockejar un mètode en una classe amb @patch.object i retornar un valor different cada vegada que es crida
 
+```python
 @patch.object(my_module.MyClass, 'my_method')
 def test_my_method_shouldReturnMultipleValues_whenMyMethodReturnsSomeValue(self, mock_my_method):
 	list_of_return_values= [True,False,False]
@@ -141,9 +169,9 @@ def test_my_method_shouldReturnMultipleValues_whenMyMethodReturnsSomeValue(self,
 	self.assertFalse(some_other_class.method_under_test())
 	self.assertFalse(some_other_class.method_under_test())
 	self.assertTrue(some_other_class.method_under_test())
-
-
-
+```
+##
+```python
 def add_contract_administrator(self, cursor, uid, polissa_id, partner_id, context=None):
     	...
     	if not self.validate_partner(cursor, uid, partner_id):
@@ -152,7 +180,10 @@ def add_contract_administrator(self, cursor, uid, polissa_id, partner_id, contex
 
                   if administradora and administradora[0] != partner_id:
             		self.remove_administrator_category(cursor, uid, administradora[0])
-        	
+```
+## 
+
+```python        	
 self.add_administrator_category(cursor, uid, administradora[0])
 	self.write(cursor, uid, polissa_id, {'administradora': partner_id})
 
@@ -165,6 +196,11 @@ def remove_administrator_category(self, cursor, uid, partner_id):
             res_partner_obj = self.pool.get('res.partner')
             res_partner_obj.write(cursor, uid, partner_id, {'category_id': [(3, admin_cat.id)]})
 
+```
+
+## 
+
+```python
     @mock.patch.object(giscedata_polissa.GiscedataPolissa, "read")
     @mock.patch.object(giscedata_polissa.GiscedataPolissa, "remove_administrator_category")
     @mock.patch.object(giscedata_polissa.GiscedataPolissa, "validate_partner")
@@ -190,36 +226,40 @@ def remove_administrator_category(self, cursor, uid, partner_id):
         self.assertTrue(result) 
 
         pol_obj.remove_administrator_category.assert_called_once_with(self.cursor, self.uid, 2)
+```
 
+## Un altre exemple en ERP
 
-Un altre exemple en ERP
 https://github.com/gisce/erp/pull/10927/files#diff-cc477805ade52b342f09b4f67330659a
 
+##
+### Altres Assertions interessants
 
-Altres Assertions interessants
-assert_called(): el mock es cridat al menys una vegada
-assert_called_once(): el mock es cridat exactament una vegada
-assert_called_with(*args, **kwargs): la crida s’ha fet en una manera particular
-assert_called_once_with(*args, **kwargs): s’ha cridat exactament una vegada i amb uns arguments específics
-assert_any_call(*args, **kwargs): s’ha cridat amb els arguments especificats
-assert_not_called(): el mock mai ha estat cridat
+- assert_called(): el mock es cridat al menys una vegada
+- assert_called_once(): el mock es cridat exactament una vegada
+- assert_called_with(*args, **kwargs): la crida s’ha fet en una manera particular
+- assert_called_once_with(*args, **kwargs): s’ha cridat exactament una vegada i amb uns arguments específics
+- assert_any_call(*args, **kwargs): s’ha cridat amb els arguments especificats
+- assert_not_called(): el mock mai ha estat cridat
 
+# @patch
 
-
-@patch
-
-
+## 
+```python
 
 @patch('my_module.MyClass')
 def test_my_method_shouldCallMyClassMethodMyMethod_whenSomeOtherClassMethodIsCalled(self, mock_my_class):
 	some_other_class =  SomeOtherClassThatUsesMyClass()
 	some_other_class.method_under_test()
 	self.assertTrue(mock_my_class.called)
+```
 
 
 
+## 
+#### Mockejar una classe sensera
 
-Mockejar una classe sensera
+```python
 
 @patch('my_module.MyClass')
 def test_my_method_shouldReturnTrue_whenSomeOtherClassMethodIsCalledAndAReturnValueIsSet(self, mock_my_class):
@@ -231,12 +271,11 @@ def test_my_method_shouldReturnTrue_whenSomeOtherClassMethodIsCalledAndAReturnVa
 
     self.assertTrue(result) 
 
+```
+## 
+#### Mockejar una classe sensera i establir el valor de retorno d’un mètode de la classe
 
-
-
-Mockejar una classe sensera i establir el valor de retorno d’un mètode de la classe
-
-
+```python
 @mock.patch.object(giscedata_polissa.GiscedataPolissa, “read”)
 @mock.patch.object(giscedata_polissa.GiscedataPolissa, “validate_partner”)
 def test_add_contract_administrator__polissa_without_administradora(self, mock_validate_partner, mock_read_polissa):
@@ -262,12 +301,15 @@ def test_add_contract_administrator__polissa_without_administradora(self, mock_p
     	result = pol_obj.add_contract_administrator(self.cursor, self.uid, polissa_id, partner_id, context={})
     	self.assertTrue(result) 
                    ….
+```
 
+# Alguns links interessants
 
-Alguns links interessants
-https://realpython.com/python-mock-library/ 
-https://www.toptal.com/python/an-introduction-to-mocking-in-python
-https://semaphoreci.com/community/tutorials/getting-started-with-mocking-in-python
-https://myadventuresincoding.wordpress.com/2011/02/26/python-python-mock-cheat-sheet/
- https://docs.python.org/3/library/unittest.mock-examples.html
-https://realpython.com/courses/python-mock-object-library/
+## 
+
+- https://realpython.com/python-mock-library/ 
+- https://www.toptal.com/python/an-introduction-to-mocking-in-python
+- https://semaphoreci.com/community/tutorials/getting-started-with-mocking-in-python
+- https://myadventuresincoding.wordpress.com/2011/02/26/python-python-mock-cheat-sheet/
+- https://docs.python.org/3/library/unittest.mock-examples.html
+- https://realpython.com/courses/python-mock-object-library/
