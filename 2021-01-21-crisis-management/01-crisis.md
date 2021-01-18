@@ -1,6 +1,46 @@
 # Introducció
 
-## Objectius
+## Comissió d'incidències crítiques
+
+Arrel de la incidència de centraleta
+
+Reunions a l'inici de desembre de 2020
+
+Representats tots els equips IT
+
+Fran, Xavi, Benja, Joan, Alberto, Jordi, Voki
+
+
+:::notes
+Coincidia amb la resaca de la centraleta.
+Tot i que encara hi erem. I encara hi som.
+
+Ens vam adonar de moltes coses que estavem fent malament.
+Hem anat incorporant algunes pràctiques que han resolt algunes disfuncions.
+I si les haguessin incorporat abans? Que ens cal, d'a més a més?
+:::
+
+## Resultats
+
+Qué considerem incidència crítica
+
+Quines disfuncionalitats tenim
+
+Quines práctiques han anat bé o es poden millorar
+
+Propostes organtizades en 14 punts, que formen el protocol
+
+Recollit a un [Document](https://docs.google.com/document/d/1tB955P30UBBRhJ8RKf94xvP4XVNi69Xeg_a8jS9MqMo/)
+
+:::notes
+El protocol està agrupat en 14 punts.
+No son passes.
+Alguns son activitats,
+d'altres eines...
+:::
+
+
+## ...i avui...
 
 Traslladar el treball de la comissió:\
 **reflexions** i **proposta de protocol**
@@ -9,25 +49,6 @@ Acabar de perfilar-ho amb **aportacions** de la resta
 
 Que tots ens donem per assabentats\
 per **començar a aplicar-ho**
-
-## Comissió
-
-Arrel de la incidència de centraleta
-
-Reunions a l'inici de desembre de 2020
-
-Fran, Xavi, Vid, Joan, Alberto, Jordi, Voki
-
-Representats tots els equips IT
-
-:::notes
-Coincidia amb la resaca del la centraleta.
-Tot i que encara hi erem. I encara hi som.
-
-Ens vam adonar de moltes coses que estavem fent malament.
-Hem anat incorporant algunes pràctiques que han resolt algunes disfuncions.
-I si les haguessin incorporat abans? Que ens cal, d'a més a més?
-:::
 
 
 ## Roadmap
@@ -201,6 +222,325 @@ Eren totes targetes pendents.
 - Falta d’un protocol de com actuar per incidències genèriques per incidències desconegudes
 - Un cop passada la incidència crítica no hi ha dades per aprendre de com s’ha de gestionar la incidència i realitzar una millora continua
 :::
+
+# Protocol
+
+## 1. Identificació
+
+Ho considera la persona que l'està gestionant:
+
+:::columns
+::::column
+#### Efectes
+
+Bloqueja **processos vitals** per l’empresa
+
+Impedeix treballar **a moltes persones**
+
+Suposa **perdua d'informació**
+::::
+
+::::column
+
+#### Resolució
+
+Coneixement clau **distribuït**
+
+Diversos **equips** d’IT
+
+**Temps** sense trobar solució
+
+Involucra gestió de **partners**
+::::
+:::
+
+Com a mínim, un de cada columna
+
+
+## 2. Movilització
+
+Identificar equips involucrats
+
+Contactar amb les persones que estan d'incidències al calendar
+
+Aquestes persones deleguen si
+no estan disponible o
+algú altre té l'especialització
+
+
+:::notes
+Suport no fa torns.
+
+- Ara les gestiona sempre Xavi i com a fall back Jordi (acabara sent Isra), a la tarda Joan
+- Establim comunicació amb support pel Hangouts IT, si no hi ha resposta per telegram.
+:::
+
+
+## 3. Kick-off
+
+Consensuar **criticitat**
+
+Crear drive de **Bitàcola**, amb l'acta
+
+**Intern:** Qui falta? qui sobra?\
+Referents? Disponibilitat?
+
+**Partners:** Quins? Interlocutors?
+
+**ET**: Quins? via? freqüència?\
+Primer contacte: _tenim comissió_
+
+**Primer dia:** posar al dia i repartir feina\
+Estat, actuacions i comunicacions. A la bitàcola.
+
+:::notes
+- Consensuar la criticitat
+- Crear un drive de bitàcola, posar-hi l’acta del kickoff per començar
+- Comunicació interna
+	- Repensar qui estem, qui falta i qui sobra
+	- Definir persona o persones de referència (una o dues)
+	- Declarar quina és la disponibilitat dels participants
+- Comunicació partners
+	- Identificar els partners externs
+	- Definir qui gestiona la interlocució amb ells
+- Comunicació externa stakeholders
+	- Identificar els stakeholders (àmbits, referents, altres equips IT)
+	- Escollir el mitjà i establir la freqüència de comunicació amb ells
+	- Fer un primer contacte, per informar que hem creat la comissió de crisi
+- Organitzar el primer dia
+	- Posada al dia d’estat, actuacions, comunicacions... (amb referències a la bitàcola per anar ràpid)
+	- Repartir feina del dia
+:::
+
+
+## 4. Persones de referència
+
+Una o dues persones concentren la info
+
+S'estableixen al kickoff
+
+Amb **suplències o traspàsos** planificats
+
+**Convoquen i moderen** reunions
+
+Centralitzen **comunicació stakeholders**
+
+Centralitzen **comunicació partners** (delegable)
+
+Apaguen focs anímics
+
+
+## 5. Presa de decissions
+
+**Gerència**:
+Pagaments, canvis de partners, inviabilitat d'una decissió de Gerència, decissions polítiques.
+
+**Stakeholders**:
+Canvis en la forma de treballar,
+interrupció o merma de servei.
+
+Per la resta la comissió és **sobirana, per consens**.
+
+Si **falta algú**: prou amb una referent i dos més.
+
+Si hi ha **disens**: s'escala\
+referents, referent IT, gerencia, CR, assemblea...
+
+## 6. Reunió seguiment diàri
+
+**Qui?** Totes les participants disponibles
+
+**Quan?** Ràpida, millor abans de l'standup
+
+**Contingut:**
+
+Posada al dia: estat, actuacions, comunicacions\
+Fer referències a la bitàcola per agilitzar
+
+Repartir feines del dia
+
+:::notes
+Arribar a l'standup sabent la disponibiliat per pair-programar
+
+
+- Tots els participants disponibles
+- Ràpida i millor fer-la abans de l’standup (perque la gent sàpiga després que podra pair-programmar)
+- Parts que ha de tenir la reunió:
+	- Posada al dia d’estat, actuacions, comunicacions... (amb referències a la bitàcora per anar ràpid)
+	- Repartir feina del dia
+:::
+
+
+## 7. Carpeta del drive
+
+Centralitza la documentació relacionada
+
+
+La posem a `IT/Incidencies/YYYYMMDD-Tema/`
+
+Enllaç a [IT/Incidencies](https://drive.google.com/drive/folders/1Y1lcQ2TZwwUKG6kJkky6suwvXAcb_dUj)
+
+
+:::notes
+La carpeta centralitza tots els documents relacionats amb la incidència
+La posem a IT/Incidencies/YYYYMMDD-Tema/.
+:::
+
+
+## 8. Bitàcola
+
+`00-Bitacola` Per a que quedi a dalt
+
+Entrades ordenades per temps.
+
+Marcat amb hora, dia i participants
+
+Cal incloure:
+
+- Actuacions fetes
+- Informació recopilada
+- Decissions preses
+- Comunicacions fetes
+
+
+:::notes
+La posem a IT/Incidencies/YYYYMMDD-Tema/00-Bitacola
+Ordenat per temps i marcat amb hora, dia
+Ressenyat amb participants
+Totes les actuacions que es fan
+Tota la informació que es recopila
+Totes les decisions que es prenen
+Tots els contactes que es fan (amb partners, usuaris…)
+:::
+
+
+## 9. Sala de Crisi (Meet)
+
+Sempre la mateixa, enllaç a la bitàcola.
+
+Sala de treball amb oients
+
+Oients fan altres coses
+
+Persones pendents en aquell moment (no actives)
+
+No hi ha tothom, si cal avisar: xat de crisi
+
+Si hi ha dos tasques, split
+
+
+
+
+:::notes
+Siempre la misma (enllaç a la bitàcola)
+Punt de contacte de la gent que està pendent en el moment (no té per què ser activa)
+Sala de treball, amb oients
+compte, no hi ha tothom si cal avisar al xat o si cal informar al log
+compte, els oients que no fan coses en paral·lel, llavors s està agafant recursos
+Cal identificar quan hi ha dos tasques en paral·lel per fer un split i evitar soroll
+:::
+
+
+## 10. Xat de crisi
+
+Flood: la informació es perd, a la bitàcola
+
+Per convocar a la Sala o raonar
+
+Separat dels **stakeholders**\
+(no estarian pendents entre el soroll)
+
+Considera si els **partners** han de ser-hi.
+
+
+:::notes
+Per convocar a la gent i notificacions a la gent que no està a la sala de crisis
+És bo separar els stakeholders (barrejar les comunicacions amb ells amb les internes, fa que no estiguin atents)
+Considerar si és convenient incloure els partners
+:::
+
+
+## 11. Rotacions i suplències
+
+Responsabilitat de la persona que faltarà
+cercar la suplencia i fer el traspàs
+
+Sobrevinguda: el seu equip s'encarrega
+
+Traspàs abans de que es produeixi, si es pot
+
+Fer servir la bitàcola per minimitzar efectes
+
+
+
+:::notes
+Com gestionar rotacions i suplències
+Es responsable de buscar substitut la persona que ha de faltar o ser rotada i si es sobrevinguda, el seu equip (persona d’incidències, referent…).
+Sempre que sigui prevista, ens assegurarem de fer el traspàs amb anterioritat
+La màxima informació possible la compartirem a la bitàcola
+:::
+
+## 12. Partners
+
+Revisar els SLA's. Que els podem exigir?
+
+Centralitzada o delegada. Es traspassa com deu mana.
+
+Qui parli amb els partners, ha de tindre el màxim d'informació.
+
+Les actuacions i comunicacions del partner es traspassen a la bitàcola.
+
+:::notes
+Com fer la comunicació amb els partners
+Cal revisar els SLA’s (Contractes de nivell de servei) per saber quina involucració podem exigir al partner
+La comunicació amb els partners serà centralitzada o delegada amb traspàs convenient
+Qui parli amb els partners ha de tindre el màxim d’informació
+Totes les actuacions, comunicacions amb el partner han d’escriure’s a la bitàcola i a la carpeta del drive
+:::
+
+
+## 13. Stakeholders
+
+Quan? Després de la reunió diaria i als canvis significatius
+
+
+
+
+:::notes
+Comunicació amb els stake holders
+Moments importants de comunicar cap als stakeholders
+Després de l’standup diari, perquè tenim la foto de com està i què farem
+Quan hi hagi un canvi d’estat significatiu
+Que comuniquem
+Estat de la incidencia (hi ha diagnostic? hi ha solució? afectació? hi ha workarounds?)
+Actuacions realitzades i pendents
+Si es pot, comunicar una estimació aproximada de temps de resolució  (evitant falsos optimismes)
+Canals d’entrada
+En una incidència d’aquesta mena és tan comú trobar saturació de canal com silenci perquè tothom ja sap que no va be
+Cercar un mecanisme que maximitzi la informació i minimitzi el soroll i que nos sigui farragós  de fer servir
+Acumular la informació per no haver d’atendre cada cas individual però tampoc perdre-la (+1)
+Exemples:
+Incidencia d’asterisk vam fer un excel per anar apuntant les trucades fallides
+Comunicar clarament als usuaris com fer servir aquest canal mentres duri la incidència
+:::
+
+## 14. Retro i Tancament
+
+:::notes
+Reunión de Retro i Tancament
+Un cop acaba la crisi és important analitzar el que ha passat amb retrospectiva
+Deixar escrit com actuar si torna a passar el mateix
+Analitzar com hem gestionat la crisis i treure conclusions (a millorar, que hem fet bé)
+Comunicar als stakeholders resum executiu de la incidència
+Cerveseta de celebració
+
+:::
+
+
+# Discusió
+
+
+
 
 
 
