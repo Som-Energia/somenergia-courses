@@ -8,8 +8,7 @@ Reunions a l'inici de desembre de 2020
 
 Representats tots els equips IT
 
-Fran, Xavi, Benja, Joan, Alberto, Jordi, Voki
-
+Benja, Xavi, Fran, Joan, Alberto, Voki
 
 :::notes
 Coincidia amb la resaca de la centraleta.
@@ -47,13 +46,13 @@ Traslladar el treball de la comissió:\
 
 Acabar de perfilar-ho amb **aportacions** de la resta
 
-Que tots ens donem per assabentats\
+Que tothom ens donem per assabentats\
 per **començar a aplicar-ho**
 
 
 ## Roadmap
 
-Detecció: Quan considerem que som a una incidéncia crítica
+Quan considerem que som a una incidéncia crítica?
 
 Disfuncionalitats que ens hem trobat
 
@@ -103,6 +102,14 @@ Com a mínim, un de cada columna
 # Què ha estat passant?
 
 
+## Recursos
+
+S'ha allargat molt temps
+
+Moltes persones implicades
+
+Persones que no calien, i persones que faltaven
+
 ## Comunicació interna
 
 Actuacions paral·leles amb desconeixença
@@ -113,7 +120,8 @@ Visió parcial del que s'està fent
 
 Necessitat continua de reunions amb tothom
 
-Múltiples vies de comunicació
+Múltiples vies de comunicació.\
+Informació perduda en algun mitjà diferent
 
 :::notes
 - No tothom implicat sap amb quines actuacions s’han fet
@@ -130,10 +138,10 @@ Múltiples vies de comunicació
 ## Comunicació externa
 
 **IT**:\
-Afecta al nostre equip? Hem de ser-hi?
+Afecta a d'altres equips? Han de ser-hi? Necessiten informació?
 
 **Espònsors**:\
-Què hem de comunicar?
+Què hem de comunicar? Cal coordinar missatges?
 
 **ET:**\
 Que passa? Qui s'està encarregant? Temps estimat?
@@ -146,14 +154,18 @@ Que passa? Qui s'està encarregant? Temps estimat?
 
 ## Cures
 
-Crema invertir molt de temps personal en una incidència
+Crema molt invertir tant de temps personal en una incidència
 
 Soletat en moments quan ningú més respon
 
+Tensió i nervis: Balons fora, culpabilització...
+
+Sense una solució, es posen en dubte totes les decisions tècniques preses
 
 :::notes
 - Les persones implicades es cremen quan porten molt de temps
 - Sensació de soletat en moments que es queda una persona al front de tot
+- No ens sentim recolzades en les decissions técniques que prenem
 :::
 
 ## Partners
@@ -173,12 +185,6 @@ Desconeixem els nivells de servei exigibles
 - Els partners no contesten amb premura
 - Desconeixem els nivells de servei que podem exigir a cada partner (SLA’s)
 :::
-
-## Recursos
-
-S'ha allargat molt la resolució
-
-Masses persones implicades
 
 ## Presa de decicions
 
@@ -206,7 +212,6 @@ Protocol genèric per noves?
 
 Retrospectiva? Aprenetatges?
 
-
 :::notes
 
 Amb la centraleta, les preventives es van fer durant la gestió.
@@ -223,7 +228,7 @@ Eren totes targetes pendents.
 - Un cop passada la incidència crítica no hi ha dades per aprendre de com s’ha de gestionar la incidència i realitzar una millora continua
 :::
 
-# Protocol
+# Proposta
 
 ## 1. Identificació
 
@@ -261,17 +266,19 @@ Com a mínim, un de cada columna
 
 Identificar equips involucrats
 
-Contactar amb les persones que estan d'incidències al calendar
+Contactar amb les persones de cada equip\
+que estan d'incidències al calendar
 
-Aquestes persones deleguen si
-no estan disponible o
-algú altre té l'especialització
+Suport no fan torns. Veure nota al costat.
 
+Aquestes persones deleguen\
+si no estan disponibles o\
+si algú altre té l'especialització
 
 :::notes
 Suport no fa torns.
 
-- Ara les gestiona sempre Xavi i com a fall back Jordi (acabara sent Isra), a la tarda Joan
+- Ara les gestiona al matí sempre Xavi i com a fall back Jordi (acabara sent Isra), a la tarda Joan
 - Establim comunicació amb support pel Hangouts IT, si no hi ha resposta per telegram.
 :::
 
@@ -290,8 +297,7 @@ Referents? Disponibilitat?
 **ET**: Quins? via? freqüència?\
 Primer contacte: _tenim comissió_
 
-**Primer dia:** posar al dia i repartir feina\
-Estat, actuacions i comunicacions. A la bitàcola.
+Primera **reunió de seguiment diària**\
 
 :::notes
 - Consensuar la criticitat
@@ -450,12 +456,14 @@ Per convocar a la Sala o raonar
 Separat dels **stakeholders**\
 (no estarian pendents entre el soroll)
 
-Considera si els **partners** han de ser-hi.
+Considerar si els **partners** han de ser-hi.
 
 
 :::notes
 Per convocar a la gent i notificacions a la gent que no està a la sala de crisis
+
 És bo separar els stakeholders (barrejar les comunicacions amb ells amb les internes, fa que no estiguin atents)
+
 Considerar si és convenient incloure els partners
 :::
 
@@ -469,14 +477,18 @@ Sobrevinguda: el seu equip s'encarrega
 
 Traspàs abans de que es produeixi, si es pot
 
-Fer servir la bitàcola per minimitzar efectes
-
+Fer servir la bitàcola per minimitzar efectes d'una absència
 
 
 :::notes
 Com gestionar rotacions i suplències
-Es responsable de buscar substitut la persona que ha de faltar o ser rotada i si es sobrevinguda, el seu equip (persona d’incidències, referent…).
+
 Sempre que sigui prevista, ens assegurarem de fer el traspàs amb anterioritat
+
+La persona que ha de faltar o ser rotada és responsable de buscar substitut
+
+Si es sobrevinguda, el seu equip (persona d’incidències, referent…).
+
 La màxima informació possible la compartirem a la bitàcola
 :::
 
@@ -501,30 +513,47 @@ Totes les actuacions, comunicacions amb el partner han d’escriure’s a la bit
 
 ## 13. Stakeholders
 
-Quan? Després de la reunió diaria i als canvis significatius
+Després de la reunió diaria i als canvis significatius:
 
+**Estat:** hi ha diagnosi? solució? afectació? workarounds?\
+**Pla:** Actuacions realitzades i pendents\
+**Estimació:** evitant falsos optimismes
 
-
+Feedback: Equilibri entre redundancia i silenci\
+Evitar soroll establint canal acomulatiu i no intrusiu\
+Cal ser clar amb els usuaris com fer servir els canals
 
 :::notes
 Comunicació amb els stake holders
-Moments importants de comunicar cap als stakeholders
-Després de l’standup diari, perquè tenim la foto de com està i què farem
-Quan hi hagi un canvi d’estat significatiu
-Que comuniquem
-Estat de la incidencia (hi ha diagnostic? hi ha solució? afectació? hi ha workarounds?)
-Actuacions realitzades i pendents
-Si es pot, comunicar una estimació aproximada de temps de resolució  (evitant falsos optimismes)
-Canals d’entrada
-En una incidència d’aquesta mena és tan comú trobar saturació de canal com silenci perquè tothom ja sap que no va be
-Cercar un mecanisme que maximitzi la informació i minimitzi el soroll i que nos sigui farragós  de fer servir
-Acumular la informació per no haver d’atendre cada cas individual però tampoc perdre-la (+1)
-Exemples:
-Incidencia d’asterisk vam fer un excel per anar apuntant les trucades fallides
-Comunicar clarament als usuaris com fer servir aquest canal mentres duri la incidència
+
+- Moments importants de comunicar cap als stakeholders
+	- Després de l’standup diari, perquè tenim la foto de com està i què farem
+	- Quan hi hagi un canvi d’estat significatiu
+- Que comuniquem
+	- Estat de la incidencia (hi ha diagnostic? hi ha solució? afectació? hi ha workarounds?)
+	- Actuacions realitzades i pendents
+	- Si es pot, comunicar una estimació aproximada de temps de resolució  (evitant falsos optimismes)
+- Canals d’entrada
+	- En una incidència d’aquesta mena és tan comú trobar saturació de canal com silenci perquè tothom ja sap que no va be
+	- Cercar un mecanisme que maximitzi la informació i minimitzi el soroll i que nos sigui farragós  de fer servir
+	- Acumular la informació per no haver d’atendre cada cas individual però tampoc perdre-la (+1)
+- Exemples:
+	- Incidencia d’asterisk vam fer un excel per anar apuntant les trucades fallides
+	- Comunicar clarament als usuaris com fer servir aquest canal mentres duri la incidència
 :::
 
 ## 14. Retro i Tancament
+
+Reunió un cop acabada la crisi
+
+Deixar escrit com actuar si torna a passar
+
+Analitzar com ho hem fet i treure conclusions
+
+Comunicar als stakeholders\
+un resum executiu de la incidència
+
+Cerveseta de celebració!!!
 
 :::notes
 Reunión de Retro i Tancament
@@ -537,7 +566,38 @@ Cerveseta de celebració
 :::
 
 
-# Discusió
+
+
+## Tasques preventives
+
+Prioritzar targetes de prevenció:
+
+:::columns
+::::column
+- Recopilar els SLA’s vigents de tots els partners
+- Elaborar un pla de gestió de riscos
+- Establir protocols per incidències específiques (previstes o conegudes)
+::::
+::::column
+- Desplegar mitjans de backup
+- Desplegar eines de diagnosi
+- Fer auditories externes
+- Fer proves de càrrega
+- Tenir integració continua
+- Testos, testos, testos
+- ...
+::::
+:::
+
+# Discussió
+
+## Temes difusos
+
+Gestió de cures
+
+Ús de la sala de crisi
+
+## Altres temes
 
 
 
