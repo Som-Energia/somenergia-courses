@@ -617,11 +617,11 @@ Prioritzar targetes de prevenció:
 
 ## Temes pendents de treballar
 
-Gestió de cures
-
-Elements que previnguin conflictes i malestars
-
 Ús de la sala de crisi
+
+Gestió de cures ::heart::
+
+Elements que previnguin conflictes i malestars ::ligthing::
 
 ## Altres temes
 
