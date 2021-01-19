@@ -473,11 +473,17 @@ Considerar si els **partners** han de ser-hi.
 
 
 :::notes
+**Alberto, Voki:**
+Para el partner seria igual que el stakeholder.
+Si mezclamos comunicaciones, no estaran pendientes.
+
+
 Per convocar a la gent i notificacions a la gent que no està a la sala de crisis
 
 És bo separar els stakeholders (barrejar les comunicacions amb ells amb les internes, fa que no estiguin atents)
 
 Considerar si és convenient incloure els partners
+
 :::
 
 
