@@ -358,8 +358,7 @@ Centralitzen **comunicació stakeholders**
 
 Centralitzen **comunicació partners** (delegable)
 
-Apaguen focs anímics
-
+Detecta i encamina necesitats de **cures**
 
 ## 6. Presa de decissions
 
@@ -402,12 +401,25 @@ Entrades ordenades per temps.
 
 Marcat amb hora, dia i participants
 
+::: columns
+:::: column
+
 Cal incloure:
 
 - Actuacions fetes
 - Informació recopilada
 - Decissions preses
 - Comunicacions fetes
+::::
+:::: column
+A la capcelera
+
+- Membres i referents
+- Interlocutors
+- Enllaç sala de crisis
+- Full de càlcul de casos
+::::
+:::
 
 
 :::notes
@@ -423,7 +435,7 @@ Tots els contactes que es fan (amb partners, usuaris…)
 
 ## 9. Sala de Crisi (Meet)
 
-Sempre la mateixa, enllaç a la bitàcola.
+Sempre la mateixa, enllaç a la capcelera de la bitàcola.
 
 Sala de treball amb oients
 
