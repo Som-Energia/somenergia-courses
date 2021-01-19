@@ -141,7 +141,7 @@ Informació perduda en algun mitjà diferent
 Afecta a d'altres equips? Han de ser-hi? Necessiten informació?
 
 **Espònsors**:\
-Què hem de comunicar? Cal coordinar missatges?
+Què hem de comunicar? Cal coordinar missatges
 
 **ET:**\
 Que passa? Qui s'està encarregant? Temps estimat?
@@ -176,6 +176,8 @@ Reben missatges contradictoris de persones diferents
 
 Ens bloquejem esperant resposta
 
+Sovint, no hem estat a sobre exigint resposta
+
 Desconeixem els nivells de servei exigibles
 
 
@@ -190,7 +192,9 @@ Desconeixem els nivells de servei exigibles
 
 Falta de auto-confiança per pendre-les
 
-Necessitem contrastar decisions amb altres persones
+Necessitem contrastar decisions amb altres persones\
+per falta del coneixement complet\
+i per necessitat de legitimitzar
 
 :::notes
 - Ningú se sent confiat per prendre decisions
@@ -204,16 +208,13 @@ Actuacions preventives pendents: diagnosi, backup...
 
 No es desfan proves, que no han tingut l'efecte esperat, acomulant efectes
 
-Inacció per ausència de protocol
+Inacció per ausència de protocol\
+concret per incidències conegudes\
+genèric per noves
 
-Protocol concret per incidències conegudes?
-
-Protocol genèric per noves?
-
-Retrospectiva? Aprenetatges?
+Retrospectiva i aprenetatges
 
 :::notes
-
 Amb la centraleta, les preventives es van fer durant la gestió.
 Servidor i xarxa de backup,
 eines de diagnosi,
@@ -319,40 +320,7 @@ Primera **reunió de seguiment diària**\
 :::
 
 
-## 4. Persones de referència
-
-Una o dues persones concentren la info
-
-S'estableixen al kickoff
-
-Amb **suplències o traspàsos** planificats
-
-**Convoquen i moderen** reunions
-
-Centralitzen **comunicació stakeholders**
-
-Centralitzen **comunicació partners** (delegable)
-
-Apaguen focs anímics
-
-
-## 5. Presa de decissions
-
-**Gerència**:
-Pagaments, canvis de partners, inviabilitat d'una decissió de Gerència, decissions polítiques.
-
-**Stakeholders**:
-Canvis en la forma de treballar,
-interrupció o merma de servei.
-
-Per la resta la comissió és **sobirana, per consens**.
-
-Si **falta algú**: prou amb una referent i dos més.
-
-Si hi ha **disens**: s'escala\
-referents, referent IT, gerencia, CR, assemblea...
-
-## 6. Reunió seguiment diàri
+## 4. Reunió seguiment diàri
 
 **Qui?** Totes les participants disponibles
 
@@ -375,6 +343,39 @@ Arribar a l'standup sabent la disponibiliat per pair-programar
 	- Posada al dia d’estat, actuacions, comunicacions... (amb referències a la bitàcora per anar ràpid)
 	- Repartir feina del dia
 :::
+
+## 5. Persones de referència
+
+Una o dues persones concentren la info
+
+S'estableixen al kickoff
+
+Amb **suplències o traspàsos** planificats
+
+**Convoquen i moderen** reunions
+
+Centralitzen **comunicació stakeholders**
+
+Centralitzen **comunicació partners** (delegable)
+
+Apaguen focs anímics
+
+
+## 6. Presa de decissions
+
+**Gerència**:
+Pagaments, canvis de partners, inviabilitat d'una decissió de Gerència, decissions polítiques.
+
+**Stakeholders**:
+Canvis en la forma de treballar,
+interrupció o merma de servei.
+
+Per la resta la comissió és **sobirana, per consens**.
+
+Si **falta algú**: prou amb una referent i dos més.
+
+Si hi ha **disens**: s'escala\
+referents, referent IT, gerencia, CR, assemblea...
 
 
 ## 7. Carpeta del drive
