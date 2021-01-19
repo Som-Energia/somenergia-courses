@@ -466,16 +466,14 @@ Flood: la informació es perd, a la bitàcola
 
 Per convocar a la Sala o raonar
 
-Separat dels **stakeholders**\
+Separat dels **stakeholders** i **partners**\
 (no estarian pendents entre el soroll)
-
-Considerar si els **partners** han de ser-hi.
 
 
 :::notes
 **Alberto, Voki:**
-Para el partner seria igual que el stakeholder.
-Si mezclamos comunicaciones, no estaran pendientes.
+En la comision se dijo que igual partner en el mismo xat.
+Pero hemos visto que habria el mismo problema que con los stakeholders.
 
 
 Per convocar a la gent i notificacions a la gent que no està a la sala de crisis
