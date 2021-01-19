@@ -487,18 +487,25 @@ Considerar si és convenient incloure els partners
 
 ## 11. Rotacions i suplències
 
-Responsabilitat de la persona que faltarà
+**Suplències:** vacances, enfermetat, ausencies, altres tasques...
+
+**Rotacions:** per evitar rostir la gent
+
+Si es pot, traspàs abans de que es produeixi
+
+La persona que faltarà és responsable de
 cercar la suplencia i fer el traspàs
 
 Sobrevinguda: el seu equip s'encarrega
-
-Traspàs abans de que es produeixi, si es pot
 
 Fer servir la bitàcola per minimitzar efectes d'una absència
 
 
 :::notes
 Com gestionar rotacions i suplències
+
+- Vacances
+- Horari laboral reduit
 
 Sempre que sigui prevista, ens assegurarem de fer el traspàs amb anterioritat
 
