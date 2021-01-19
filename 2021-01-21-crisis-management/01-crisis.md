@@ -487,13 +487,12 @@ Considerar si és convenient incloure els partners
 
 ## 11. Rotacions i suplències
 
+**Rotacions:** per evitar rostir la gent\
 **Suplències:** vacances, enfermetat, ausencies, altres tasques...
 
-**Rotacions:** per evitar rostir la gent
+Si es pot, **traspàs** abans de que es produeixi
 
-Si es pot, traspàs abans de que es produeixi
-
-La persona que faltarà és responsable de
+La persona que faltarà és responsable de\
 cercar la suplencia i fer el traspàs
 
 Sobrevinguda: el seu equip s'encarrega
@@ -518,20 +517,21 @@ La màxima informació possible la compartirem a la bitàcola
 
 ## 12. Partners
 
-Revisar els SLA's. Que els podem exigir?
+Revisar els SLA's. Què els podem exigir?
 
-Centralitzada o delegada. Es traspassa com deu mana.
+Centralitzada o delegada. Es traspassa com Déu mana:
 
 Qui parli amb els partners, ha de tindre el màxim d'informació.
 
-Les actuacions i comunicacions del partner es traspassen a la bitàcola.
+Les actuacions i comunicacions del partner\
+es traspassen sempre a la bitàcola.
 
 :::notes
-Com fer la comunicació amb els partners
-Cal revisar els SLA’s (Contractes de nivell de servei) per saber quina involucració podem exigir al partner
-La comunicació amb els partners serà centralitzada o delegada amb traspàs convenient
-Qui parli amb els partners ha de tindre el màxim d’informació
-Totes les actuacions, comunicacions amb el partner han d’escriure’s a la bitàcola i a la carpeta del drive
+- Com fer la comunicació amb els partners
+- Cal revisar els SLA’s (Contractes de nivell de servei) per saber quina involucració podem exigir al partner
+- La comunicació amb els partners serà centralitzada o delegada amb traspàs convenient
+- Qui parli amb els partners ha de tindre el màxim d’informació
+- Totes les actuacions, comunicacions amb el partner han d’escriure’s a la bitàcola i a la carpeta del drive
 :::
 
 
@@ -543,8 +543,8 @@ Després de la reunió diaria i als canvis significatius:
 **Pla:** Actuacions realitzades i pendents\
 **Estimació:** evitant falsos optimismes
 
-Feedback: Equilibri entre redundancia i silenci\
-Evitar soroll establint canal acomulatiu i no intrusiu\
+Rebre feedback: Equilibri entre redundancia i silenci\
+Evitar soroll establint **canal acomulatiu i no intrusiu**\
 Cal ser clar amb els usuaris com fer servir els canals
 
 :::notes
@@ -592,7 +592,7 @@ Cerveseta de celebració
 
 
 
-## Tasques preventives
+## 0. Tasques preventives
 
 Prioritzar targetes de prevenció:
 
@@ -615,15 +615,17 @@ Prioritzar targetes de prevenció:
 
 # Discussió
 
-## Temes difusos
+## Temes pendents de treballar
 
 Gestió de cures
+
+Elements que previnguin conflictes i malestars
 
 Ús de la sala de crisi
 
 ## Altres temes
 
-
+Recollim-los al [Document](https://docs.google.com/document/d/1tB955P30UBBRhJ8RKf94xvP4XVNi69Xeg_a8jS9MqMo/)
 
 
 
