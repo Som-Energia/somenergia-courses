@@ -11,12 +11,13 @@ Representats tots els equips IT
 Benja, Xavi, Fran, Joan, Alberto, Voki
 
 :::notes
-Coincidia amb la resaca de la centraleta.
-Tot i que encara hi erem. I encara hi som.
 
-Ens vam adonar de moltes coses que estavem fent malament.
-Hem anat incorporant algunes pràctiques que han resolt algunes disfuncions.
-I si les haguessin incorporat abans? Que ens cal, d'a més a més?
+Esta formación presenta las conclusiones
+de la comision que se formó a raiz de la incidencia de centralita.
+
+Otros equipos tambien tenian inquietudes por este tipo de incidencia.
+Asi que montamos una comision con representantes de todos los equipos.
+
 :::
 
 ## Resultats
@@ -32,10 +33,13 @@ Propostes organtizades en 14 punts, que formen el protocol
 Recollit a un [Document](https://docs.google.com/document/d/1tB955P30UBBRhJ8RKf94xvP4XVNi69Xeg_a8jS9MqMo/)
 
 :::notes
-El protocol està agrupat en 14 punts.
-No son passes.
-Alguns son activitats,
-d'altres eines...
+- Lo primero **para no divagar** fue definir que consideramos una incidencia critica
+- Ens vam adonar de moltes **coses que estavem fent malament**. Vam recopilar-les
+- Hem anat incorporant algunes **pràctiques** que han resolt algunes disfuncions.
+- I si les haguessin incorporat abans?
+- Que ens cal, d'a més a més?
+- Hem agrupat les propostes en 14 punts
+- No son passes.  Alguns son **activitats**, d'altres **eines**...
 :::
 
 
@@ -49,6 +53,13 @@ Acabar de perfilar-ho amb **aportacions** de la resta
 Que tothom ens donem per assabentats\
 per **començar a aplicar-ho**
 
+:::notes
+- ¿Que fem avui?
+- Traslado del trabajo
+- Incorporar les vostres aportacions
+- Que tothom comenci a aplicar-ho
+:::
+
 
 ## Roadmap
 
@@ -58,6 +69,11 @@ Disfuncionalitats que ens hem trobat
 
 Protocol, dividit en 14 pràctiques-artefactes
 
+:::notes
+- Primero os explicaremos el consenso al que llegamos de qué es una incidencia crítica
+- Os explicaremos las cosas que no han funcionado, **para que podais reflexionar** luego, si la propuesta **las cubre bien o no**.
+- Despues os describiremos la propuesta agrupada en 14+1 puntos o temas.
+:::
 
 ## Quines incidències?
 
@@ -89,6 +105,11 @@ Involucra gestió de **partners**
 Com a mínim, un de cada columna
 
 ::: notes
+- Pusimos en común ejemplos de cosas que considerábamos incidència crítica
+- Vimos que habia dos aspectos que la definian: el **efecto** y la forma de **resolverlo**
+- Normalmente **bastaba** con que se diera **uno de los elementos en cada columna**.
+
+
 **Exemples**
 
 - Una incidència que para a molta gent de treballar, i que una sola persona no troba la solució inmediata
@@ -102,7 +123,7 @@ Com a mínim, un de cada columna
 # Què ha estat passant?
 
 
-## Recursos
+## Masses Recursos
 
 S'ha allargat molt temps
 
@@ -110,11 +131,17 @@ Moltes persones implicades
 
 Persones que no calien, i persones que faltaven
 
+:::notes
+- Ha absorvit massa recursos
+- Molt temps, moltes persones
+- Limitar les persones, a pelo, no es suficient perque en molts moments faltaven persones per carrega o coneixement
+:::
+
 ## Comunicació interna
 
 Actuacions paral·leles amb desconeixença
 
-Rotacions sense traspàs
+Rotacions sense traspàs adequat
 
 Visió parcial del que s'està fent
 
@@ -124,6 +151,15 @@ Múltiples vies de comunicació.\
 Informació perduda en algun mitjà diferent
 
 :::notes
+
+- S'han fet actuacions en paral·lel, sense que uns sapiguessin que fan els altres
+- Quan es feien rotacions, no hi havia un traspàs adequat de la informacio
+- Tothom teniem una visió només parcial de la incidencia
+- Para solucionarlo se requerian reuniones de todo el mundo
+- Como habia diferentes canales, a veces te llegaba informacion por un canal del que no estabas pendiente y se perdia
+
+### Extret del document
+
 - No tothom implicat sap amb quines actuacions s’han fet
 - Actuacions en paral·lel amb efectes mutus
 - Costa traspassar informació quan hi ha rotació de persones
@@ -137,17 +173,26 @@ Informació perduda en algun mitjà diferent
 
 ## Comunicació externa
 
-**IT**:\
-Afecta a d'altres equips? Han de ser-hi? Necessiten informació?
+**Altres equips IT**:\
+Afecta al meu equip?
 
 **Espònsors**:\
 Què hem de comunicar? Cal coordinar missatges
 
-**ET:**\
+**ET (Usaris, Representants IT, Gerència):**\
 Que passa? Qui s'està encarregant? Temps estimat?
 
 
 :::notes
+- Que fallos hemos tenido comunicando fuera del grupo que gestionaba la incidència
+- Altres equips IT:
+	- Otros equipos afectados sin saberlo
+- Esponsors
+	- No se les ponía al dia y se generaban mensajes contradictorios
+- ET (Usuaris i Gerencia)
+	- Incertidumbre de como se esta gestionando
+
+### Extret del document
 - Els altres subequips no se n’adonen que la incidència també els pot estar afectant a ells.
 - Comunicació confusa cap a l’ET (què passa, qui s’està encarregant, estimacions de temps de solució, ...)
 :::
@@ -163,6 +208,16 @@ Tensió i nervis: Balons fora, culpabilització...
 Sense una solució, es posen en dubte totes les decisions tècniques preses
 
 :::notes
+- En l'aspecte emocional, hi ha coses que no hem gestionat bé o tard.
+- Dedicar gran part del temps a una incidència crema, perque deixes de fer altres coses
+- Molta gent s'ha sentit a vegades sola, quan pel que sigui ningú més responia
+- Es genera tensió i nervis, i aixo provoca per exemple
+	- Que moltes vegades es tirin balons fora (amb rao o no, pero sense comprovar-ho)
+	- Al contrari, es genera molta culpabilització interna i externa
+- Mentres que no hi ha una solució, s'estan posant en dubte totes les decissions presses encara que no siguin el motiu de la incidència
+
+#### Extret del document
+
 - Les persones implicades es cremen quan porten molt de temps
 - Sensació de soletat en moments que es queda una persona al front de tot
 - No ens sentim recolzades en les decissions técniques que prenem
