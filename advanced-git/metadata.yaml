@@ -1,7 +1,9 @@
 ---
-title: Arquitecturas Multicapa
-subtitle: Consideraciones de diseño
-author: David García Garzón
+title: Usos de GIT avanzado
+subtitle: Lo vais a flipar
+author:
+- Alberto Rasillo Fernández
+- David García Garzón
 
 theme: serif # beige/black/blood/league/moon/night/serif/simple/sky/solarized/white
 history: true # no vuelvas al principo con F5
