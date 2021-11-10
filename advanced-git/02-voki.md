@@ -2,11 +2,11 @@
 
 ## Patrons de base
 
-Source Branching
+Tota la resta es basen en aquests:
 
-Main Line
-
-Healthy Branching
+- Source Branching
+- Main Line
+- Healthy Branching
 
 ## Source Branching
 
@@ -45,8 +45,40 @@ Repositori central vs Repositoris locals
 
 Alternativa: **Release train**
 
+
 ## Healthy branching
 
+Problema: Tot l'equip depèn de l'estabilitat de les branques compartides
+
+Estableix comprovacións automatitzades a fer a cada commit, per assegurar que no hi ha defectes en la branca
+
+Automatitzat: estil (linters), funcionalitat (unittest), desplegabilitat (deploys)...
+
+Relacionat: **Pre-integration review**
+
+
+# Patrons d'integració
+
+
+## Patrons d'integració
+
+Cóm resoldre el problema de la integració de branques
+
+- Mainline Integration
+- Feature branching
+- Integration Frequency
+- Continuous Integration
+- Pre-integration Review
+- Integration friction
+- Modularity
+
+
+## Mainline Integration
+
+Problema
+
+
+# Patrons de Camí a Produció
 
 
 

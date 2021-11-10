@@ -18,22 +18,22 @@ Si no, pregunteu
 ## Roadmap
 
 
-tig (manejo general, tree)
-definir alias (lola…)
-tags
-rebase vs merge
-resolucion de conflictos
-cherry pick (con tig)
-rebase interactivo
-reescritura de historia
-patrones (problema, definicion y fuerzas)
-workflows
-    git flow
-    github flow
-    trunk develompent (CICD)
-debates:
-quin workflow?
-tag i branch naming
+- tig (manejo general, tree)
+- definir alias (lola…)
+- tags
+- rebase vs merge
+- resolucion de conflictos
+- cherry pick (con tig)
+- rebase interactivo
+- reescritura de historia
+- patrones (problema, definicion y fuerzas)
+- workflows
+	- git flow
+	- github flow
+	- trunk develompent (CICD)
+- debates:
+- quin workflow?
+- tag i branch naming
 
 
 
