@@ -26,7 +26,9 @@ Fuerzas: Agrupar funcionalidades en ramas permite activar y desactivar la nueva 
 
 La función es muy grande(desarrollo de varios dias) dificulta la integración en mainline.
 
-Alternativa: **Continuous Integration** integrar en mainline diariamente vs integrar por funcionalidad.
+Alternativa: **Continuous Integration** integrar en mainline diariamente) vs integrar por funcionalidad finalizada.
+
+Alta frecuencia vs Baja frecuencia
 
 ## Integration Frequency
 
@@ -37,3 +39,15 @@ Solución:  Frecuencia de integración de las ramas locales con mainline.
 Baja frecuencia vs Alta frecuencia.
 
 Fuerzas: Fusiones grandes y pocas(complejidad alta) vs fusiones pequeñas y frecuentes(complejidad baja)
+
+## Continuous Integration
+
+Problema: A mayor diferencia entre el código local y mainline, mayor dificultad de integración.
+
+Solución: Alta frecuencia de integración, desacopla la longitud de la función de la frecuencia de integración.
+
+Las integraciones son más pequeñas y requieren menos trabajo.
+
+Fuerzas: Mayor dificultad en un mainline saludable vs funcionalidad acoplada a una rama.
+
+Uso de Keystone Interface para evitar uso de la funcionalidad hasta finalizar el desarrollo.
