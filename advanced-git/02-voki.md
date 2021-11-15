@@ -54,7 +54,8 @@ Estableix comprovacións automatitzades a fer a cada commit, per assegurar que n
 
 Automatitzat: estil (linters), funcionalitat (unittest), desplegabilitat (deploys)...
 
-Relacionat: **Pre-integration review**
+No todos los problemas se detectan en la automatización -> **Pre-integration review**
+
 
 
 # Patrons d'integració
