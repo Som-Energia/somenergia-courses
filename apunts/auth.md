@@ -293,17 +293,17 @@ response_type=id_token
 The token is a long string with no information encoded.
 The server has a private record of the information related to this token.
 
-- :-) Easy to revoke: remove/deactivate the DB entry
-- :-) Easy to list active tokens: list active DB entries
-- :-( Uses DB space (do not scale on huge systems)
-- :-( Latency: Requires access to the database or http call to the auth server if separated
+- :+1: Easy to revoke: remove/deactivate the DB entry
+- :+1: Easy to list active tokens: list active DB entries
+- :sad: Uses DB space (do not scale on huge systems)
+- :-1: Latency: Requires access to the database or http call to the auth server if separated
 
 **Self-Encoded token:**
 They encode the information related to the token.
 The content is signed by the originator, so the content can be trusted by checking the signature.
 
-- :-) No storage required
-- :-) Fast to check, no DB or http access
+- :+1: No storage required
+- :+1: Fast to check, no DB or http access
 - :-( Cannot be revoked
 - :-( Active tokens unknown
 - :+1:
