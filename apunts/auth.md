@@ -2,7 +2,7 @@
 
 ## Damn Acronnyms, let's define!
 
-CAS, SASL, SAML, OAuth, OAuth2, OpenID, OIDC, SSO, AD, LDAP, OpenLDAP, Kerberos...
+CAS, SASL, SAML, OAuth, OAuth2, OpenID, OIDC, SSO, AD, LDAP, OpenLDAP, MFA, SCIM, PKCE, JWT...
 
 Let's start with some human-like definitions.
 
@@ -17,8 +17,25 @@ Both start with _auth_, but are meant different:
 - **Credentials:** anything used to ensure the identity
 - **Authentication factors:** Kinds of credentials that may be combined to provide more security
 	- knowledge factor: something the user _knows_ (password, partial password, passphrase, challenge token...)
-	- ownership factor: something the user _has_ (id card, cell phone, digital certificate...)
+	- ownership factor: something the user _has_ (id card, cell phone, digital certificate, mail account...)
 	- inherent factor: something the user _is_ or _does_ (fingerprint, dna, signature, voice...) 
+
+Use cases:
+
+- **Multi-Factor Authentication (MFA):** Combines several authentication factors to endure authentication
+- **Enrollment:** The process of a new identity by its own initiative, being incorporated as identity (donar-se d'alta)
+	- The first time someone approaches to a service we have no reference on who it is
+	- We can just trust it, or relay on official certificates, visual ids checks... or relay on external services
+	- Warning: External services might not have enough endurance on the identity themselves
+- **Channel Verification:** Verify that the person owns a given channel (sms, email...).
+	- A channel being verified or not is important claim to do.
+	- Ara mateix a Som Energia, verifiquem el correu pero no ens guardem quan ho fem o quan modifiquem o afegim correus. Perdem la constancia de verificació.
+- **Provision:** The proces of adding identities to be able to authenticate
+	- For example, staff in a firm is provisioned
+	- A different way for an identity to be added, in contrast to enrollment, there is no person initiative
+	- Often the act of granting access to an existing identity is also called provisioning.
+- **Deprovision:** Removing an identity or removing any grant it has
+	- Important to propagate Deprovisioning to all the apps (SCIM)
 
 ### Authorization elements
 
@@ -28,12 +45,40 @@ Both start with _auth_, but are meant different:
 - **Permission/Grant:** Entitlement to access a given service
 - **Role:** Set of operations and resources that may be granted as a block for convenience of management.
 - **Delegation:** Ability for an owner of a resource to give others a certain grant on it
-- **Third party authorization:** When third parties (applications) might obtain authorization to act on behalf of the user (usually with specific grants)
 
 Use cases:
 
-- **Delegated authorization:** Let a third party to do some limited things with your services.
+- **Delegated/Third-party authorization:** A user letting a third party to do some limited things with in its behalf.
 Avoids having to give your own password to get the full access to a third party.
+
+
+### Common concerns and use cases
+
+
+- User network is not a trusted medium
+	- Web hijacking (like the one used by the access portals) can replace authentication site and perform man in the middle attacks
+	- Use https for all communications
+- User device is not a trusted device
+	- Malicious application may generate login ui's simulating the real ones
+	- Virus, keyloggers...
+	- As a double factor might not be reliable
+- The browser is an insecure platform, not controlled neither by the Service Provider nor by third parties
+	- Cookies can be inspected by browser extensions or other applications
+	- Any information in the url can be visually spotted
+	- Cookies might be vulnerable to CSRF attacks
+	- LocalStorage might be vulnerable to XSS attacks
+- Many applications of the same coorporation need to implement authentication for the same users
+	- Directory service: Have a common repository of users, resources and grants and let all apps use it to
+	- This way, user management is centralized, still...
+- Authenticate in diferent unrelated services with different domains may lead to phishing attacks
+	- Centralize authentication in a single service the other applications relay on
+- The user has to identify again and again to access the many service
+	- Single Sign-on: The authentication server provides a common session to the apps
+- Users have to remaind different passwords for many services
+	- Third party authentication: You can use authentication on widespread services (google, facebook, github...) to authenticate into your system
+- A third party application wants to use some owned resource but the owner does not want to give full credentials
+	- Third party authorization: Users grants the third party to access just that resource for a limited time
+
 
 ### Authentification architectures
 
@@ -220,23 +265,71 @@ So they added a new standard layer to OAuth2.0 called OpenId Connect.
 
 ### OpenID connect
 
+A layer on the top of OAuth2 that standardizes ways for implementing authentication over OAuth2.
+The things that get standardized are:
 
 - **ID Token:** standard token content
 - **Userinfo end-point:** to obtain extra info not included in the token once authenticated
 - **Stardard on scopes:** `openid`, `profile` (profile para el userinfo endpoint?)
 - **Standard on implementaton:** 
 
+Terminology (slightly different of OAuth2 as they are convergent standards from different):
+
+- **OpenID provider:** The authorization server that issues the ID token.
+- **End user:** Whose information is contained in the ID token
+- **Relying party:** The client application that requests the ID token from the OpenID provider
+- **Claim:** A piece of information about the user contained in the ID token
+
+The token is a JWT
+
+
 ```
 response_type=id_token
 ```
 
-### Json Web Token
+### Access token types
+
+**Reference token:**
+The token is a long string with no information encoded.
+The server has a private record of the information related to this token.
+
+- :-) Easy to revoke: remove/deactivate the DB entry
+- :-) Easy to list active tokens: list active DB entries
+- :-( Uses DB space (do not scale on huge systems)
+- :-( Latency: Requires access to the database or http call to the auth server if separated
+
+**Self-Encoded token:**
+They encode the information related to the token.
+The content is signed by the originator, so the content can be trusted by checking the signature.
+
+- :-) No storage required
+- :-) Fast to check, no DB or http access
+- :-( Cannot be revoked
+- :-( Active tokens unknown
+- :+1:
+
+### Json Web Token (JWT)
 
 
 Tres partes uuencoded separadas por puntos: Cabecera, payload y firma.
 
-- La cabera tiene informacion sobre  los
-El payload contiene los 
+- La cabera tiene informacion sobre el algoritmo de firma
+- El payload contiene los campos
+- La firma es un 
+
+No esta cifrado, solo firmado.
+
+
+### Refresh token
+
+It is a technique to avoid XSS and XCSF attacks.
+
+JS apps have to store credentials in order to resend them to the service.
+The only way for a JS app to persist credentials is using either cookies or local/session storage.
+They are vulnerable to XSS and XCSF attacks that can obtain them from a different website.
+
+
+Doubt: How does the refresh sequence works if we send parallel asyncrounous queries?
 
 
 ## SCIM - System for Crossdomain Identity Management
@@ -287,12 +380,21 @@ Provide framework to map your user info from/to SCIM messages
 - https://www.youtube.com/watch?v=996OiexHze0&t=0s (OAuth2 in plain English)
 - https://blog.postman.com/pkce-oauth-how-to/ "OAuth 2.0: Implicit Flow is Dead, Try PKCE Instead" Diferencias entre Implicit, Auth Code y PKCE
 
-
 ## Implementation
 
-### Authorization servers
+- https://django-oauth-toolkit.readthedocs.io/en/latest/tutorial/tutorial_01.html
+
+### Authorization servers / Identity providers
 
 Servers we can deploy in our network to be Authentication providers.
+
+[Authentic](https://goauthentik.io)
+- OpenSource [Code](https://github.com/goauthentik/authentik)
+- basado en Python (Django)
+- Single Sign-on basado en SAML
+- Hosteable (no dan el servicio ellos)
+- Directorios: LDAP
+- External Identity Providers:  OIDC
 
 [Keycloak](https://www.keycloak.org/)
 
