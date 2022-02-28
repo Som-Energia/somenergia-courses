@@ -48,9 +48,9 @@ Use cases:
 
 Use cases:
 
-- **Delegated/Third-party authorization:** A user letting a third party to do some limited things with in its behalf.
+- **Delegated authorization/Third-party authorization:**
+A user enables a third party to use a set of limited services in its behalf.
 Avoids having to give your own password to get the full access to a third party.
-
 
 ### Common concerns and use cases
 
@@ -61,17 +61,17 @@ Avoids having to give your own password to get the full access to a third party.
 - User device is not a trusted device
 	- Malicious application may generate login ui's simulating the real ones
 	- Virus, keyloggers...
-	- As a double factor might not be reliable
+	- Device as a double factor might not be reliable
 - The browser is an insecure platform, not controlled neither by the Service Provider nor by third parties
 	- Cookies can be inspected by browser extensions or other applications
 	- Any information in the url can be visually spotted
 	- Cookies might be vulnerable to CSRF attacks
 	- LocalStorage might be vulnerable to XSS attacks
-- Many applications of the same coorporation need to implement authentication for the same users
+- Many applications of the same coorporation have to authenticate a similar set of users
 	- Directory service: Have a common repository of users, resources and grants and let all apps use it to
 	- This way, user management is centralized, still...
 - Authenticate in diferent unrelated services with different domains may lead to phishing attacks
-	- Centralize authentication in a single service the other applications relay on
+	- Delegated Authentication: Centralize authentication in a single service the other applications relay on
 - The user has to identify again and again to access the many service
 	- Single Sign-on: The authentication server provides a common session to the apps
 - Users have to remaind different passwords for many services
@@ -114,19 +114,39 @@ Authorization:
 Authentication may rely on a directory to check, several directories, or a plain database, or...
 
 
+## SCIM - System for Crossdomain Identity Management
 
-Extras:
 
+Purpose: Centralize the provision and deprovision of users and propagate it where it is needed
+
+- Its a REST/JSON protocol.
+- The client is the Identity Provider
+- Servers are the Service Providers
+- CRUD changes to identities in the IdP are propagated through the SPs
+- IdP can also read profiles in SP's to update info and detect vulnerabilites (how?)
+- Means synced profile information and also grants
+
+Free Server Implementations:
+
+- [django-scim](https://bitbucket.org/atlassian/django_scim/src/master/) "provider side" (no se mantiene desde 2019)
+- [django-scim2](https://github.com/15five/django-scim2) directorio en postgres, forkeado del anterior, ultimos cambios hace dias
+
+Provide framework to map your user info from/to SCIM messages
+
+## Extra use cases
 
 - **Nonrepudiation:** the feature of a protocol that ensures,
 once a message has been sent and received,
 the sender cannot later deny having sent it and
 the receiver cannot later deny having received it.
 
+This is what we would like to have on contracts, other legal stuff and action confirmation.
+
+
 ## SAML
 
 - Single Sign-On
-- Hard to work with
+- Hard to work with (SOAP)
 - Mobile Apps
 
 
@@ -231,12 +251,25 @@ Other flows:
 - Client credentials (backchannel only) (legacy systems)
 - Device code: Cuando el usuario usa el cliente sin navegador, necesita validar por otro medio.
 
+The only flow is currently recommended is 
+
+### Password flow
+
+Why not to use it:
+
+- Legacy transition flow
+- Exposes username and password to the application
+- Even on trusted applications, it increases the attack surface
+- Users get used to enter their password in multiples places
+- Unable to upgrade and use multifactor or passwordless authentication
 
 
 ### Implicit Flow
 
-Implicit flow is used when there is no backchannel available.
+Implicit flow is (was) used when there is no backchannel available.
 It means that there is no backend server to rely on.
+
+Compromise for this scenario years ago. Just use Authorization Code + PKCE
 
 (CAUTION: This flow is now not recommended to be used in SPA's)
 
@@ -287,6 +320,39 @@ The token is a JWT
 response_type=id_token
 ```
 
+[charla que explica como usar jwt para ](https://www.youtube.com/watch?v=ZjPF8yZ83Wo)
+
+Claims to check:
+
+- iss: (issuer) issuer of the token (uri)
+- sub: (subject) the authenticated-authorized subject (uri)
+- aud: (audience) who is released to (uri)
+- exp: (expiration) reduces the exposition if the token is leaked (timestamp)
+- nbf: (not-before) if present must to be checket too (timestamp)
+- iat: (issued-at) when the token was created (timestamp)
+- jti: (token-id) must be validated to avoid replay attack
+- Public claims: (name, profile, email...) useful or not, have to be avoided in private claims
+- Private claims: any custom data, warning, not encrypted, so do not include any sensible information, do not use jwt as private session storage
+
+SECURITY WARNING:
+The JWT specification treats the signature as optional.
+An the algorith to be either "None" or any symetrical key algorithms.
+**Expect and ensure that the signature algorithm is the one you expect**.
+Las implementaciones modernas, piden como parametro el algoritmo.
+
+- jku (json web key) donde estan las claves publicas (!!!! Un atacante puede poner las suyas!!)
+- kid (key id) referencia a la clave usada para cifrar
+
+Guias de seguridad:
+
+- Siempre verificar el algorithmo del header (ignorarlo, o rechazar si no es el que esperamos)
+	- Una atacante puede crear un token y ponerle que va sin firma y seria un jwt valido.
+	- Una atacante puede crear un token y ponerle un algoritmo fragil o una clave debil
+- Usar algoritmos de firma buenos: No clave simetrica, no hmac...
+- Usar claves fuertes
+- Validarlo todo: expiration, audience...
+
+
 ### Access token types
 
 **Reference token:**
@@ -295,7 +361,7 @@ The server has a private record of the information related to this token.
 
 - :+1: Easy to revoke: remove/deactivate the DB entry
 - :+1: Easy to list active tokens: list active DB entries
-- :sad: Uses DB space (do not scale on huge systems)
+- :-1: Uses DB space (do not scale on huge systems)
 - :-1: Latency: Requires access to the database or http call to the auth server if separated
 
 **Self-Encoded token:**
@@ -304,20 +370,29 @@ The content is signed by the originator, so the content can be trusted by checki
 
 - :+1: No storage required
 - :+1: Fast to check, no DB or http access
-- :-( Cannot be revoked
-- :-( Active tokens unknown
-- :+1:
+- :-1: Cannot be revoked
+- :-1: Active tokens unknown
 
 ### Json Web Token (JWT)
 
-
+Estandard 
 Tres partes uuencoded separadas por puntos: Cabecera, payload y firma.
 
 - La cabera tiene informacion sobre el algoritmo de firma
 - El payload contiene los campos
-- La firma es un 
+- La firma representa una tira de bits que sirve de firma sobre el contenido del resto del token
 
-No esta cifrado, solo firmado.
+DUDA: La firma cubre el payload o tambien la cabecera?
+
+**OJO!** No esta cifrado, solo firmado.
+No se puede suponer que la información que ponemos en el token esta protegida por el codificado.
+Se usa un codificado base64 que cualquiera puede descodificar.
+
+**OJO!** Es un error de seguridad fiarse del algoritmo que pone en la cabecera.
+Se puede construir un token con algoritmo "none" sin firma o incluso poner un
+algoritmo de clave simetrica y firmarlo con la clave publica del originador.
+
+**OJO!:** Por lo mismo, evidentemente, es error de seguridad fiarse del contenido del token sin comprobar la firma.
 
 
 ### Refresh token
@@ -331,25 +406,15 @@ They are vulnerable to XSS and XCSF attacks that can obtain them from a differen
 
 Doubt: How does the refresh sequence works if we send parallel asyncrounous queries?
 
+### Security recommendation as for 2020
 
-## SCIM - System for Crossdomain Identity Management
+https://www.youtube.com/watch?v=g_aVPdwBTfw
 
-
-Purpose: Centralize the provision and deprovision of users and propagate it where it is needed
-
-- Its a REST/JSON protocol.
-- The client is the Identity Provider
-- Servers are the Service Providers
-- CRUD changes to identities in the IdP are propagated through the SPs
-- IdP can also read profiles in SP's to update info and detect vulnerabilites (how?)
-- Means synced profile information and also grants
-
-Free Server Implementations:
-
-- [django-scim](https://bitbucket.org/atlassian/django_scim/src/master/) "provider side" (no se mantiene desde 2019)
-- [django-scim2](https://github.com/15five/django-scim2) directorio en postgres, forkeado del anterior, ultimos cambios hace dias
-
-Provide framework to map your user info from/to SCIM messages
+- Use authcode + pkce in all applications (even on non-public clients)
+- Restrict redirections to exact matching registerd url
+- Do not send access tokens in the query string (was allowed because old technology limitations before broadspread of API's)
+- Refresh tokens must be sender constrained (not the only piece of information, client secret) or if not possible (public clients) make it single use token
+- Refresh tokens with maximum life.
 
 
 ## References
