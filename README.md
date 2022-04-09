@@ -24,6 +24,10 @@ Public materials used in internal Som Energia training courses.
 
 - WIP: [D3](d3)
 - WIP: [CLI Graphics](cligraphics/)
+- WIP: [Branch policies](advanced-git/)
+- WIP: [Test Driven Development](apunts/TDD-Test-driven-development)
+- WIP: [Auth](apunts/auth)
+- WIP: [Localization](localization-standards)
 
 If not indicated otherwise, those materials are covered
 by the [Creative Commons Attribution-ShareAlike 4.0 International License](LICENSE).
