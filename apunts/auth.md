@@ -448,6 +448,7 @@ https://www.youtube.com/watch?v=g_aVPdwBTfw
 ## Implementation
 
 - https://django-oauth-toolkit.readthedocs.io/en/latest/tutorial/tutorial_01.html
+- https://github.com/AxaGuilDEv/react-oidc (Implementacion en react con pkce, muy encapsulada y bien integrada con el framework)
 
 ### Authorization servers / Identity providers
 
@@ -468,6 +469,8 @@ Servers we can deploy in our network to be Authentication providers.
 - Single Sign-On
 - External Identity Providers: OIDC, Kerberos, SAML2
 - Directorios: LDAP, AD, Database...
+- Plugin for serving clients CAS protocol: https://github.com/jacekkow/keycloak-protocol-cas (Not for relying on an existing CAS service that would be useful for us)
+- How to add a custom provider: https://www.baeldung.com/java-keycloak-custom-user-providers (In order to use OV users) [The code](https://github.com/Baeldung/spring-security-oauth/tree/master/oauth-rest/keycloak-custom-providers)
 
 [Shibboleth](https://www.shibboleth.net/)
 
