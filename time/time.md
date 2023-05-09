@@ -375,6 +375,8 @@ A determinar:
 - Las 00:00 de referencia del EPOCH pueden ser UTC... o no
 	- Se recomienda UTC pero no tiene porqué ni hay forma de indicarlo
 
+# WIP - A partir de aquí es Work In Progress
+
 ### Python
 
 A parte de las representaciones en string y timestamp numérico,
@@ -416,6 +418,14 @@ Conversions:
 
 ### Javascript
 
+Representaciones posibles
+
+- new Date
+- momentjs
+- dayjs
+- strings ISO
+
+
 dayjs(utc_timestamp_ms) -> local datetime
 
 
@@ -432,11 +442,14 @@ dayjs(utc_timestamp_ms) -> local datetime
 
 
 
+# Discusion inicial
 
 naive: no incluye el timezone (datetimes, isodatetime) necesitamos saber que es para interpretarlo.
+
 tz: incluye el timezone (datetimes, isodatetime) es implicito que es.
 
 Semantica:
+
 	- local: la hora local, en nuestro código, es Madrid
 		- si es un formato naive, necesitamos un season para
 		  identificar la hora real (hay horas en el cambio
@@ -444,16 +457,17 @@ Semantica:
 	- utc: hora zulu, Tiempo Universal Coordinado
 
 Formatos:
-	date: datetime.date(y,m,d)
-	isodate: "YYYY-MM-DD"
-		Cuando comparamos fechas con tiempo, se le supone 00:00:00
+
+	- date: datetime.date(y,m,d)
+	- isodate: "YYYY-MM-DD"
+		- Cuando comparamos fechas con tiempo, se le supone 00:00:00
 		seria un naive, y habria que interpretarlo como tz con
 		la semantica que tenga (usualmente local, no utc)
-	naive_datetime: datetime.datetime(y,m,d,h,m,s)
-	tz_datetime: datetime.datetime(y,m,d,h,m,s,zone_info=tz)
-	isodatetime: "YYYY-MM-DD HH:MM:SS"
-	tz_isodatetime: "YYYY-MM-DD HH:MM:SS+02:00"
-	timestamp: miliseconds or seconds since epoch (1 enero 1970)
+	- naive_datetime: datetime.datetime(y,m,d,h,m,s)
+	- tz_datetime: datetime.datetime(y,m,d,h,m,s,zone_info=tz)
+	- isodatetime: "YYYY-MM-DD HH:MM:SS"
+	- tz_isodatetime: "YYYY-MM-DD HH:MM:SS+02:00"
+	- timestamp: miliseconds or seconds since epoch (1 enero 1970)
 		- Puede ser local o utc
 		- Puede estar en milisegundos o en segundos
 		- Puede ser entero o float
