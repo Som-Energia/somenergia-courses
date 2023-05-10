@@ -12,16 +12,21 @@ que faciliten la manipulación de marcas temporales.
 
 - **UTC:** Hora de referencia internacional, la hora solar media de Greenwich, antiguamente GMT.
 - **UTC Offset:** Diferencia de un sistema horario con UTC. Se expresa UTC+-HH:MM
-- **Huso horario:** UTF offsets en horas enteras. De UTC-12 a UTC+12.
+- **Huso horario:** UTF offsets en horas enteras. De UTC-12 a UTC+12. Hay unos pocos estándares con offsets no de horas enteras.
 - **Standard Time (ST):** Sistema horario usado en una región (WET, CET, PST, WAT, CAT...), se corresponde con un UTC offset.
 - **Daylight Saving Time (DST):** Sistema horario alternativo a un Standard Time para el periodo de verano (WEST, CEST, PDT, WAST, CAST...)
 - **Time Zone (TZ):** Zona en la que se aplica un Standard Time (y su pareja DST, si toca)
-- **Local time:** Hora que se aplica oficialmente en una ciudad de referencia en cada momento. Europe/Madrid
-- **Europe/Madrid:** Es nuestro local time. Actualmente CET(UTC+1)/CEST(UTC+2) con cambio de horario el último domingo de octubre y de marzo a la 01:00 UTC. Históricamente ha cambiado y puede cambiar.
+- **Local time:** Hora que se aplica oficialmente en una ciudad de referencia en cada momento.
+	- Cambios en la oficialidad de un sitio implica cambios en como obtener la hora local.
+- **Europe/Madrid:** Es nuestro local time.
+	- Actualmente CET(UTC+1)/CEST(UTC+2) con cambio de horario el último domingo de octubre y de marzo a la 01:00 UTC.
+	- Históricamente ha cambiado y puede cambiar: Fue WET/WEST, DST se ha aplicado de forma intermitente, y ha habido otros criterios para el cambio DST.
+	- Africa/Ceuta es igual que Europe/Madrid
+	- Atlantic/Canary que es WET(UTC+0)/WEST(UTC+1). Cambia a DST simultaneamente, a la 1:00 UTC (1:00 local en vez de 2:00)
 - **IANA TZ Database:** Compilación histórica de los sistemas horarios que se aplican a ciertas ciudades de referencia.
 
 Si te interesa profundizar en el origen y motivación de estos conceptos, sigue leyendo.
-Si no, puedes saltar a la siguiente sección.
+Si no, puedes saltar al apartado de ambiguedades y convenciones.
 
 ### Hora solar media (Mean solar time)
 
@@ -64,32 +69,28 @@ La hora solar media en el observatorio de Greenwich, en Londres,
 el **Greenwich Mean Time (GMT)**. También es el meridiano origen de la longitud.
 En la actualidad, usamos el **UTC (Universal Time Coordinated)** que es una redefinición más precisa del GMT.
 
-La diferencia de un sistema horario con UTC la llamamos **UTC offset** y se expresa `UTC+-HH`.
+La diferencia de un estándard horario con UTC la llamamos **desplazamiento UTC** (UTC offset) y se expresa `UTC+-HH`.
 Podemos añadir minutos y segundos al offset si hiciera falta.
 El antiguo Tehran Mean Time era `UTC+03:25:44`.
 
 La otra aportación de Fleming fueron los **husos horarios**.
 Son franjas terrestres de 15 grados de longitud
 (el giro de la tierra en una hora)
-en las que aplicar un offset UTC de horas enteras
-de tal manera que la divergencia con la hora solar sea solo de media hora arriba o abajo.
+a las que corresponderia un offset UTC de horas enteras.
+Ello limitaría la divergencia con la hora solar a media hora más o menos.
 
 - El huso de referencia, centrado en el meridiano de Greenwich tiene la hora UTC+00.
 - Los husos al este desfasan una hora más cada uno UTC+1, UTC+2..., UTC+12.
 - Los husos al oeste defasan una hora menos cada uno UTC-1, UTC-2..., UTC-12.
 - Los husos UTC+12 y UTC-12 son la mitad de anchos, y los separa el anti-meridiano de Greenwich que define el cambio internacional de dia.
 
-Este diseño consigue dos cosas:
-
-- limita, dentro del huso, la desviación solar a sólo media hora
-- hace que los ajustes entre zonas horarias sean de horas enteras
-
 ![](World_Time_Zones_Map.png)
 
 Si observas el mapa actual de zonas horarias,
 verás que los husos como delimitación geográfica
 apenas se usan en tierra, sólo en alta mar.
-Si que se han mantenido la idea de offsets enteros.
+Si que triunfó la idea de offsets enteros
+que se aplica en todos sitios menos en las zonas ralladas.
 
 ### Denominación militar/radiofónica de los husos
 
@@ -216,15 +217,19 @@ El cambio DST se hace
 - Último domingo de Marzo a la 1:00 UTC
 - Último domingo de Octubre a la 1:00 UTC
 
-No siempre ha sido así, no se puede tomar como regla general.
+No siempre ha sido así, y puede cambiar,
+así que no se puede tomar como regla general.
 Hay que confiar en las implementaciones de tz's que
 consideran los cambios históricos y
 se actualizarán con los cambios futuros.
 
 Tambien existen las horas locales de Africa/Ceuta, que coincide con Europe/Madrid,
-y Atlantic/Canary que usa WET/WEST como standard y dst y hace los cambios los mismos días.
+y Atlantic/Canary.
+Atlantic/Canary usa WET(UTC+0)/WEST(UTC+1) como st y dst
+Hace los cambios a UTC simultaneamente con Madrid a la misma hora UTC (a diferente hora local)
+de forma que siempre hay un offset de una hora entre Canary y Madrid.
 
-### Historia
+### Historia de Europe/Madrid
 
 España estandarizó su hora para península y baleares en 1900,
 adoptando GMT+00 al ser el huso predominante en la península (el oeste de Galicia le hubiera tocado GMT-01).
