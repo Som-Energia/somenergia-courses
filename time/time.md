@@ -246,20 +246,31 @@ Hasta
 
 ## Ambiguedades y convenciones
 
+### Estratégia del sandwich
+
+Cuando llegan a nuestro software diferentes formatos o convenciones,
+conviene usar la estrategia del sandwich,
+que consiste en gestionar la heterogeneidad vía conversiones
+en la parte más externa y cercana a la fuente de la hetereogeneidad,
+e internamente, usar una convención única.
+Tiene estos beneficios:
+
+- El código interno es más simple, pues sólo gestiona una convención.
+- Las conversiones pueden ser más específicas a cada fuente y documentan la convención usada por cada una de estas.
+
 ### Ambigüedad de las horas naive
 
 Una **representación horaria naive**
 es la que no aporta información explícita
-sobre a qué estándar de hora o offset UTC al que se refiere.
+sobre a qué estándar de hora o offset UTC se refiere.
 Lo contrario es una representación con TZ explícito.
 
-Las representaciones naive son ambiguas,
-necesitamos conocer la convención que siguen para interpretarlas correctamente.
-Aplicaremos la estrategia del sandwich:
-Si una fuente de datos ofrece tiempos naive,
-nos informaremos de la convención y haremos la conversión a tz explícito lo antes posible.
-De esta manera trabajaremos internamente siempre con representaciones de tz explícito.
-
+Las representaciones naive son ambiguas
+y necesitan convenciones o información adicional para desambiguarlas.
+Usando la estrategia sandwich,
+averiguaremos la convención que usa la fuente
+para convertirlas en tiempos con tz explicitos
+tan pronto lleguen al sistema.
 
 ### Ambiguedad debido al DST
 
@@ -269,29 +280,9 @@ Debido al DST, la hora local es ambigua aunque se nos diga que es de Europe/Madr
 - Hay una hora local repetida: de 2:00 a 3:00 del ultimo domingo de octubre
 
 Cuando recibimos un tiempo en local time,
-o bien viene con el timezone informado,
-o con un flag de DST.
+deberíamos recibirlo, bien con el timezone informado,
+o bien con un flag de DST.
 En el segundo caso, aplicando sandwich, lo convertimos a time zone informado.
-
-### Ambiguedad de las fechas al mezclarlas con tiempos
-
-Una fecha en una TZ empieza a las 00:00 hora local,
-que corresponde diferentes instantes UTC dependiendo del TZ.
-
-Ej 2022-02-01 en Madrid empieza a las `2022-01-31 23:00Z`
-
-Cuando vayamos a usar fechas para delimitar, comparar...
-datetimes, necesitamos saber que convencion se usa en las fechas.
-Normalmente se referiran al día en la hora local, aunque no está de más comprobarlo.
-
-Una buena aproximación es convertir la fecha a la hora 00:00:00 local del día en cuestión.
-Nos sirve para comparar con fechas anteriores o posteriores e iguales.
-Sin embargo, para comparar con fechas posteriores o menores e iguales,
-deberíamos añadirle un día local.
-
-Dado que la fecha no tiene informado el TZ,
-¿necesitamos indicar el DST para convertirla en tiempo local con TZ informado?
-No, porque a las 00:00 locales no hay ambiguedad, por la fecha sabremos si es DST o no.
 
 ### Mutabilidad de la hora local
 
@@ -310,7 +301,67 @@ no usar CET o CEST o los offsets concretos como zona horaria de destino,
 sinó usar la hora local _Europe/Madrid_.
 
 
-## Representacions
+### Naividad de las fechas
+
+Las fechas (sin hora) son naive:
+Representan a un intervalo de tiempo,
+que depende de la TZ a la que se refiera.
+Tiene sentido y es más sencillo
+manipularlas en esta forma naive.
+Pero necesitamos referirlas a una TZ
+cuando las mezclamos con tiempos.
+
+![](naivedates.png)
+
+Un dia empieza (y acaba) en instantes diferentes dependiendo de la TZ en la que estemos.
+
+Normalmente una fecha se refiere no a la hora UTC sinó a la local.
+
+Por ejemplo, el día 2022-03-05 en Madrid empieza a las `2022-03-0 23:00 CET` que corresponde a `2022-03-04 23:00Z`.
+
+
+Cuando vayamos a usar fechas para compararlas con datetimes,
+necesitamos saber que convencion se usa en las fechas.
+Normalmente se referiran al día en la hora local, aunque no está de más comprobarlo.
+
+Una buena aproximación es convertir la fecha a la hora 00:00:00 local del día en cuestión.
+Nos sirve para comparar con fechas anteriores o posteriores e iguales.
+
+	Comprobar si un tiempo es anterior a una fecha:
+		2020-03-04T23:59:59CET < 2020-03-05?
+			2020-03-05 -> 2020-03-05T00:00:00CET # Convertimos a localtime a las 00:00
+			2020-03-04T23:59:59CET < 2020-03-05T00:00:00CET # Comparamos
+	
+	Comprobar si un tiempo es posterior o igual a una fecha:
+		2020-03-04T23:59:59CET >= 2020-03-05?
+			2020-03-05 -> 2020-03-05T00:00:00CET # Convertimos a localtime a las 00:00
+			2020-03-04T23:59:59CET >= 2020-03-05T00:00:00CET # Comparamos
+
+Sin embargo, para comparar tiempos posteriores o menores e iguales a una fecha,
+deberíamos añadirle un día antes de convertirlo a local.
+Un día y no 24h porque hay dias que por el DST tiene 23 o 25 horas.
+
+	Comprobar si un tiempo es posterior a una fecha:
+		2020-03-04T23:59:59CET > 2020-03-05?
+			2020-03-05 -> 2020-03-06 # Añadimos un dia a la fecha (que no 24h por que hay dias de 23 y 25)
+			2020-03-06 -> 2020-03-06T00:00:00CET # Convertimos a localtime a las 00:00
+			2020-03-04T23:59:59CET < 2020-03-06T00:00:00CET # Comparamos
+	
+	Comprobar si un tiempo es anterior o igual a una fecha:
+		2020-03-04T23:59:59CET <= 2020-03-05?
+			2020-03-05 -> 2020-03-05T00:00:00CET # Convertimos a localtime a las 00:00
+			2020-03-04T23:59:59CET <= 2020-03-05T00:00:00CET # Comparamos
+
+
+![](comparing-dates-and-datetimes.png)
+
+
+Dado que la fecha no tiene informado el TZ,
+¿necesitamos indicar el DST para convertirla en tiempo local con TZ informado?
+No, porque a las 00:00 locales no hay ambiguedad, por la fecha sabremos si es DST o no.
+
+
+## Representaciones
 
 
 ### ISO Format
