@@ -11,7 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" exact element={<Home/>} />
         <Route path="/formulari" exact element={<Formulari />} />
-        <Route path="/component" exact element={<Component />} />
+        <Route path="/component" exact element={<Component text="CLICAT!">CLICA</Component>} />
       </Routes>
     </Router>
   );
