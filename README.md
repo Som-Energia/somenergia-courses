@@ -22,6 +22,8 @@ Public materials used in internal Som Energia training courses.
 - 2024-02-01: [UI Testing with Cypress](2024-02-01-cypress) [ca]
 - 2024-04-04: [Arquitectures CSS](2024-04-04-css-architectures) [ca]
 
+En preparació
+
 - WIP: [D3](d3)
 - WIP: [CLI Graphics](cligraphics/)
 - WIP: [Branch policies](advanced-git/)
