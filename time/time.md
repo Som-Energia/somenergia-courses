@@ -115,7 +115,7 @@ Aunque las naciones vieron con buenos ojos los defases en horas enteras de una h
 no triunfó tanto la idea de delimitar las zonas horarias con meridianos.
 Era preferible hacerlos coincidir con los límites políticos existentes: paises, provincias o zonas económicas.
 
-- Por un lado es más fácil saber en que zona horaria estás si coincide con un límite que ya conoces.
+- Por un lado es más fácil saber cuando cambias de zona horaria si coincide con un límite ya conocido.
 - Por otro, se vió más útil mantener una hora comun con los vecinos que limitar el desajuste solar a media hora.
 
 Por eso gran parte de la Europa occidental, incluida España, Francia y el Benelux, usa un huso horario que no le corresponde, el de Alemania.
@@ -226,8 +226,9 @@ se actualizarán con los cambios futuros.
 Tambien existen las horas locales de Africa/Ceuta, que coincide con Europe/Madrid,
 y Atlantic/Canary.
 Atlantic/Canary usa WET(UTC+0)/WEST(UTC+1) como st y dst
-Hace los cambios a UTC simultaneamente con Madrid a la misma hora UTC (a diferente hora local)
+Hace los cambios a UTC simultaneamente con Madrid a la misma hora UTC (a diferente hora local!)
 de forma que siempre hay un offset de una hora entre Canary y Madrid.
+Esto quiere decir que el canvio ST-DST se hace a las 2 en peninsula y a la 1 en Canarias.
 
 ### Historia de Europe/Madrid
 
@@ -251,17 +252,29 @@ Hasta
 
 ## Ambiguedades y convenciones
 
-### Estratégia del sandwich
+### Estratégia del sandwich 🍔
 
-Cuando llegan a nuestro software diferentes formatos o convenciones,
-conviene usar la estrategia del sandwich,
-que consiste en gestionar la heterogeneidad vía conversiones
-en la parte más externa y cercana a la fuente de la hetereogeneidad,
-e internamente, usar una convención única.
+La _estragégia del Sandwich_ es una estrategia general,
+no solo para formatos de tiempo,
+para lidiar con datos
+que pueden representarse de formas diferentes y, a veces, ambiguas.
+
+Consiste en uniformar internamente una convención única y universal,
+idealmente, que no pierda información respecto a las otras,
+y gestionar la heterogeneidad, vía conversiones,
+en las interfícies con las fuentes de dicha heterogeneidad.
+
 Tiene estos beneficios:
 
 - El código interno es más simple, pues sólo gestiona una convención.
-- Las conversiones pueden ser más específicas a cada fuente y documentan la convención usada por cada una de estas.
+- En los puntos frontera es donde es más probable que conozcamos las convenciones externas que se usa en cada elemento externo y por tanto la conversión a usar.
+
+Por ejemplo, en el caso de texto internacional, podemos tener
+una representación interna UTF8 y,
+tener en cuenta que codificacion usa una fuente de datos para convertirlo a UTF8.
+Contra más capas de nuestro sistema cruce ese dato sin convertirse a la lengua franca,
+mas capas tendran que gestionar esos multiples formatos y
+más probable es que perdamos la informació sobre cual era el formato original.
 
 ### Ambigüedad de las horas naive
 
@@ -302,28 +315,28 @@ y delegar en librerías especializadas, que mantienen la base de datos
 de timezones.
 
 También se recomienda cuando convirtamos a hora local,
-no usar CET o CEST o los offsets concretos como zona horaria de destino,
-sinó usar la hora local _Europe/Madrid_.
-
+no explicitar CET o CEST o los offsets concretos como zona horaria de destino,
+sinó usar la hora local _Europe/Madrid_
+y la libreria de TZ ya nos indicara el offset o el standard time para una hora UTC.
 
 ### Naividad de las fechas
 
-Las fechas (sin hora) son naive:
-Representan a un intervalo de tiempo,
-que depende de la TZ a la que se refiera.
-Tiene sentido y es más sencillo
-manipularlas en esta forma naive.
-Pero necesitamos referirlas a una TZ
-cuando las mezclamos con tiempos.
+Podríamos pensar que las fechas, puesto que no indican hora,
+no tienen problema de timezone, ni de dst.
+Y así lo podemos considerar mientras solo operemos con fechas.
+
+Pero una fecha es un intervalo temporal de las 00h a las 24h,
+y ese intervalo es diferente, otra vez, dependiento de la hora local.
+Esto cobra importancia cuando empezamos a mezclar fechas con horas.
+
+En ese sentido hay que considerar las fechas como tiempos naive.
 
 ![](naivedates.png)
 
-Un dia empieza (y acaba) en instantes diferentes dependiendo de la TZ en la que estemos.
-
-Normalmente una fecha se refiere no a la hora UTC sinó a la local.
+Normalmente, cuando una usuaria indica una fecha,
+se refiere no a la hora UTC sinó a la local.
 
 Por ejemplo, el día 2022-03-05 en Madrid empieza a las `2022-03-0 23:00 CET` que corresponde a `2022-03-04 23:00Z`.
-
 
 Cuando vayamos a usar fechas para compararlas con datetimes,
 necesitamos saber que convencion se usa en las fechas.
@@ -430,6 +443,8 @@ A determinar:
 	- Ojo con los floats y la precisión (a menudo que el numero se hace grande baja en precision)
 - Las 00:00 de referencia del EPOCH pueden ser UTC... o no
 	- Se recomienda UTC pero no tiene porqué ni hay forma de indicarlo
+
+### Tupla tiempo
 
 # WIP - A partir de aquí es Work In Progress
 

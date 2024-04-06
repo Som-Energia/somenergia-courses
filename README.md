@@ -24,6 +24,7 @@ Public materials used in internal Som Energia training courses.
 
 En preparació
 
+- WIP: [Time](time)
 - WIP: [D3](d3)
 - WIP: [CLI Graphics](cligraphics/)
 - WIP: [Branch policies](advanced-git/)
