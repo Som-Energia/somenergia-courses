@@ -446,6 +446,8 @@ A determinar:
 
 ### Tupla tiempo
 
+Otra representación
+
 # WIP - A partir de aquí es Work In Progress
 
 ### Python
