@@ -1,8 +1,8 @@
-## Proposta criteris generals
+# Proposta criteris generals
 
-### Pels atributs de **layout**
+## Pels atributs de **layout**
 
-El seu significat es inconexe fora d'una estructura.
+El seu significat seria inconexe fora d'una estructura.
 
 Té sentit aplicar-los directament al JSX
 
@@ -28,7 +28,7 @@ Para tener un grid css, partir del `Box`.
 
 Hi ha un `Grid_v2` que encara és un grid de bootstrap.
 :::
-### Attributs **look and feel**
+## Attributs **look and feel**
 
 Minimitzar customitzacions de components MUI
 
@@ -64,7 +64,7 @@ Per què afegir els colors nous al tema?
 
 :::
 
-### Attributs **look and feel** (2)
+## Attributs **look and feel** (2)
 
 Customitzar el tema general hauria de ser una decissió consensuada amb Comunica
 
@@ -74,7 +74,7 @@ de forma quirúrgica i consensuada amb Comunica
 Si un tros de l'aplicació funciona amb diferents colors,
 considerar crear un tema diferent i aplicar un ThemeProvider
 
-### Evitar els **esculls**
+## Evitar els **esculls**
 
 Canviar sempre color i background a la vegada
 
@@ -94,7 +94,7 @@ Per què canviar color i background a la vegada?
 depenent del context del component, o el tema o el mode de llum pot variar.
 :::
 
-### Resets
+## Resets
 
 Eliminar `App.css` i `index.css` que genera React
 

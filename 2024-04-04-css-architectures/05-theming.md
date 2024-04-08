@@ -1,6 +1,6 @@
-## Definició i ús de temes
+# Definició i ús de temes
 
-### Paleta
+## Paleta
 
 El tema conté una paleta amb un conjunt de _colors compostos_
 redefinibles o _color objects_\
@@ -11,10 +11,10 @@ Compostos perque cadascun té subcomponents o _tokens_:\
 
 Podem inventar-nos tant colors (`tertiary`) com a tokens (`superlight`).
 
-### Auto-augmentat de colors
+## Augmentat de colors
 
 `createTheme` sobrescriu el [tema per defecte]()\
-El que rep ho complementa
+Complementa el que rep
 
 ```javascript
 createTheme({
@@ -33,7 +33,7 @@ createTheme({
 })
 ```
 
-### Auto-augmentat de colors
+## Augmentat de colors
 
 Per augmentar els colors fa servir parametres del `theme.palette`:
 
@@ -45,7 +45,7 @@ Podem personalitzar-los al nostre tema.
 **Accessibilitat:** `contrastThreshold` ha de ser mínim 4.5
 
 
-### Definir custom colors
+## Definir custom colors
 
 Només augmenta colors estàndard.\
 Segona passada per fer servir `augmentColor`\
@@ -69,7 +69,7 @@ theme = createTheme(theme, {
 [Documentació: Custom colors](https://mui.com/material-ui/customization/palette/#custom-colors)
 :::
 
-### Aplicant paleta
+## Aplicant paleta
 
 Amb `sx`:\
 els posem com string\
@@ -83,18 +83,18 @@ cal obtenir el `theme` amb `useTheme`\
 cal indicar el token, no el color compost\
 `color: theme.palette.primary.main`
 
-### Ús avançat de la paleta
+## Ús avançat de la paleta
 
 A `sx` podem rebre com a paràmetre el tema\
 Aporta funcions per calcular els shades i contrastos
 
 ```jsx
 <Box sx={({theme})=>({
-  color: theme.palette.contrastText("#443")
+  color: theme.palette.getContrastText("#443")
 })}
 ```
 
-### Breakpoints al tema
+## Breakpoints al tema
 
 Estableixen tamanys de dispositius per a funcionalitats _responsives_.
 
@@ -115,7 +115,7 @@ theme.breakpoints.not(bp) // qualsevol menys bp
 theme.breakpoints.between(bp1,bp2) // entre b1 i b2 inclosos
 ```
 
-### Breakpoints a `sx`
+## Breakpoints a `sx`
 
 ```javascript
 sx={(theme)=>({
@@ -161,7 +161,7 @@ No li cal rebre `theme`
 ::::
 :::
 
-### Breakpoints amb hooks
+## Breakpoints amb hooks
 
 ```javascript
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -173,7 +173,7 @@ export default function MyComponent() {
 }
 ```
 
-### Tipografies
+## Tipografies
 
 `theme.typography.htmlFontSize`:
 Font en la que es basa `rem`.
@@ -183,13 +183,13 @@ No es recomana fixar-la perque l'usuaria la canvia per temes d'accessibilitat.
 
 `theme.typography.fontFamily`: llista separada per comes de noms de fonts.
 
-### Tipografies: variants
+## Tipografies: variants
 
 `h1`-`h6`, `subtitle1`/`2`, `body1`/`2`, `button`, `caption`, `overline`
 
 `theme.typography.<variant>`: Objecte amb estils per la variant.
 
-### Tipografies: responsives
+## Tipografies: responsives
 
 `fontSize` amb media queries per cada variant
 
@@ -202,7 +202,7 @@ Segon paràmetre opcional opcions:
 - `breakpoints`: 
 :::
 
-### Tipografies: fluïdes
+## Tipografies: fluïdes
 
 ```css
 // Fluid font-size: s'adapta de forma continua
@@ -225,7 +225,7 @@ https://css-tricks.com/snippets/css/fluid-typography/
 :::
 
 
-### Components temificats
+## Components temificats
 
 La [Documentació](https://mui.com/material-ui/customization/creating-themed-components/)
 encara fa servir la funció `styled`.
