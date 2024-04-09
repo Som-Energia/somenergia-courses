@@ -1,5 +1,19 @@
 # Proposta criteris generals
 
+## Resets
+
+Eliminar `App.css` i `index.css` que genera React
+
+Afegir `CssBaseline` a l'arbre de l'aplicació
+
+Afegir el `ThemeProvider` per sota del `CssBaseline`
+
+:::notes
+index.css fa una mica de reset. No prou.
+Però, a mes, afegeix estils de la demo inicial.
+:::
+
+
 ## Pels atributs de **layout**
 
 El seu significat seria inconexe fora d'una estructura.
@@ -93,18 +107,4 @@ Per què canviar color i background a la vegada?
 - Si canviem nomes un, ie. color, no controlem quin es el background que vindrà
 depenent del context del component, o el tema o el mode de llum pot variar.
 :::
-
-## Resets
-
-Eliminar `App.css` i `index.css` que genera React
-
-Afegir `CssBaseline` a l'arbre de l'aplicació
-
-Afegir el `ThemeProvider` per sota del `CssBaseline`
-
-:::notes
-index.css fa una mica de reset. No prou.
-Però, a mes, afegeix estils de la demo inicial.
-:::
-
 

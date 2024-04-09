@@ -1,7 +1,9 @@
 
 # Personalització a MUI
 
-## [make Styles](https://mui.com/system/styles/basics/) (v4 deprecated!)
+## [make Styles](https://mui.com/system/styles/basics/)
+
+v4 deprecated!
 
 ```jsx
 import * as React from 'react';
@@ -23,11 +25,12 @@ export default function Hook() {
 
 :::notes
 
-El que apliquem el component es similar als CSS modules.
-
 El css l'escrivim com a objecte javascript no CSS extern.
 
-Retorna una estructura similar als css modules. Els estils estan scoped.
+Retorna mapa a class names made unique for the module (scoped).
+
+El que apliquem el component es similar als CSS modules.
+
 
 API's alternatives fent servir styled i el wrapper withStyles (higher ordre component)
 

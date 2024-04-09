@@ -400,46 +400,46 @@ background-color: var(--r-background-color);
 </head>
 <body>
 <style>
-    .reveal {
-        background: #d5e20f88;
-        background-image: url('../images/logo-somit.svg');
-        background-repeat: no-repeat;
-        background-size: 20%;
-        background-position: bottom left;
-        opacity: 80%;
-    }
-    .reveal .slides {
-        background: #ffffffee;
-    }
-    .reveal .slides .titleslide {
-        background-color: #86bc25ff;
-        background-color: red;
-    }
-    .reveal .slides .title-slide h1 {
-        font-size: 3em;
-        color: #569c15ff;
-    }
-    .reveal .slides .slide.level2 h2 {
-        color: #86bc25ff;
-        //color: #480;
-    }
-    code {
-        background: #ffe;
-        border-radius: 0.5ex;
-        padding: 3px;
-        color: #500;
-    }
-    .slide strong {
-        color: #060;
-    }
-    .columns {
-        display: flex;
-    }
-    .columns .column {
-        font-size: smaller;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .reveal {
+    background: #d5e20f88;
+    background-image: url('../images/logo-somit.svg');
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: bottom left;
+    opacity: 80%;
+  }
+  .reveal .slides {
+    background: #ffffffee;
+  }
+  .reveal .slides .titleslide {
+    background-color: #86bc25ff;
+    background-color: red;
+  }
+  .reveal .slides .title-slide h1 {
+    font-size: 3em;
+    color: #569c15ff;
+  }
+  .reveal .slides .slide.level2 h2 {
+    color: #86bc25ff;
+    //color: #480;
+  }
+  code {
+    background: #ffe;
+    border-radius: 0.5ex;
+    padding: 3px;
+    color: #500;
+  }
+  .slide strong {
+    color: #060;
+  }
+  .columns {
+    display: flex;
+  }
+  .columns .column {
+          font-size: smaller;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
   <div class="reveal">
     <div class="slides">
@@ -919,9 +919,9 @@ als fills.</p>
 <h1>Personalització a MUI</h1>
 
 </section>
-<section id="make-styles-v4-deprecated" class="slide level2">
-<h2><a href="https://mui.com/system/styles/basics/">make Styles</a> (v4
-deprecated!)</h2>
+<section id="make-styles" class="slide level2">
+<h2><a href="https://mui.com/system/styles/basics/">make Styles</a></h2>
+<p>v4 deprecated!</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { makeStyles } <span class="im">from</span> <span class="st">&#39;@mui/styles&#39;</span><span class="op">;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> Button <span class="im">from</span> <span class="st">&#39;@mui/material/Button&#39;</span><span class="op">;</span></span>
@@ -938,10 +938,9 @@ deprecated!)</h2>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return </span><span class="fu">&lt;Button</span> <span class="ot">className</span><span class="op">=</span><span class="va">{</span>classes<span class="op">.</span><span class="at">root</span><span class="va">}</span><span class="fu">&gt;</span>Hook<span class="fu">&lt;/Button&gt;</span><span class="op">;</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <aside class="notes">
-<p>El que apliquem el component es similar als CSS modules.</p>
 <p>El css l’escrivim com a objecte javascript no CSS extern.</p>
-<p>Retorna una estructura similar als css modules. Els estils estan
-scoped.</p>
+<p>Retorna mapa a class names made unique for the module (scoped).</p>
+<p>El que apliquem el component es similar als CSS modules.</p>
 <p>API’s alternatives fent servir styled i el wrapper withStyles (higher
 ordre component)</p>
 <p>Podiem parametritzar-ho fent que els valors de les propietats fossin
@@ -1211,6 +1210,23 @@ passar de mui4 a mui5</em></a></p>
 <h1>Definició i ús de temes</h1>
 
 </section>
+<section id="accedint-al-tema" class="slide level2">
+<h2>Accedint al tema</h2>
+<p>Depenent del tipus d’atribut, alguns components estan disponibles per
+id:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Podem fer servir el hook, fins i tot a style</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> theme <span class="op">=</span> <span class="fu">useTheme</span>()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Box</span> <span class="ot">style</span><span class="op">=</span><span class="va">{</span>{<span class="dt">bgcolor</span><span class="op">:</span> (theme)<span class="kw">=&gt;</span> theme<span class="op">.</span><span class="at">palette</span><span class="op">.</span><span class="at">primary</span><span class="op">.</span><span class="at">main</span> }<span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">// sx ho pot passar via lambda</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Box</span> <span class="ot">sx</span><span class="op">=</span><span class="va">{</span>(theme)<span class="kw">=&gt;</span> {<span class="dt">bgcolor</span><span class="op">:</span> theme<span class="op">.</span><span class="at">palette</span><span class="op">.</span><span class="at">primary</span><span class="op">.</span><span class="at">main</span> }<span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Podem posar la lambda al valor</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Box</span> <span class="ot">sx</span><span class="op">=</span><span class="va">{</span>{<span class="dt">bgcolor</span><span class="op">:</span> (theme)<span class="kw">=&gt;</span> theme<span class="op">.</span><span class="at">palette</span><span class="op">.</span><span class="at">primary</span><span class="op">.</span><span class="at">main</span> }<span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Recomanat: alguns atributs coneixen els elements del tema per nom</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Box</span> <span class="ot">sx</span><span class="op">=</span><span class="va">{</span>{ <span class="dt">bgcolor</span><span class="op">:</span> <span class="vs">`primary.main`</span> }<span class="va">}</span> <span class="fu">/&gt;</span></span></code></pre></div>
+</section>
 <section id="paleta" class="slide level2">
 <h2>Paleta</h2>
 <p>El tema conté una paleta amb un conjunt de <em>colors compostos</em>
@@ -1228,20 +1244,20 @@ redefinibles o <em>color objects</em><br />
 <p><code>createTheme</code> sobrescriu el <a href>tema per
 defecte</a><br />
 Complementa el que rep</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">createTheme</span>({</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> {</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">primary</span><span class="op">:</span> {</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>      <span class="co">// complementarà dark i contrastText</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">main</span><span class="op">:</span> <span class="st">&#39;#f55&#39;</span><span class="op">,</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">light</span><span class="op">:</span> <span class="st">&#39;#faa&#39;</span><span class="op">,</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Agafa &#39;blue&#39; com a main i calcularà la resta</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">secondary</span><span class="op">:</span> <span class="st">&#39;blue&#39;</span><span class="op">,</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// mantindrà: error, info... del tema per defecte</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// També mantindrà tot el que hi ha fora de palette:</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// breakpoints, typografies...</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">createTheme</span>({</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">primary</span><span class="op">:</span> {</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      <span class="co">// complementarà dark i contrastText</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">main</span><span class="op">:</span> <span class="st">&#39;#f55&#39;</span><span class="op">,</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">light</span><span class="op">:</span> <span class="st">&#39;#faa&#39;</span><span class="op">,</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Agafa &#39;blue&#39; com a main i calcularà la resta</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">secondary</span><span class="op">:</span> <span class="st">&#39;blue&#39;</span><span class="op">,</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// mantindrà: error, info... del tema per defecte</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// També mantindrà tot el que hi ha fora de palette:</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// breakpoints, typografies...</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 </section>
 <section id="augmentat-de-colors-1" class="slide level2">
 <h2>Augmentat de colors</h2>
@@ -1256,23 +1272,31 @@ ser mínim 4.5</p>
 </section>
 <section id="definir-custom-colors" class="slide level2">
 <h2>Definir custom colors</h2>
-<p>Només augmenta colors estàndard.<br />
-Segona passada per fer servir <code>augmentColor</code><br />
-necessita un <code>color.main</code> i un <code>name</code></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">createTheme</span>(theme<span class="op">,</span> {</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Custom colors created with augmentColor go here</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> {</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">tertiary</span><span class="op">:</span> theme<span class="op">.</span><span class="at">palette</span><span class="op">.</span><span class="fu">augmentColor</span>({</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">color</span><span class="op">:</span> {</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">main</span><span class="op">:</span> <span class="st">&#39;#FF5733&#39;</span><span class="op">,</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;tertiary&#39;</span><span class="op">,</span> <span class="co">// Necessari per fer-ho servir per nom</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    })<span class="op">,</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Per augmentar colors no estàndard,<br />
+cal segona passada per fer servir <code>augmentColor</code><br />
+Necessita un <code>color.main</code> i un <code>name</code></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">createTheme</span>(theme<span class="op">,</span> {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Custom colors created with augmentColor go here</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> {</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">tertiary</span><span class="op">:</span> theme<span class="op">.</span><span class="at">palette</span><span class="op">.</span><span class="fu">augmentColor</span>({</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">color</span><span class="op">:</span> {</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">main</span><span class="op">:</span> <span class="st">&#39;#FF5733&#39;</span><span class="op">,</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;tertiary&#39;</span><span class="op">,</span> <span class="co">// Necessari per fer-ho servir per nom</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    })<span class="op">,</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
 <aside class="notes">
 <p><a href="https://mui.com/material-ui/customization/palette/#custom-colors">Documentació:
 Custom colors</a></p>
+<p><code>createTheme</code> només augmenta automàticament els colors
+estàndar: <code>primary</code>, <code>secondary</code>…</p>
+<p>Si afegim el nostre propi color, <code>tertiary</code>, l’haurem
+d’augmentar nosaltres a mà cridant
+<code>theme.palette.augmentColor()</code>.</p>
+<p>Però com que aquesta funció, es defineix a dins d’un tema complert,
+cal cridar per segon cop a <code>createTheme</code> amb el theme de la
+primera passa.</p>
 </aside>
 </section>
 <section id="aplicant-paleta" class="slide level2">
@@ -1291,33 +1315,33 @@ cal indicar el token, no el color compost<br />
 <h2>Ús avançat de la paleta</h2>
 <p>A <code>sx</code> podem rebre com a paràmetre el tema<br />
 Aporta funcions per calcular els shades i contrastos</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Box</span> <span class="ot">sx</span><span class="op">=</span><span class="va">{</span>({theme})<span class="kw">=&gt;</span>({</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> theme<span class="op">.</span><span class="at">palette</span><span class="op">.</span><span class="fu">getContrastText</span>(<span class="st">&quot;#443&quot;</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>})<span class="va">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Box</span> <span class="ot">sx</span><span class="op">=</span><span class="va">{</span>({theme})<span class="kw">=&gt;</span>({</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> theme<span class="op">.</span><span class="at">palette</span><span class="op">.</span><span class="fu">getContrastText</span>(<span class="st">&quot;#443&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>})<span class="va">}</span></span></code></pre></div>
 </section>
 <section id="breakpoints-al-tema" class="slide level2">
 <h2>Breakpoints al tema</h2>
 <p>Estableixen tamanys de dispositius per a funcionalitats
 <em>responsives</em>.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Values</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="at">keys</span> <span class="op">=</span> [<span class="st">&#39;xs&#39;</span><span class="op">,</span><span class="st">&#39;sm&#39;</span><span class="op">,</span><span class="st">&#39;md&#39;</span><span class="op">,</span><span class="st">&#39;lg&#39;</span><span class="op">,</span><span class="st">&#39;xl&#39;</span>]</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="at">values</span> <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">600</span><span class="op">,</span> <span class="dv">900</span><span class="op">,</span> <span class="dv">1200</span><span class="op">,</span> <span class="dv">1536</span>]</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="at">units</span> <span class="op">=</span> <span class="st">&#39;px&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Values</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="at">keys</span> <span class="op">=</span> [<span class="st">&#39;xs&#39;</span><span class="op">,</span><span class="st">&#39;sm&#39;</span><span class="op">,</span><span class="st">&#39;md&#39;</span><span class="op">,</span><span class="st">&#39;lg&#39;</span><span class="op">,</span><span class="st">&#39;xl&#39;</span>]</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="at">values</span> <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">600</span><span class="op">,</span> <span class="dv">900</span><span class="op">,</span> <span class="dv">1200</span><span class="op">,</span> <span class="dv">1536</span>]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="at">units</span> <span class="op">=</span> <span class="st">&#39;px&#39;</span></span></code></pre></div>
 <p>Eines per generar <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/width">media-queries</a></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// functions to return media queries</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">up</span>(bp) <span class="co">// bp i més grans</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">down</span>(bp) <span class="co">// bp i més petites</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">only</span>(bp) <span class="co">// nomes bp</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">not</span>(bp) <span class="co">// qualsevol menys bp</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">between</span>(bp1<span class="op">,</span>bp2) <span class="co">// entre b1 i b2 inclosos</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">// functions to return media queries</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">up</span>(bp) <span class="co">// bp i més grans</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">down</span>(bp) <span class="co">// bp i més petites</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">only</span>(bp) <span class="co">// nomes bp</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">not</span>(bp) <span class="co">// qualsevol menys bp</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">between</span>(bp1<span class="op">,</span>bp2) <span class="co">// entre b1 i b2 inclosos</span></span></code></pre></div>
 </section>
 <section id="breakpoints-a-sx" class="slide level2">
 <h2>Breakpoints a <code>sx</code></h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sx<span class="op">=</span>{(theme)<span class="kw">=&gt;</span>({</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  [theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">up</span>(<span class="st">&#39;md&#39;</span>)]<span class="op">:</span> {</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">display</span><span class="op">:</span> <span class="st">&quot;none&quot;</span> <span class="co">// oculta per dispositius mitjans</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>})}</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sx<span class="op">=</span>{(theme)<span class="kw">=&gt;</span>({</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  [theme<span class="op">.</span><span class="at">breakpoints</span><span class="op">.</span><span class="fu">up</span>(<span class="st">&#39;md&#39;</span>)]<span class="op">:</span> {</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">display</span><span class="op">:</span> <span class="st">&quot;none&quot;</span> <span class="co">// oculta per dispositius mitjans</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>})}</span></code></pre></div>
 <aside class="notes">
 <p>Sintaxi JS: Els corxets converteixen una expressio en clau del
 objecte/diccionari.</p>
@@ -1332,31 +1356,32 @@ equival a <code>theme.breakpoint.up(bp)</code><br />
 No li cal rebre <code>theme</code></p>
 <div class="columns">
 <div class="column">
-<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condicionar un conjunt d&#39;atributs</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sm</span><span class="op">:</span> {</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">color</span><span class="op">:</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div><div class="column">
-<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condicionar els valors d&#39;un atribut</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condicionar un conjunt d&#39;atributs</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sm</span><span class="op">:</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sm</span><span class="op">:</span> {</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">color</span><span class="op">:</span> <span class="st">&quot;black&quot;</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div><div class="column">
+<div class="sourceCode" id="cb26"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condicionar els valors d&#39;un atribut</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sm</span><span class="op">:</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
 </section>
 <section id="breakpoints-amb-hooks" class="slide level2">
 <h2>Breakpoints amb hooks</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> useMediaQuery <span class="im">from</span> <span class="st">&#39;@mui/material/useMediaQuery&#39;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">MyComponent</span>() {</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> isBigEnough <span class="op">=</span> <span class="fu">useMediaQuery</span>(<span class="st">&#39;(min-width:600px)&#39;</span>)<span class="op">;</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (isBigEnough) <span class="op">...</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Quan volem coneixer el breakpoint fora dels estils.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> useMediaQuery <span class="im">from</span> <span class="st">&#39;@mui/material/useMediaQuery&#39;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">MyComponent</span>() {</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> isBigEnough <span class="op">=</span> <span class="fu">useMediaQuery</span>(<span class="st">&#39;(min-width:600px)&#39;</span>)<span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (isBigEnough) <span class="op">...</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 <section id="tipografies" class="slide level2">
 <h2>Tipografies</h2>
@@ -1390,23 +1415,55 @@ breakpoints (2 per defecte) - <code>breakpoints</code>:</p>
 </section>
 <section id="tipografies-fluïdes" class="slide level2">
 <h2>Tipografies: fluïdes</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="er">// Fluid font-size: s&#39;adapta de forma continua</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="er">// canvia el tamany del bodi</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>body {</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-size</span>: <span class="fu">calc(</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">var(</span><span class="va">--fluid-font-size-min</span><span class="fu">)</span> </span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> (</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">var(</span><span class="va">--fluid-font-size-max</span><span class="fu">)</span> <span class="op">-</span> <span class="fu">var(</span><span class="va">--fluid-font-size-min</span><span class="fu">)</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">*</span> (</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>      <span class="dv">100</span><span class="dt">vw</span> <span class="op">-</span> <span class="fu">var(</span><span class="va">--fluid-font-min-viewport</span><span class="fu">)</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">/</span> (</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">var(</span><span class="va">--fluid-font-max-viewport</span><span class="fu">)</span> <span class="op">-</span> <span class="fu">var(</span><span class="va">--fluid-font-min-viewport</span><span class="fu">)</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">)</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="er">// Fluid font-size: s&#39;adapta de forma continua</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="er">// canvia el tamany del bodi</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>body {</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-size</span>: <span class="fu">calc(</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">var(</span><span class="va">--fluid-font-size-min</span><span class="fu">)</span> </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> (</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">var(</span><span class="va">--fluid-font-size-max</span><span class="fu">)</span> <span class="op">-</span> <span class="fu">var(</span><span class="va">--fluid-font-size-min</span><span class="fu">)</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">*</span> (</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>      <span class="dv">100</span><span class="dt">vw</span> <span class="op">-</span> <span class="fu">var(</span><span class="va">--fluid-font-min-viewport</span><span class="fu">)</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">/</span> (</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">var(</span><span class="va">--fluid-font-max-viewport</span><span class="fu">)</span> <span class="op">-</span> <span class="fu">var(</span><span class="va">--fluid-font-min-viewport</span><span class="fu">)</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">)</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <aside class="notes">
 <p>https://css-tricks.com/snippets/css/fluid-typography/</p>
 </aside>
+</section>
+<section id="spacing" class="slide level2">
+<h2>Spacing</h2>
+<p>Defineix espaiats coherents<br />
+<code>theme.spacing(n)</code></p>
+<p>Enters a atributs distància d’<code>sx</code></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>Stack gap<span class="op">=</span>{<span class="dv">1</span>} <span class="op">/&gt;</span> <span class="co">// 1 = 8px per defecte</span></span></code></pre></div>
+<p>Personalització</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">createTheme</span>({</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">spacing</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span> <span class="co">//  4px</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">spacing</span><span class="op">:</span> (n) <span class="kw">=&gt;</span> <span class="vs">`</span><span class="sc">${</span><span class="fl">0.25</span> <span class="op">*</span> n<span class="sc">}</span><span class="vs">rem`</span><span class="op">,</span> <span class="co">// Equivalent si 1rem=16px</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">spacing</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span><span class="dv">4</span><span class="op">,</span><span class="dv">8</span><span class="op">,</span><span class="dv">10</span><span class="op">,</span><span class="dv">12</span>]<span class="op">,</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<aside class="notes">
+<p>Quan als atributs de distància d’<code>sx</code> posem un enter,
+s’està fent servir aquesta funció</p>
+<p><code>padding*</code>, <code>margin*</code>,
+<code>borderRadius</code></p>
+<p>En canvi, <code>*width</code>, <code>*height</code>…
+(<code>min</code>, <code>max</code>…) considera un int com a
+<code>px</code> si és major que 1. Si el valor està entre 0 i 1, ho
+considera percentatge.</p>
+<p>Si sempre fem servir aquesta unitat, podem canviar tots els espais a
+la vegada</p>
+<p>A la pràctica, és complicat fer-ho servir a arreu</p>
+</aside>
+</section>
+<section id="zindex" class="slide level2">
+<h2>zIndex</h2>
+<p><code>theme.zIndex</code> objecte amb valors de profunditat de
+referència<br />
+<code>tooltip &gt; snackbar &gt; modal &gt; drawer &gt; appbar &gt; speeddial &gt; fab &gt; mobilestepper</code></p>
 </section>
 <section id="components-temificats" class="slide level2">
 <h2>Components temificats</h2>
@@ -1417,6 +1474,18 @@ encara fa servir la funció <code>styled</code>.</p>
 <section id="proposta-criteris-generals" class="title-slide slide level1">
 <h1>Proposta criteris generals</h1>
 
+</section>
+<section id="resets" class="slide level2">
+<h2>Resets</h2>
+<p>Eliminar <code>App.css</code> i <code>index.css</code> que genera
+React</p>
+<p>Afegir <code>CssBaseline</code> a l’arbre de l’aplicació</p>
+<p>Afegir el <code>ThemeProvider</code> per sota del
+<code>CssBaseline</code></p>
+<aside class="notes">
+<p>index.css fa una mica de reset. No prou. Però, a mes, afegeix estils
+de la demo inicial.</p>
+</aside>
 </section>
 <section id="pels-atributs-de-layout" class="slide level2">
 <h2>Pels atributs de <strong>layout</strong></h2>
@@ -1505,23 +1574,93 @@ que vindrà depenent del context del component, o el tema o el mode de
 llum pot variar.</li>
 </ul>
 </aside>
-</section>
-<section id="resets" class="slide level2">
-<h2>Resets</h2>
-<p>Eliminar <code>App.css</code> i <code>index.css</code> que genera
-React</p>
-<p>Afegir <code>CssBaseline</code> a l’arbre de l’aplicació</p>
-<p>Afegir el <code>ThemeProvider</code> per sota del
-<code>CssBaseline</code></p>
-<aside class="notes">
-<p>index.css fa una mica de reset. No prou. Però, a mes, afegeix estils
-de la demo inicial.</p>
-</aside>
 </section></section>
+<section>
 <section id="consensos" class="title-slide slide level1">
 <h1>Consensos</h1>
 
 </section>
+<section id="oficialment" class="slide level2">
+<h2>Oficialment</h2>
+<p>Recollits a aquest <a href="https://docs.google.com/document/d/1RXexNAIqNR54ySRsRDJa6Ri36WMQqDa6ueQaZFjJVQw/edit#heading=h.pgagwmctyqs1">document</a>
+(privat)</p>
+<p>Pendents de que fan noves versions de MUI</p>
+</section>
+<section id="quin-mecanisme-destilat" class="slide level2">
+<h2>Quin mecanisme d’estilat?</h2>
+<p>Fem servir <code>sx</code> per MUI (<code>style</code> per html
+pur)</p>
+<p>Per contenidors estructurals (layout) prioritzarem<br />
+<code>Stack</code>, <code>Grid</code>, <code>Box</code><br />
+amb atributs css com si fossin html</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Be</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Stack</span> <span class="ot">sx</span><span class="op">=</span><span class="va">{</span>{<span class="dt">justifyContent</span><span class="op">:</span> <span class="st">&quot;space-evenly&quot;</span>}<span class="va">}</span><span class="fu">&gt;</span> ... <span class="fu">&lt;/Stack&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Millor</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Stack</span> <span class="ot">justifyContent</span><span class="op">=</span><span class="st">&quot;space-evenly&quot;</span><span class="fu">&gt;</span> ... <span class="fu">&lt;/Stack&gt;</span></span></code></pre></div>
+<aside class="notes">
+<p>Intentem que sigui <code>sx</code>, no <code>style</code>, fen
+servir, per exemple, <code>Box</code> en comptes de <code>div</code>.
+Així aprofitarem els avantatges de <code>sx</code></p>
+</aside>
+</section>
+<section id="styled" class="slide level2">
+<h2><code>styled</code>?</h2>
+<p>No hem trobat un cas d’ús<br />
+on <code>sx</code> no ho faci més simple que <code>styled</code>.</p>
+<p>No tanquem la porta a <code>styled</code><br />
+si no es pot fer amb <code>sx</code> més simplement.</p>
+</section>
+<section id="activació-i-customització" class="slide level2">
+<h2>Activació i customització</h2>
+<p>Consensuem concentrar la lógica d’aplicació d’estil a un component
+contenidor que mourem a la llibreria.</p>
+<p>Contrindrà:<br />
+CSS Reset<br />
+Lògica dark theme<br />
+Aplica el ThemeProvider<br />
+Tema Som per defecte, parametritzable<br />
+Completesa dels colors del tema<br />
+Càlcul de tipografies responsives<br />
+….</p>
+<aside class="notes">
+<p>Tenir-ho a un component centralitzat i a la llibreria facilitarà la
+<strong>incorporació transversal de millores</strong>.</p>
+<p>Segurament també ens ajudarà a la migració quan arribi el <strong>nou
+sistema de temes de MUI6</strong> amb css variables i zero-runtime
+css</p>
+</aside>
+</section>
+<section id="personalització-de-laspecte" class="slide level2">
+<h2>Personalització de l’aspecte</h2>
+<p>En comptes de posar colors directes <code>#rrggbb</code><br />
+prioritzem fer servir els tokens (colors, tipografies…)<br />
+estàndars del tema (<code>secondary</code>, <code>primary</code>…)</p>
+<p>Varietat amb els subtokens<br />
+<code>light</code>, <code>dark</code>, <code>contrastText</code>…</p>
+<p>Si realment necessitem <strong>colors nous</strong><br />
+definim un nou token al tema<br />
+Nom <strong>funcional</strong>, no descriptiu</p>
+<aside class="notes">
+<p>Motiu de ficar tots els tokens al tema:</p>
+<ul>
+<li>Poder fer una gestió centralitzada dels colors.</li>
+<li>No haver d’anar a buscar on fem servir els colors concrets.</li>
+<li>Poder buscar més fàcilment els usos que s’en fan</li>
+<li>Relacionar els colors derivats amb l’original
+<ul>
+<li><code>#f00</code> i <code>#700</code> vs <code>accent</code> vs
+<code>accent.dark</code></li>
+</ul></li>
+</ul>
+<p><strong>Nom funcional:</strong> El nom descriu la funció que fa el
+color: <code>accent</code>, <code>compare</code>, <code>ternary</code>…
+no pas descriu el color: <code>orange</code>,
+<code>fancyPurple</code></p>
+</aside>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+</section></section>
     </div>
   </div>
 

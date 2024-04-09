@@ -1,5 +1,25 @@
 # Definició i ús de temes
 
+## Accedint al tema
+
+Depenent del tipus d'atribut,
+alguns components estan disponibles per id:
+
+```jsx
+// Podem fer servir el hook, fins i tot a style
+const theme = useTheme()
+<Box style={{bgcolor: (theme)=> theme.palette.primary.main }} />
+
+// sx ho pot passar via lambda
+<Box sx={(theme)=> {bgcolor: theme.palette.primary.main }} />
+
+// Podem posar la lambda al valor
+<Box sx={{bgcolor: (theme)=> theme.palette.primary.main }} />
+
+// Recomanat: alguns atributs coneixen els elements del tema per nom
+<Box sx={{ bgcolor: `primary.main` }} />
+```
+
 ## Paleta
 
 El tema conté una paleta amb un conjunt de _colors compostos_
@@ -47,9 +67,9 @@ Podem personalitzar-los al nostre tema.
 
 ## Definir custom colors
 
-Només augmenta colors estàndard.\
-Segona passada per fer servir `augmentColor`\
-necessita un `color.main` i un `name`
+Per augmentar colors no estàndard,\
+cal segona passada per fer servir `augmentColor`\
+Necessita un `color.main` i un `name`
 
 ```javascript
 theme = createTheme(theme, {
@@ -67,6 +87,16 @@ theme = createTheme(theme, {
 
 :::notes
 [Documentació: Custom colors](https://mui.com/material-ui/customization/palette/#custom-colors)
+
+`createTheme` només augmenta automàticament els colors estàndar:
+`primary`, `secondary`...
+
+Si afegim el nostre propi color, `tertiary`,
+l'haurem d'augmentar nosaltres a mà cridant `theme.palette.augmentColor()`.
+
+Però com que aquesta funció, es defineix a dins
+d'un tema complert, cal cridar per segon cop
+a `createTheme` amb el theme de la primera passa.
 :::
 
 ## Aplicant paleta
@@ -163,6 +193,8 @@ No li cal rebre `theme`
 
 ## Breakpoints amb hooks
 
+Quan volem coneixer el breakpoint fora dels estils.
+
 ```javascript
 import useMediaQuery from '@mui/material/useMediaQuery'
 
@@ -223,6 +255,47 @@ body {
 :::notes
 https://css-tricks.com/snippets/css/fluid-typography/
 :::
+
+## Spacing
+
+Defineix espaiats coherents\
+`theme.spacing(n)`
+
+Enters a atributs distància d'`sx`
+```javascript
+<Stack gap={1} /> // 1 = 8px per defecte
+```
+
+Personalització
+
+```javascript
+createTheme({
+  spacing: 4, //  4px
+  spacing: (n) => `${0.25 * n}rem`, // Equivalent si 1rem=16px
+  spacing: [0,4,8,10,12],
+})
+```
+:::notes
+Quan als atributs de distància d'`sx` posem un enter,
+s'està fent servir aquesta funció
+
+`padding*`, `margin*`, `borderRadius`
+
+En canvi, `*width`, `*height`... (`min`, `max`...)
+considera un int com a `px` si és major que 1.
+Si el valor està entre 0 i 1, ho considera percentatge.
+
+Si sempre fem servir aquesta unitat,
+podem canviar tots els espais a la vegada
+
+A la pràctica, és complicat fer-ho servir a arreu
+:::
+
+## zIndex
+
+`theme.zIndex` objecte amb valors de profunditat de referència\
+`tooltip > snackbar > modal > drawer > appbar > speeddial > fab > mobilestepper`
+
 
 
 ## Components temificats
