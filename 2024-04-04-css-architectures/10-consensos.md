@@ -21,7 +21,7 @@ amb atributs css com si fossin html
 <Stack justifyContent="space-evenly"> ... </Stack>
 ```
 :::notes
-Intentem que sigui `sx`, no `style`, fen servir, per exemple, `Box` en comptes de `div`.
+Intentem que sigui `sx`, no `style`, fent servir, per exemple, `Box` en comptes de `div`.
 Així aprofitarem els avantatges de `sx`
 :::
 
@@ -33,7 +33,7 @@ on `sx` no ho faci més simple que `styled`.
 No tanquem la porta a `styled`\
 si no es pot fer amb `sx` més simplement.
 
-## Activació i customització
+## Activació del tema
 
 Consensuem concentrar la lógica d'aplicació d'estil
 a un component  contenidor que mourem a la llibreria.
@@ -42,7 +42,7 @@ Contrindrà:\
 CSS Reset\
 Lògica dark theme\
 Aplica el ThemeProvider\
-Tema Som per defecte, parametritzable\
+**Tema Som per defecte, parametritzable**\
 Completesa dels colors del tema\
 Càlcul de tipografies responsives\
 ....
@@ -55,9 +55,15 @@ Segurament també ens ajudarà a la migració
 quan arribi
 el **nou sistema de temes de MUI6**
 amb css variables i zero-runtime css
+
+És pràctic que el tema per defecte sigui el de Som,
+pero que si un projecte necessita el seu propi tema
+està be que li podem passar a aquest component.
+També convé poder passar un objecte buït per tenir
+el tema per defecte de Mui.
 :::
 
-## Personalització de l'aspecte
+## Personalització de colors
 
 En comptes de posar colors directes `#rrggbb`\
 prioritzem fer servir els tokens (colors, tipografies...)\
@@ -86,7 +92,23 @@ El nom descriu la funció que fa el color:
 no pas descriu el color: `orange`, `fancyPurple`
 :::
 
-## 
+## Customitzar components
 
+Volem canviar l'aspecte d'un component?
 
+Primer variants i parametres del component
 
+Després `sx` locals
+
+Si ho fem servir a molts,\
+nou component amb `sx`
+
+Només si és universal\
+i amb confirmació de Comunica/UX\
+`theme.componenents`
+
+:::notes
+Parlem de regles per, per exemple,
+per fer que tots els 
+
+:::

@@ -1598,7 +1598,7 @@ amb atributs css com si fossin html</p>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Millor</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Stack</span> <span class="ot">justifyContent</span><span class="op">=</span><span class="st">&quot;space-evenly&quot;</span><span class="fu">&gt;</span> ... <span class="fu">&lt;/Stack&gt;</span></span></code></pre></div>
 <aside class="notes">
-<p>Intentem que sigui <code>sx</code>, no <code>style</code>, fen
+<p>Intentem que sigui <code>sx</code>, no <code>style</code>, fent
 servir, per exemple, <code>Box</code> en comptes de <code>div</code>.
 Així aprofitarem els avantatges de <code>sx</code></p>
 </aside>
@@ -1610,15 +1610,15 @@ on <code>sx</code> no ho faci més simple que <code>styled</code>.</p>
 <p>No tanquem la porta a <code>styled</code><br />
 si no es pot fer amb <code>sx</code> més simplement.</p>
 </section>
-<section id="activació-i-customització" class="slide level2">
-<h2>Activació i customització</h2>
+<section id="activació-del-tema" class="slide level2">
+<h2>Activació del tema</h2>
 <p>Consensuem concentrar la lógica d’aplicació d’estil a un component
 contenidor que mourem a la llibreria.</p>
 <p>Contrindrà:<br />
 CSS Reset<br />
 Lògica dark theme<br />
 Aplica el ThemeProvider<br />
-Tema Som per defecte, parametritzable<br />
+<strong>Tema Som per defecte, parametritzable</strong><br />
 Completesa dels colors del tema<br />
 Càlcul de tipografies responsives<br />
 ….</p>
@@ -1628,10 +1628,14 @@ Càlcul de tipografies responsives<br />
 <p>Segurament també ens ajudarà a la migració quan arribi el <strong>nou
 sistema de temes de MUI6</strong> amb css variables i zero-runtime
 css</p>
+<p>És pràctic que el tema per defecte sigui el de Som, pero que si un
+projecte necessita el seu propi tema està be que li podem passar a
+aquest component. També convé poder passar un objecte buït per tenir el
+tema per defecte de Mui.</p>
 </aside>
 </section>
-<section id="personalització-de-laspecte" class="slide level2">
-<h2>Personalització de l’aspecte</h2>
+<section id="personalització-de-colors" class="slide level2">
+<h2>Personalització de colors</h2>
 <p>En comptes de posar colors directes <code>#rrggbb</code><br />
 prioritzem fer servir els tokens (colors, tipografies…)<br />
 estàndars del tema (<code>secondary</code>, <code>primary</code>…)</p>
@@ -1658,8 +1662,19 @@ no pas descriu el color: <code>orange</code>,
 <code>fancyPurple</code></p>
 </aside>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
+<section id="customitzar-components" class="slide level2">
+<h2>Customitzar components</h2>
+<p>Volem canviar l’aspecte d’un component?</p>
+<p>Primer variants i parametres del component</p>
+<p>Després <code>sx</code> locals</p>
+<p>Si ho fem servir a molts,<br />
+nou component amb <code>sx</code></p>
+<p>Només si és universal<br />
+i amb confirmació de Comunica/UX<br />
+<code>theme.componenents</code></p>
+<aside class="notes">
+<p>Parlem de regles per, per exemple, per fer que tots els</p>
+</aside>
 </section></section>
     </div>
   </div>

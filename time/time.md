@@ -499,6 +499,67 @@ Representaciones posibles
 - strings ISO
 
 
+#### Standard Date
+
+A diferencia del `datetime` de Python,
+`Date` de Javascript no tiene una versión naive.
+Siempre representa un instante UTC.
+
+Sin embargo tenemos que ir con cuidado
+puesto que la interfaz es dual,
+y a veces usa hora local y a veces hora UTC.
+
+Además, cuando usamos la hora local,
+se usa la **hora local del Navegador!**
+lo que da al desarrollador muy poco control
+sobre lo que pasa.
+
+
+
+- Los accesores set/getMinutes/Hours/Days... consideran la hora local
+- Tenemos los accesores set/get/UTCMinutes/Hours/Days... que consideran hora UTC
+- Si lo mostramos por consola, imprimirá la hora local.
+
+El problema es:
+
+- La hora local depende del navegador
+- No hay utilidades estandard para obtener otras representaciones.
+
+```javascript
+>> new Date("2023-02-02")
+Date Thu Feb 02 2023 01:00:00 GMT+0100 (Hora estàndard del Centre d’Europa)
+
+>> new Date("2023-02-02T00:00:00")
+Date Thu Feb 02 2023 00:00:00 GMT+0100 (Hora estàndard del Centre d’Europa)
+
+>> new Date("2023-02-02T00:00:00Z")
+Date Thu Feb 02 2023 01:00:00 GMT+0100 (Hora estàndard del Centre d’Europa)
+
+>> new Date(10*1000) // 10 seconds after epoch
+Date Thu Jan 01 1970 01:00:10 GMT+0100 (Hora estàndard del Centre d’Europa)
+
+// Las fechas se serializan en ISO UTC
+>> JSON.stringify(new Date("2023-02-02T00:00:00"))
+'"2023-02-01T23:00:00.000Z"'
+
+// Pero se deserializan como strings!!!
+>> JSON.parse('"2023-02-01T23:00:00.000Z"')
+"2023-02-01T23:00:00.000Z"
+
+>> Date.UTC(2020, 2, 2) // default month=1, date=1, hour=0, minutes=0, seconds=0
+
+```
+
+:::warning
+Sin `new`, `Date` devuelve siempre un string con el instante actual localizado en hora y formato.
+No manejable para nada.
+:::
+
+Standard Date representa internamente como timestamp UTC
+pero tiene accesores y representación con localtime.
+
+
+
 dayjs(utc_timestamp_ms) -> local datetime
 
 
