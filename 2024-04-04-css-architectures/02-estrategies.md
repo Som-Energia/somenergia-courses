@@ -1,281 +1,3 @@
-# La sessió
-
-## Objectiu
-
-Repassar l'estat de l'art en les diferents formes d'aplicar i mantenir estils\
-en general, en React i en MUI.
-
-Per pendre una decissió informada sobre\
-cap a on anar en els nostres projectes d'UI.
-
-## ⚠️ Disclaimer⚠️
-
-Avancem per terres pantanoses\
-No hi ha una solució estable definitiva\
-
-Surten frameworks a cada més
-
-MUI mateix canvia cada versió
-
-No hi ha **bala de plata** (encara)
-
-:::notes
-MUI5 [inclou en experimental](https://mui.com/material-ui/experimental-api/css-theme-variables/overviewv/)
-l'us de variables CSS per fer el theming.
-Suposadament "la forma" per MUI6.
-
-A més, [anuncien](https://github.com/mui/material-ui/issues/38137)
-que MUI6 serà "zero-runtime CSS".
-Segurament també implicarà canvis.
-
-React/Meta també fa les seves propostes: [StyleX](https://stylexjs.com/docs/learn/).
-:::
-
-
-## 🗺️ El camí 🗺️
-
-1. Quins **problemes de gestió d'estils** encarem
-1. Repassarem **estratègies** generals existents
-1. Acotarem a les solucions que integra **MUI**
-1. **Debatrem** quina opció prenem i com **transicionem**
-1. Establirem **consensos**
-
-# Els problemes 😈
-
-## 🛑Pareu-nos!🛑
-
-És important tenir un vocabulari comú.
-
-Segurament ja us heu trobats en les situacions que descrivim.
-No entrarem per no allargar-nos
-
-Pero si no ubiqueu els problemes als que ens referim\
-pareu-nos i donarem exemples concrets
-
-## ⚡Forces en Tensió⚡
-
-🎯 Especificitat
-
-🐑 Reusabilitat
-
-🤡 Personalització
-
-:::notes
-- **Especificitat:** com afinem perque una regla apliqui a cert element i només a ell
-- **Reusabilitat:** com evitem especificar el mateix arreu (quan volem modificar conceptualment el mateix)
-- **Personalització:** com fer per poder-nos sortir en algun cas de la generalització
-:::
-
-## Especificitat 🎯
-
-> Com afinem que una regla afecti a un element?
-
-A un mateix element poden aplicar moltes regles.\
-Quines es queden?
-
-S'ordenen per l'especificitat del selector.\
-Determinista però complex.
-
-A mesura que afegim regles, creix el perill de que comencin a interferir entre elles.
-
-:::notes
-Per si no us resona explicat en genèric,
-aquí teniu uns casos concrets
-que segur que heu viscut:
-
-
-- **Colisió** entre els noms de les classes de diferents libreries i les nostres. `button`? `disabled`? `error`?
-
-- **Contaminació per herència.**
-Definim un component rebé amb els seus estils, el fiquem a un context
-on un dels ancestres seteja un atribut heretable i ens trenca el component.
-
-- **Excessiva especificitat** en els estils d'una llibreria complica personalitzacions o simplement evitar contaminacions (Tomatic vs Polythene)
-
-Tot plegat es complexe. La solució: mantenir baixa l'entropia. Reduir els casos i les interferències.
-Ara bé, com?
-:::
-
-
-## 🎯 Estratègies
-
-**Especificitat plana**\
-ni selectors alta especificitat, ni combinacions\
-Metodologies: [BEM], [SuitCSS]\
-Frameworks: Bootstrap, [Mui]
-
-**Jerarquitzar els estils per tipus**\
-arquitectures CSS de capes\
-Metodologies: [ITCSS], [SMACSS], [Atomic Design]
-
-**Acotar l'aplicació de les regles**\
-Metodologies: [CSS-in-JS], [CSS modules]...\
-Frameworks: [Emotion], [Styled Components]
-
-[BEM]:(https://getbem.com/)
-[SuitCSS]:(https://suitcss.github.io/)
-[ITCSS]:(https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/)
-[SMACSS]:(http://smacss.com/)
-[Atomic Design]:(https://bradfrost.com/blog/post/atomic-web-design/)
-[CSS-in-JS]:(https://en.wikipedia.org/wiki/CSS-in-JS)
-[Emotion]:(https://emotion.sh/docs/introduction)
-[Styled Components]:(https://styled-components.com/)
-[CSS modules]:(https://github.com/css-modules/css-modules)
-
-:::notes
-**Especificitat plana**
-
-- Tots els selectors tenen especificitat similar. (tots amb una classe, dues classes per quan ho necessitem)
-- Eviten l'aniuament de selectors per evitar side effects
-
-**Capes:**
-- Classes de regles: mes abast -> tipus de selector amb menys especificitat
-- Exemple capes: reset - base - layout - component - state
-
-**CSS-in-JS:** escriure el CSS com a codi JS.
-El JS genera el CSS en compilacio o execució.
-Com string template, com a diccionari, JSX...
-
-**CSS modules:** CSS importat desde JS.
-El processen les eines de compilació.
-
-Quina estrategia segueix MUI?
-**Mes o menys les tres**
-:::
-
-## Reusabilitat 🐑
-
-> Voldríem no repetir-nos (DRY)
-
-Objectiu: Tenir un sol punt de canvi.
-
-:::notes
-Que quan decideixin a Som que el color de som es el vermell,
-o la lletra deixi de ser la Montserrat, ho poguem fer a un sol lloc.
-
-Que si tenim cent botons i les cantonades deixen de ser quadrades, que ho fem a un sol lloc.
-
-Que si hi ha una forma mes eficient de fer una certa animació, ho canviem a un sol lloc.
-:::
-
-## 🐑 Coses reusables
-
-**Temes**\
-uns certs àtoms/tokens que apliquem arreu\
-_colors, typografies, mides..._
-
-**Components**\
-una estructura html aïllada repetida\
-_botons, llistes, barres de navegació..._
-
-**Utilitats:**\
-estils que apliquem a elements diversos\
-_center, space-evenly, vertical, danger..._
-
-:::notes
-_**Look and feel** vs **Layout**_
-
-**Aspecte** vs **Maquetació**
-
-Les regles d'aspecte s'hereten
-:::
-
-## 🐑 Estrategies
-
-**CSS Preprocessors**\
-functions, variables, mixins\
-[Less], [Sass], [Stylus]
-
-**Components JS**\
-Repetim els estils amb el html\
-React, Vue...
-
-**Theme system / CSS Variables**
-
-
-[Less]:(https://lesscss.org)
-[Sass]:(https://sass-lang.com/)
-[Stylus]:(https://stylus-lang.com/)
-
-
-## Personalització 🤡
-
-> Havent generalitzat, com podem diferenciar un cas concret.
-
-Canviar el tema per defecte
-
-Aplicar un tema diferent a certs components
-
-Personalitzar un component
-
-Les altes especificitats compliquen sobreescriure
-
-## 🤡 Solucions
-
-Fer servir especificitat més alta que al component.
-
-Exemples:
-
-Selector combinant la classe original amb la de especilització.
-
-CSS Inline (máxima especificitat)
-
-Sistemes de Temes personalitzables
-
-:::notes
-Els components de MUI venen amb molt estil,
-cada versió van canviant de sistema per facilitar aquesta personalització.
-:::
-
-## Altres consideracions
-
-**Compatibilitat** 🧩\
-Res més compatible que CSS pur
-
-**Velocitat** 🚀\
-Res més ràpid que CSS pregenerat\
-
-**Canvis Dinàmics** ⚙️\
-Poder canviar les regles des de JS\
-Modificar les classes -- Variables CSS
-
-**Expressivitat** 👄\
-Media queries. Dreceres...
-
-:::notes
-**Compatibilitat**
-
-JS-to-CSS depén del framework.\
-Donada la canviant escena,
-Quan canviem cal rescriure els estils.\
-CSS pur és i serà compatible.
-
-**Zero run-time CSS**:
-En compilació o en càrrega genera el CSS.
-Aspectes dinàmics modificant les classes i alterant les variables.
-El css serà estàtic.
-
-Ho implementa [Vanilla Extract](https://vanilla-extract.style/)
-
-MUI6 pretént integrar Zero run-time CSS.
-
-
-Genera 
-
-:::
-
-## Ens deixem cap?
-
-Si, durant la presentació,\
-penseu en cap altra força o criteri,\
-afegim-ho per considerar-ho
-
-:::notes
-Ara que ja sabem quins son els problemes
-que dona la gestió dels css,
-repassem solucions que s'han donat a la indústria a nivell general.
-:::
-
 # Estratègies CSS
 
 ## Arquitectures Planes
@@ -536,7 +258,264 @@ Definides a top level
 :::
 
 
+# Estratègies CSS
 
+## Arquitectures Planes
+
+Exemples: BEM, SuitCSS
+
+Mantenir l'especificitat baixa
+
+```css
+.button > .icon  /* La icona dintre d'un boto: MAL! (0,2,0) */
+.button-icon` /* La icona del botó: BIEN! (0,1,0) */
+/* Independent de la estructura, i, sempre (0,1,0) */
+
+/* Particularització amb modificadors (estat, mode...) */
+/* La icona a un boto deshabilitat (0,2,0) */
+.button__disabled .button-icon  /* sobrescrivim el general */
+
+/*
+Diferents separadors per indicar el tipus
+de cada part del nom de la classe:
+Block, Element, Modifier
+Depén de la metodologia
+*/
+```
+:::notes
+Per entendre com funciona l'especificitat,
+pots provar selectors a  [aquesta calculadora](https://specificity.keegan.st/)
+
+- Només selectors amb 1 o 2 classes: assegura especificitat baixa
+- No aniuades: evita depèndencia de l'estructura
+- Apliquen una clase a blocs i elements
+- Per regles particulartizants la del block/element i una clase de modificador
+- Això puja la especificitat per sobrescriure el cas genèric
+- La jerarquia block -> element l'expressem al nom de la classe
+- Nomenclatura  `block[-element][__modificador]`
+- Separen parts convinant snake/camell/kebab-case
+- Importància: naming estés a altres frameworks
+- Nomenclatures de clases de Mui i d'altres s'enmirallen en BEM
+
+BEM ens aporta:
+
+- Criteris de nomenclatura de classes (es fa servir a Mui)
+- La urgència de definir els selectors molt plans
+- La táctica de definir modificadors amb major especificitat
+
+:::
+
+
+## Jerarquies CSS
+
+Organitzar les regles per especificitat segons la seva natura (a quants elements apliquen)
+
+- **reset** (fuck explorer) -> especificidad tag
+- **base** (h1, h2, p, …) -> especificidad tag
+- **layout** (stack, vertical, grid…) -> especificidad class (no s’hereten)
+- **components** (button…) -> especificidad class
+- **state** (disabled, active…) -> especificidad 2 class (customitzat)
+- **theme** (dark, ligth, som…) -> variables
+
+:::notes
+component i state correspon amb BE i M de BEM.
+
+Es interessant la distinció que fan dels estils de layout.
+
+Els estils de layout, a diferencia de els que dirien de look-and-feel,
+ni son temificables ni s'hereten als fills.
+Per això els separen a classes diferentes.
+
+Els base i el reset, s'apliquen no pas a classes
+sinó a elements.
+Afecten a com es veuen els elements estàndards d'html si no els fiquem cap classe.
+:::
+
+
+## Precompiladors: Sass, Less, Stylus
+
+- DRY: funcions, variables, mixins...
+- Aniuament noms (BEM) i selectors (Estructural)
+- Ajuden a muntar BEM o jerarquies
+- Es com es generen els estils de les llibreries que fem servir
+
+:::notes
+Preprocessadors
+
+- Coses ja estan incorporades en l'estandard.\
+	- CSS variables
+	- `calc()`
+	- aniuament amb &
+	- grid system
+	- includes
+- Altres les podem suplir amb CSS-in-JS
+- Algunes poques encara poden ser convenients
+:::
+
+
+## CSS com a recurs JS
+
+```javascript
+import "mystyle.css" // o .styl, .sass, .less
+```
+
+Pel fet d'importar-ho, Webpack/Vite\
+l'incorporen com a asset compilat, minimitzat...
+
+Per aplicar, afegim les classes al component.
+
+React crea per defecte `index.css` i `App.css`\
+Millor eliminar-los i fer servir `CssReset` de Mui.
+
+Dividir per components. Treeshaking pero no aïllem.
+
+:::notes
+
+`index.css` i `App.css` fan una mica reset, però insuficient.
+
+A més afegeixen els estils de la demo que poden interferir amb els nostres.
+
+Si no fos Mui, seria el lloc on posaríem
+els estils de reset i de base.
+
+De fet, podriem fer servir paquets existents per fer bé el reset.
+
+Pero a Mui tenim l'element del CssReset que en ficar-ho
+a l'arbre de l'aplicació ja ho fa.
+
+Podem dividir els estils per components.
+Posar estils i javascript d'un component de costat.
+Aixo també ajuda al tree-shaking:
+Si no fem servir el component, no afegirà els estils als assets.
+
+És útil transitoriament, quan estem migrant un component que té els estils plans.
+Exemple: Els estils del Tomatic, que estaven a fitxers stylus.
+
+Una primera passa a la migració es separar els estils que apliquen a un component
+i importar-ho a cada component.
+:::
+
+## CSS Modules
+
+Resol especificitat i reús a nivell components
+
+```css
+// mybutton.module.css
+.button { ... } // escrius css pur
+
+// el compilador detecta el .module i genera un css
+// afegint una tirallonga única al nom de les classes
+.button-tirallonga { ... } 
+```
+
+```javascript
+// Quan l'importes al javascript
+import style from "mybutton.module.css"
+// retorna un mapa entre les classes originals i les generades
+{ button: 'button-tirallonga' }
+// i el fem sevir així:
+`<Button className={style.button} />`
+```
+
+:::notes
+MUI fa servir `emotion`
+que genera classes uniques fent servir una estrategia similar.
+Tot i que no ho escrius a un arxiu css.
+
+Avantatges:
+
+- No construeix estils en runtime
+- Eficient i sense glitch inicial
+- CSS standard, fàcil de migrar.
+- No depen del framework Javascript
+
+Problemes:
+
+- Valors dinàmics
+	- Aplicar classes de forma condicional
+	- Alguns es poden calcular amb `calc()`
+	- Modificar dinamicament variables css
+- Temificació
+	- Fer servir variables css pels temes
+:::
+
+## CSS-in-JS
+
+Codi Javascript que genera CSS
+
+```javascript
+// Escrit com a text templatitzat
+css = `
+button {
+  background-color: ${mycolor}
+}
+`
+// Escrit com a objecte javascript
+css = {
+  button: {
+    backgroundColor: mycolor
+  }
+}
+```
+
+:::notes
+Els templates son més propes al css original
+
+Els objectes han de canviar les propietats de kebabcase a camellcase
+
+:::
+
+## CSS-in-JS
+
+Com ho apliquem als components
+
+**Styled components:** modifica un component existent per generar un segon amb els estils
+
+**Class names:** Com els CSS modules. Cal extreure el css fora.
+
+**Attributes:** `style` (React) o `sx` (MUI)
+
+`style` tradueix directament a l'atribut inline\
+`sx` fa tot un seguit de transformacións
+
+:::notes
+Hi ha alguns frameworks com [Vanilla Extract]
+que fan l'extracció a CSS pur com els css modules.
+Pero la part dinamica l'extreu automàticament com a variable
+i li aplica els canvis per javascript només a la variable
+que sembla ser molt més eficient.
+
+MUI [diuen] que la proxima versió de MUI anirà per aquesta direcció.
+[diuen]:()
+:::
+
+## CSS variables
+
+CSS variables: Propietats css especials\
+S'hereten i s'apliquen a selectors.\
+Es referencien amb la funció `var()`\
+
+Brutals per fer theming\
+També per evitar magic numbers.\
+Tandem amb `calc()/min()/max()/clamp()/...`
+
+Molt suportades pels navegadors\
+Ús experimental en theming de MUI 5
+
+:::notes
+Identificades pel prefix `--`, ie `--my-color`
+
+Les variables normalment aporten tokens (colors, distàncies...)
+que és el que normalment fiquem als temes.
+
+En heretar-se les podem modificar en punts de l'arbre
+i s'apliquen als fills.
+
+`var()` permet aportar un default sobrescrivible.
+
+Definides a top level
+
+:::
 
 
 
