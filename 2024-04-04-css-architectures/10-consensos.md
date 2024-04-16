@@ -96,19 +96,37 @@ no pas descriu el color: `orange`, `fancyPurple`
 
 Volem canviar l'aspecte d'un component?
 
-Primer variants i parametres del component
+Considerar primer les variants i atributs del component\
+`variant`, `color`, `dense`...
 
-Després `sx` locals
+Si no son prou, considerem\
+`sx` aplicats localment
 
 Si ho fem servir a molts,\
-nou component amb `sx`
+nou component que apliqui `sx`\
+al component original
 
 Només si és universal\
 i amb confirmació de Comunica/UX\
 `theme.componenents`
 
 :::notes
-Parlem de regles per, per exemple,
-per fer que tots els 
+`theme.components`
+Afecta a tots els components dels tipus referenciats.
+Els canvis que fem aquí afectarán a tots els projectes
+que comparteixin aquest tema.
 
+Per això, modificarem els components al tema amb aquest impacte en ment.
+Decissió global i amb coordinació amb Comunica/UX.
+
+Si es una personalització puntual però repetida,
+considerarem crear un nou component que adapti l'original, modificant el `sx`.
+
+La majoria dels casos podrem modificar l'sx del component en el lloc que el fem servir.
+
+Pero modificar l'aspecte a l'`sx` sovint te interaccions no desitjades,
+per això abans de considerar modificar-ho amb `sx`,
+convé veure si el component té atributs de customització com ara
+`variant`, `color`, `dense`...
 :::
+
