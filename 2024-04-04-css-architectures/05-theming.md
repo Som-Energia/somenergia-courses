@@ -8,7 +8,7 @@ alguns components estan disponibles per id:
 ```jsx
 // Podem fer servir el hook, fins i tot a style
 const theme = useTheme()
-<Box style={{bgcolor: (theme)=> theme.palette.primary.main }} />
+<Box style={{bgcolor: theme.palette.primary.main }} />
 
 // sx ho pot passar via lambda
 <Box sx={(theme)=> {bgcolor: theme.palette.primary.main }} />
@@ -189,6 +189,19 @@ No li cal rebre `theme`
 }
 ```
 ::::
+:::
+
+:::notes
+```javascript
+const theme = useTheme()
+return <div
+  style={{
+    [theme.breakpoints.up('md')]: {
+      display: "none" // oculta per dispositius mitjans
+    }
+  }}
+>
+```
 :::
 
 ## Breakpoints amb hooks

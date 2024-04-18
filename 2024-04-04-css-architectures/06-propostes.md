@@ -88,7 +88,7 @@ de forma quirúrgica i consensuada amb Comunica
 Si un tros de l'aplicació funciona amb diferents colors,
 considerar crear un tema diferent i aplicar un ThemeProvider
 
-## Evitar els **esculls**
+## Evitar **paranys**
 
 Canviar sempre color i background a la vegada
 
@@ -104,7 +104,8 @@ depenents de l'estructura
 :::notes
 Per què canviar color i background a la vegada?
 
-- Si canviem nomes un, ie. color, no controlem quin es el background que vindrà
-depenent del context del component, o el tema o el mode de llum pot variar.
+Color i background s'hereten, si un component fixa només un dels dos,
+sovint passa que en un context no previst, s'hereta l'altre,
+sense suficient contrast o que no combina bé.
 :::
 

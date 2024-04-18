@@ -10,6 +10,9 @@ No entrarem per no allargar-nos
 Pero si no ubiqueu els problemes als que ens referim\
 pareu-nos i donarem exemples concrets
 
+Si estàs llegint-ho en diferit,\
+alguns exemples en les 'speaker notes'
+
 ## ⚡Forces en Tensió⚡
 
 🎯 Especificitat
@@ -20,7 +23,7 @@ pareu-nos i donarem exemples concrets
 
 :::notes
 - **Especificitat:** com afinem perque una regla apliqui a cert element i només a ell
-- **Reusabilitat:** com evitem especificar el mateix arreu (quan volem modificar conceptualment el mateix)
+- **Reusabilitat:** com evitem especificar arreu el mateix concepte
 - **Personalització:** com fer per poder-nos sortir en algun cas de la generalització
 :::
 
@@ -86,7 +89,8 @@ Frameworks: [Emotion], [Styled Components]
 - Tots els selectors tenen especificitat similar. (tots amb una classe, dues classes per quan ho necessitem)
 - Eviten l'aniuament de selectors per evitar side effects
 
-**Capes:**
+**Capes**
+
 - Classes de regles: mes abast -> tipus de selector amb menys especificitat
 - Exemple capes: reset - base - layout - component - state
 
@@ -108,12 +112,12 @@ Quina estrategia segueix MUI?
 Objectiu: Tenir un sol punt de canvi.
 
 :::notes
-Que quan decideixin a Som que el color de som es el vermell,
+Que, quan decideixin a Som que el color de som es el vermell,
 o la lletra deixi de ser la Montserrat, ho poguem fer a un sol lloc.
 
-Que si tenim cent botons i les cantonades deixen de ser quadrades, que ho fem a un sol lloc.
+Que, si tenim cent botons i les cantonades deixen de ser quadrades, que ho fem a un sol lloc.
 
-Que si hi ha una forma mes eficient de fer una certa animació, ho canviem a un sol lloc.
+Que, si hi ha una forma mes eficient de fer una certa animació, ho canviem a un sol lloc.
 :::
 
 ## 🐑 Coses reusables
@@ -131,11 +135,18 @@ estils que apliquem a elements diversos\
 _center, space-evenly, vertical, danger..._
 
 :::notes
-_**Look and feel** vs **Layout**_
+Els **temes** defineixen un seguit d'elements (tokens: colors, lletres, espaiats...)
+que es fan servir arreu pero que podem canviar de forma global
+perque siguin uns altres.
 
-**Aspecte** vs **Maquetació**
+Quan definim **components** establim blocs d'html reutilitzables.
+No només reutilitzem l'html sinó els estils que apliquem per que tinguin l'aspecte que volem.
+Definim classes amb noms que identifiquen els components.
 
-Les regles d'aspecte s'hereten
+Les **utilitats** són classes que vinculem amb un seguit de regles css.
+Definim classes amb noms que referencien l'efecte de les regles.
+
+Amb grisos, existeixen llibreries CSS basades en components (Bootstrap, Bulma...) i basades en utilities (Tailwind)
 :::
 
 ## 🐑 Estrategies
@@ -191,11 +202,10 @@ cada versió van canviant de sistema per facilitar aquesta personalització.
 Res més compatible que CSS pur
 
 **Velocitat** 🚀\
-Res més ràpid que CSS pregenerat\
+Generar o modificar CSS en el navegador es lent.
 
 **Canvis Dinàmics** ⚙️\
-Poder canviar les regles des de JS\
-Modificar les classes -- Variables CSS
+Modificar en execució els attributs CSS.
 
 **Expressivitat** 👄\
 Media queries. Dreceres...
@@ -204,22 +214,34 @@ Media queries. Dreceres...
 **Compatibilitat**
 
 JS-to-CSS depén del framework.\
-Donada la canviant escena,
-Quan canviem cal rescriure els estils.\
+Escena canviant -> rescriptura\
 CSS pur és i serà compatible.
 
+**Eficiència**
+
+Generar/modificar CSS en el navegador, costós:\
+rescriure una regla -> recàlcul  cascada CSS
+
 **Zero run-time CSS**:
-En compilació o en càrrega genera el CSS.
-Aspectes dinàmics modificant les classes i alterant les variables.
-El css serà estàtic.
+CSS estàtic generat en compilació.
+Dinamisme via clases i variables.
 
-Ho implementa [Vanilla Extract](https://vanilla-extract.style/)
+- [Vanilla Extract](https://vanilla-extract.style/), [Linaria](https://linaria.dev/)...
+- [MUI6 en camí](https://github.com/mui/material-ui/issues/38137)
 
-MUI6 pretént integrar Zero run-time CSS.
+**Canvis dinàmics**
 
+Modificar les regles que s'apliquen a un element en temps d'execució
 
-Genera 
+- Modificant directament les regles des del JS (costós)
+- Canviant les classes de l'element
+- Donant valors a variables CSS
 
+**Expressivitat:**
+
+Eines per facilitar l'escriptura i lectura.\
+Estructures css complicades d'escriure:\
+media queries, keyframes, anidacions...
 :::
 
 ## Ens deixem cap?

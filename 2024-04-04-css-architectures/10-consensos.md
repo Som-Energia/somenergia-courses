@@ -94,29 +94,26 @@ no pas descriu el color: `orange`, `fancyPurple`
 
 ## Customitzar components
 
-Volem canviar l'aspecte d'un component?
+**Volem canviar l'aspecte d'un component?**
 
-Considerar primer les variants i atributs del component\
+Primer, variants i atributs del component\
 `variant`, `color`, `dense`...
 
-Si no son prou, considerem\
-`sx` aplicats localment
+No son prou? ⇨ `sx` aplicats localment
 
-Si ho fem servir a molts,\
-nou component que apliqui `sx`\
+Ús repetit? ⇨ nou component que apliqui `sx`\
 al component original
 
-Només si és universal\
-i amb confirmació de Comunica/UX\
-`theme.componenents`
+Universal i d'acord amb Comunica/UX?\
+⇨ `theme.componenents`
 
 :::notes
 `theme.components`
-Afecta a tots els components dels tipus referenciats.
+Afecta a totes les instàncies del component.
 Els canvis que fem aquí afectarán a tots els projectes
 que comparteixin aquest tema.
 
-Per això, modificarem els components al tema amb aquest impacte en ment.
+Per això, modificarem els components al tema amb aquest impacte en ment:
 Decissió global i amb coordinació amb Comunica/UX.
 
 Si es una personalització puntual però repetida,
