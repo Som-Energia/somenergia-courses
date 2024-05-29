@@ -19,9 +19,12 @@ Public materials used in internal Som Energia training courses.
 - 2020-09-10: [Python Mock](2020-09-10-python-mock) [ca]
 - 2020-12-03: [Locust](2020-12-03-locust) [ca]
 - 2021-01-21: [Incidències Crítiques](2021-01-21-crisis-management) [ca]
+- 2024-02-01: [UI Testing with Cypress](2024-02-01-cypress) [ca]
+- 2024-04-04: [Arquitectures CSS](2024-04-04-css-architectures) [ca]
 
+En preparació
 
-
+- WIP: [Time](time)
 - WIP: [D3](d3)
 - WIP: [CLI Graphics](cligraphics/)
 - WIP: [Branch policies](advanced-git/)

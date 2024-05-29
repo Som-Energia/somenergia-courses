@@ -1,0 +1,29 @@
+{
+  "name": "somenergia-courses",
+  "version": "1.0.0",
+  "description": "Som Energia training presentations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Som-Energia/somenergia-courses.git"
+  },
+  "keywords": [
+    "training",
+    "python",
+    "css",
+    "javascript"
+  ],
+  "author": "Som Energia SCCL",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Som-Energia/somenergia-courses/issues"
+  },
+  "homepage": "https://github.com/Som-Energia/somenergia-courses#readme",
+  "dependencies": {
+    "gh-pages": "^6.1.1",
+    "reveal.js": "^5.0.5"
+  }
+}

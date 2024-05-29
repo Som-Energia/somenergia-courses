@@ -18,54 +18,54 @@ keyboard:
   46: prev
   13: alert('hello')
 include-before: |
-	<style>
-		.reveal {
-			background: #d5e20f88;
-			background-image: url('../images/logo-somit.svg');
-			background-repeat: no-repeat;
-			background-size: 20%;
-			background-position: bottom left;
-			opacity: 50%;
-		}
-		.reveal .slides section h1.title {
+  <style>
+    .reveal {
+      background: #d5e20f88;
+      background-image: url('../images/logo-somit.svg');
+      background-repeat: no-repeat;
+      background-size: 20%;
+      background-position: bottom left;
+      opacity: 50%;
+    }
+    .reveal .slides section h1.title {
             font-size: 250%;
         }
-		.reveal .slides section h1.subtitle {
+    .reveal .slides section h1.subtitle {
             font-size: 120%;
         }
-		.reveal .slides section h2.author {
+    .reveal .slides section h2.author {
             font-size: 100%;
         }
-		.reveal .slides {
-			background: #ffffffee;
-		}
-		.reveal .slides .titleslide {
-			background-color: #86bc25ff;
-		}
-		.reveal .slides .titleslide h1 {
-			color: white;
-		}
-		.reveal .slides .slide.level2 h1 {
-			color: #86bc25ff;
+    .reveal .slides {
+      background: #ffffffee;
+    }
+    .reveal .slides .titleslide {
+      background-color: #86bc25ff;
+    }
+    .reveal .slides .titleslide h1 {
+      color: white;
+    }
+    .reveal .slides .slide.level2 h1 {
+      color: #86bc25ff;
             font-size: 180%;
-			//color: #480;
-		}
-		code {
-			background: #ffe;
-			border-radius: 0.5ex;
-			padding: 3px;
-			color: #500;
-		}
-		.slide strong {
-			color: #060;
-		}
-		.columns {
-			display: flex;
-		}
-		.columns .column {
-			margin-left: auto;
-			margin-right: auto;
-		}
-	</style>
+      //color: #480;
+    }
+    code {
+      background: #ffe;
+      border-radius: 0.5ex;
+      padding: 3px;
+      color: #500;
+    }
+    .slide strong {
+      color: #060;
+    }
+    .columns {
+      display: flex;
+    }
+    .columns .column {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: CLI para Gráficos
 subtitle: >
-	Herramientas command line para manipulación\
-	de imágenes y documentos
+  Herramientas command line para manipulación\
+  de imágenes y documentos
 author: Som Energia
 
 theme: serif # beige/black/blood/league/moon/night/serif/simple/sky/solarized/white
@@ -20,48 +20,48 @@ showNotes: true
 keyboard:
   46: prev
 include-before: |
-	<style>
-		.reveal {
-			background: #d5e20f88;
-			background-image: url('../images/logo-somit.svg');
-			background-repeat: no-repeat;
-			background-size: 20%;
-			background-position: bottom left;
-			opacity: 50%;
-		}
-		.reveal .slides {
-			background: #ffffffee;
-		}
-		.reveal .slides .titleslide {
-			background-color: #86bc25ff;
-		}
-		.reveal .slides .titleslide h1 {
-			color: white;
-		}
-		.reveal .slides .slide.level2 h1 ,
-		.reveal .slides .slide.level2 h2 {
+  <style>
+    .reveal {
+      background: #d5e20f88;
+      background-image: url('../images/logo-somit.svg');
+      background-repeat: no-repeat;
+      background-size: 20%;
+      background-position: bottom left;
+      opacity: 50%;
+    }
+    .reveal .slides {
+      background: #ffffffee;
+    }
+    .reveal .slides .titleslide {
+      background-color: #86bc25ff;
+    }
+    .reveal .slides .titleslide h1 {
+      color: white;
+    }
+    .reveal .slides .slide.level2 h1 ,
+    .reveal .slides .slide.level2 h2 {
             font-size: 2.2em;
-			color: #86bc25ff;
-			//color: #480;
-		}
-		code {
-			background: #ffe;
-			border-radius: 0.5ex;
-			padding: 3px;
-			color: #500;
-		}
-		.slide strong {
-			color: #060;
-		}
-		.columns {
-			font-size: smaller;
-			display: flex;
-		}
-		.columns .column {
-			font-size: smaller;
-			margin-left: auto;
-			margin-right: auto;
-		}
-	</style>
+      color: #86bc25ff;
+      //color: #480;
+    }
+    code {
+      background: #ffe;
+      border-radius: 0.5ex;
+      padding: 3px;
+      color: #500;
+    }
+    .slide strong {
+      color: #060;
+    }
+    .columns {
+      font-size: smaller;
+      display: flex;
+    }
+    .columns .column {
+      font-size: smaller;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
 ---
 

@@ -239,7 +239,7 @@ En este otro ejemplo:
 - En cambio, el `-operador2`, en azul, una vez cerrado el paréntesis ya se aplica a todos
 :::
 
-## Operador Multi-imagen
+## Ops Multi-imagen
 
 ![](images/imagemagick-multiop.svg)
 
@@ -278,6 +278,8 @@ seguiran siendo clones por que les aplicaremos los mismos efectos.
 
 
 ## Operadores de canal
+
+TODO: Aún no los he entendido
 
 ## Configuración
 
@@ -425,8 +427,8 @@ Muy útiles para hacer pruebas.
 - `radial-gradient:[<color>-<color>]` grandiente 
 - `fractal:[<color>-<color>]` generador texturas (necesita -size)
 - `plasma:` generador texturas (el mismo que `fractal`?)
-- `label:<text>`
-- `caption:<text>`
+- `label:<text>` linia de texto
+- `caption:<text>` texto wrappeado
 - `tile:<image>` Expande la imagen al size replicándola
 :::
 
@@ -520,8 +522,9 @@ convert @ficheros.txt -o salida.gif
 ::: notes
 :::
 
-## Opciones
+# Opciones
 
+## Tipos de opciones
 
 Configuración
 
@@ -639,7 +642,6 @@ $ convert input1 -op1 \( input2 -op2 \) -op3 ...
 
 
 ::: notes
-```bash
 ‑annotate
 ‑black‑threshold
 ‑blur
@@ -721,10 +723,9 @@ $ convert input1 -op1 \( input2 -op2 \) -op3 ...
 ‑wave
 ‑white‑point
 ‑white‑threshold
-```
 :::
 
-## Operadores Multi-imàgen
+## Oper. Multi-imàgen
 
 ¿Qué hacemos con múltiples entradas?
 
@@ -741,8 +742,6 @@ genera múltiples ficheros con sufijo numérico.
 `-composite`: mezcla las imagenes con el setting `-compose`
 
 ::: notes
-
-```bash
 ‑append
 ‑affinity
 ‑average
@@ -778,8 +777,6 @@ genera múltiples ficheros con sufijo numérico.
 ‑quiet
 ‑swap
 ‑write
-```
-
 :::
 
 ## Operaciones de pila
