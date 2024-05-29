@@ -50,11 +50,11 @@ service:
         - Supporting more than 119 country world
         - Open transaction with more than currencies
         - Customer Service with 79 languages
-    - title: Accountability that works for you
+    - title: Com saber quina potència contractar?
       description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin.
       video:
-        thumbnail: "/images/intro-thumbnail.png"
-        video_id: "g3-VxLQO7do"
+        thumbnail: "https://i.ytimg.com/vi/-hGrHJtXyQ4/sddefault.jpg"
+        video_id: "-hGrHJtXyQ4"
       button:
         label: Know About Us
         link: "#"
@@ -71,13 +71,28 @@ testimonial:
       rating: five
       content: L'atenció personalitzada m'ho ha resolt tot sempre a la primera.
     - author: Marité Guerrieri 
-      avatar: "/images/users/user-3.png"
+      avatar: "/images/users/user-2.png"
       organization: Web Apps
       rating: five
       content: El cooperativisme és la solució.
     - author: Marta Fernández
-      avatar: "/images/users/user-3.png"
+      avatar: "/images/users/user-1.png"
       organization: Web Apps
       rating: four
       content: La transparència i la cura per les clientes, és espectacular.
+    - author: Dani Quilez
+      avatar: "/images/users/user-5.png"
+      organization: Comunitats Energètiques
+      rating: five
+      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin.
+    - author: Gil Gassó
+      avatar: "/images/users/user-4.png"
+      organization: Web Apps
+      rating: five
+      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin.
+    - author: David Garcia
+      avatar: "/images/users/user-6.png"
+      organization: Web Apps
+      rating: five
+      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin.
 ---

@@ -2,27 +2,7 @@
   "main": [
     {
       "name": "Qui Som?",
-      "url": "/"
-    },
-    {
-      "name": "Serveis que oferim",
-      "url": "/about"
-    },
-    {
-      "name": "Participa",
-      "url": "/blog"
-    },
-    {
-      "name": "Blog",
-      "url": "/features"
-    },
-    {
-      "name": "Centre d'Ajuda",
-      "url": "/how-it-works"
-    },
-    {
-      "name": "Pages",
-      "url": "",
+      "url": "/",
       "hasChildren": true,
       "children": [
         {
@@ -59,7 +39,23 @@
       ]
     },
     {
-      "name": "Contact",
+      "name": "Serveis que oferim",
+      "url": "/about"
+    },
+    {
+      "name": "Participa",
+      "url": "/blog"
+    },
+    {
+      "name": "Blog",
+      "url": "/features"
+    },
+    {
+      "name": "Centre d'Ajuda",
+      "url": "/how-it-works"
+    },
+    {
+      "name": "Contacte",
       "url": "/contact"
     }
   ],
@@ -70,7 +66,7 @@
       "url": "/about"
     },
     {
-      "name": "Contact",
+      "name": "Contacte",
       "url": "/contact"
     },
     {

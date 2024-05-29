@@ -64,23 +64,23 @@ members:
   title: This is who we are
   description: Donec sollicitudin molestie malesda. Donec sollitudin mol estie ultricies ligula sed magna dictum
   member_list:
-    - name: Eleanor Pena
+    - name: Marta Fernández
       field: Co-founder & COO
       image: "/images/users/user-1.png"
-    - name: Bukiakta Bansalo
+    - name: Marité Guerreri
       field: Product Manager
       image: "/images/users/user-2.png"
-    - name: Ortrin Okaster
+    - name: Pol Monsó Purtí
       field: Software Engineer
       image: "/images/users/user-3.png"
-    - name: Eleanor Pena
+    - name: Gil Grassó
       field: Co-founder & COO
-      image: "/images/users/user-1.png"
-    - name: Bukiakta Bansalo
+      image: "/images/users/user-4.png"
+    - name: Dani Quilez
       field: Product Manager
-      image: "/images/users/user-2.png"
-    - name: Ortrin Okaster
+      image: "/images/users/user-5.png"
+    - name: David Garcia
       field: Software Engineer
-      image: "/images/users/user-3.png"
+      image: "/images/users/user-6.png"
 ---
 Donec sollicitudin molestie malesda. Donec sollitudin molestie malesuada. Mauris pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta. Lorem
