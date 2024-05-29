@@ -1,23 +1,23 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "Qui Som?",
       "url": "/"
     },
     {
-      "name": "About",
+      "name": "Serveis que oferim",
       "url": "/about"
     },
     {
-      "name": "Blog",
+      "name": "Participa",
       "url": "/blog"
     },
     {
-      "name": "Features",
+      "name": "Blog",
       "url": "/features"
     },
     {
-      "name": "How It Works",
+      "name": "Centre d'Ajuda",
       "url": "/how-it-works"
     },
     {

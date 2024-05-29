@@ -1,10 +1,11 @@
 {
-  "facebook": "https://facebook.com/",
-  "twitter": "https://twitter.com/",
-  "instagram": "",
-  "youtube": "",
-  "linkedin": "https://linkedin.com/",
-  "github": "",
+  "facebook": "https://www.facebook.com/somenergia/",
+  "twitter": "https://twitter.com/somenergia/",
+  "instagram": "https://www.instagram.com/somenergia/",
+  "youtube": "https://www.youtube.com/user/SomEnergia/",
+  "linkedin": "https://www.linkedin.com/company/somenergia/",
+  "mastodon": "https://mastodon.economiasocial.org/@SomEnergia",
+  "github": "https://github.com/Som-Energia",
   "gitlab": "",
   "medium": "",
   "codepen": "",
@@ -25,6 +26,6 @@
   "email": "",
   "phone": "",
   "address": "",
-  "skype": "https://skype.com/",
+  "skype": "",
   "website": ""
 }
