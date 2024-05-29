@@ -6,27 +6,30 @@ const FirstScreen = ({ formData, handleChange, handleChangePage }) => {
   return (
     <div>
       <h2>First Screen</h2>
-      <form>
-        <label>
-          Nombre:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => handleChange("name", e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Teléfono:
-          <input
-            type="text"
-            value={phone}
-            onChange={(e) => handleChange("phone", e.target.value)}
-          />
-        </label>
-        <br />
-        <button onClick={() => handleChangePage(1)}>Siguiente</button>
-      </form>
+
+      <label>
+        Nombre:
+        <input
+          type="text"
+          data-cy="input-name"
+          value={name}
+          onChange={(e) => handleChange("name", e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Teléfono:
+        <input
+          type="text"
+          data-cy="input-phone"
+          value={phone}
+          onChange={(e) => handleChange("phone", e.target.value)}
+        />
+      </label>
+      <br />
+      <button data-cy="input-button" onClick={() => handleChangePage(1)}>
+        Siguiente
+      </button>
     </div>
   );
 };
