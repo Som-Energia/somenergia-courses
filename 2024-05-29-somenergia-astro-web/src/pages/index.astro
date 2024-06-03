@@ -1,33 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
-
-import fetchApi from "../lib/strapi";
-import Markdown from "markdown-to-jsx";
-
-const pages = await fetchApi({
-	endpoint: "pages",
-	wrappedByKey: "data",
-});
+import Article from "../components/Article.jsx";
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		{
-			pages.map((page) => {
-				console.log(page?.attributes);
-				return (
-					<div>
-						<>
-							<p>{page?.attributes?.Title}</p>
-							<Markdown>
-								## Hola
-							</Markdown>
-						</>
-					</div>
-				);
-			})
-		}
 		<svg
 			class="astro-a"
 			width="495"
@@ -85,6 +63,9 @@ const pages = await fetchApi({
 				body="Come say hi to our amazing Discord community. ❤️"
 			/>
 		</ul>
+		<Article />
+
+
 	</main>
 </Layout>
 

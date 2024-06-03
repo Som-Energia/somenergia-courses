@@ -1,8 +1,16 @@
 ---
 import { Image } from "astro:assets";
+import {getTestimonials} from '../../../lib/fetchStrapi'
+
 const {
   members: { title, description, member_list },
 } = Astro.props;
+
+
+const members = await getTestimonials("testimonials");
+
+console.log(members[0])
+
 ---
 
 <section class="section">
@@ -33,6 +41,25 @@ const {
                 <div class="mt-6 w-full flex-1 rounded-xl bg-white px-4 py-8 shadow-lg">
                   <h5 class="font-primary">{item.name}</h5>
                   <p class="mt-1.5">{item.field}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="row mt-12 justify-center">
+      <div class="lg:col-10">
+        <div class="row">
+          {
+            members.map((item: any) => (
+              <div class="mb-6 flex flex-col px-6 text-center sm:col-6 lg:col-4 sm:items-center">
+                <div class="member-avatar inline-flex justify-center">
+
+                </div>
+                <div class="mt-6 w-full flex-1 rounded-xl bg-white px-4 py-8 shadow-lg">
+                  <h5 class="font-primary">{item.attributes.Name}</h5>
+                  <p class="mt-1.5">{item.attributes.Field}</p>
                 </div>
               </div>
             ))
