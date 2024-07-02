@@ -1,0 +1,10 @@
+htmlcov
+.coverage
+.venv
+.mutmut-cache
+
+__pycache__
+
+*.swp
+tags
+
