@@ -1,0 +1,4 @@
+pytest
+watchdog
+coverage
+mutmut
