@@ -29,7 +29,7 @@ En preparació
 - WIP: [CLI Graphics](cligraphics/)
 - WIP: [Branch policies](advanced-git/)
 - WIP: [Test Driven Development](apunts/TDD-Test-driven-development)
-- WIP: [Auth](apunts/auth)
+- WIP: [Auth](apunts/auth.md)
 - WIP: [Localization](localization-standards)
 
 If not indicated otherwise, those materials are covered
