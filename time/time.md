@@ -26,7 +26,7 @@ que faciliten la manipulación de marcas temporales.
 - **IANA TZ Database:** Compilación histórica de los sistemas horarios que se aplican a ciertas ciudades de referencia.
 
 Si te interesa profundizar en el origen y motivación de estos conceptos, sigue leyendo.
-Si no, puedes saltar al apartado de ambiguedades y convenciones.
+Si no, puedes saltar a los apartados de ambiguedades y convenciones.
 
 ### Hora solar media (Mean solar time)
 
@@ -35,6 +35,8 @@ La **hora solar media** es la que sincroniza las 12h del mediodía con el apogeo
 Le llamamos _media_, porque el movimiento relativo entre la tierra y el sol
 avanza o atrasa el apogeo dependiendo de la época del año,
 así que se toma la hora promedio.
+
+![Desplazamiento del apogeo solar a lo largo del año](Tijdvereffening-equation_of_time-en.jpg)
 
 Con hora solar media,
 era necesario ir ajustando el reloj a poco que nos movamos al este o al oeste.
@@ -267,6 +269,7 @@ en las interfícies con las fuentes de dicha heterogeneidad.
 Tiene estos beneficios:
 
 - El código interno es más simple, pues sólo gestiona una convención.
+- Limitamos las conversiones que tenemos que implementar: De todas a la lengua franca y al reves y no todas con todas. (O(N) vs O(N²))
 - En los puntos frontera es donde es más probable que conozcamos las convenciones externas que se usa en cada elemento externo y por tanto la conversión a usar.
 
 Por ejemplo, en el caso de texto internacional, podemos tener
@@ -306,7 +309,7 @@ En el segundo caso, aplicando sandwich, lo convertimos a time zone informado.
 
 Históricamente los criterios para determinar la hora local han variado.
 
-- El offset standard (cambió a CET en 1940 y hay propuestas de restablecer WET)
+- El offset standard (Madrid cambió de WET a CET en 1940 y hay propuestas de restablecer WET)
 - Si hay o no DST (cambió 6 veces en el siglo XX, y hay propuestas de eliminarlo)
 - Cuando se produce el cambio de hora (el criterio actual se estableció en 1996)
 
@@ -315,7 +318,8 @@ y delegar en librerías especializadas, que mantienen la base de datos
 de timezones.
 
 También se recomienda cuando convirtamos a hora local,
-no explicitar CET o CEST o los offsets concretos como zona horaria de destino,
+normalmente para presentarla al usuario,
+no conviene averiguar nosotros si toca CET o CEST para aplicar el offset,
 sinó usar la hora local _Europe/Madrid_
 y la libreria de TZ ya nos indicara el offset o el standard time para una hora UTC.
 
@@ -326,7 +330,7 @@ no tienen problema de timezone, ni de dst.
 Y así lo podemos considerar mientras solo operemos con fechas.
 
 Pero una fecha es un intervalo temporal de las 00h a las 24h,
-y ese intervalo es diferente, otra vez, dependiento de la hora local.
+y ese intervalo es diferente, otra vez, dependiendo de la hora local.
 Esto cobra importancia cuando empezamos a mezclar fechas con horas.
 
 En ese sentido hay que considerar las fechas como tiempos naive.
@@ -341,6 +345,7 @@ Por ejemplo, el día 2022-03-05 en Madrid empieza a las `2022-03-0 23:00 CET` qu
 Cuando vayamos a usar fechas para compararlas con datetimes,
 necesitamos saber que convencion se usa en las fechas.
 Normalmente se referiran al día en la hora local, aunque no está de más comprobarlo.
+Además ¿qué hora local? ¿la del usuario? ¿la del servidor? ¿la del lugar de la recogida de datos?
 
 Una buena aproximación es convertir la fecha a la hora 00:00:00 local del día en cuestión.
 Nos sirve para comparar con fechas anteriores o posteriores e iguales.
@@ -382,7 +387,7 @@ No, porque a las 00:00 locales no hay ambiguedad, por la fecha sabremos si es DS
 ## Representaciones
 
 
-### ISO Format
+### Texto ISO Format
 
 El estándard [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
 establece una forma uniforme de representar el tiempo como texto.
@@ -397,23 +402,23 @@ coincide el orden cronologico y el lexicografico.
 - UTC ISO datetimes: "YYYY-MM-DD hh:mm:ssZ" or "YYYY-MM-DD hh:mm:ss+00:00"
 - TZ iso datetimes: ""YYYY-MM-DD hh:mm:ss+02:00"
 
-Conventions:
+Convenciones:
 
-- Naive iso datetimes are ambiguous, need exchange convention, either:
-	- We are not produccing them (add always a TZ indicator)
-	- When accepted, convention is needed, either:
-		- They represent UTC
-		- They represent local and a DST flag is provided to disambiguate
-	- Standard says that naive is local time but 
-- Naive iso dates are considered 00:00 localtime, there is no abiguity with DST.
-	- Day addition to a isodate should be done in days not in hours since some local days are 23 and 25 hours.
-	- Danger: When comparing with other isodates 'string':
+- Naive iso datetimes son ambiguas
+	- El estandard dice que si no hay TZ, es local/juliet
+	- Si es local, hay que convenir qué local es (usuario, servidor, lugar de obtención...)
+	- Si es local, a parte se necesita información adicional de DST
+	- Algunos entornos consideran la convencion que Naive es UTC para desambiguarlas
+	- En general, se recomienda no usar naives para no tener que usar convenciones adicionales
+- Fechas naive se consideran 00:00 localtime, no hay ambiguedad de DST pero requiere convencion de qué es Juliet
+	- Adición de dias en isodate se ha de hacer en dias no en horas puesto que las horas del dia local varian entre 23 y 25.
+	- Peligro: Cuando comparamos como texto isodates, si no son del mismo tipo
 		- Comparing with an UTC datetime, the first hours of the day in UTC are less than the date 
 			- `"2022-08-01 23:30Z" < "2022-08-02"` but `isodatetimetz("2022-08-01 23:30Z")>localisodate("2022-08-02")`
-
-- ISO format allows not using '-' and ':' as date and time elements separator. We are forcing it's use for readability.
-- ISO format allows using either 'T' or ' ' (space) as separator between date and time. We are using always space unless exporting to json which requires 'T'
-- UTC can be marked either as Z or as offset +00, neither 
+- El uso de separadores '-' y ':' es opcional pero recomendado por legibilidad. Nosotros lo forzamos por eso mismo.
+- También se permite 'T' o espacios como separador entre dia y hora.
+	- JSON requiere 'T'. yamlns usa espacio.
+- UTC can be marked either as Z or as offset +00, -00:00
 - Smaller time elements can be dropped, meaning 00
 - Smaller timezone elements can be dropped, meaning 00
 
@@ -430,9 +435,8 @@ los segundos transcurridos desde una momento de referencia o epoch.
 Es un numero dificil de interpretar, pero fácil de obtener, comparar, restar...
 
 Internamente en POSIX y por extension en otros sistemas,
-el ordenador se representa numéricamente
-como el tiempo transcurrido desde el EPOCH UNIX (January 1s 1970 00:00+00).
-
+el tiempo se representa numéricamente
+como los segundos transcurridos desde el EPOCH UNIX (January 1s 1970 00:00+00).
 
 A determinar:
 
@@ -446,7 +450,10 @@ A determinar:
 
 ### Tupla tiempo
 
-Otra representación
+Otra representación típica es una tupla o estructura
+que contiene númericamente los diferentes niveles de tiempo:
+año, mes...
+
 
 # WIP - A partir de aquí es Work In Progress
 
@@ -499,7 +506,7 @@ Representaciones posibles
 - strings ISO
 
 
-#### Standard Date
+#### Standard JS Date
 
 A diferencia del `datetime` de Python,
 `Date` de Javascript no tiene una versión naive.
@@ -514,10 +521,8 @@ se usa la **hora local del Navegador!**
 lo que da al desarrollador muy poco control
 sobre lo que pasa.
 
-
-
 - Los accesores set/getMinutes/Hours/Days... consideran la hora local
-- Tenemos los accesores set/get/UTCMinutes/Hours/Days... que consideran hora UTC
+- Tenemos los accesores set/getUTCMinutes/Hours/Days... que consideran hora UTC
 - Si lo mostramos por consola, imprimirá la hora local.
 
 El problema es:
@@ -525,18 +530,32 @@ El problema es:
 - La hora local depende del navegador
 - No hay utilidades estandard para obtener otras representaciones.
 
+Para nosotros se nos manifiesta el problema cuando:
+
+- la usuaria no esta en el país o está en Canarias, o por lo que sea tiene el ordenador configurado en otra zona horaria
+- queremos representar cosas (produccion de plantas, consumos de suministros) de Canarias
+
 ```javascript
+// El Epoch es Unix time UTC 1970-01-01T00:00:00Z
+>> new Date(0)
+Date Thu Jan 01 1970 01:00:00 GMT+0100 (Hora estàndard del Centre d’Europa)
+
+// Y en milisegundos
+>> new Date(10*1000) // 10 seconds after epoch
+Date Thu Jan 01 1970 01:00:10 GMT+0100 (Hora estàndard del Centre d’Europa)
+
+// Las fechas ISO naive se suponen UTC, NO LOCALES!!
+// Cuando comparamos fechas, normalmente nos interesan las de Europe/Madrid o Pacific/Canary
 >> new Date("2023-02-02")
 Date Thu Feb 02 2023 01:00:00 GMT+0100 (Hora estàndard del Centre d’Europa)
 
+// En cambio, si indicamos la hora sin TZ, se supone la local del navegador!!
 >> new Date("2023-02-02T00:00:00")
 Date Thu Feb 02 2023 00:00:00 GMT+0100 (Hora estàndard del Centre d’Europa)
 
+// Para indicar UTC, añadir Zulu
 >> new Date("2023-02-02T00:00:00Z")
 Date Thu Feb 02 2023 01:00:00 GMT+0100 (Hora estàndard del Centre d’Europa)
-
->> new Date(10*1000) // 10 seconds after epoch
-Date Thu Jan 01 1970 01:00:10 GMT+0100 (Hora estàndard del Centre d’Europa)
 
 // Las fechas se serializan en ISO UTC
 >> JSON.stringify(new Date("2023-02-02T00:00:00"))
@@ -546,21 +565,89 @@ Date Thu Jan 01 1970 01:00:10 GMT+0100 (Hora estàndard del Centre d’Europa)
 >> JSON.parse('"2023-02-01T23:00:00.000Z"')
 "2023-02-01T23:00:00.000Z"
 
+>> new Date(JSON.parse('"2023-02-01T23:00:00.000Z"'))
+
+
 >> Date.UTC(2020, 2, 2) // default month=1, date=1, hour=0, minutes=0, seconds=0
 
+// OJO: si nos olvidamos `new` devuelve un string no manipulable de la fecha local actual
+>> Date("2020-03-02T00:00:00Z")
+"Wed Jul 17 2024 02:47:40 GMT+0200 (Hora d’estiu del Centre d’Europa)"
+// Nada que ver con el parámetro
 ```
 
-:::warning
-Sin `new`, `Date` devuelve siempre un string con el instante actual localizado en hora y formato.
-No manejable para nada.
-:::
+TODO: Aritmetica temporal
 
-Standard Date representa internamente como timestamp UTC
-pero tiene accesores y representación con localtime.
+- Obtener el inicio de la fecha local
+	```javascript
+	function localDateStart(date) {
+		const d = new Date(date)
+		d.setHours(0)
+		d.setMinutes(0)
+		d.setSeconds(0)
+		d.setMilliseconds(0)
+		return d
+	}
+	```
 
+- Como añadir dias locales
+	- No sumar 24h por dia: Hay cambios de DST!!
+	- `new Date(new Date(d).setDate(d.getDate() + daysOffset))`
+	```javascript
+	function addDays(d, ndays) {
+		return new Date(new Date(d).setDate(d.getDate()+ndays))
+	}
+	```
+	- Manejar en lo posible fechas a las 00:00 local
+	- Esto se hace en hora local del navegador
+- Como añadir años
+	- No sumar 365 dias, hay años bisiestos!
+	- `new Date(new Date(d).setFullYear(d.getFullYear() + yearsOffset))
+	- Ajusta a los bisiestos:
+		- El 29 de febrero bisiesto lo mueve al 1 de Marzo en años no bisiestos.
+		- El resto de fechas las mueve a la misma fecha.
+- Como añadir meses
+	- No sumar 30 dias... pues claro.
+	- new Date(new Date(d).setMonth(d.getMonth()+2)).toISOString()
+	- Dias 29, 30 o 31 que no existen en el mes destino, pasa los dias sobrantes al siguiente mes.
+		- 2020-01-31T10:00Z -> +1mes -> 2020-03-03T10:00:00Z
+- Como ubicar tiempos en intervalos de fechas locales
+	- Como vienen las fechas, en local o en UTC?
+		- Normalmente queremos ubicar dias locales
+		- Las fechas ISO se traducen a UTC (00:00Z)
+
+```javascript
+// Local month offset beyond month
+>> d = new Date("2021-01-31T10:00Z")
+>> new Date(new Date(d).setMonth(d.getMonth()+1)).toISOString()
+"2020-03-03T10:00:00.000Z"
+```
+
+TODO: Libreria momentjs
+
+TODO: Libreria dayjs
 
 
 dayjs(utc_timestamp_ms) -> local datetime
+
+
+Yup `date` valida y convierte ISO strings en Date. Para obtenerlo. `schema.cast(JSON.parse(jsonstring))`
+- `yup.string().datetime() ([doc](https://github.com/jquense/yup?tab=readme-ov-file#stringdatetimeoptions-message-string--function-allowoffset-boolean-precision-number))
+	- No convierte a Date, solo parsea y valida, lo mantiene como string
+	- Solo acepta Zulus, no naives ni otros tz
+- `yup.date()`
+	- Convierte a Date si hacemos `schema.cast(jsondata)`
+
+Zod
+- `z.date()`
+	- Por defecto solo acepta `Date`
+	- Para hacer conversion: `z.coerce.Date`, pasa el campo por el constructor de `Date`
+	- En ese caso, acepta formatos no ISO como el constructor de Date
+- `z.string().datetime()` ([doc](https://zod.dev/?id=datetimes))
+	- Soporta solo Zulus no otros offsets, o naives
+	- Se come cosas invalidas (no comprueba fechas imposibles)
+	- No convierte, sigue siendo un string
+- Como parsear solo iso y obtener Dates??
 
 
 ### ERP
@@ -570,6 +657,45 @@ dayjs(utc_timestamp_ms) -> local datetime
 - Mogrifying dates (query search)
 - Inserting data
 - Extracting data
+
+### JSON
+
+El tiempo no tienen representación nativa en JSON.
+Se suelen representar por una string ISO en UTC pero es un string.
+Javascript, por ejemplo, serializa Dates como strings iso en zulu pero despues no las deserializa.
+
+```javascript
+> new Date("2022-01-01T22:00+01:00").toJSON()
+'2022-01-01T21:00:00.000Z'
+> new Date("2022-01-01T22:00+01:00").toISOString()
+'2022-01-01T21:00:00.000Z'
+> JSON.stringify(new Date("2022-01-01T22:00+01:00"))
+'"2022-01-01T21:00:00.000Z"' // note the quotes
+> JSON.parse('"2022-01-01T22:00:00.000Z"')
+'2022-01-01T22:00:00.000Z'  // just string, must call  new Date() to get the date.
+```
+
+Otra representación típica es con los milisegundos despues del Epoch UTC.
+En cualquier caso, ha de ser una convención.
+
+### YAML
+
+YAML si que tiene formato de tiempo definido. https://yaml.org/type/timestamp.html
+Usa formato ISO con las siguientes consideraciones:
+
+- Les corresponde el tag `!!timestamp`
+	- no se indica ya que es uno de los tags detectados por defecto
+	- al reves si quisieramos representar un string iso como string añadiriamos `!!str`
+- El formato canónico es YYYY-MM-DDTHH:MM:SSZ, opcionalmente con milisegundos
+- Formatos no canónicos aceptados:
+	- En vez de `T`, `t` (minúscula) o uno o varios espacios o tabuladores.
+	- Separar opcionalmente el TZ con espacios
+	- No especificar la hora, se supone 00:00:00Z
+	- No especificar el TZ, se supone Z
+
+**Ojo:** Una fecha sin TZ en YAML se considera Zulu, una fecha sin TZ en JS se considera Juliet
+
+
 
 ### Mongo
 
