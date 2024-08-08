@@ -6,8 +6,7 @@ class Weather:
 
     def predict(self, city, aDateTime = None, wind = False):
         # When date is not provided we look for the current prediction
-        if aDateTime is None:
-            aDateTime = datetime.datetime.now()
+        aDateTime = self.set_valid_datatime(aDateTime)
         # If there are predictions
         if (aDateTime < (datetime.datetime.now() + datetime.timedelta(days=6)).replace(hour=0, minute=0, second=0)):
             # Find the id of the city on metawheather
@@ -30,6 +29,11 @@ class Weather:
 
         else:
             return ""
+
+    def set_valid_datetime(self, aDateTime):
+        if aDateTime is None:
+            aDateTime = datetime.datetime.now()
+        return aDateTime
 
     def codeToText(self, weatherCode):
         return {
