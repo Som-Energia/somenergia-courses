@@ -1,6 +1,6 @@
 ---
 import AboutLayout from "@/layouts/About.astro";
-import fetchStrapi from '../lib/fetchStrapi'
+import fetchStrapi from "../../lib/fetchStrapi";
 import { getEntryBySlug } from "astro:content";
 
 const about = await getEntryBySlug("about", "index");
@@ -9,12 +9,12 @@ const page_data = {
   ...about.data,
   content: about.body,
 };
-
+const locale = Astro.currentLocale;
 const strapi_members = await fetchStrapi({
-	endpoint: "testimonials",
-	wrappedByKey: "data",
+  endpoint: "testimonials",
+  wrappedByKey: "data",
+  query: {locale:locale},
 });
-
 ---
 
 <AboutLayout

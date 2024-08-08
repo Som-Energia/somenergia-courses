@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import '../i18n'; // import the i18n configuration
 
 const Article = () => {
   const { t, i18n } = useTranslation();

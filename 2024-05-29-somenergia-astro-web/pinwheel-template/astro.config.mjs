@@ -16,6 +16,10 @@ export default defineConfig({
   image: {
     service: squooshImageService(),
   },
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "ca-ES", "es"],
+  },
   integrations: [
     react(),
     sitemap(),

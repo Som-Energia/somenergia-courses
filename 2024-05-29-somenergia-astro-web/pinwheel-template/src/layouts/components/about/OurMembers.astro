@@ -1,15 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import {getTestimonials} from '../../../lib/fetchStrapi'
 
 const {
   members: { title, description, member_list },
+  strapi_members
 } = Astro.props;
-
-
-const members = await getTestimonials("testimonials");
-
-console.log(members[0])
 
 ---
 
@@ -52,7 +47,7 @@ console.log(members[0])
       <div class="lg:col-10">
         <div class="row">
           {
-            members.map((item: any) => (
+            strapi_members.map((item: any) => (
               <div class="mb-6 flex flex-col px-6 text-center sm:col-6 lg:col-4 sm:items-center">
                 <div class="member-avatar inline-flex justify-center">
 

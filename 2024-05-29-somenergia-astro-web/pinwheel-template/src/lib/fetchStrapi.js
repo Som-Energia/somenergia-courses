@@ -1,6 +1,6 @@
-/* export default async function fetchApi({
+export default async function fetchApi({
     endpoint='',
-    query='',
+    query={},
     wrappedByKey='',
     wrappedByList=''
   }){
@@ -15,6 +15,7 @@
         url.searchParams.append(key, value);
       });
     }
+  
     const res = await fetch(url.toString(),{
         headers: {
             'Authorization': 'Bearer ' + import.meta.env.STRAPI_API_KEY
@@ -33,10 +34,10 @@
     }
 
     return data;
-} */
+}
 
 // src/services/strapi.js
-
+/* 
 import axios from 'axios';
 
 // Create an Axios instance with the base URL of your Strapi API
@@ -58,3 +59,4 @@ export const getTestimonials = async (locale = 'en', endpoint='') => {
     return [];
   }
 };
+ */
