@@ -3,33 +3,22 @@ import json
 from urllib.request import urlopen
 
 class Weather:
+    def contract_testing_example(self, latitude, longitude):
+        response = self.get_meteo(latitude, longitude)
+        current_date = self.current_date()
 
-    def predict(self, city, aDateTime = None, wind = False):
-        # When date is not provided we look for the current prediction
-        if aDateTime is None:
-            aDateTime = datetime.datetime.now()
-        # If there are predictions
-        if (aDateTime < (datetime.datetime.now() + datetime.timedelta(days=6)).replace(hour=0, minute=0, second=0)):
-            # Find the id of the city on metawheather
-            response = json.loads(urlopen(
-                "https://positionstack.com/geo_api.php?query=" + city).read().decode("utf-8"))
-            latitude = response['data'][0]['latitude']
-            longitude = response['data'][0]['longitude']
+        for day in response['daily']['time']:
+            if day == current_date:
+                return response['daily']['time'][0], self.codeToText(response['daily']['weathercode'][0])
+        return 'No data available for today'
 
-            # Find the predictions for the location
-            url = "https://api.open-meteo.com/v1/forecast?latitude="+ str(latitude) + "&longitude=" + str(longitude) + "&daily=weathercode,windspeed_10m_max&current_weather=true&timezone=Europe%2FBerlin"
-            response = json.loads(urlopen(url).read().decode("utf-8"))
+    def current_date(self):
+        return datetime.datetime.now().strftime("%Y-%m-%d")
 
-            for i in range(7):
-                if response["daily"]['time'][i] == aDateTime.strftime('%Y-%m-%d'):
-                    if (wind):
-                        return response['daily']['windspeed_10m_max'][i]
-                    else:
-                        weatherCode = response['daily']['weathercode'][i]
-                        return self.codeToText(weatherCode)
-
-        else:
-            return ""
+    def get_meteo(self, latitude, longitude):
+        url = "https://api.open-meteo.com/v1/forecast?latitude="+ str(latitude) + "&longitude=" + str(longitude) + "&daily=weathercode,windspeed_10m_max&current_weather=true&timezone=Europe%2FBerlin"
+        response = json.loads(urlopen(url).read().decode("utf-8"))
+        return response
 
     def codeToText(self, weatherCode):
         return {
