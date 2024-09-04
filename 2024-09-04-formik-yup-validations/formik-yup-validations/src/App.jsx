@@ -1,34 +1,86 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import PrevButton from './components/PrevButton'
+import NextButton from './components/NextButton'
+import { Formik, Form } from 'formik'
+import * as Yup from 'yup'
+import PersonalData from './pages/PersonalData'
+import Activity from './pages/Activity'
+import Review from './pages/Review'
+
+const MAX_STEP_NUMBER = 2
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [activeStep, setActiveStep] = useState(0)
+  const initialValues = {
+    nif: undefined,
+    name: undefined,
+    surname: undefined,
+    horoscope: undefined,
+    favorite_pokemon: undefined,
+    place: undefined,
+    ativity: undefined,
+    date: undefined,
+    privacy_policy_accepted: false,
+  }
+
+  const validationSchemas = []
+
+
+  const nextStep = () => {
+    const next = activeStep + 1
+    const last = MAX_STEP_NUMBER
+    setActiveStep(Math.min(next, last))
+  }
+
+  const prevStep = () => {
+    const prev = activeStep - 1
+    setActiveStep(Math.max(0, prev))
+  }
+
+const getStep = (props) => {
+  if(activeStep === 0) {
+    return <PersonalData {...props}/>
+  }
+  else if(activeStep === 1) {
+    return <Activity {...props}/>
+  }
+  else {
+    return <Review {...props}/>
+  }
+}
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Formik
+      initialValues={initialValues}
+      // validationSchema={validationSchemas[activeStep]}
+    >
+      {(formikProps) => (
+        <>
+          {
+            getStep(formikProps)
+          }
+          <div style={{
+            marginTop: '2rem',
+            marginX: '2rem',
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}>
+          <PrevButton
+            disabled={activeStep === 0}
+            onClick={() => prevStep(formikProps)}
+            title={"PREV"}
+          />
+          <NextButton
+            disabled={activeStep === MAX_STEP_NUMBER}
+            onClick={() => nextStep(formikProps)}
+            title={"NEXT"}
+          />
+          </div>
+        </>
+      )}
+    </Formik>
   )
 }
 
