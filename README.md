@@ -24,6 +24,7 @@ Public materials used in internal Som Energia training courses.
 
 En preparació
 
+- WIP: [Programació agentica amb SDD, Gentle-IA i OpenCode](2026-05-06-programacio-agentica) [ca] [slidev]
 - WIP: [Time](time)
 - WIP: [D3](d3)
 - WIP: [CLI Graphics](cligraphics/)
@@ -34,6 +35,5 @@ En preparació
 
 If not indicated otherwise, those materials are covered
 by the [Creative Commons Attribution-ShareAlike 4.0 International License](LICENSE).
-
 
 

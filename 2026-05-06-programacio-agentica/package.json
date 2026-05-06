@@ -1,0 +1,13 @@
+{
+  "name": "programacio-agentica-slidev",
+  "private": true,
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.15.1",
+    "@slidev/theme-default": "latest"
+  }
+}
